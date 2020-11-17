@@ -4,7 +4,7 @@ import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 
 function MainButton({ appState, handleClick }) {
   const icon =
-    appState === ('default' || appState === 'pause') ? (
+    appState === 'default' || appState === 'paused' ? (
       <PlayIcon />
     ) : (
       <PauseIcon />
@@ -14,10 +14,11 @@ function MainButton({ appState, handleClick }) {
 }
 
 const ButtonStyled = styled.button`
+  border-radius: 50%;
   svg {
-    width: 60px;
-    height: 60px;
-    fill: #fff;
+    width: 70px;
+    height: 70px;
+    fill: var(--icon-color);
   }
 `
 

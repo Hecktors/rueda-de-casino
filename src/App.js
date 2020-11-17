@@ -6,10 +6,13 @@ import audioUrl from './assets/audio/music/Uno dos tres.mp3'
 
 export default function App() {
   const [appState, setAppState] = useState('default')
-  const songRef = useRef(null)
+  let songRef = useRef(null)
 
   useEffect(() => {
     songRef.current = new Audio(audioUrl)
+    return () => {
+      songRef.current = null
+    }
   }, [])
 
   useEffect(() => {
@@ -25,6 +28,7 @@ export default function App() {
   }
 
   function stopPlaying() {
+    songRef.current.currentTime = 0
     setAppState('default')
   }
 
@@ -42,11 +46,11 @@ export default function App() {
 const AppStyled = styled.div`
   display: grid;
   grid-template-rows: 80px auto 100px;
-  height: 100vh;
+  height: 100%;
   font-family: Helvetica;
   font-size: 112.5%;
-  color: #e5e5e5;
-  background-color: #16191d;
+  color: var(--text-color);
+  background-color: var(--primery-color);
 
   main {
     display: grid;
