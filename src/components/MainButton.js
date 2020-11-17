@@ -1,18 +1,16 @@
-import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 
-function MainButton({ task, isDisabled = false, handleClick }) {
-  return (
-    <ButtonStyled
-      onClick={() => handleClick(task)}
-      task={task}
-      disabled={isDisabled}
-    >
-      {task === 'play' ? <PlayIcon /> : <PauseIcon />}
-    </ButtonStyled>
-  )
+function MainButton({ appState, handleClick }) {
+  const icon =
+    appState === ('default' || appState === 'pause') ? (
+      <PlayIcon />
+    ) : (
+      <PauseIcon />
+    )
+
+  return <ButtonStyled onClick={() => handleClick()}>{icon}</ButtonStyled>
 }
 
 const ButtonStyled = styled.button`
@@ -24,8 +22,3 @@ const ButtonStyled = styled.button`
 `
 
 export default MainButton
-
-ButtonStyled.propTypes = {
-  task: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-}

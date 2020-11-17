@@ -4,55 +4,57 @@ import Header from './components/Header'
 import MainButton from './components/MainButton'
 import audioUrl from './assets/audio/music/Uno dos tres.mp3'
 
-function App() {
-  // Hooks
+export default function App() {
   const [appState, setAppState] = useState('default')
   const songRef = useRef(null)
-  // Constans
-  const btnTask = appState === 'playing' ? 'pause' : 'play'
 
-  // UseEffect
   useEffect(() => {
     songRef.current = new Audio(audioUrl)
   }, [])
 
   useEffect(() => {
-    if (appState === 'default' || appState === 'pausing') {
+    if (appState === 'default' || appState === 'paused') {
       songRef.current.pause()
     } else {
       songRef.current.play()
     }
   }, [appState])
 
-  // Functions
-  function playSong(btnState) {
-    setAppState(btnState === 'play' ? 'playing' : 'pausing')
+  function toogleSongPlay() {
+    setAppState(appState === 'playing' ? 'paused' : 'playing')
+  }
+
+  function stopPlaying() {
+    setAppState('default')
   }
 
   return (
     <AppStyled>
-      <Header title="Rueda De Salsa" />
+      <Header appState={appState} handleClick={stopPlaying} />
       <main></main>
-      <FooterStyled>
-        <MainButton task={btnTask} handleClick={playSong} />
-      </FooterStyled>
+      <footer>
+        <MainButton appState={appState} handleClick={toogleSongPlay} />
+      </footer>
     </AppStyled>
   )
 }
 
-export default App
-
 const AppStyled = styled.div`
   display: grid;
-  grid-template-rows: 70px auto 100px;
+  grid-template-rows: 80px auto 100px;
   height: 100vh;
   font-family: Helvetica;
   font-size: 112.5%;
   color: #e5e5e5;
   background-color: #16191d;
-`
 
-const FooterStyled = styled.footer`
-  width: 100%;
-  text-align: center;
+  main {
+    display: grid;
+    place-items: center;
+  }
+
+  footer {
+    width: 100%;
+    text-align: center;
+  }
 `

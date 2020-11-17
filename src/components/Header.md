@@ -1,3 +1,5 @@
 ```jsx
-<Header title="Rueada De Casino" />
+<Header appState="default" />
+<Header appState="playing" />
+<Header appState="pausing" />
 ```
