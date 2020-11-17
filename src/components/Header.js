@@ -1,17 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
-function Header({name}) {
-    return (
-        <HeaderStyled>
-            {name}
-        </HeaderStyled>
-    )
+function Header({ title }) {
+  return <HeaderStyled>{title}</HeaderStyled>
 }
 
 const HeaderStyled = styled.header`
-    display: grid;
-    place-items: center;
-    color: midnightblue;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  /* text-transform: uppercase; */
 `
-/** @component */
 export default Header

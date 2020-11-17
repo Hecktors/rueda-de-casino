@@ -1,1 +1,3 @@
-<Header name="Rueada De Casino" />
+```jsx
+<Header title="Rueada De Casino" />
+```
