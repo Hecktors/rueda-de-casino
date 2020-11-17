@@ -3,9 +3,13 @@ import styled from 'styled-components/macro'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 
-function MainButton({ task, isDisabled = false }) {
+function MainButton({ task, isDisabled = false, handleClick }) {
   return (
-    <ButtonStyled disabled={isDisabled}>
+    <ButtonStyled
+      onClick={() => handleClick(task)}
+      task={task}
+      disabled={isDisabled}
+    >
       {task === 'play' ? <PlayIcon /> : <PauseIcon />}
     </ButtonStyled>
   )

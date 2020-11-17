@@ -8,6 +8,5 @@ const HeaderStyled = styled.header`
   display: grid;
   place-items: center;
   font-size: 2rem;
-  /* text-transform: uppercase; */
 `
 export default Header
