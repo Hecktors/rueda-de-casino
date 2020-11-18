@@ -20,7 +20,7 @@ export default createGlobalStyle`
 
     body {
         font-family: 'Helvetica';
-        font-size: '112.5%';
+        font-size: 112.5%;
         color:  var(--text-color);
     }
 

@@ -10,7 +10,7 @@ function MainButton({ appState, handleClick }) {
       <PauseIcon />
     )
 
-  return <ButtonStyled onClick={() => handleClick()}>{icon}</ButtonStyled>
+  return <ButtonStyled onClick={handleClick}>{icon}</ButtonStyled>
 }
 
 const ButtonStyled = styled.button`

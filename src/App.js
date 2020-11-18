@@ -10,9 +10,6 @@ export default function App() {
 
   useEffect(() => {
     songRef.current = new Audio(audioUrl)
-    return () => {
-      songRef.current = null
-    }
   }, [])
 
   useEffect(() => {
@@ -47,8 +44,6 @@ const AppStyled = styled.div`
   display: grid;
   grid-template-rows: 80px auto 80px;
   height: 100%;
-  font-family: Helvetica;
-  font-size: 112.5%;
   color: var(--text-color);
   background-color: var(--primery-color);
 
