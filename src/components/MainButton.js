@@ -14,10 +14,12 @@ function MainButton({ appState, handleClick }) {
 }
 
 const ButtonStyled = styled.button`
-  border-radius: 50%;
+  width: 100%;
+  height: 80px;
+  background-color: var(--main-button-color);
   svg {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     fill: var(--icon-color);
   }
 `

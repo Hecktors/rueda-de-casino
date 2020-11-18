@@ -45,7 +45,7 @@ export default function App() {
 
 const AppStyled = styled.div`
   display: grid;
-  grid-template-rows: 80px auto 100px;
+  grid-template-rows: 80px auto 80px;
   height: 100%;
   font-family: Helvetica;
   font-size: 112.5%;
