@@ -14,6 +14,12 @@ export default function App() {
   const musicAudioRef = useRef(null)
   const intervalRef = useRef(null)
 
+  useEffect(() => {
+    musicAudioRef.current = new Audio(musicUrl)
+    return () => clearInterval(intervalRef.current)
+  }, [])
+
+  // VARIABLES
   const moves = movesData
   const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
@@ -25,11 +31,6 @@ export default function App() {
       : appState === 'playing'
       ? 'Bailamos!!!'
       : 'Pause'
-
-  useEffect(() => {
-    musicAudioRef.current = new Audio(musicUrl)
-    return () => clearInterval(intervalRef.current)
-  }, [])
 
   // ===== FUNCTIONS =====
   function tooglePlay() {
@@ -60,13 +61,14 @@ export default function App() {
     return moves[randomNum]
   }
 
-  //
+  // Start interval for current move change
   function startMoveInterval() {
     intervalRef.current = setInterval(() => {
       setCurrentMove(getRandomMove)
-    }, 5000)
+    }, 3000)
   }
 
+  // Destroy interval
   function stopMoveInterval() {
     clearInterval(intervalRef.current)
     intervalRef.current = null
@@ -91,6 +93,7 @@ export default function App() {
   )
 }
 
+// ===== STYLE =====
 const Container = styled.div`
   display: grid;
   grid-template-rows: 80px auto 80px;
