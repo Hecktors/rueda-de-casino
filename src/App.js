@@ -3,10 +3,13 @@ import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno dos tres.mp3'
+import moves from './moves.json'
+import MoveList from './components/MoveList'
 
 export default function App() {
   const [appState, setAppState] = useState('default')
-  let musicRef = useRef(null)
+  const musicRef = useRef(null)
+  const isPlaying = appState === 'playing'
 
   useEffect(() => {
     musicRef.current = new Audio(musicUrl)
@@ -32,7 +35,7 @@ export default function App() {
   return (
     <AppStyled>
       <Header appState={appState} handleClick={stopPlaying} />
-      <main></main>
+      <main>{!isPlaying && <MoveList moves={moves} />}</main>
       <footer>
         <MainButton appState={appState} handleClick={toogleMusicPlay} />
       </footer>
