@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 CurrentMove.propTypes = { title: PropTypes.string.isRequired }
 
 export default function CurrentMove({ title }) {
-  console.log(title)
   return <TitleWrapper>{title}</TitleWrapper>
 }
 

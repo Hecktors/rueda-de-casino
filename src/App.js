@@ -8,7 +8,7 @@ import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
 
 export default function App() {
-  // ===== HOOKS =====
+  /*===== HOOKS =====*/
   const [appState, setAppState] = useState('default')
   const [currentMove, setCurrentMove] = useState({})
   const musicAudioRef = useRef(null)
@@ -19,7 +19,7 @@ export default function App() {
     return () => clearInterval(intervalRef.current)
   }, [])
 
-  // VARIABLES
+  /*===== VARIABLES =====*/
   const moves = movesData
   const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
@@ -32,23 +32,23 @@ export default function App() {
       ? 'Bailamos!!!'
       : 'Pause'
 
-  // ===== FUNCTIONS =====
+  /*===== FUNCTIONS =====*/
   function tooglePlay() {
     if (isPlaying) {
-      // User clicked pause
+      // User clicked pause: pause music, destroy move-change-interval, remove current-move
       musicAudioRef.current.pause()
       stopMoveInterval()
       setCurrentMove({})
       setAppState('paused')
     } else {
-      // User clicked play
+      // User clicked play: continue music play, start move-change-interval
       musicAudioRef.current.play()
       startMoveInterval()
       setAppState('playing')
     }
   }
 
-  // User clicked stop
+  // User clicked stop: set music audio to start position
   function stopPlay() {
     musicAudioRef.current.currentLength = 0
     setAppState('default')
@@ -61,14 +61,14 @@ export default function App() {
     return moves[randomNum]
   }
 
-  // Start interval for current move change
+  // Start move-change-interval
   function startMoveInterval() {
     intervalRef.current = setInterval(() => {
       setCurrentMove(getRandomMove)
     }, 3000)
   }
 
-  // Destroy interval
+  // Destroy move-change-interval
   function stopMoveInterval() {
     clearInterval(intervalRef.current)
     intervalRef.current = null
@@ -93,7 +93,7 @@ export default function App() {
   )
 }
 
-// ===== STYLE =====
+/*===== STYLE =====*/
 const Container = styled.div`
   display: grid;
   grid-template-rows: 80px auto 80px;
