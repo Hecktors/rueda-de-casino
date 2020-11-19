@@ -1,8 +1,6 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-MoveList.propTypes = { moves: PropTypes.array.isRequired }
-
 export default function MoveList({ moves }) {
   if (!Array.isArray(moves)) return <div className="error-msg">Data Error</div>
 
@@ -20,7 +18,7 @@ export default function MoveList({ moves }) {
 
 const ListStyled = styled.ul`
   width: 100%;
-  padding: 20px;
+  padding-left: 50px;
   li {
     margin: 5px;
     list-style: none;
@@ -30,3 +28,5 @@ const ListStyled = styled.ul`
     color: orange;
   }
 `
+
+MoveList.propTypes = { moves: PropTypes.array.isRequired }
