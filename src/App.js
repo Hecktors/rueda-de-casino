@@ -95,6 +95,8 @@ export default function App() {
 
 /*===== STYLE =====*/
 const Container = styled.div`
+  max-width: 450px;
+  margin: 0 auto;
   display: grid;
   grid-template-rows: 80px auto 80px;
   height: 100%;
@@ -103,6 +105,7 @@ const Container = styled.div`
   main {
     display: grid;
     place-items: center;
+    overflow: scroll;
   }
 
   footer {
