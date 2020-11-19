@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import HeaderButton from './HeaderButton'
+import PropTypes from 'prop-types'
 
 export default function Header({ appState, handleClick }) {
   const title =
@@ -27,3 +28,7 @@ const HeaderStyled = styled.header`
     font-size: 2rem;
   }
 `
+HeaderStyled.propTypes = {
+  appState: PropTypes.string,
+  handleClick: PropTypes.func,
+}

@@ -1,50 +1,62 @@
   [
   {
     "id": 1,
-    "title": "la prima"
+    "title": "la prima",
+    "steps": 3
   },
   {
     "id": 2,
-    "title": "sombrero"
+    "title": "sombrero",
+    "steps": 4
   },
   {
     "id": 3,
-    "title": "sombrero con una mano"
+    "title": "sombrero con una mano",
+    "steps": 4
   },
   { 
     "id": 4,
-    "title": "doble play"
+    "title": "doble play",
+    "steps": 4
   },
   {
     "id": 5,
-    "title": "sesenta"
+    "title": "sesenta",
+    "steps": 4
   },
   {
     "id": 6,
-    "title": "métele el dedo"
+    "title": "métele el dedo",
+    "steps": 4
   },
   {
     "id": 7,
-    "title": "vacuna"
+    "title": "vacuna",
+    "steps": 4
   },
   {
     "id": 8,
-    "title": "enchufla con la boricua"
+    "title": "enchufla con la boricua",
+    "steps": 4
   },
   {
     "id": 9,
-    "title": "prima con la tia"
+    "title": "prima con la tia",
+    "steps": 4
   },
   {
     "id": 10,
-    "title": "vacílala"
+    "title": "vacílala",
+    "steps": 4
   },
   {
     "id": 11,
-    "title": "sesenta y nueve"
+    "title": "sesenta y nueve",
+    "steps": 4
   },
   {
     "id": 12,
-    "title": "enchufla con la familia"
+    "title": "enchufla con la familia",
+    "steps": 4
   }
 ]

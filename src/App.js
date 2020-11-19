@@ -7,12 +7,16 @@ import movesData from './moves.json'
 import MoveList from './components/MoveList'
 
 export default function App() {
+  // ===== HOOKS =====
   const [appState, setAppState] = useState('default')
-  const musicRef = useRef(null)
+  const [currentMove, setCurrentMove] = useState({})
+  const musicAudioRef = useRef(null)
+  const intervalRef = useRef(null)
 
   const moves = movesData
   const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
+
   const title =
     appState === 'default'
       ? 'Rueda De Casino'
@@ -21,37 +25,66 @@ export default function App() {
       : 'Pause'
 
   useEffect(() => {
-    musicRef.current = new Audio(musicUrl)
+    musicAudioRef.current = new Audio(musicUrl)
+    return () => clearInterval(intervalRef.current)
   }, [])
 
-  useEffect(() => {
-    if (appState === 'default' || appState === 'paused') {
-      musicRef.current.pause()
+  // ===== FUNCTIONS =====
+  function tooglePlay() {
+    if (isPlaying) {
+      // User clicked pause
+      musicAudioRef.current.pause()
+      stopMoveInterval()
+      setCurrentMove({})
+      setAppState('paused')
     } else {
-      musicRef.current.play()
+      // User clicked play
+      musicAudioRef.current.play()
+      startMoveInterval()
+      setAppState('playing')
     }
-  }, [appState])
-
-  function toogleMusicPlay() {
-    setAppState(appState === 'playing' ? 'paused' : 'playing')
   }
 
-  function stopPlaying() {
-    musicRef.current.currentTime = 0
+  // User clicked stop
+  function stopPlay() {
+    musicAudioRef.current.currentLength = 0
     setAppState('default')
   }
 
+  // Get random move form moves array
+  function getRandomMove() {
+    const movesNum = moves.length
+    const randomNum = Math.floor(Math.random() * movesNum)
+    return moves[randomNum]
+  }
+
+  //
+  function startMoveInterval() {
+    intervalRef.current = setInterval(() => {
+      setCurrentMove(getRandomMove)
+    }, 5000)
+  }
+
+  function stopMoveInterval() {
+    clearInterval(intervalRef.current)
+    intervalRef.current = null
+  }
+
+  console.log(currentMove.title)
   return (
     <Container>
       <Header
         title={title}
         isPaused={isPaused}
         appState={appState}
-        handleClick={stopPlaying}
+        handleClick={stopPlay}
       />
-      <main>{!isPlaying && <MoveList moves={moves} />}</main>
+      <main>
+        {!isPlaying && <MoveList moves={moves} />}
+        <h2>{currentMove.title}</h2>
+      </main>
       <footer>
-        <MainButton appState={appState} handleClick={toogleMusicPlay} />
+        <MainButton appState={appState} handleClick={tooglePlay} />
       </footer>
     </Container>
   )
@@ -64,8 +97,8 @@ const Container = styled.div`
   color: var(--text-color);
 
   main {
-    /* display: grid; */
-    /* place-items: center; */
+    display: grid;
+    place-items: center;
   }
 
   footer {
