@@ -1,6 +1,11 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
+
+MoveList.propTypes = { moves: PropTypes.array.isRequired }
 
 export default function MoveList({ moves }) {
+  if (!Array.isArray(moves)) return <div className="error-msg">Data Error</div>
+
   const listItems = moves.map(({ title, id }) => <li key={id}>{title}</li>)
 
   const content =
