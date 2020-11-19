@@ -14,8 +14,9 @@ export default function HeaderButton({ handleClick }) {
 
 const ButtonStyled = styled.button`
   position: absolute;
-  top: 10px;
+  top: 50%;
   right: 10px;
+  transform: translateY(-50%);
   svg {
     width: 50px;
     height: 50px;
