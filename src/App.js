@@ -65,7 +65,7 @@ export default function App() {
   function startMoveInterval() {
     intervalRef.current = setInterval(() => {
       setCurrentMove(getRandomMove)
-    }, 3000)
+    }, 10000)
   }
 
   // Destroy move-change-interval
