@@ -1,18 +1,11 @@
 import styled from 'styled-components/macro'
 import HeaderButton from './HeaderButton'
 
-export default function Header({ appState, handleClick }) {
-  const title =
-    appState === 'default'
-      ? 'Rueda De Casino'
-      : appState === 'playing'
-      ? 'Bailamos!!!'
-      : 'Pause'
-
+export default function Header({ title, isPaused, handleClick }) {
   return (
     <HeaderStyled>
       <h1>{title}</h1>
-      {appState === 'paused' && <HeaderButton handleClick={handleClick} />}
+      {isPaused && <HeaderButton handleClick={handleClick} />}
     </HeaderStyled>
   )
 }
