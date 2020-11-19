@@ -5,6 +5,7 @@ import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno dos tres.mp3'
 import movesData from './moves.json'
 import MoveList from './components/MoveList'
+import CurrentMove from './components/CurrentMove'
 
 export default function App() {
   // ===== HOOKS =====
@@ -16,6 +17,7 @@ export default function App() {
   const moves = movesData
   const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
+  const hasCurrentMove = currentMove.hasOwnProperty('id')
 
   const title =
     appState === 'default'
@@ -70,7 +72,6 @@ export default function App() {
     intervalRef.current = null
   }
 
-  console.log(currentMove.title)
   return (
     <Container>
       <Header
@@ -81,7 +82,7 @@ export default function App() {
       />
       <main>
         {!isPlaying && <MoveList moves={moves} />}
-        <h2>{currentMove.title}</h2>
+        {hasCurrentMove && <CurrentMove title={currentMove.title} />}
       </main>
       <footer>
         <MainButton appState={appState} handleClick={tooglePlay} />
