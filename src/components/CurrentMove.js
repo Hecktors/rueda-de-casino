@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-TitleWrapper.propTypes = { title: PropTypes.string.isRequired }
+CurrentMove.propTypes = { title: PropTypes.string.isRequired }
 
 export default function CurrentMove({ title }) {
+  console.log(title)
   return <TitleWrapper>{title}</TitleWrapper>
 }
 

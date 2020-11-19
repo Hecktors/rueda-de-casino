@@ -1,5 +1,8 @@
 import styled from 'styled-components/macro'
 import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
+import Proptypes from 'prop-types'
+
+HeaderButton.propTypes = { handleClick: Proptypes.func.isRequired }
 
 export default function HeaderButton({ handleClick }) {
   return (
