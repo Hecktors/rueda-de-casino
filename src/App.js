@@ -2,30 +2,30 @@ import styled from 'styled-components/macro'
 import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
-import audioUrl from './assets/audio/music/Uno dos tres.mp3'
+import musicUrl from './assets/audio/music/Uno dos tres.mp3'
 
 export default function App() {
   const [appState, setAppState] = useState('default')
-  let songRef = useRef(null)
+  let musicRef = useRef(null)
 
   useEffect(() => {
-    songRef.current = new Audio(audioUrl)
+    musicRef.current = new Audio(musicUrl)
   }, [])
 
   useEffect(() => {
     if (appState === 'default' || appState === 'paused') {
-      songRef.current.pause()
+      musicRef.current.pause()
     } else {
-      songRef.current.play()
+      musicRef.current.play()
     }
   }, [appState])
 
-  function toogleSongPlay() {
+  function toogleMusicPlay() {
     setAppState(appState === 'playing' ? 'paused' : 'playing')
   }
 
   function stopPlaying() {
-    songRef.current.currentTime = 0
+    musicRef.current.currentTime = 0
     setAppState('default')
   }
 
@@ -34,7 +34,7 @@ export default function App() {
       <Header appState={appState} handleClick={stopPlaying} />
       <main></main>
       <footer>
-        <MainButton appState={appState} handleClick={toogleSongPlay} />
+        <MainButton appState={appState} handleClick={toogleMusicPlay} />
       </footer>
     </AppStyled>
   )
@@ -45,7 +45,6 @@ const AppStyled = styled.div`
   grid-template-rows: 80px auto 80px;
   height: 100%;
   color: var(--text-color);
-  background-color: var(--primery-color);
 
   main {
     display: grid;
