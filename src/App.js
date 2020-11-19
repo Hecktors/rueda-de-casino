@@ -3,13 +3,14 @@ import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno dos tres.mp3'
-import moves from './moves.json'
+import movesData from './moves.json'
 import MoveList from './components/MoveList'
 
 export default function App() {
   const [appState, setAppState] = useState('default')
   const musicRef = useRef(null)
   const isPlaying = appState === 'playing'
+  const moves = movesData
 
   useEffect(() => {
     musicRef.current = new Audio(musicUrl)
@@ -50,8 +51,8 @@ const AppStyled = styled.div`
   color: var(--text-color);
 
   main {
-    display: grid;
-    place-items: center;
+    /* display: grid; */
+    /* place-items: center; */
   }
 
   footer {

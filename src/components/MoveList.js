@@ -1,13 +1,16 @@
 import styled from 'styled-components/macro'
 
 export default function MoveList({ moves }) {
-  return (
-    <ListStyled>
-      {moves.map(({ title, id }) => (
-        <li key={id}>{title}</li>
-      ))}
-    </ListStyled>
-  )
+  const listItems = moves.map(({ title, id }) => <li key={id}>{title}</li>)
+
+  const content =
+    listItems.length > 0 ? (
+      listItems
+    ) : (
+      <span className="warning">No move selected</span>
+    )
+
+  return <ListStyled>{content}</ListStyled>
 }
 
 const ListStyled = styled.ul`
@@ -16,5 +19,9 @@ const ListStyled = styled.ul`
   li {
     margin: 5px;
     list-style: none;
+  }
+
+  & .warning {
+    color: orange;
   }
 `
