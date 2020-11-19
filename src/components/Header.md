@@ -1,5 +1,5 @@
 ```jsx
 <Header appState="default" />
 <Header appState="playing" />
-<Header appState="pausing" />
+<Header appState="paused" />
 ```
