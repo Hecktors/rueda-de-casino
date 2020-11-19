@@ -9,8 +9,16 @@ import MoveList from './components/MoveList'
 export default function App() {
   const [appState, setAppState] = useState('default')
   const musicRef = useRef(null)
-  const isPlaying = appState === 'playing'
+
   const moves = movesData
+  const isPlaying = appState === 'playing'
+  const isPaused = appState === 'paused'
+  const title =
+    appState === 'default'
+      ? 'Rueda De Casino'
+      : appState === 'playing'
+      ? 'Bailamos!!!'
+      : 'Pause'
 
   useEffect(() => {
     musicRef.current = new Audio(musicUrl)
@@ -34,17 +42,22 @@ export default function App() {
   }
 
   return (
-    <AppStyled>
-      <Header appState={appState} handleClick={stopPlaying} />
+    <Container>
+      <Header
+        title={title}
+        isPaused={isPaused}
+        appState={appState}
+        handleClick={stopPlaying}
+      />
       <main>{!isPlaying && <MoveList moves={moves} />}</main>
       <footer>
         <MainButton appState={appState} handleClick={toogleMusicPlay} />
       </footer>
-    </AppStyled>
+    </Container>
   )
 }
 
-const AppStyled = styled.div`
+const Container = styled.div`
   display: grid;
   grid-template-rows: 80px auto 80px;
   height: 100%;
