@@ -1,5 +1,12 @@
 import styled from 'styled-components/macro'
 import HeaderButton from './HeaderButton'
+import PropTypes from 'prop-types'
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func,
+}
 
 export default function Header({ title, isPaused, handleClick }) {
   return (
