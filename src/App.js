@@ -95,7 +95,7 @@ const Container = styled.div`
   main {
     display: grid;
     place-items: center;
-    overflow: scroll;
+    overflow: auto;
   }
 
   footer {
