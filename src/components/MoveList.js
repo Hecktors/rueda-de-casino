@@ -6,7 +6,7 @@ MoveList.propTypes = { moves: PropTypes.array.isRequired }
 export default function MoveList({ moves }) {
   if (!Array.isArray(moves)) return <div className="error-msg">Data Error</div>
 
-  const listItems = moves.map(({ title, id }) => <li key={id}>{title}</li>)
+  const listItems = moves.map(({ name, id }) => <li key={id}>{name}</li>)
 
   const content =
     listItems.length > 0 ? (

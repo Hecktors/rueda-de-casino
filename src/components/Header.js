@@ -3,22 +3,16 @@ import HeaderButton from './HeaderButton'
 import PropTypes from 'prop-types'
 
 Header.propTypes = {
-  appState: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  isPaused: PropTypes.bool.isRequired,
   handleClick: PropTypes.func,
 }
 
-export default function Header({ appState, handleClick }) {
-  const title =
-    appState === 'default'
-      ? 'Rueda De Casino'
-      : appState === 'playing'
-      ? 'Bailamos!!!'
-      : 'Pause'
-
+export default function Header({ title, isPaused, handleClick }) {
   return (
     <HeaderStyled>
       <h1>{title}</h1>
-      {appState === 'paused' && <HeaderButton handleClick={handleClick} />}
+      {isPaused && <HeaderButton handleClick={handleClick} />}
     </HeaderStyled>
   )
 }

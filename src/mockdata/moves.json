@@ -1,14 +1,14 @@
   [
   {
     "id": 1,
-    "title": "la prima"
+    "name": "la prima"
   },
   {
     "id": 2,
-    "title": "sombrero"
+    "name": "sombrero"
   },
   {
     "id": 3,
-    "title": "sombrero con una mano"
+    "name": "sombrero con una mano"
   }
 ]

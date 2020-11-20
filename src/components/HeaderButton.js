@@ -17,6 +17,7 @@ const ButtonStyled = styled.button`
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+
   svg {
     width: 50px;
     height: 50px;
