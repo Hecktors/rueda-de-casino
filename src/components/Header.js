@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   isPaused: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func.isRequired,
 }
 
 export default function Header({ title, isPaused, handleClick }) {

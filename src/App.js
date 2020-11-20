@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno_dos_tres.mp3'
-import movesData from './moves.json'
+import moves from './data//moves.json'
 import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
 
@@ -11,17 +11,18 @@ export default function App() {
   const [appState, setAppState] = useState('default')
   const [currentMove, setCurrentMove] = useState({})
   const musicAudioRef = useRef(null)
-  const intervalRef = useRef(null)
+  const moveAudioRef = useRef(null)
+  const timeoutRef = useRef(null)
 
-  useEffect(() => {
-    musicAudioRef.current = new Audio(musicUrl)
-    return () => clearInterval(intervalRef.current)
-  }, [])
-
-  const moves = movesData
   const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
   const hasCurrentMove = currentMove.hasOwnProperty('id')
+
+  useEffect(() => {
+    musicAudioRef.current = new Audio(musicUrl)
+    musicAudioRef.current.volume = 0.3
+    return () => clearTimeout(timeoutRef.current)
+  }, [])
 
   const title =
     appState === 'default'
@@ -33,12 +34,12 @@ export default function App() {
   function startOrPauseSession() {
     if (isPlaying) {
       musicAudioRef.current.pause()
-      stopMoveInterval()
+      stopMoveAudioProcess()
       setCurrentMove({})
       setAppState('paused')
     } else {
       musicAudioRef.current.play()
-      startMoveInterval()
+      startMoveTimeout(5000)
       setAppState('playing')
     }
   }
@@ -54,27 +55,30 @@ export default function App() {
     return moves[randomNum]
   }
 
-  function startMoveInterval() {
-    intervalRef.current = setInterval(() => {
-      setCurrentMove(getRandomMove)
-    }, 10000)
+  function startMoveTimeout(ms) {
+    console.log(ms)
+    timeoutRef.current = setTimeout(() => {
+      const nextCurrentMove = getRandomMove()
+      setCurrentMove(nextCurrentMove)
+      moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
+      moveAudioRef.current.play()
+      timeoutRef.current = null
+      clearTimeout(timeoutRef.current)
+      startMoveTimeout(nextCurrentMove.steps * 1000)
+    }, ms)
   }
 
-  function stopMoveInterval() {
-    clearInterval(intervalRef.current)
-    intervalRef.current = null
+  function stopMoveAudioProcess() {
+    clearTimeout(timeoutRef.current)
+    timeoutRef.current = null
+    moveAudioRef.current = null
   }
 
   return (
     <Container>
-      <Header
-        title={title}
-        isPaused={isPaused}
-        // appState={appState}
-        handleClick={stopSession}
-      />
+      <Header title={title} isPaused={isPaused} handleClick={stopSession} />
       <main>
-        {!isPlaying && <MoveList moves={moves} />}
+        {!isPlaying && <MoveList moves={moves} isPaused={isPaused} />}
         {hasCurrentMove && <CurrentMove name={currentMove.name} />}
       </main>
       <footer>

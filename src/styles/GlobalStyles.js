@@ -8,6 +8,7 @@ export default createGlobalStyle`
         --default-header-color: #e5e5e5;
         --main-button-color: transparent;
         --icon-color: #e5e5e5;
+        --move-list-pause-color: #8d8d8d;
     }
     * {
         box-sizing: border-box;
