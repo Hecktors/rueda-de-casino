@@ -37,4 +37,9 @@ export default createGlobalStyle`
         opacity: 0.8;
         }
     }
+    .error-msg {
+        padding: 20px;
+        color: red;
+        font-family: monospace
+    }
 `

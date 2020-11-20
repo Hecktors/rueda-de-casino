@@ -1,0 +1,3 @@
+```jsx
+<CurrentMove name="sombrero" />
+```

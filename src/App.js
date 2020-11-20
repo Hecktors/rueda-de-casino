@@ -2,12 +2,27 @@ import styled from 'styled-components/macro'
 import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
-import musicUrl from './assets/audio/music/Uno dos tres.mp3'
+import musicUrl from './assets/audio/music/Uno_dos_tres.mp3'
+import movesData from './moves.json'
+import MoveList from './components/MoveList'
+import CurrentMove from './components/CurrentMove'
 
 export default function App() {
   const [appState, setAppState] = useState('default')
-  let musicRef = useRef(null)
+  const [currentMove, setCurrentMove] = useState({})
+  const musicAudioRef = useRef(null)
+  const intervalRef = useRef(null)
+
+  useEffect(() => {
+    musicAudioRef.current = new Audio(musicUrl)
+    return () => clearInterval(intervalRef.current)
+  }, [])
+
+  const moves = movesData
+  const isPlaying = appState === 'playing'
   const isPaused = appState === 'paused'
+  const hasCurrentMove = currentMove.hasOwnProperty('id')
+
   const title =
     appState === 'default'
       ? 'Rueda De Casino'
@@ -15,25 +30,39 @@ export default function App() {
       ? 'Bailamos!!!'
       : 'Pause'
 
-  useEffect(() => {
-    musicRef.current = new Audio(musicUrl)
-  }, [])
-
-  useEffect(() => {
-    if (appState === 'default' || appState === 'paused') {
-      musicRef.current.pause()
+  function startOrPauseSession() {
+    if (isPlaying) {
+      musicAudioRef.current.pause()
+      stopMoveInterval()
+      setCurrentMove({})
+      setAppState('paused')
     } else {
-      musicRef.current.play()
+      musicAudioRef.current.play()
+      startMoveInterval()
+      setAppState('playing')
     }
-  }, [appState])
-
-  function toogleMusicPlay() {
-    setAppState(appState === 'playing' ? 'paused' : 'playing')
   }
 
-  function stopPlaying() {
-    musicRef.current.currentTime = 0
+  function stopSession() {
+    musicAudioRef.current.currentTime = 0
     setAppState('default')
+  }
+
+  function getRandomMove() {
+    const movesNum = moves.length
+    const randomNum = Math.floor(Math.random() * movesNum)
+    return moves[randomNum]
+  }
+
+  function startMoveInterval() {
+    intervalRef.current = setInterval(() => {
+      setCurrentMove(getRandomMove)
+    }, 10000)
+  }
+
+  function stopMoveInterval() {
+    clearInterval(intervalRef.current)
+    intervalRef.current = null
   }
 
   return (
@@ -41,18 +70,23 @@ export default function App() {
       <Header
         title={title}
         isPaused={isPaused}
-        appState={appState}
-        handleClick={stopPlaying}
+        // appState={appState}
+        handleClick={stopSession}
       />
-      <main></main>
+      <main>
+        {!isPlaying && <MoveList moves={moves} />}
+        {hasCurrentMove && <CurrentMove name={currentMove.name} />}
+      </main>
       <footer>
-        <MainButton appState={appState} handleClick={toogleMusicPlay} />
+        <MainButton appState={appState} handleClick={startOrPauseSession} />
       </footer>
     </Container>
   )
 }
 
 const Container = styled.div`
+  max-width: 450px;
+  margin: 0 auto;
   display: grid;
   grid-template-rows: 80px auto 80px;
   height: 100%;
@@ -61,6 +95,7 @@ const Container = styled.div`
   main {
     display: grid;
     place-items: center;
+    overflow: scroll;
   }
 
   footer {
