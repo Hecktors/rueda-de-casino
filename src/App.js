@@ -50,7 +50,7 @@ export default function App() {
 
   // User clicked stop: set music audio to start position
   function stopPlay() {
-    musicAudioRef.current.currentLength = 0
+    musicAudioRef.current.currentTime = 0
     setAppState('default')
   }
 
