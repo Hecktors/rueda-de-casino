@@ -3,16 +3,16 @@ import { render } from '@testing-library/react'
 const testMoves = [
   {
     id: 1,
-    title: 'la prima',
+    name: 'la prima',
   },
   {
     id: 2,
-    title: 'sombrero',
+    name: 'sombrero',
   },
 ]
 
 describe('MoveList', () => {
-  it('shows move title', () => {
+  it('shows move names', () => {
     const { getByText } = render(<MoveList moves={testMoves} />)
 
     expect(getByText('la prima')).toBeInTheDocument()

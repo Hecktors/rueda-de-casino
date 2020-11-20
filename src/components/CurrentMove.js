@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-CurrentMove.propTypes = { title: PropTypes.string.isRequired }
+CurrentMove.propTypes = { name: PropTypes.string.isRequired }
 
-export default function CurrentMove({ title }) {
-  return <TitleWrapper>{title}</TitleWrapper>
+export default function CurrentMove({ name }) {
+  return <NameWrapper>{name}</NameWrapper>
 }
 
-const TitleWrapper = styled.div`
+const NameWrapper = styled.div`
   font-size: 2rem;
 `

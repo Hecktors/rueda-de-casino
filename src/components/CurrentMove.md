@@ -1,3 +1,3 @@
 ```jsx
-<CurrentMove title="sombrero" />
+<CurrentMove name="sombrero" />
 ```
