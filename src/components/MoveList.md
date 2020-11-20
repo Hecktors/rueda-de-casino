@@ -1,4 +1,7 @@
 ```jsx
 import moves from '../mockdata/moves.json'
-;<MoveList moves={moves} />
+;<div>
+  <MoveList moves={moves} isPaused={true} />
+  <MoveList moves={moves} isPaused={false} />
+</div>
 ```
