@@ -1,0 +1,60 @@
+import { useState } from 'react'
+import styled from 'styled-components'
+
+export default function LevelForm({ name, moves, userInput, updateUserInput }) {
+  const [isOpen, setIsOpen] = useState(true)
+
+  function toogleLevelList() {
+    setIsOpen(!isOpen)
+  }
+
+  return (
+    <LevelsStyled isOpen={isOpen}>
+      <h3 onClick={toogleLevelList}>{name.toUpperCase()}</h3>
+      <ul>
+        {moves.map((move) => (
+          <li key={move.id}>
+            <label>
+              <input
+                onChange={() => updateUserInput(move.id)}
+                type="checkbox"
+              />{' '}
+              {move.name}
+            </label>
+          </li>
+        ))}
+      </ul>
+    </LevelsStyled>
+  )
+}
+
+const LevelsStyled = styled.div`
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  input {
+    margin-right: 5px;
+  }
+  h3 {
+    padding: 3px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: inherit;
+    label {
+      flex-grow: 1;
+    }
+  }
+  }
+  ul {
+    overflow: hidden;
+    transition: 1s;
+    height: ${(props) => (props.isOpen ? 'auto' : 0)};
+  }
+  li {
+    padding: 3px 0;
+
+    label {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+`

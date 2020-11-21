@@ -9,14 +9,28 @@ MainButton.propTypes = {
 }
 
 function MainButton({ appState, handleClick }) {
-  const icon =
-    appState === 'default' || appState === 'paused' ? (
-      <PlayIcon />
-    ) : (
-      <PauseIcon />
-    )
+  let buttonContent = ''
 
-  return <ButtonStyled onClick={handleClick}>{icon}</ButtonStyled>
+  switch (appState) {
+    case 'playing':
+      buttonContent = <PauseIcon />
+      break
+    case 'settings':
+      buttonContent = 'Save'
+      break
+    default:
+      buttonContent = <PlayIcon />
+  }
+
+  appState === 'default' || appState === 'paused' ? <PlayIcon /> : <PauseIcon />
+
+  return appState === 'settings' ? (
+    <ButtonStyled form="settings" type="submit">
+      {buttonContent}
+    </ButtonStyled>
+  ) : (
+    <ButtonStyled onClick={handleClick}>{buttonContent}</ButtonStyled>
+  )
 }
 
 const ButtonStyled = styled.button`

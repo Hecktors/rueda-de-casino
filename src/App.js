@@ -3,19 +3,23 @@ import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno_dos_tres.mp3'
-import moves from './data/moves.json'
+import pensum from './data/pensum.json'
 import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
+import Settings from './components/Settings'
 
 export default function App() {
-  const [appState, setAppState] = useState('default')
+  const [appState, setAppState] = useState('settings')
   const [currentMove, setCurrentMove] = useState({})
+  const [selectedMoves, setSelectedMoves] = useState([])
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
 
   const isSessionRunning = appState === 'playing'
   const isSessionPaused = appState === 'paused'
+  const isSettingsOpen = appState === 'settings'
+  const isMoveListDisplay = !isSessionRunning && !isSettingsOpen
   const hasCurrentMove = currentMove.hasOwnProperty('id')
 
   useEffect(() => {
@@ -50,13 +54,14 @@ export default function App() {
   }
 
   function getRandomMove() {
-    const movesNum = moves.length
+    const movesNum = selectedMoves.length
     const randomNum = Math.floor(Math.random() * movesNum)
-    return moves[randomNum]
+    return selectedMoves[randomNum]
   }
 
   function startMoveTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
+      console.log('################setTimeout!')
       const nextCurrentMove = getRandomMove()
       setCurrentMove(nextCurrentMove)
       moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
@@ -72,6 +77,10 @@ export default function App() {
     moveAudioRef.current = null
   }
 
+  function updateSelectedMoves(moveIds) {
+    console.log('update:', moveIds)
+  }
+
   return (
     <Container>
       <Header
@@ -80,10 +89,13 @@ export default function App() {
         handleClick={stopSession}
       />
       <main>
-        {!isSessionRunning && (
-          <MoveList moves={moves} isPaused={isSessionPaused} />
+        {isMoveListDisplay && (
+          <MoveList moves={selectedMoves} isPaused={isSessionPaused} />
         )}
         {hasCurrentMove && <CurrentMove name={currentMove.name} />}
+        {isSettingsOpen && (
+          <Settings pensum={pensum} updateSelectedMoves={updateSelectedMoves} />
+        )}
       </main>
       <footer>
         <MainButton appState={appState} handleClick={startOrPauseSession} />
