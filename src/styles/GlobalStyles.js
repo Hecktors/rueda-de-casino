@@ -30,15 +30,18 @@ export default createGlobalStyle`
         border: none;
         padding: 0;
         background-color: transparent;
+        color: var(--text-color);
+        font-size: 2.5rem;
 
         &:active,
         &:hover {
         opacity: 0.8;
         }
     }
-    .error-msg {
-        padding: 20px;
-        color: red;
-        font-family: monospace
+    ul {
+        padding: 0;
+    }
+    li {
+        list-style: none;
     }
 `
