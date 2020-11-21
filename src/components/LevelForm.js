@@ -18,6 +18,7 @@ export default function LevelForm({ name, moves, userInput, updateUserInput }) {
               <input
                 onChange={() => updateUserInput(move.id)}
                 type="checkbox"
+                checked={userInput.includes(move.id)}
               />{' '}
               {move.name}
             </label>

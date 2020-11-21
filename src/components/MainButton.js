@@ -1,35 +1,27 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
-import PropTypes from 'prop-types'
 
 MainButton.propTypes = {
   appState: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
-function MainButton({ appState, handleClick }) {
-  let buttonContent = ''
-
-  switch (appState) {
-    case 'playing':
-      buttonContent = <PauseIcon />
-      break
-    case 'settings':
-      buttonContent = 'Save'
-      break
-    default:
-      buttonContent = <PlayIcon />
-  }
-
-  appState === 'default' || appState === 'paused' ? <PlayIcon /> : <PauseIcon />
+function MainButton({ appState, onClick, isDisabled }) {
+  console.log(isDisabled)
+  let buttonLabel = <PlayIcon />
+  if (appState === 'sessionPause') buttonLabel = <PauseIcon />
+  if (appState === 'settings') buttonLabel = 'Save'
 
   return appState === 'settings' ? (
     <ButtonStyled form="settings" type="submit">
-      {buttonContent}
+      {buttonLabel}
     </ButtonStyled>
   ) : (
-    <ButtonStyled onClick={handleClick}>{buttonContent}</ButtonStyled>
+    <ButtonStyled disabled={isDisabled} onClick={onClick}>
+      {buttonLabel}
+    </ButtonStyled>
   )
 }
 
