@@ -7,34 +7,26 @@ MoveList.propTypes = {
 }
 
 export default function MoveList({ moves, isPaused }) {
-  const listItemsColor = isPaused
-    ? 'var(--move-list-pause-color)'
-    : 'var(--text-color)'
-
-  if (!Array.isArray(moves)) return <div className="error-msg">Data Error</div>
-
   const listItems = moves.map(({ name, id }) => <li key={id}>{name}</li>)
 
-  const content =
-    listItems.length > 0 ? (
-      listItems
-    ) : (
-      <span className="warning">No move selected</span>
-    )
-
-  return <ListStyled color={listItemsColor}>{content}</ListStyled>
+  return listItems.length > 0 ? (
+    <ListStyled isPauses={isPaused}>{listItems}</ListStyled>
+  ) : (
+    <Message>Select some moves to practice!</Message>
+  )
 }
 
 const ListStyled = styled.ul`
-  width: 100%;
-  padding-left: 50px;
+  padding: 0;
   li {
     margin: 5px;
     list-style: none;
-    color: ${(props) => props.color};
+    color: ${(props) =>
+      props.isPauses ? 'var(--move-list-pause-color)' : 'var(--text-color)'};
   }
+`
 
-  & .warning {
-    color: orange;
-  }
+const Message = styled.div`
+  color: orange;
+  font-size: 1.5rem;
 `
