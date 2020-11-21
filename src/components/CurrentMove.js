@@ -8,5 +8,7 @@ export default function CurrentMove({ name }) {
 }
 
 const NameWrapper = styled.div`
+  padding: 20px;
+  text-align: center;
   font-size: 2rem;
 `

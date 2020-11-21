@@ -9,18 +9,21 @@ import CurrentMove from './components/CurrentMove'
 import Settings from './components/Settings'
 
 export default function App() {
-  const [appState, setAppState] = useState('settings')
+  const [appState, setAppState] = useState('home')
   const [currentMove, setCurrentMove] = useState({})
   const [selectedMoves, setSelectedMoves] = useState([])
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
 
-  const isSessionRunning = appState === 'playing'
-  const isSessionPaused = appState === 'paused'
-  const isSettingsOpen = appState === 'settings'
-  const isMoveListDisplay = !isSessionRunning && !isSettingsOpen
+  const isStartMode = appState === 'home'
+  const isSessionPlayMode = appState === 'sessionPlay'
+  const isSessionPauseMode = appState === 'sessionPause'
+  const isSettingsMode = appState === 'settings'
+
+  const isMoveListDisplayed = isStartMode || isSessionPauseMode
   const hasCurrentMove = currentMove.hasOwnProperty('id')
+  const isNoReady = selectedMoves.length < 2
 
   useEffect(() => {
     musicAudioRef.current = new Audio(musicUrl)
@@ -28,29 +31,27 @@ export default function App() {
     return () => clearTimeout(timeoutRef.current)
   }, [])
 
-  const title =
-    appState === 'default'
-      ? 'Rueda De Casino'
-      : appState === 'playing'
-      ? 'Bailamos!!!'
-      : 'Pause'
-
-  function startOrPauseSession() {
-    if (isSessionRunning) {
+  function handleSession() {
+    console.log('GO!!!')
+    if (isSessionPlayMode) {
       musicAudioRef.current.pause()
       stopMoveAudioProcess()
       setCurrentMove({})
-      setAppState('paused')
+      setAppState('sessionPause')
     } else {
       musicAudioRef.current.play()
       startMoveTimeout(1000)
-      setAppState('playing')
+      setAppState('sessionPlay')
     }
   }
 
   function stopSession() {
     musicAudioRef.current.currentTime = 0
-    setAppState('default')
+    setAppState('home')
+  }
+
+  function toggleSettings() {
+    setAppState(appState === 'home' ? 'settings' : 'home')
   }
 
   function getRandomMove() {
@@ -78,27 +79,42 @@ export default function App() {
   }
 
   function updateSelectedMoves(moveIds) {
-    console.log('update:', moveIds)
+    const updatedSelectedMoves = []
+    pensum.forEach((level) =>
+      level.moves.forEach(
+        (move) => moveIds.includes(move.id) && updatedSelectedMoves.push(move)
+      )
+    )
+    setSelectedMoves(updatedSelectedMoves)
+    setAppState('home')
   }
 
   return (
     <Container>
       <Header
-        title={title}
-        isPaused={isSessionPaused}
-        handleClick={stopSession}
+        appState={appState}
+        stopSession={stopSession}
+        toggleSettings={toggleSettings}
       />
       <main>
-        {isMoveListDisplay && (
-          <MoveList moves={selectedMoves} isPaused={isSessionPaused} />
+        {isMoveListDisplayed && (
+          <MoveList moves={selectedMoves} isPaused={isSessionPauseMode} />
         )}
         {hasCurrentMove && <CurrentMove name={currentMove.name} />}
-        {isSettingsOpen && (
-          <Settings pensum={pensum} updateSelectedMoves={updateSelectedMoves} />
+        {isSettingsMode && (
+          <Settings
+            pensum={pensum}
+            selectedMoves={selectedMoves}
+            updateSelectedMoves={updateSelectedMoves}
+          />
         )}
       </main>
       <footer>
-        <MainButton appState={appState} handleClick={startOrPauseSession} />
+        <MainButton
+          appState={appState}
+          onClick={handleSession}
+          isDisabled={isNoReady}
+        />
       </footer>
     </Container>
   )
@@ -113,6 +129,7 @@ const Container = styled.div`
   color: var(--text-color);
 
   main {
+    position: relative;
     display: grid;
     place-items: center;
     overflow: auto;

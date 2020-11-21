@@ -2,9 +2,13 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import LevelForm from './LevelForm'
 
-export default function Settings({ pensum, updateSelectedMoves }) {
-  const [userInput, setUserInput] = useState([])
-  console.log('userInput:', userInput)
+export default function Settings({
+  pensum,
+  selectedMoves,
+  updateSelectedMoves,
+}) {
+  const [userInput, setUserInput] = useState(selectedMoves.map(({ id }) => id))
+  // console.log('userInput:', userInput)
 
   function updateUserInput(id) {
     const updatedUserInput = userInput.includes(id)
@@ -24,6 +28,7 @@ export default function Settings({ pensum, updateSelectedMoves }) {
       key={id}
       name={name}
       moves={moves}
+      selectedMoves={selectedMoves}
       userInput={userInput}
       updateUserInput={updateUserInput}
     />
