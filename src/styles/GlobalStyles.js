@@ -4,10 +4,9 @@ export default createGlobalStyle`
     :root {
         --primary-color: #121212;
         --text-color: #e5e5e5;
-        --running-header-color: #e5e5e5;
-        --default-header-color: #e5e5e5;
+        --icon-color: var(--text-color);
         --main-button-color: transparent;
-        --icon-color: #e5e5e5;
+        --move-list-pause-color: #8d8d8d;
     }
     * {
         box-sizing: border-box;
