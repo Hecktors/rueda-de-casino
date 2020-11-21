@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header'
 import MainButton from './components/MainButton'
 import musicUrl from './assets/audio/music/Uno_dos_tres.mp3'
-import moves from './data//moves.json'
+import moves from './data/moves.json'
 import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
 
@@ -14,8 +14,8 @@ export default function App() {
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
 
-  const isPlaying = appState === 'playing'
-  const isPaused = appState === 'paused'
+  const isSessionRunning = appState === 'playing'
+  const isSessionPaused = appState === 'paused'
   const hasCurrentMove = currentMove.hasOwnProperty('id')
 
   useEffect(() => {
@@ -32,14 +32,14 @@ export default function App() {
       : 'Pause'
 
   function startOrPauseSession() {
-    if (isPlaying) {
+    if (isSessionRunning) {
       musicAudioRef.current.pause()
       stopMoveAudioProcess()
       setCurrentMove({})
       setAppState('paused')
     } else {
       musicAudioRef.current.play()
-      startMoveTimeout(5000)
+      startMoveTimeout(1000)
       setAppState('playing')
     }
   }
@@ -56,14 +56,12 @@ export default function App() {
   }
 
   function startMoveTimeout(ms) {
-    console.log(ms)
     timeoutRef.current = setTimeout(() => {
       const nextCurrentMove = getRandomMove()
       setCurrentMove(nextCurrentMove)
       moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
       moveAudioRef.current.play()
       timeoutRef.current = null
-      clearTimeout(timeoutRef.current)
       startMoveTimeout(nextCurrentMove.steps * 1000)
     }, ms)
   }
@@ -76,9 +74,15 @@ export default function App() {
 
   return (
     <Container>
-      <Header title={title} isPaused={isPaused} handleClick={stopSession} />
+      <Header
+        title={title}
+        isPaused={isSessionPaused}
+        handleClick={stopSession}
+      />
       <main>
-        {!isPlaying && <MoveList moves={moves} isPaused={isPaused} />}
+        {!isSessionRunning && (
+          <MoveList moves={moves} isPaused={isSessionPaused} />
+        )}
         {hasCurrentMove && <CurrentMove name={currentMove.name} />}
       </main>
       <footer>
