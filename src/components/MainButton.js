@@ -9,7 +9,6 @@ MainButton.propTypes = {
 }
 
 function MainButton({ appState, onClick, isDisabled }) {
-  console.log(isDisabled)
   let buttonLabel = <PlayIcon />
   if (appState === 'sessionPause') buttonLabel = <PauseIcon />
   if (appState === 'settings') buttonLabel = 'Save'

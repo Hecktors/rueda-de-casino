@@ -32,7 +32,6 @@ export default function App() {
   }, [])
 
   function handleSession() {
-    console.log('GO!!!')
     if (isSessionPlayMode) {
       musicAudioRef.current.pause()
       stopMoveAudioProcess()
@@ -62,7 +61,6 @@ export default function App() {
 
   function startMoveTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      console.log('################setTimeout!')
       const nextCurrentMove = getRandomMove()
       setCurrentMove(nextCurrentMove)
       moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
@@ -89,12 +87,17 @@ export default function App() {
     setAppState('home')
   }
 
+  function deleleSelectedMoves() {
+    setSelectedMoves([])
+  }
+
   return (
     <Container>
       <Header
         appState={appState}
         stopSession={stopSession}
         toggleSettings={toggleSettings}
+        deleleSelectedMoves={deleleSelectedMoves}
       />
       <main>
         {isMoveListDisplayed && (

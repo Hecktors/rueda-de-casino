@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import LevelForm from './LevelForm'
 
@@ -7,8 +7,11 @@ export default function Settings({
   selectedMoves,
   updateSelectedMoves,
 }) {
-  const [userInput, setUserInput] = useState(selectedMoves.map(({ id }) => id))
-  // console.log('userInput:', userInput)
+  const [userInput, setUserInput] = useState([])
+
+  useEffect(() => {
+    setUserInput(selectedMoves.map(({ id }) => id))
+  }, [selectedMoves])
 
   function updateUserInput(id) {
     const updatedUserInput = userInput.includes(id)
