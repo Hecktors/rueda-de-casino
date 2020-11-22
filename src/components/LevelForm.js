@@ -3,12 +3,23 @@ import styled from 'styled-components'
 import { ReactComponent as ArrowUpIcon } from '../assets/img/arrow_up.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
-export default function LevelForm({ name, moves, userInput, updateUserInput }) {
-  const [isOpen, setIsOpen] = useState(true)
+export default function LevelForm({
+  name,
+  moves,
+  selectedMoves,
+  userInput,
+  updateUserInput,
+}) {
+  const selectedMoveIds = selectedMoves.map((move) => move.id)
+  const hasSelectedMove = moves.some((move) =>
+    selectedMoveIds.includes(move.id)
+  )
+
+  const [isOpen, setIsOpen] = useState(hasSelectedMove)
 
   const listItems = moves.map((move) => (
     <li key={move.id}>
-      <label class={userInput.includes(move.id) ? 'isChecked' : ''}>
+      <label className={userInput.includes(move.id) ? 'isChecked' : ''}>
         <input
           onChange={() => updateUserInput(move.id)}
           type="checkbox"
