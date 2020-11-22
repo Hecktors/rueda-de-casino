@@ -91,17 +91,12 @@ export default function App() {
     setLocalStorage('selectedMoves', updatedSelectedMoves)
   }
 
-  function deleleSelectedMoves() {
-    setSelectedMoves([])
-  }
-
   return (
     <Container>
       <Header
         appState={appState}
         stopSession={stopSession}
         toggleSettings={toggleSettings}
-        deleleSelectedMoves={deleleSelectedMoves}
       />
       <main>
         {isMoveListDisplayed && (

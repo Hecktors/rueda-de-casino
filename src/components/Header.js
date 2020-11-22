@@ -6,7 +6,6 @@ Header.propTypes = {
   appState: PropTypes.string.isRequired,
   stopSession: PropTypes.func,
   toggleSettings: PropTypes.func,
-  deleleSelectedMoves: PropTypes.func,
 }
 
 export default function Header({
@@ -35,11 +34,17 @@ export default function Header({
         <HeaderButton
           isResetButton={true}
           appState={appState}
-          onClick={deleleSelectedMoves}
+          onClick={() => {}}
         />
       )}
       <h1>{title}</h1>
-      {hasButton && <HeaderButton onClick={handleClick} appState={appState} />}
+      {hasButton && (
+        <HeaderButton
+          onClick={handleClick}
+          appState={appState}
+          isResetButton={false}
+        />
+      )}
     </HeaderStyled>
   )
 }
