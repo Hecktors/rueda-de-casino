@@ -7,6 +7,8 @@ import pensum from './data/pensum.json'
 import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
 import Settings from './components/Settings'
+import getLocalStorage from './components/lib/getLocalStorage'
+import setLocalStorage from './components/lib/setLocalStorage'
 
 export default function App() {
   const [appState, setAppState] = useState('home')
@@ -26,6 +28,7 @@ export default function App() {
   const isNoReady = selectedMoves.length < 2
 
   useEffect(() => {
+    setSelectedMoves(getLocalStorage('selectedMoves') ?? [])
     musicAudioRef.current = new Audio(musicUrl)
     musicAudioRef.current.volume = 0.3
     return () => clearTimeout(timeoutRef.current)
@@ -83,8 +86,9 @@ export default function App() {
         (move) => moveIds.includes(move.id) && updatedSelectedMoves.push(move)
       )
     )
-    setSelectedMoves(updatedSelectedMoves)
+    setSelectedMoves('selectedMoves', updatedSelectedMoves)
     setAppState('home')
+    setLocalStorage(updatedSelectedMoves)
   }
 
   function deleleSelectedMoves() {
