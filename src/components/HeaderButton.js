@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 HeaderButton.propTypes = {
   onClick: PropTypes.func,
   appState: PropTypes.string.isRequired,
-  isResetButton: PropTypes.bool,
+  isResetButton: PropTypes.bool.isRequired,
 }
 
 export default function HeaderButton({ appState, isResetButton, onClick }) {

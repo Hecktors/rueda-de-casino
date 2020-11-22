@@ -22,8 +22,11 @@ export default function Settings({
 
   function handleSubmit(e) {
     e.preventDefault()
-
     updateSelectedMoves(userInput)
+  }
+
+  function handleReset() {
+    setUserInput([])
   }
 
   const content = pensum.map(({ id, name, moves }) => (
@@ -38,13 +41,13 @@ export default function Settings({
   ))
 
   return (
-    <SettingsStyled onSubmit={handleSubmit} id="settings">
+    <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
       {content}
-    </SettingsStyled>
+    </FormStyled>
   )
 }
 
-const SettingsStyled = styled.form`
+const FormStyled = styled.form`
   width: 100%;
   height: 100%;
   padding: 20px;
