@@ -1,9 +1,19 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
 import { ReactComponent as ArrowUpIcon } from '../assets/img/arrow_up.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
-export default function LevelForm({
+LevelDropDown.propTypes = {
+  name: PropTypes.string.isRequired,
+  moves: PropTypes.array.isRequired,
+  selectedMoves: PropTypes.array.isRequired,
+  userInput: PropTypes.array.isRequired,
+  updateUserInput: PropTypes.func.isRequired,
+}
+
+export default function LevelDropDown({
   name,
   moves,
   selectedMoves,
@@ -35,17 +45,17 @@ export default function LevelForm({
   }
 
   return (
-    <LevelsStyled isOpen={isOpen}>
+    <LevelDropDownStyled isOpen={isOpen}>
       <h3 onClick={toogleLevelList}>
         {name.toUpperCase()}
         {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}{' '}
       </h3>
       <ul>{listItems}</ul>
-    </LevelsStyled>
+    </LevelDropDownStyled>
   )
 }
 
-const LevelsStyled = styled.div`
+const LevelDropDownStyled = styled.div`
   font-size: 1.1rem;
   margin-bottom: 10px;
 
