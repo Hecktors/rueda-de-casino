@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import LevelForm from './LevelForm'
+import LevelDropDown from './LevelDropDown'
 
 export default function Settings({
   pensum,
@@ -27,7 +27,7 @@ export default function Settings({
   }
 
   const content = pensum.map(({ id, name, moves }) => (
-    <LevelForm
+    <LevelDropDown
       key={id}
       name={name}
       moves={moves}

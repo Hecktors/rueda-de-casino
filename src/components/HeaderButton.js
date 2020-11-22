@@ -4,15 +4,15 @@ import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 
-import Proptypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 HeaderButton.propTypes = {
-  onClick: Proptypes.func,
-  appState: Proptypes.string.isRequired,
-  isResetButton: Proptypes.bool,
+  onClick: PropTypes.func,
+  appState: PropTypes.string.isRequired,
+  isResetButton: PropTypes.bool,
 }
 
-export default function HeaderButton({ onClick, appState, isResetButton }) {
+export default function HeaderButton({ appState, isResetButton, onClick }) {
   let icon = null
   if (appState === 'home') icon = <SettingsIcon />
   if (appState === 'settings') icon = <CancelIcon />
@@ -40,8 +40,8 @@ const ButtonStyled = styled.button`
   transform: translateY(-50%);
 
   svg {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     fill: var(--color-active);
   }
 `

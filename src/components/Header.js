@@ -33,9 +33,9 @@ export default function Header({
     <HeaderStyled>
       {isSettings && (
         <HeaderButton
-          onClick={deleleSelectedMoves}
           isResetButton={true}
           appState={appState}
+          onClick={deleleSelectedMoves}
         />
       )}
       <h1>{title}</h1>
@@ -50,7 +50,6 @@ const HeaderStyled = styled.header`
   place-items: center;
 
   h1 {
-    font-weight: lighter;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 `
