@@ -2,11 +2,12 @@ import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
     :root {
-        --primary-color: #121212;
-        --text-color: #e5e5e5;
-        --icon-color: var(--text-color);
-        --main-button-color: transparent;
-        --move-list-pause-color: #8d8d8d;
+        --color-primary: #121212;
+        --color-text: #e5e5e5;
+        --color-main-button: transparent;
+        --color-selected: orange;
+        --color-active: #e5e5e5;
+        --color-disabled: #666;
     }
     * {
         box-sizing: border-box;
@@ -20,8 +21,8 @@ export default createGlobalStyle`
     body {
         font-family: 'Helvetica';
         font-size: 112.5%;
-        color:  var(--text-color);
-        background-color: var(--primary-color);
+        color:  var(--color-text);
+        background-color: var(--color-primary);
     }
 
     button {
@@ -30,7 +31,7 @@ export default createGlobalStyle`
         border: none;
         padding: 0;
         background-color: transparent;
-        color: var(--text-color);
+        color:  var(--color-text);
         font-size: 2.5rem;
 
         &:active,

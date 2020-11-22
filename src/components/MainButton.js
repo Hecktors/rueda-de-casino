@@ -10,7 +10,7 @@ MainButton.propTypes = {
 
 function MainButton({ appState, onClick, isDisabled }) {
   let buttonLabel = <PlayIcon />
-  if (appState === 'sessionPause') buttonLabel = <PauseIcon />
+  if (appState === 'sessionPlay') buttonLabel = <PauseIcon />
   if (appState === 'settings') buttonLabel = 'Save'
 
   return appState === 'settings' ? (
@@ -18,7 +18,11 @@ function MainButton({ appState, onClick, isDisabled }) {
       {buttonLabel}
     </ButtonStyled>
   ) : (
-    <ButtonStyled disabled={isDisabled} onClick={onClick}>
+    <ButtonStyled
+      disabled={isDisabled}
+      onClick={onClick}
+      isDisabled={isDisabled}
+    >
       {buttonLabel}
     </ButtonStyled>
   )
@@ -27,11 +31,12 @@ function MainButton({ appState, onClick, isDisabled }) {
 const ButtonStyled = styled.button`
   width: 100%;
   height: 80px;
-  background-color: var(--main-button-color);
+  background-color: var(--color-main-button);
   svg {
     width: 60px;
     height: 60px;
-    fill: var(--icon-color);
+    fill: ${(props) =>
+      props.isDisabled ? 'var(--color-disabled)' : 'var(--color-active)'};
   }
 `
 
