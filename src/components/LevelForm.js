@@ -1,8 +1,23 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { ReactComponent as ArrowUpIcon } from '../assets/img/arrow_up.svg'
+import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
 export default function LevelForm({ name, moves, userInput, updateUserInput }) {
   const [isOpen, setIsOpen] = useState(true)
+
+  const listItems = moves.map((move) => (
+    <li key={move.id}>
+      <label class={userInput.includes(move.id) ? 'isChecked' : ''}>
+        <input
+          onChange={() => updateUserInput(move.id)}
+          type="checkbox"
+          checked={userInput.includes(move.id)}
+        />{' '}
+        {move.name}
+      </label>
+    </li>
+  ))
 
   function toogleLevelList() {
     setIsOpen(!isOpen)
@@ -10,21 +25,11 @@ export default function LevelForm({ name, moves, userInput, updateUserInput }) {
 
   return (
     <LevelsStyled isOpen={isOpen}>
-      <h3 onClick={toogleLevelList}>{name.toUpperCase()}</h3>
-      <ul>
-        {moves.map((move) => (
-          <li key={move.id}>
-            <label>
-              <input
-                onChange={() => updateUserInput(move.id)}
-                type="checkbox"
-                checked={userInput.includes(move.id)}
-              />{' '}
-              {move.name}
-            </label>
-          </li>
-        ))}
-      </ul>
+      <h3 onClick={toogleLevelList}>
+        {name.toUpperCase()}
+        {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}{' '}
+      </h3>
+      <ul>{listItems}</ul>
     </LevelsStyled>
   )
 }
@@ -32,18 +37,19 @@ export default function LevelForm({ name, moves, userInput, updateUserInput }) {
 const LevelsStyled = styled.div`
   font-size: 1.1rem;
   margin-bottom: 10px;
+
   input {
     margin-right: 5px;
   }
+
   h3 {
-    padding: 3px 0;
+    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     font-size: inherit;
-    label {
-      flex-grow: 1;
+    svg {
+      transform: scale(2);
     }
-  }
   }
   ul {
     overflow: hidden;
@@ -57,5 +63,9 @@ const LevelsStyled = styled.div`
       display: inline-block;
       width: 100%;
     }
+  }
+
+  .isChecked {
+    color: var(--color-selected);
   }
 `

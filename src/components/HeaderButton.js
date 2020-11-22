@@ -42,6 +42,6 @@ const ButtonStyled = styled.button`
   svg {
     width: 40px;
     height: 40px;
-    fill: var(--icon-color);
+    fill: var(--color-active);
   }
 `

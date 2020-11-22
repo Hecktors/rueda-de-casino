@@ -24,8 +24,7 @@ const MoveListStyled = styled.div`
     li {
       margin: 5px;
       list-style: none;
-      color: ${(props) =>
-        props.isPaused ? 'var(--move-list-pause-color)' : 'var(--text-color)'};
+      color: var(--color-disabled);
     }
   }
   .msg {
@@ -34,7 +33,7 @@ const MoveListStyled = styled.div`
     left: 0;
     width: 100%;
     text-align: center;
-    color: orange;
+    color: var(--color-selected);
     font-size: 1.2rem;
   }
 `
