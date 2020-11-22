@@ -39,7 +39,7 @@ export default function App() {
       setAppState('sessionPause')
     } else {
       musicAudioRef.current.play()
-      startMoveTimeout(1000)
+      startMoveTimeout(5000)
       setAppState('sessionPlay')
     }
   }
@@ -66,7 +66,7 @@ export default function App() {
       moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
       moveAudioRef.current.play()
       timeoutRef.current = null
-      startMoveTimeout(nextCurrentMove.steps * 1000)
+      startMoveTimeout(nextCurrentMove.steps * 2000 + 1000)
     }, ms)
   }
 
