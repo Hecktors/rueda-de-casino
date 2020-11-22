@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-
-import { ReactComponent as ArrowUpIcon } from '../assets/img/arrow_up.svg'
+import { ReactComponent as ArrowLeftIcon } from '../assets/img/arrow_left.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
 LevelDropDown.propTypes = {
@@ -47,8 +46,8 @@ export default function LevelDropDown({
   return (
     <LevelDropDownStyled isOpen={isOpen}>
       <h3 onClick={toogleLevelList}>
-        <span class="level-name">{name.toUpperCase()}</span>
-        {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}{' '}
+        <span className="level-name">{name.toUpperCase()}</span>
+        {isOpen ? <ArrowDownIcon /> : <ArrowLeftIcon />}{' '}
       </h3>
       <ul>{listItems}</ul>
     </LevelDropDownStyled>

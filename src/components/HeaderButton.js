@@ -32,13 +32,6 @@ export default function HeaderButton({ appState, isResetButton, onClick }) {
 }
 
 const ButtonStyled = styled.button`
-  position: absolute;
-  top: 50%;
-  left: ${(props) => (props.isLeft ? '10px' : 'auto')};
-  right: ${(props) => (props.isLeft ? 'auto' : '10px')};
-  font-size: inherit;
-  transform: translateY(-50%);
-
   svg {
     width: 30px;
     height: 30px;

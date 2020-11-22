@@ -8,16 +8,10 @@ Header.propTypes = {
   toggleSettings: PropTypes.func,
 }
 
-export default function Header({
-  appState,
-  stopSession,
-  toggleSettings,
-  deleleSelectedMoves,
-}) {
+export default function Header({ appState, stopSession, toggleSettings }) {
   let title = 'Salsa Time'
   if (appState === 'sessionPlay') title = 'Bailamos!!!'
   if (appState === 'sessionPause') title = 'Pause'
-  if (appState === 'settings') title = 'Settings'
   if (appState === 'settings') title = 'Settings'
 
   const handleClick =
@@ -44,9 +38,9 @@ export default function Header({
   return (
     <HeaderStyled>
       <h1 className={isHome ? 'title' : ''}>
-        {buttonLeft}
+        <span className="header__btn header__btn--left">{buttonLeft}</span>
         {title}
-        {buttonRight}
+        <span className="header__btn header__btn--right">{buttonRight}</span>
       </h1>
       {isHome && <h2 className="subtitle">El cantante de la rueda</h2>}
     </HeaderStyled>
@@ -68,14 +62,26 @@ const HeaderStyled = styled.header`
   .title {
     font-family: 'Molle', cursive;
     color: var(--color-secondary);
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     position: absolute;
     bottom: -10px;
     text-transform: uppercase;
     color: var(--color-secondary);
     font-family: 'Molle', cursive;
+  }
+  .header__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: inherit;
+  }
+  .header__btn--left {
+    left: 10px;
+  }
+  .header__btn--right {
+    right: 10px;
   }
 `
