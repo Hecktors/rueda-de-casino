@@ -47,7 +47,7 @@ export default function LevelDropDown({
   return (
     <LevelDropDownStyled isOpen={isOpen}>
       <h3 onClick={toogleLevelList}>
-        {name.toUpperCase()}
+        <span class="level-name">{name.toUpperCase()}</span>
         {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}{' '}
       </h3>
       <ul>{listItems}</ul>
@@ -56,29 +56,43 @@ export default function LevelDropDown({
 }
 
 const LevelDropDownStyled = styled.div`
-  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 5px;
   margin-bottom: 10px;
+  background-color: var(--color-bg-dropdown);
 
   input {
+    display: none;
     margin-right: 5px;
   }
 
   h3 {
-    padding: 5px 0;
+    font-size: 1rem;
+    padding: 0;
     display: flex;
     justify-content: space-between;
-    font-size: inherit;
+
+    & .level-name {
+      flex-grow: 1;
+      font-size: inherit;
+      font-weight: normal;
+      text-align: center;
+    }
+
     svg {
       transform: scale(2);
     }
   }
   ul {
     overflow: hidden;
-    transition: 1s;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
   }
   li {
+    color: var(--color-passive);
     padding: 3px 0;
+    &:first-of-type {
+      padding-top: 15px;
+    }
 
     label {
       display: inline-block;
