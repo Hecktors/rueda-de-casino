@@ -86,9 +86,9 @@ export default function App() {
         (move) => moveIds.includes(move.id) && updatedSelectedMoves.push(move)
       )
     )
-    setSelectedMoves('selectedMoves', updatedSelectedMoves)
+    setSelectedMoves(updatedSelectedMoves)
     setAppState('home')
-    setLocalStorage(updatedSelectedMoves)
+    setLocalStorage('selectedMoves', updatedSelectedMoves)
   }
 
   function deleleSelectedMoves() {
