@@ -1,13 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Molle:ital@1&display=swap');
+
     :root {
         --color-primary: #121212;
         --color-text: #e5e5e5;
         --color-main-button: transparent;
-        --color-selected: orange;
+        --color-selected: #ff6c00;
         --color-active: #e5e5e5;
-        --color-disabled: #666;
+        --color-disabled: #2c2c2c;
+        --color-passive: #999;
+        --color-secondary: #ff3d00;
+        --color-bg-dropdown: #201e1e;
+
     }
     * {
         box-sizing: border-box;

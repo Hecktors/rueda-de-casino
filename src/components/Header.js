@@ -14,7 +14,7 @@ export default function Header({
   toggleSettings,
   deleleSelectedMoves,
 }) {
-  let title = 'Rueda De Casino'
+  let title = 'Salsa Time'
   if (appState === 'sessionPlay') title = 'Bailamos!!!'
   if (appState === 'sessionPause') title = 'Pause'
   if (appState === 'settings') title = 'Settings'
@@ -25,26 +25,30 @@ export default function Header({
       ? toggleSettings
       : stopSession
 
-  const hasButton = appState !== 'sessionPlay'
-  const isSettings = appState === 'settings'
+  const isHome = appState === 'home'
+  const hasButtonRight = appState !== 'sessionPlay'
+  const hasButtonLeft = appState === 'settings'
+
+  const buttonLeft = hasButtonLeft ? (
+    <HeaderButton isResetButton={true} appState={appState} onClick={() => {}} />
+  ) : null
+
+  const buttonRight = hasButtonRight ? (
+    <HeaderButton
+      onClick={handleClick}
+      appState={appState}
+      isResetButton={false}
+    />
+  ) : null
 
   return (
     <HeaderStyled>
-      {isSettings && (
-        <HeaderButton
-          isResetButton={true}
-          appState={appState}
-          onClick={() => {}}
-        />
-      )}
-      <h1>{title}</h1>
-      {hasButton && (
-        <HeaderButton
-          onClick={handleClick}
-          appState={appState}
-          isResetButton={false}
-        />
-      )}
+      <h1 className={isHome ? 'title' : ''}>
+        {buttonLeft}
+        {title}
+        {buttonRight}
+      </h1>
+      {isHome && <h2 className="subtitle">El cantante de la rueda</h2>}
     </HeaderStyled>
   )
 }
@@ -55,6 +59,23 @@ const HeaderStyled = styled.header`
   place-items: center;
 
   h1 {
-    font-size: 1.7rem;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: normal;
+  }
+  .title {
+    font-family: 'Molle', cursive;
+    color: var(--color-secondary);
+    font-size: 3rem;
+  }
+  .subtitle {
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: -10px;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    font-family: 'Molle', cursive;
   }
 `

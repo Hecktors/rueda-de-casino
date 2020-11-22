@@ -24,16 +24,16 @@ const MoveListStyled = styled.div`
     li {
       margin: 5px;
       list-style: none;
-      color: var(--color-disabled);
+      color: var(--color-passive);
     }
   }
   .msg {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 0;
     text-align: center;
-    color: var(--color-selected);
-    font-size: 1.2rem;
+    color: var(--color-text);
+    font-size: 1rem;
   }
 `

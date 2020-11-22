@@ -1,19 +1,20 @@
 import styled from 'styled-components/macro'
 import { useEffect, useState, useRef } from 'react'
-import Header from './components/Header'
-import MainButton from './components/MainButton'
+import getLocalStorage from './components/lib/getLocalStorage'
+import setLocalStorage from './components/lib/setLocalStorage'
 import musicUrl from './assets/audio/music/Uno_dos_tres.mp3'
 import pensum from './data/pensum.json'
+import Header from './components/Header'
+import MainButton from './components/MainButton'
 import MoveList from './components/MoveList'
 import CurrentMove from './components/CurrentMove'
 import Settings from './components/Settings'
-import getLocalStorage from './components/lib/getLocalStorage'
-import setLocalStorage from './components/lib/setLocalStorage'
 
 export default function App() {
   const [appState, setAppState] = useState('home')
   const [currentMove, setCurrentMove] = useState({})
   const [selectedMoves, setSelectedMoves] = useState([])
+
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
