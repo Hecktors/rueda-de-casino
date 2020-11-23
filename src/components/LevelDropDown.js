@@ -87,7 +87,7 @@ const LevelDropDownStyled = styled.div`
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
   }
   li {
-    color: var(--color-passive);
+    color: var(--color-disabled);
     padding: 3px 0;
     &:first-of-type {
       padding-top: 15px;

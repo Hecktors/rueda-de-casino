@@ -29,14 +29,13 @@ function MainButton({ appState, onClick, isDisabled }) {
 }
 
 const ButtonStyled = styled.button`
-  width: 100%;
-  height: 80px;
-  background-color: var(--color-main-button);
+  background-color: transparent;
+  color: var(--color-button);
   svg {
     width: 60px;
     height: 60px;
-    fill: ${(props) =>
-      props.isDisabled ? 'var(--color-disabled)' : 'var(--color-active)'};
+    fill: ${({ isDisabled }) =>
+      isDisabled ? 'var(--color-disabled)' : 'var(--color-button)'};
   }
 `
 

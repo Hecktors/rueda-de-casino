@@ -22,18 +22,15 @@ const MoveListStyled = styled.div`
   ul {
     padding: 0;
     li {
+      list-style: inherit;
+      font-size: 1.5rem;
       margin: 5px;
-      list-style: none;
-      color: var(--color-passive);
+      color: var(--color-disabled);
     }
   }
   .msg {
-    width: 100%;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    text-align: center;
-    color: var(--color-text);
-    font-size: 1rem;
+    margin-top: 20px;
+    color: var(--color-message);
+    font-size: 1.3rem;
   }
 `
