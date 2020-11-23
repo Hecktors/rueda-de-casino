@@ -3,16 +3,17 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
 
     :root {
-        --color-primary: #121212;
-        --color-text: #e5e5e5;
-        --color-main-button: transparent;
-        --color-selected: #ff6c00;
-        --color-active: #e5e5e5;
-        --color-disabled: #2c2c2c;
-        --color-passive: #999;
-        --color-secondary: #ff3d00;
+        --color-bg: #121212;
         --color-bg-dropdown: #201e1e;
-
+        --color-text: #a0a0a0;
+        --color-title: #ff7109;
+        --color-move: #9116a6;
+        --color-button: #d90000;
+        --color-message: #a66767;
+        --color-selected: #ff7109;
+        --color-disabled: #999;
+        --color-active: #e5e5e5;
+        --color-passive: #999;
     }
     * {
         box-sizing: border-box;
@@ -27,7 +28,7 @@ export default createGlobalStyle`
         font-family: 'Helvetica';
         font-size: 112.5%;
         color:  var(--color-text);
-        background-color: var(--color-primary);
+        background-color: var(--color-bg);
     }
 
     button {

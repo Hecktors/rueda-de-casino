@@ -42,7 +42,7 @@ export default function Header({ appState, stopSession, toggleSettings }) {
         {title}
         <span className="header__btn header__btn--right">{buttonRight}</span>
       </h1>
-      {isHome && <h2 className="subtitle">El cantante de la rueda</h2>}
+      {/* {isHome && <h2 className="subtitle">El cantante de la rueda</h2>} */}
     </HeaderStyled>
   )
 }
@@ -61,7 +61,7 @@ const HeaderStyled = styled.header`
   }
   .title {
     font-family: 'Molle', cursive;
-    color: var(--color-secondary);
+    color: var(--color-title);
     font-size: 2.5rem;
   }
   .subtitle {
@@ -69,7 +69,7 @@ const HeaderStyled = styled.header`
     position: absolute;
     bottom: -10px;
     text-transform: uppercase;
-    color: var(--color-secondary);
+    color: var(--color-title);
     font-family: 'Molle', cursive;
   }
   .header__btn {
@@ -79,9 +79,9 @@ const HeaderStyled = styled.header`
     font-size: inherit;
   }
   .header__btn--left {
-    left: 10px;
+    left: 15px;
   }
   .header__btn--right {
-    right: 10px;
+    right: 15px;
   }
 `

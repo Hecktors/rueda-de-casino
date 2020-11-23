@@ -92,33 +92,41 @@ export default function App() {
     setLocalStorage('selectedMoves', updatedSelectedMoves)
   }
 
+  const headerComp = (
+    <Header
+      appState={appState}
+      stopSession={stopSession}
+      toggleSettings={toggleSettings}
+    />
+  )
+  const moveListComp = (
+    <MoveList moves={selectedMoves} isPaused={isSessionPauseMode} />
+  )
+  const currentMoveComp = <CurrentMove name={currentMove.name} />
+  const settingsComp = (
+    <Settings
+      pensum={pensum}
+      selectedMoves={selectedMoves}
+      updateSelectedMoves={updateSelectedMoves}
+    />
+  )
+  const mainButtonComp = (
+    <MainButton
+      appState={appState}
+      onClick={handleSession}
+      isDisabled={isNoReady}
+    />
+  )
+
   return (
     <Container>
-      <Header
-        appState={appState}
-        stopSession={stopSession}
-        toggleSettings={toggleSettings}
-      />
+      {headerComp}
       <main>
-        {isMoveListDisplayed && (
-          <MoveList moves={selectedMoves} isPaused={isSessionPauseMode} />
-        )}
-        {hasCurrentMove && <CurrentMove name={currentMove.name} />}
-        {isSettingsMode && (
-          <Settings
-            pensum={pensum}
-            selectedMoves={selectedMoves}
-            updateSelectedMoves={updateSelectedMoves}
-          />
-        )}
+        {isMoveListDisplayed && moveListComp}
+        {hasCurrentMove && currentMoveComp}
+        {isSettingsMode && settingsComp}
       </main>
-      <footer>
-        <MainButton
-          appState={appState}
-          onClick={handleSession}
-          isDisabled={isNoReady}
-        />
-      </footer>
+      <footer>{mainButtonComp}</footer>
     </Container>
   )
 }
@@ -140,6 +148,7 @@ const Container = styled.div`
 
   footer {
     width: 100%;
-    text-align: center;
+    display: grid;
+    place-items: center;
   }
 `
