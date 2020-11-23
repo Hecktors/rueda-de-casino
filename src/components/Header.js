@@ -1,87 +1,27 @@
 import styled from 'styled-components/macro'
-import HeaderButton from './HeaderButton'
 import PropTypes from 'prop-types'
 
-Header.propTypes = {
-  appState: PropTypes.string.isRequired,
-  stopSession: PropTypes.func,
-  toggleSettings: PropTypes.func,
-}
+Header.propTypes = {}
 
-export default function Header({ appState, stopSession, toggleSettings }) {
-  let title = 'Salsa Time'
-  if (appState === 'sessionPlay') title = ''
-  if (appState === 'sessionPause') title = 'Pause'
-  if (appState === 'settings') title = 'Settings'
-
-  const handleClick =
-    appState === 'home' || appState === 'settings'
-      ? toggleSettings
-      : stopSession
-
-  const isHome = appState === 'home'
-  const hasButtonRight = appState !== 'sessionPlay'
-  const hasButtonLeft = appState === 'settings'
-
-  const buttonLeft = hasButtonLeft ? (
-    <HeaderButton isResetButton={true} appState={appState} onClick={() => {}} />
-  ) : null
-
-  const buttonRight = hasButtonRight ? (
-    <HeaderButton
-      onClick={handleClick}
-      appState={appState}
-      isResetButton={false}
-    />
-  ) : null
-
-  return (
-    <HeaderStyled>
-      <h1 className={isHome ? 'title' : ''}>
-        <span className="header__btn header__btn--left">{buttonLeft}</span>
-        {title}
-        <span className="header__btn header__btn--right">{buttonRight}</span>
-      </h1>
-      {/* {isHome && <h2 className="subtitle">El cantante de la rueda</h2>} */}
-    </HeaderStyled>
-  )
+export default function Header({ children }) {
+  return <HeaderStyled>{children}</HeaderStyled>
 }
 
 const HeaderStyled = styled.header`
   position: relative;
   display: grid;
+  grid-template-columns: 40px auto 40px;
   place-items: center;
+  padding: 0 15px;
 
   h1 {
-    position: relative;
-    width: 100%;
     text-align: center;
     font-size: 1.8rem;
     font-weight: normal;
   }
-  .title {
+  .logo {
     font-family: 'Molle', cursive;
     color: var(--color-title);
     font-size: 2.5rem;
-  }
-  .subtitle {
-    font-size: 1.1rem;
-    position: absolute;
-    bottom: -10px;
-    text-transform: uppercase;
-    color: var(--color-title);
-    font-family: 'Molle', cursive;
-  }
-  .header__btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: inherit;
-  }
-  .header__btn--left {
-    left: 15px;
-  }
-  .header__btn--right {
-    right: 15px;
   }
 `

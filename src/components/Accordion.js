@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ReactComponent as ArrowLeftIcon } from '../assets/img/arrow_left.svg'
+import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
-LevelDropDown.propTypes = {
+LevelAccordion.propTypes = {
   name: PropTypes.string.isRequired,
   moves: PropTypes.array.isRequired,
   selectedMoves: PropTypes.array.isRequired,
@@ -12,7 +12,7 @@ LevelDropDown.propTypes = {
   updateUserInput: PropTypes.func.isRequired,
 }
 
-export default function LevelDropDown({
+export default function LevelAccordion({
   name,
   moves,
   selectedMoves,
@@ -24,7 +24,12 @@ export default function LevelDropDown({
     selectedMoveIds.includes(move.id)
   )
 
-  const [isOpen, setIsOpen] = useState(hasSelectedMove)
+  const [isOpen, setIsOpen] = useState()
+  // console.log(name, hasSelectedMove, isOpen)
+
+  useEffect(() => {
+    hasSelectedMove && setIsOpen(true)
+  }, [hasSelectedMove])
 
   const listItems = moves.map((move) => (
     <li key={move.id}>
@@ -44,21 +49,21 @@ export default function LevelDropDown({
   }
 
   return (
-    <LevelDropDownStyled isOpen={isOpen}>
+    <LevelAccordionStyled isOpen={isOpen}>
       <h3 onClick={toogleLevelList}>
+        {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{name.toUpperCase()}</span>
-        {isOpen ? <ArrowDownIcon /> : <ArrowLeftIcon />}{' '}
       </h3>
       <ul>{listItems}</ul>
-    </LevelDropDownStyled>
+    </LevelAccordionStyled>
   )
 }
 
-const LevelDropDownStyled = styled.div`
+const LevelAccordionStyled = styled.div`
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: var(--color-bg-dropdown);
+  background-color: var(--color-bg-accordion);
 
   input {
     display: none;
