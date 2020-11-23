@@ -23,7 +23,7 @@ const MoveListStyled = styled.div`
     padding: 0;
     li {
       list-style: inherit;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin: 5px;
       color: var(--color-disabled);
     }

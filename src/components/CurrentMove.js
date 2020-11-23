@@ -4,15 +4,22 @@ import PropTypes from 'prop-types'
 CurrentMove.propTypes = { name: PropTypes.string }
 
 export default function CurrentMove({ name }) {
-  return <NameWrapper>{name}</NameWrapper>
+  return (
+    <NameWrapper>
+      <span>{name}</span>
+    </NameWrapper>
+  )
 }
 
 const NameWrapper = styled.div`
-  padding: 20px;
+  height: 100%;
+  /* padding-top: 10vh; */
   text-align: center;
   font-family: 'Molle', cursive;
 
-  font-size: 4rem;
-  color: var(--color-move);
-  margin-top: -10vh;
+  span {
+    font-size: 4rem;
+    color: var(--color-move);
+    margin-top: -10vh;
+  }
 `

@@ -10,7 +10,7 @@ Header.propTypes = {
 
 export default function Header({ appState, stopSession, toggleSettings }) {
   let title = 'Salsa Time'
-  if (appState === 'sessionPlay') title = 'Bailamos!!!'
+  if (appState === 'sessionPlay') title = ''
   if (appState === 'sessionPause') title = 'Pause'
   if (appState === 'settings') title = 'Settings'
 
