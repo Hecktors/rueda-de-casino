@@ -4,16 +4,17 @@ export default createGlobalStyle`
 
     :root {
         --color-bg: #121212;
-        --color-bg-dropdown: #201e1e;
+        --color-bg-accordion: #201e1e;
         --color-text: #ccc;
         --color-button: #fff;
         --color-disabled: #999;
         --color-selected: #ff7109;
         --color-move: #ff7109;
+        --color-warning: #d15353;
+        --color-success: green;
         /* --color-title: #ff7109;
         --color-text: #a0a0a0;
         --color-move: #9116a6;
-        --color-message: #a66767;
         --color-button: #d90000;
         --color-selected: #ff7109;
         --color-active: #e5e5e5;
@@ -35,6 +36,15 @@ export default createGlobalStyle`
         background-color: var(--color-bg);
     }
 
+    main { 
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* justify-content: center; */
+        place-items: center;
+        padding: 10px;
+        
+    }
+
     button {
         cursor: pointer;
         outline: none;
@@ -54,5 +64,18 @@ export default createGlobalStyle`
     }
     li {
         list-style: none;
+    }
+    .msg {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .warning {
+        color: var(--color-warning)
+    }
+
+    .success {
+        color: var(--color-success)
     }
 `
