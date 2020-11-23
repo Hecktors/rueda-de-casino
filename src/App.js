@@ -132,7 +132,7 @@ export default function App() {
 }
 
 const Container = styled.div`
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
   display: grid;
   grid-template-rows: 80px auto 80px;
