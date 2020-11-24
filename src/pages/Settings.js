@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
 import LevelAccordion from '../components/Accordion'
@@ -11,9 +12,10 @@ import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 import getLocalStorage from '../lib/getLocalStorage'
 import setLocalStorage from '../lib/setLocalStorage'
 
-export default function Settings(props) {
+export default function Settings() {
   const [selectedMoves, setSelectedMoves] = useState([])
   const [userInput, setUserInput] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     const storedMove = getLocalStorage('selectedMoves') ?? []
@@ -31,7 +33,7 @@ export default function Settings(props) {
   function handleSubmit(e) {
     e.preventDefault()
     updateSelectedMoves(userInput)
-    props.history.push('/')
+    history.push('/')
   }
 
   function handleReset(e) {
