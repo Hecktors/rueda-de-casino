@@ -4,24 +4,25 @@ import Layout from '../components/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
-
+import { useHistory } from 'react-router-dom'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 
-export default function Home(props) {
+export default function Home() {
   const [selectedMoves, setSelectedMoves] = useState([])
-  const isNoReady = selectedMoves.length < 2
+  const isNotReady = selectedMoves.length < 2
+  const history = useHistory()
 
   useEffect(() => {
     setSelectedMoves(getLocalStorage('selectedMoves') ?? [])
   }, [])
 
   function startSession() {
-    props.history.push('/session')
+    history.push('/session')
   }
 
   function openSettings() {
-    props.history.push('/settings')
+    history.push('/settings')
   }
 
   const message =
@@ -36,7 +37,7 @@ export default function Home(props) {
       <Header title="Salsa time">
         <div />
         <h1 className="logo">Salsa time!</h1>
-        <Button onClick={openSettings} isSmall>
+        <Button data-testid="btn-settings" onClick={openSettings} isSmall>
           <SettingsIcon />
         </Button>
       </Header>
@@ -45,7 +46,7 @@ export default function Home(props) {
         <MoveList moves={selectedMoves} />
       </main>
       <footer>
-        <Button onClick={startSession} isDisabled={isNoReady}>
+        <Button onClick={startSession} isDisabled={isNotReady}>
           <PlayIcon />
         </Button>
       </footer>
