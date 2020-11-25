@@ -19,6 +19,7 @@ const HeaderStyled = styled.header`
     font-size: 1.8rem;
     font-weight: normal;
   }
+
   .logo {
     font-family: 'Molle', cursive;
     color: var(--color-title);

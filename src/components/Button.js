@@ -27,6 +27,7 @@ export default function Button({
 const ButtonStyled = styled.button`
   background-color: transparent;
   color: var(--color-button);
+
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
