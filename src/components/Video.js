@@ -1,6 +1,12 @@
-import styled from 'styled-components'
-import Button from './Button'
+import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
+import Button from './Button'
+
+Video.propTypes = {
+  video: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+}
 
 export default function Video({ video, onClick }) {
   const url = `${video.url}?controls=0&amp;start=${video.start}`
@@ -10,9 +16,9 @@ export default function Video({ video, onClick }) {
       width="100%"
       height="300"
       src={url}
-      frameborder="0"
+      frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
+      allowFullScreen
     ></iframe>
   )
 
@@ -46,8 +52,5 @@ const VideoStyled = styled.div`
     top: 15px;
     right: 15px;
     z-index: 999;
-  }
-
-  iframe {
   }
 `

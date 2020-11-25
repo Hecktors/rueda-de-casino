@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
+import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
+import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 import Layout from '../components/Layout'
 import LevelAccordion from '../components/Accordion'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
-import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
+
+Settings.propTypes = {
+  moves: PropTypes.array.isRequired,
+  selectedMoves: PropTypes.array.isRequired,
+  updateSelectedMoves: PropTypes.func.isRequired,
+}
 
 export default function Settings({
   history,
