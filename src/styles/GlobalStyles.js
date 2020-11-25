@@ -32,7 +32,6 @@ export default createGlobalStyle`
     main { 
         place-items: center;
         padding: 10px;
-        
     }
 
     button {
