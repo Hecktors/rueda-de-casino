@@ -13,7 +13,7 @@ const Container = styled.div`
   color: var(--text-color);
 
   main {
-    position: relative;
+    /* position: relative; */
     overflow: auto;
   }
 

@@ -7,37 +7,49 @@
       "id": 1,
       "name": "la prima",
       "steps": 2,
-      "filename": "la_prima.mp3"
+      "filename": "la_prima.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "20"
     },
     {
       "id": 2,
       "name": "sombrero",
       "steps": 2,
-      "filename": "sombrero.mp3"
+      "filename": "sombrero.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 3,
       "name": "sombrero con una mano",
       "steps": 2,
-      "filename": "sombrero_con_una_mano.mp3"
+      "filename": "sombrero_con_una_mano.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     { 
       "id": 4,
       "name": "doble play",
       "steps": 3,
-      "filename": "doble_play.mp3"
+      "filename": "doble_play.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 5,
       "name": "sesenta",
       "steps": 4,
-      "filename": "sesenta.mp3"
+      "filename": "sesenta.mp3",
+      "video_url": "https://www.youtube.com/embed/riQ_IAmFRJ0",
+      "video_start": "1"
     },
     {
       "id": 6,
       "name": "métele el dedo",
       "steps": 4,
-      "filename": "metele_el_dedo.mp3"
+      "filename": "metele_el_dedo.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     }
   ]
 },
@@ -49,37 +61,49 @@
       "id": 7,
       "name": "vacuna",
       "steps": 4,
-      "filename": "vacuna.mp3"
+      "filename": "vacuna.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 8,
       "name": "enchufla con la buricua",
       "steps": 4,
-      "filename": "enchufla_con_la_buricua.mp3"
+      "filename": "enchufla_con_la_buricua.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 9,
       "name": "prima con la tía",
       "steps": 3,
-      "filename": "prima_con_la_tia.mp3"
+      "filename": "prima_con_la_tia.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 10,
       "name": "vacílala",
       "steps": 2,
-      "filename": "vacilala.mp3"
+      "filename": "vacilala.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 11,
       "name": "sesenta y nueve",
       "steps": 4,
-      "filename": "sesenta_y_nueve.mp3"
+      "filename": "sesenta_y_nueve.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     },
     {
       "id": 12,
       "name": "enchufla con raulín",
       "steps": 2,
-      "filename": "enchulfa_con_raulin.mp3"
+      "filename": "enchulfa_con_raulin.mp3",
+      "video_url": "https://www.youtube.com/embed/yHjWNiGmTqg",
+      "video_start": "1"
     }
     ]
   }
