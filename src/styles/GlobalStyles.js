@@ -1,12 +1,17 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
+
     :root {
-        --primary-color: #121212;
-        --text-color: #e5e5e5;
-        --icon-color: var(--text-color);
-        --main-button-color: transparent;
-        --move-list-pause-color: #8d8d8d;
+        --bg-color: #121212;
+        --bg-color-accordion: #201e1e;
+        --color-text: #ccc;
+        --color-button: #fff;
+        --color-disabled: #999;
+        --color-selected: #ff7109;
+        --color-move: #ff7109;
+        --color-warning: #d15353;
+        --color-success: green;
     }
     * {
         box-sizing: border-box;
@@ -20,8 +25,14 @@ export default createGlobalStyle`
     body {
         font-family: 'Helvetica';
         font-size: 112.5%;
-        color:  var(--text-color);
-        background-color: var(--primary-color);
+        color:  var(--color-text);
+        background-color: var(--bg-color);
+    }
+
+    main { 
+        place-items: center;
+        padding: 10px;
+        
     }
 
     button {
@@ -30,15 +41,31 @@ export default createGlobalStyle`
         border: none;
         padding: 0;
         background-color: transparent;
+        color:  var(--color-text);
+        font-size: 2.5rem;
 
         &:active,
         &:hover {
         opacity: 0.8;
         }
     }
-    .error-msg {
-        padding: 20px;
-        color: red;
-        font-family: monospace
+    ul {
+        padding: 0;
+    }
+    li {
+        list-style: none;
+    }
+    .msg {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .warning {
+        color: var(--color-warning)
+    }
+
+    .success {
+        color: var(--color-success)
     }
 `

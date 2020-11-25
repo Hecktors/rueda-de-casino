@@ -3,30 +3,28 @@ import PropTypes from 'prop-types'
 
 MoveList.propTypes = {
   moves: PropTypes.array.isRequired,
-  isPaused: PropTypes.bool.isRequired,
 }
 
-export default function MoveList({ moves, isPaused }) {
+export default function MoveList({ moves }) {
   const listItems = moves.map(({ name, id }) => <li key={id}>{name}</li>)
-
-  return listItems.length > 0 ? (
-    <ListStyled isPauses={isPaused}>{listItems}</ListStyled>
-  ) : (
-    <Message>Select some moves to practice!</Message>
+  return (
+    <MoveListStyled>
+      <ul>{listItems}</ul>
+    </MoveListStyled>
   )
 }
+const MoveListStyled = styled.div`
+  height: 80%;
+  display: grid;
+  place-items: center;
 
-const ListStyled = styled.ul`
-  padding: 0;
-  li {
-    margin: 5px;
-    list-style: none;
-    color: ${(props) =>
-      props.isPauses ? 'var(--move-list-pause-color)' : 'var(--text-color)'};
+  ul {
+    padding: 0;
+
+    li {
+      font-size: 1.5rem;
+      margin: 5px;
+      color: var(--color-disabled);
+    }
   }
-`
-
-const Message = styled.div`
-  color: orange;
-  font-size: 1.5rem;
 `

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion renders Accordion 1`] = `
+<div
+  class="sc-bdfBwQ cLTPYZ"
+>
+  <h3>
+    <svg>
+      arrow_right.svg
+    </svg>
+     
+    <span
+      class="level-name"
+    >
+      TEST ACCORDION
+    </span>
+  </h3>
+  <ul>
+    <li>
+      <label
+        class=""
+      >
+        <input
+          type="checkbox"
+        />
+         
+        la prima
+      </label>
+    </li>
+    <li>
+      <label
+        class="isChecked"
+      >
+        <input
+          checked=""
+          type="checkbox"
+        />
+         
+        sombrero
+      </label>
+    </li>
+  </ul>
+</div>
+`;
