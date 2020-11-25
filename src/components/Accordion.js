@@ -62,7 +62,7 @@ const LevelAccordionStyled = styled.div`
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: var(--color-bg-accordion);
+  background-color: var(--bg-color-accordion);
 
   input {
     display: none;
@@ -86,13 +86,16 @@ const LevelAccordionStyled = styled.div`
       transform: scale(2);
     }
   }
+
   ul {
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
   }
+
   li {
     color: var(--color-disabled);
     padding: 3px 0;
+
     &:first-of-type {
       padding-top: 15px;
     }

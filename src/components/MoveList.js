@@ -17,8 +17,10 @@ const MoveListStyled = styled.div`
   height: 80%;
   display: grid;
   place-items: center;
+
   ul {
     padding: 0;
+
     li {
       font-size: 1.5rem;
       margin: 5px;

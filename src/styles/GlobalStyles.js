@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
 
     :root {
-        --color-bg: #121212;
-        --color-bg-accordion: #201e1e;
+        --bg-color: #121212;
+        --bg-color-accordion: #201e1e;
         --color-text: #ccc;
         --color-button: #fff;
         --color-disabled: #999;
@@ -12,13 +12,6 @@ export default createGlobalStyle`
         --color-move: #ff7109;
         --color-warning: #d15353;
         --color-success: green;
-        /* --color-title: #ff7109;
-        --color-text: #a0a0a0;
-        --color-move: #9116a6;
-        --color-button: #d90000;
-        --color-selected: #ff7109;
-        --color-active: #e5e5e5;
-        --color-passive: #999; */
     }
     * {
         box-sizing: border-box;
@@ -33,13 +26,10 @@ export default createGlobalStyle`
         font-family: 'Helvetica';
         font-size: 112.5%;
         color:  var(--color-text);
-        background-color: var(--color-bg);
+        background-color: var(--bg-color);
     }
 
     main { 
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* justify-content: center; */
         place-items: center;
         padding: 10px;
         
