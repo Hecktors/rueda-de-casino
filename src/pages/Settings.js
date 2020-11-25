@@ -1,27 +1,23 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
 import LevelAccordion from '../components/Accordion'
-import pensum from '../data/pensum.json'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 
-import getLocalStorage from '../lib/getLocalStorage'
-import setLocalStorage from '../lib/setLocalStorage'
-
-export default function Settings() {
-  const [selectedMoves, setSelectedMoves] = useState([])
+export default function Settings({
+  history,
+  moves,
+  selectedMoves,
+  updateSelectedMoves,
+}) {
   const [userInput, setUserInput] = useState([])
-  const history = useHistory()
 
   useEffect(() => {
-    const storedMove = getLocalStorage('selectedMoves') ?? []
-    setSelectedMoves(storedMove)
-    setUserInput(storedMove.map(({ id }) => id))
-  }, [])
+    setUserInput(selectedMoves.map((move) => move.id))
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateUserInput(id) {
     const updatedUserInput = userInput.includes(id)
@@ -43,21 +39,10 @@ export default function Settings() {
 
   function handleCancel(e) {
     e.preventDefault()
-    props.history.push('/')
+    history.push('/')
   }
 
-  function updateSelectedMoves(moveIds) {
-    const updatedSelectedMoves = []
-    pensum.forEach((level) =>
-      level.moves.forEach(
-        (move) => moveIds.includes(move.id) && updatedSelectedMoves.push(move)
-      )
-    )
-    setSelectedMoves(updatedSelectedMoves)
-    setLocalStorage('selectedMoves', updatedSelectedMoves)
-  }
-
-  const content = pensum.map(({ id, name, moves }) => (
+  const content = moves.map(({ id, name, moves }) => (
     <LevelAccordion
       key={id}
       name={name}

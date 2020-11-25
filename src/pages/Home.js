@@ -1,21 +1,12 @@
-import { useEffect, useState } from 'react'
-import getLocalStorage from '../lib/getLocalStorage'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
-import { useHistory } from 'react-router-dom'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 
-export default function Home() {
-  const [selectedMoves, setSelectedMoves] = useState([])
-  const isNotReady = selectedMoves.length < 2
-  const history = useHistory()
-
-  useEffect(() => {
-    setSelectedMoves(getLocalStorage('selectedMoves') ?? [])
-  }, [])
+export default function Home({ history, selectedMoves }) {
+  const hasNotEnoughMoves = selectedMoves.length < 2
 
   function startSession() {
     history.push('/session')
@@ -46,7 +37,7 @@ export default function Home() {
         <MoveList moves={selectedMoves} />
       </main>
       <footer>
-        <Button onClick={startSession} isDisabled={isNotReady}>
+        <Button onClick={startSession} isDisabled={hasNotEnoughMoves}>
           <PlayIcon />
         </Button>
       </footer>

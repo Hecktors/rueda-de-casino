@@ -13,7 +13,7 @@ export default function Button({
 }) {
   return (
     <ButtonStyled
-      data-testid="btn"
+      data-testid="button"
       onClick={onClick}
       isSmall={isSmall}
       active={!isDisabled}

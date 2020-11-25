@@ -25,7 +25,6 @@ export default function LevelAccordion({
   )
 
   const [isOpen, setIsOpen] = useState()
-  // console.log(name, hasSelectedMove, isOpen)
 
   useEffect(() => {
     hasSelectedMove && setIsOpen(true)

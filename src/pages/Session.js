@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
-import getLocalStorage from '../lib/getLocalStorage'
 import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
@@ -11,11 +9,9 @@ import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 
-export default function App() {
+export default function App({ history, selectedMoves }) {
   const [currentMove, setCurrentMove] = useState({})
-  const [selectedMoves, setSelectedMoves] = useState([])
   const [isPlaying, setIsPlaying] = useState(false)
-  const history = useHistory()
 
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
@@ -24,7 +20,6 @@ export default function App() {
   const hasCurrentMove = currentMove && currentMove.hasOwnProperty('id')
 
   useEffect(() => {
-    setSelectedMoves(getLocalStorage('selectedMoves'))
     musicAudioRef.current = new Audio(musicUrl)
     musicAudioRef.current.volume = 0.3
     return () => clearTimeout(timeoutRef.current)
