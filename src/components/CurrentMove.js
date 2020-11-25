@@ -13,7 +13,6 @@ export default function CurrentMove({ name }) {
 
 const NameWrapper = styled.div`
   height: 100%;
-  /* padding-top: 10vh; */
   text-align: center;
   font-family: 'Molle', cursive;
 
