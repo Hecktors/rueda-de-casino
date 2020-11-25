@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import Video from '../components/Video'
-import { useState } from 'react'
 
 MoveList.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -32,6 +32,7 @@ export default function MoveList({ moves }) {
     </MoveListStyled>
   )
 }
+
 const MoveListStyled = styled.div`
   height: 80%;
   display: grid;

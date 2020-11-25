@@ -1,18 +1,20 @@
 import { useEffect, useState, useRef } from 'react'
+import PropTypes from 'prop-types'
+import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
+import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
+import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import MoveList from '../components/MoveList'
 import CurrentMove from '../components/CurrentMove'
-import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
-import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
-import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 
-export default function App({ history, selectedMoves }) {
+Session.propTypes = { selectedMoves: PropTypes.array.isRequired }
+
+export default function Session({ history, selectedMoves }) {
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(false)
-
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
@@ -60,7 +62,6 @@ export default function App({ history, selectedMoves }) {
   function startMoveTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
       const nextCurrentMove = getRandomMove()
-      console.log(nextCurrentMove)
       setCurrentMove(nextCurrentMove)
       moveAudioRef.current = new Audio(
         `./audio/moves/${nextCurrentMove.filename}`
