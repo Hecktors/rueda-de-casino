@@ -10,7 +10,6 @@ MoveList.propTypes = {
 
 export default function MoveList({ moves }) {
   const [video, setVideo] = useState({})
-  console.log(video)
 
   const listItems = moves.map(({ name, id, video_url, video_start }) => (
     <li key={id} onClick={() => openVideo(video_url, video_start)}>

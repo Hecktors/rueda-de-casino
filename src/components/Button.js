@@ -16,7 +16,6 @@ export default function Button({
       data-testid="button"
       onClick={onClick}
       isSmall={isSmall}
-      active={!isDisabled}
       disabled={isDisabled}
     >
       {children}

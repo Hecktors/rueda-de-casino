@@ -62,7 +62,9 @@ export default function App({ history, selectedMoves }) {
       const nextCurrentMove = getRandomMove()
       console.log(nextCurrentMove)
       setCurrentMove(nextCurrentMove)
-      moveAudioRef.current = new Audio(`./moves/${nextCurrentMove.filename}`)
+      moveAudioRef.current = new Audio(
+        `./audio/moves/${nextCurrentMove.filename}`
+      )
       moveAudioRef.current.play()
       timeoutRef.current = null
       startMoveTimeout(nextCurrentMove.steps * 2000 + 1000)
