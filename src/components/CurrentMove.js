@@ -1,12 +1,24 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-CurrentMove.propTypes = { name: PropTypes.string.isRequired }
+CurrentMove.propTypes = { name: PropTypes.string }
 
 export default function CurrentMove({ name }) {
-  return <NameWrapper>{name}</NameWrapper>
+  return (
+    <NameWrapper>
+      <span>{name}</span>
+    </NameWrapper>
+  )
 }
 
 const NameWrapper = styled.div`
-  font-size: 2rem;
+  height: 100%;
+  text-align: center;
+  font-family: 'Molle', cursive;
+
+  span {
+    font-size: 4rem;
+    color: var(--color-move);
+    margin-top: -10vh;
+  }
 `
