@@ -5,7 +5,8 @@ export default function Layout({ children }) {
 }
 
 const Container = styled.div`
-  max-width: 500px;
+  position: relative;
+  max-width: 600px;
   margin: 0 auto;
   display: grid;
   grid-template-rows: 80px auto 80px;
