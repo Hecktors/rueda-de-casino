@@ -28,7 +28,7 @@ export default function Home({ history, selectedMoves }) {
 
   return (
     <Layout>
-      <Header title="Salsa time">
+      <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
         <Button data-testid="btn-settings" onClick={openSettings} isSmall>

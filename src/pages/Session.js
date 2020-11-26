@@ -80,15 +80,20 @@ export default function Session({ history, selectedMoves }) {
 
   return (
     <Layout>
-      <Header title="Salsa time">
-        <div />
+      <Header>
         <div />
         {isPlaying ? (
-          <div />
+          <>
+            <div />
+            <div />
+          </>
         ) : (
-          <Button onClick={stopSession} isSmall>
-            <StopIcon />
-          </Button>
+          <>
+            <h1>Pause</h1>
+            <Button onClick={stopSession} isSmall>
+              <StopIcon />
+            </Button>
+          </>
         )}
       </Header>
       <main>
