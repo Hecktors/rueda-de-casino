@@ -7,8 +7,9 @@ export default createGlobalStyle`
         --bg-color-accordion: #201e1e;
         --color-text: #ccc;
         --color-button: #fff;
-        --color-disabled: #999;
-        --color-selected: #ff7109;
+        --color-disabled: #333;
+        --color-listitem: #999;
+        --color-listitem-active: #ff7109;
         --color-move: #ff7109;
         --color-warning: #d15353;
         --color-success: green;

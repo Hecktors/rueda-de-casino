@@ -56,7 +56,7 @@ const MoveListStyled = styled.div`
       button {
         font-size: 1.5rem;
         margin: 5px 0;
-        color: var(--color-disabled);
+        color: var(--color-listitem);
       }
     }
 
