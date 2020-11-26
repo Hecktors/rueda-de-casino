@@ -9,7 +9,7 @@ Video.propTypes = {
 }
 
 export default function Video({ video, onClick }) {
-  const url = `${video.url}?controls=0&amp;start=${video.start}`
+  const url = `https://www.youtube.com/embed/${video.id}?controls=0&amp;start=${video.start}`
   const iframe = (
     <iframe
       title="video"

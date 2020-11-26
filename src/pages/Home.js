@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
-import Layout from '../components/Layout'
+import Layout from '../components/UI/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'

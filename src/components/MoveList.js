@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import youTubeIcon from '../assets/img/youTube.png'
 import Video from '../components/Video'
 
 MoveList.propTypes = {
@@ -10,15 +11,20 @@ MoveList.propTypes = {
 
 export default function MoveList({ moves }) {
   const [video, setVideo] = useState({})
+  console.log(video)
 
-  const listItems = moves.map(({ name, id, video_url, video_start }) => (
-    <li key={id} onClick={() => openVideo(video_url, video_start)}>
-      {name}
+  const listItems = moves.map(({ name, id, video_id, video_start }) => (
+    <li key={id}>
+      <span onClick={() => openVideo(video_id, video_start)}>
+        {name}
+        {video_id && <img src={youTubeIcon} alt="youtube" />}
+        <span />
+      </span>
     </li>
   ))
 
-  function openVideo(url, start) {
-    setVideo({ url, start })
+  function openVideo(id, start) {
+    setVideo({ id, start })
   }
 
   function closeVideo() {
@@ -27,7 +33,7 @@ export default function MoveList({ moves }) {
 
   return (
     <MoveListStyled>
-      {video.url && <Video video={video} onClick={closeVideo} />}
+      {video.id && <Video video={video} onClick={closeVideo} />}
       <ul>{listItems}</ul>
     </MoveListStyled>
   )
@@ -44,12 +50,17 @@ const MoveListStyled = styled.div`
     li {
       cursor: pointer;
       font-size: 1.5rem;
-      margin: 5px;
+      margin: 5px 0;
       color: var(--color-disabled);
     }
 
-    li:hover {
+    span:hover {
       opacity: 0.6;
+    }
+
+    img {
+      margin-left: 10px;
+      height: 0.6em;
     }
   }
 `
