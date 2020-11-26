@@ -63,7 +63,7 @@ export default function Settings({
   return (
     <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
       <Layout>
-        <Header title="Salsa time">
+        <Header>
           <Button onClick={handleReset} isSmall>
             <ResetIcon />
           </Button>

@@ -11,15 +11,17 @@ MoveList.propTypes = {
 
 export default function MoveList({ moves }) {
   const [video, setVideo] = useState({})
-  console.log(video)
 
   const listItems = moves.map(({ name, id, video_id, video_start }) => (
     <li key={id}>
-      <span onClick={() => openVideo(video_id, video_start)}>
+      <button
+        data-testid="listitem-button"
+        onClick={() => openVideo(video_id, video_start)}
+      >
         {name}
         {video_id && <img src={youTubeIcon} alt="youtube" />}
         <span />
-      </span>
+      </button>
     </li>
   ))
 
@@ -46,12 +48,16 @@ const MoveListStyled = styled.div`
 
   ul {
     padding: 0;
+    width: 100%;
 
     li {
-      cursor: pointer;
-      font-size: 1.5rem;
-      margin: 5px 0;
-      color: var(--color-disabled);
+      text-align: center;
+
+      button {
+        font-size: 1.5rem;
+        margin: 5px 0;
+        color: var(--color-disabled);
+      }
     }
 
     span:hover {

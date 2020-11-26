@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoveList renders MoveList 1`] = `
+<div>
+  <div
+    class="MoveList__MoveListStyled-skwchu-0 iEZrZc"
+  >
+    <ul>
+      <li>
+        <button
+          data-testid="listitem-button"
+        >
+          la prima
+          <span />
+        </button>
+      </li>
+      <li>
+        <button
+          data-testid="listitem-button"
+        >
+          sombrero
+          <span />
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

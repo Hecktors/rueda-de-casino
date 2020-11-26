@@ -12,6 +12,7 @@ export default function Video({ video, onClick }) {
   const url = `https://www.youtube.com/embed/${video.id}?controls=0&amp;start=${video.start}`
   const iframe = (
     <iframe
+      data-testid="video"
       title="video"
       width="100%"
       height="300"
