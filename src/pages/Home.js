@@ -19,12 +19,9 @@ export default function Home({ history, selectedMoves }) {
     history.push('/settings')
   }
 
-  const message =
-    selectedMoves.length < 2 ? (
-      <div className="msg warning">Select at least 2 moves to start</div>
-    ) : (
-      <div className="msg success">Ready? Click Play to start!</div>
-    )
+  const message = selectedMoves.length < 2 && (
+    <div className="msg warning">Select at least 2 moves to start</div>
+  )
 
   return (
     <Layout>

@@ -93,7 +93,7 @@ const LevelAccordionStyled = styled.div`
   }
 
   li {
-    color: var(--color-disabled);
+    color: var(--color-listitem);
     padding: 3px 0;
 
     &:first-of-type {
@@ -107,6 +107,6 @@ const LevelAccordionStyled = styled.div`
   }
 
   .isChecked {
-    color: var(--color-selected);
+    color: var(--color-listitem-active);
   }
 `

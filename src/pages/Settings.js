@@ -21,9 +21,14 @@ export default function Settings({
   updateSelectedMoves,
 }) {
   const [userInput, setUserInput] = useState([])
+  const [selectedMovesIds, setSelectedMovesIds] = useState([])
+  const hasNoChanges =
+    JSON.stringify(userInput) === JSON.stringify(selectedMovesIds)
+  const hasNoSelect = !userInput.length
 
   useEffect(() => {
     setUserInput(selectedMoves.map((move) => move.id))
+    setSelectedMovesIds(selectedMoves.map((move) => move.id))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateUserInput(id) {
@@ -64,7 +69,7 @@ export default function Settings({
     <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
       <Layout>
         <Header>
-          <Button onClick={handleReset} isSmall>
+          <Button onClick={handleReset} isDisabled={hasNoSelect} isSmall>
             <ResetIcon />
           </Button>
           <h1>Settings</h1>
@@ -74,7 +79,9 @@ export default function Settings({
         </Header>
         <main>{content}</main>
         <footer>
-          <Button onClick={() => {}}>SAVE</Button>
+          <Button onClick={() => {}} isDisabled={hasNoChanges}>
+            SAVE
+          </Button>
         </footer>
       </Layout>
     </FormStyled>
