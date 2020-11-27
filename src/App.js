@@ -1,11 +1,10 @@
 import { Route, Switch } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getLocalStorage, setLocalStorage } from './lib/localStorage'
+import pensum from './data/pensum.json'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Session from './pages/Session'
-import getLocalStorage from './lib/getLocalStorage'
-import setLocalStorage from './lib/setLocalStorage'
-import { useEffect, useState } from 'react'
-import pensum from './data/pensum.json'
 
 export default function App() {
   const [selectedMoves, setSelectedMoves] = useState([])

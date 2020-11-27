@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import Layout from '../components/Layout'
+import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
+import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
+import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
+import Layout from '../components/UI/Layout'
 import LevelAccordion from '../components/Accordion'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
-import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
+
+Settings.propTypes = {
+  moves: PropTypes.array.isRequired,
+  selectedMoves: PropTypes.array.isRequired,
+  updateSelectedMoves: PropTypes.func.isRequired,
+}
 
 export default function Settings({
   history,
@@ -56,7 +63,7 @@ export default function Settings({
   return (
     <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
       <Layout>
-        <Header title="Salsa time">
+        <Header>
           <Button onClick={handleReset} isSmall>
             <ResetIcon />
           </Button>

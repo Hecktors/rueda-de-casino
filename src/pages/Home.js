@@ -1,9 +1,12 @@
-import Layout from '../components/Layout'
+import PropTypes from 'prop-types'
+import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
+import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
+import Layout from '../components/UI/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
-import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
-import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
+
+Home.propTypes = { selectedMoves: PropTypes.array.isRequired }
 
 export default function Home({ history, selectedMoves }) {
   const hasNotEnoughMoves = selectedMoves.length < 2
@@ -25,7 +28,7 @@ export default function Home({ history, selectedMoves }) {
 
   return (
     <Layout>
-      <Header title="Salsa time">
+      <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
         <Button data-testid="btn-settings" onClick={openSettings} isSmall>
