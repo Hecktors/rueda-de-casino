@@ -12,16 +12,14 @@ const testMoves = [
 ]
 
 describe('MoveList', () => {
-  it('shows move names', () => {
-    const { getByText } = render(<MoveList moves={testMoves} />)
-
-    expect(getByText('la prima')).toBeInTheDocument()
-    expect(getByText('sombrero')).toBeInTheDocument()
+  it('renders MoveList', () => {
+    const { container } = render(<MoveList moves={testMoves} />)
+    expect(container).toMatchSnapshot()
   })
 
-  it('show fallback function if no move selected', () => {
-    const { getByText } = render(<MoveList moves={[]} />)
-
-    expect(getByText('No move selected')).toBeInTheDocument()
+  it('shows move names', () => {
+    const { getByText } = render(<MoveList moves={testMoves} />)
+    expect(getByText('la prima')).toBeInTheDocument()
+    expect(getByText('sombrero')).toBeInTheDocument()
   })
 })

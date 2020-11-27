@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
