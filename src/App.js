@@ -8,12 +8,16 @@ import Session from './pages/Session'
 
 export default function App() {
   const [selectedMoves, setSelectedMoves] = useState([])
+  const [isFirstAppStart, setIsFirstAppStart] = useState(true)
 
   useEffect(() => {
-    setSelectedMoves(getLocalStorage('selectedMoves') ?? [])
+    const storedSelectedMoves = getLocalStorage('selectedMoves')
+    setSelectedMoves(storedSelectedMoves ?? [])
+    setIsFirstAppStart(!storedSelectedMoves)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateSelectedMoves(moveIds) {
+    isFirstAppStart && setIsFirstAppStart(false)
     const updatedSelectedMoves = []
     pensum.forEach((level) =>
       level.moves.forEach(
@@ -29,7 +33,13 @@ export default function App() {
       <Route
         exact
         path="/"
-        render={(props) => <Home {...props} selectedMoves={selectedMoves} />}
+        render={(props) => (
+          <Home
+            {...props}
+            selectedMoves={selectedMoves}
+            isFirstAppStart={isFirstAppStart}
+          />
+        )}
       />
       <Route
         exact

@@ -5,42 +5,41 @@ import Layout from '../components/UI/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
+import StartMessage from '../components/StartMessage'
 
-Home.propTypes = { selectedMoves: PropTypes.array.isRequired }
+Home.propTypes = {
+  selectedMoves: PropTypes.array.isRequired,
+  isFirstAppStart: PropTypes.bool.isRequired,
+}
 
-export default function Home({ history, selectedMoves }) {
+export default function Home({ history, selectedMoves, isFirstAppStart }) {
   const hasNotEnoughMoves = selectedMoves.length < 2
-
-  function startSession() {
-    history.push('/session')
-  }
-
-  function openSettings() {
-    history.push('/settings')
-  }
-
-  const message =
-    selectedMoves.length < 2 ? (
-      <div className="msg warning">Select at least 2 moves to start</div>
-    ) : (
-      <div className="msg success">Ready? Click Play to start!</div>
-    )
 
   return (
     <Layout>
       <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
-        <Button data-testid="btn-settings" onClick={openSettings} isSmall>
+        <Button
+          data-testid="btn-settings"
+          onClick={() => history.push('/settings')}
+          isSmall
+        >
           <SettingsIcon />
         </Button>
       </Header>
       <main>
-        {message}
-        <MoveList moves={selectedMoves} />
+        {hasNotEnoughMoves ? (
+          <StartMessage isFirstAppStart={isFirstAppStart} />
+        ) : (
+          <MoveList moves={selectedMoves} />
+        )}
       </main>
       <footer>
-        <Button onClick={startSession} isDisabled={hasNotEnoughMoves}>
+        <Button
+          onClick={() => history.push('/session')}
+          isDisabled={hasNotEnoughMoves}
+        >
           <PlayIcon />
         </Button>
       </footer>
