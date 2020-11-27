@@ -93,8 +93,8 @@ const LevelAccordionStyled = styled.div`
   }
 
   li {
-    color: var(--color-disabled);
-    padding: 3px 0;
+    color: var(--color-listitem);
+    margin: 5px 0;
 
     &:first-of-type {
       padding-top: 15px;
@@ -103,10 +103,15 @@ const LevelAccordionStyled = styled.div`
     label {
       display: inline-block;
       width: 100%;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+      }
     }
   }
 
   .isChecked {
-    color: var(--color-selected);
+    color: var(--color-listitem-active);
   }
 `

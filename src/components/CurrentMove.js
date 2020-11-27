@@ -17,8 +17,9 @@ const NameWrapper = styled.div`
   font-family: 'Molle', cursive;
 
   span {
+    display: inline-block;
     font-size: 4rem;
     color: var(--color-move);
-    margin-top: -10vh;
+    margin-top: 10vh;
   }
 `
