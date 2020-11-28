@@ -19,16 +19,15 @@ export default function LevelAccordion({
   userInput,
   updateUserInput,
 }) {
+  const [isOpen, setIsOpen] = useState()
+
   const selectedMoveIds = selectedMoves.map((move) => move.id)
   const hasSelectedMove = moves.some((move) =>
     selectedMoveIds.includes(move.id)
   )
-
-  const [isOpen, setIsOpen] = useState()
-
-  useEffect(() => {
-    hasSelectedMove && setIsOpen(true)
-  }, [hasSelectedMove])
+  const color = hasSelectedMove
+    ? 'var(--color-accordion-title-active)'
+    : 'var(--color-accordion-title)'
 
   const listItems = moves.map((move) => (
     <li key={move.id}>
@@ -48,7 +47,7 @@ export default function LevelAccordion({
   }
 
   return (
-    <LevelAccordionStyled isOpen={isOpen}>
+    <LevelAccordionStyled isOpen={isOpen} color={color}>
       <h3 onClick={toogleLevelList}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
@@ -60,7 +59,6 @@ export default function LevelAccordion({
 
 const LevelAccordionStyled = styled.div`
   width: 100%;
-  border-radius: 5px;
   background-color: var(--bg-color-accordion);
 
   input {
@@ -70,10 +68,12 @@ const LevelAccordionStyled = styled.div`
   h3 {
     cursor: pointer;
     font-size: 1rem;
-    padding: 6px;
+    padding: 7px;
     display: flex;
     justify-content: space-between;
-    color: var(--color-accordion-title);
+    border: 1px solid ${({ color }) => color};
+    border-radius: 5px;
+    color: ${({ color }) => color};
 
     & .level-name {
       flex-grow: 1;
@@ -84,7 +84,7 @@ const LevelAccordionStyled = styled.div`
 
     svg {
       transform: scale(1.5);
-      fill: var(--color-accordion-title);
+      fill: ${({ color }) => color};
     }
   }
 

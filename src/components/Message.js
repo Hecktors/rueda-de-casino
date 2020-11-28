@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { ReactComponent as NorthIcon } from '../assets/img/north.svg'
 import { ReactComponent as SouthIcon } from '../assets/img/south.svg'
 

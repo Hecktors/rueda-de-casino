@@ -33,20 +33,16 @@ export default function MoveList({ moves }) {
 }
 
 const MoveListStyled = styled.div`
-  height: 80%;
-  display: grid;
-  place-items: center;
+  padding-top: 20%;
 
   ul {
     padding: 0;
-    width: 100%;
+    margin-left: 30px;
 
     li {
-      margin-left: 15px;
-
       button {
-        font-size: 1rem;
-        margin: 3px 0;
+        font-size: 1.3rem;
+        margin: 1px 0;
         color: var(--color-listitem);
       }
     }
