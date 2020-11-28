@@ -5,7 +5,7 @@ import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
 LevelAccordion.propTypes = {
-  name: PropTypes.string.isRequired,
+  levelName: PropTypes.string.isRequired,
   moves: PropTypes.array.isRequired,
   selectedMoves: PropTypes.array.isRequired,
   userInput: PropTypes.array.isRequired,
@@ -13,7 +13,7 @@ LevelAccordion.propTypes = {
 }
 
 export default function LevelAccordion({
-  name,
+  levelName,
   moves,
   selectedMoves,
   userInput,
@@ -51,7 +51,7 @@ export default function LevelAccordion({
     <LevelAccordionStyled isOpen={isOpen}>
       <h3 onClick={toogleLevelList}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
-        <span className="level-name">{name.toUpperCase()}</span>
+        <span className="level-name">{levelName}</span>
       </h3>
       <ul>{listItems}</ul>
     </LevelAccordionStyled>
@@ -59,21 +59,21 @@ export default function LevelAccordion({
 }
 
 const LevelAccordionStyled = styled.div`
-  padding: 10px;
+  width: 100%;
   border-radius: 5px;
-  margin-bottom: 10px;
   background-color: var(--bg-color-accordion);
 
   input {
     display: none;
-    margin-right: 5px;
   }
 
   h3 {
+    cursor: pointer;
     font-size: 1rem;
-    padding: 0;
+    padding: 6px;
     display: flex;
     justify-content: space-between;
+    color: var(--color-accordion-title);
 
     & .level-name {
       flex-grow: 1;
@@ -83,35 +83,37 @@ const LevelAccordionStyled = styled.div`
     }
 
     svg {
-      transform: scale(2);
+      transform: scale(1.5);
+      fill: var(--color-accordion-title);
     }
   }
 
   ul {
+    padding: 0 10px;
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
   }
 
   li {
-    color: var(--color-listitem);
-    margin: 5px 0;
-
     &:first-of-type {
-      padding-top: 15px;
+      padding-top: 5px;
+    }
+    &:last-of-type {
+      padding-bottom: 5px;
     }
 
     label {
+      color: var(--color-accordion-item);
       display: inline-block;
       width: 100%;
 
       &:hover {
         cursor: pointer;
-        opacity: 0.7;
       }
     }
   }
 
   .isChecked {
-    color: var(--color-listitem-active);
+    color: var(--color-accordion-item-active);
   }
 `

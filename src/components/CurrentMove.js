@@ -20,6 +20,6 @@ const NameWrapper = styled.div`
     display: inline-block;
     font-size: 4rem;
     color: var(--color-move);
-    margin-top: 10vh;
+    margin-top: 5vh;
   }
 `

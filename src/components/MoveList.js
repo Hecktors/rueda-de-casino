@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import youTubeIcon from '../assets/img/youTube.png'
-import Video from '../components/Video'
+import Video from './Video'
 
 MoveList.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -46,8 +46,8 @@ const MoveListStyled = styled.div`
       margin-left: 15px;
 
       button {
-        font-size: 1.5rem;
-        margin: 5px 0;
+        font-size: 1rem;
+        margin: 3px 0;
         color: var(--color-listitem);
       }
     }

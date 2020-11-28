@@ -1,20 +1,25 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
-
     :root {
-        --bg-color: #121212;
-        --bg-color-accordion: #201e1e;
-        --color-text: #ccc;
-        --color-button: #fff;
+        /* General */
+        --color-primary: #ff7109;
+        --bg-color: #181b27;
+        --color: #bbb;
+        /* Title */
+        --color-title: #bbb;
+        /* Accordion */
+        --bg-color-accordion: #262b34;
+        --color-accordion-title: #2ca3d2;
+        --color-accordion-item: #bbb;
+        --color-accordion-item-active: #ff7109;
+        /* Buttons */
+        --color-button: #2ca3d2;
         --color-disabled: #333;
-        --color-listitem: #999;
-        --color-listitem-active: #ff7109;
+        /* Current move */
         --color-move: #ff7109;
-        --color-title: #ff7109;
-        --color-warning: #d15353;
-        --color-success: green;
     }
+
     * {
         box-sizing: border-box;
         margin: 0;
@@ -26,14 +31,15 @@ export default createGlobalStyle`
 
     body {
         font-family: 'Helvetica';
+        font-family: 'Open Sans', sans-serif;
+
         font-size: 112.5%;
-        color:  var(--color-text);
+        color:  var(--color);
         background-color: var(--bg-color);
     }
 
     main { 
         place-items: center;
-        padding: 10px;
     }
 
     button {
@@ -43,7 +49,7 @@ export default createGlobalStyle`
         padding: 0;
         background-color: transparent;
         color:  var(--color-text);
-        font-size: 2.5rem;
+        font-size: 1.5rem;
 
         &:active,
         &:hover {

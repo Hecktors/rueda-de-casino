@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 import Layout from '../components/UI/Layout'
 import LevelAccordion from '../components/Accordion'
@@ -9,14 +8,14 @@ import Header from '../components/Header'
 import Button from '../components/Button'
 
 Settings.propTypes = {
-  moves: PropTypes.array.isRequired,
+  levels: PropTypes.array.isRequired,
   selectedMoves: PropTypes.array.isRequired,
   updateSelectedMoves: PropTypes.func.isRequired,
 }
 
 export default function Settings({
   history,
-  moves,
+  levels,
   selectedMoves,
   updateSelectedMoves,
 }) {
@@ -54,10 +53,10 @@ export default function Settings({
     history.push('/')
   }
 
-  const content = moves.map(({ id, name, moves }) => (
+  const content = levels.map(({ id, name, moves }) => (
     <LevelAccordion
       key={id}
-      name={name}
+      levelName={name}
       moves={moves}
       selectedMoves={selectedMoves}
       userInput={userInput}
@@ -73,13 +72,20 @@ export default function Settings({
             <ResetIcon />
           </Button>
           <h1>Settings</h1>
-          <Button onClick={handleCancel} isSmall>
-            <CancelIcon />
-          </Button>
+          <div />
         </Header>
         <main>{content}</main>
         <footer>
-          <Button onClick={() => {}} isDisabled={hasNoChanges}>
+          <Button onClick={handleCancel} color="--color-warning" isOutlined>
+            {' '}
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {}}
+            color="--color-warning"
+            isOutlined
+            isDisabled={hasNoChanges}
+          >
             SAVE
           </Button>
         </footer>
@@ -89,5 +95,19 @@ export default function Settings({
 }
 
 const FormStyled = styled.form`
+  background-color: linear-gradient(to left, #434343, #000000);
   height: 100%;
+
+  main {
+    padding: 0 20px;
+    display: inline-grid;
+    grid-auto-rows: max-content;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-evenly;
+  }
 `
