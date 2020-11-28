@@ -5,32 +5,38 @@ import Layout from '../components/UI/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
-import StartMessage from '../components/StartMessage'
+import Message from '../components/Message'
 
 Home.propTypes = {
   selectedMoves: PropTypes.array.isRequired,
   isFirstAppStart: PropTypes.bool.isRequired,
 }
 
-export default function Home({ history, selectedMoves, isFirstAppStart }) {
+export default function Home({
+  history,
+  selectedMoves,
+  isFirstAppStart,
+  setIsFirstAppStart,
+}) {
   const hasNotEnoughMoves = selectedMoves.length < 2
+
+  function handleOpenSettings() {
+    history.push('/settings')
+    setIsFirstAppStart(false)
+  }
 
   return (
     <Layout>
       <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
-        <Button
-          data-testid="btn-settings"
-          onClick={() => history.push('/settings')}
-          isSmall
-        >
+        <Button data-testid="btn-settings" onClick={handleOpenSettings} isSmall>
           <SettingsIcon />
         </Button>
       </Header>
       <main>
         {hasNotEnoughMoves ? (
-          <StartMessage isFirstAppStart={isFirstAppStart} />
+          <Message isFirstAppStart={isFirstAppStart} />
         ) : (
           <MoveList moves={selectedMoves} />
         )}

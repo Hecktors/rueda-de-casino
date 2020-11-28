@@ -20,7 +20,6 @@ export default function MoveList({ moves }) {
       >
         {name}
         {videoId && <img src={youTubeIcon} alt="youtube" />}
-        <span />
       </button>
     </li>
   ))

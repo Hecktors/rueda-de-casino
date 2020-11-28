@@ -38,6 +38,7 @@ export default function App() {
             {...props}
             selectedMoves={selectedMoves}
             isFirstAppStart={isFirstAppStart}
+            setIsFirstAppStart={setIsFirstAppStart}
           />
         )}
       />

@@ -22,9 +22,10 @@ const HeaderStyled = styled.header`
   }
 
   .logo {
+    text-transform: none;
     font-family: 'Molle', cursive;
     color: var(--color-primary);
     letter-spacing: 0px;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 `

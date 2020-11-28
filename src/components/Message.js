@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ReactComponent as NorthIcon } from '../assets/img/north.svg'
 import { ReactComponent as SouthIcon } from '../assets/img/south.svg'
 
-export default function StartMessage({ isFirstAppStart }) {
+export default function Message({ isFirstAppStart = false }) {
   return (
     <MessageStyled>
       {isFirstAppStart ? (
@@ -10,11 +10,12 @@ export default function StartMessage({ isFirstAppStart }) {
           <div className="top">
             <NorthIcon />
             <br />
-            <span className="text">1. Choose the moves here.</span>
+            <span className="text">1. Select the moves here</span>
           </div>
           <div className="text">
-            Afer choosing at least 2 moves
-            <br /> you'll be ready to start
+            You need at least 2 moves
+            <br />
+            to start the session
           </div>
 
           <div className="bottom">
@@ -25,7 +26,7 @@ export default function StartMessage({ isFirstAppStart }) {
           </div>
         </div>
       ) : (
-        <div className="default">
+        <div className="bottom">
           <span className="text">Select at least 2 moves</span>
         </div>
       )}
@@ -34,13 +35,12 @@ export default function StartMessage({ isFirstAppStart }) {
 }
 
 const MessageStyled = styled.div`
-  display: absolute;
-  text-align: center;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 20px;
   background-color: var(--bg-color);
   opacity: 0.5;
 
@@ -56,6 +56,11 @@ const MessageStyled = styled.div`
     text-align: right;
   }
 
+  .bottom,
+  .warning {
+    text-align: center;
+  }
+
   .text {
     display: inline-block;
     margin: 15px 0;
@@ -67,6 +72,6 @@ const MessageStyled = styled.div`
     transform: scale(2.5);
   }
   .top svg {
-    margin-right: 20px;
+    margin-right: 10px;
   }
 `
