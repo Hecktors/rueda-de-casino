@@ -3,23 +3,35 @@ import PropTypes from 'prop-types'
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool,
+  isSmall: PropTypes.bool,
+  isPrimary: PropTypes.bool,
 }
 
 export default function Button({
   onClick,
   isDisabled = false,
   isSmall = false,
-  isOutlined = false,
-  color = 'var(--color-button)',
+  isPrimary = false,
   children,
 }) {
+  let color = isPrimary ? 'var(--bg-color)' : 'var(--color-button)'
+  let bgColor = isPrimary ? 'var(--color-primary)' : 'transparent'
+
+  if (isDisabled) {
+    color = isPrimary ? 'var(--bg-color)' : 'var(--color-disabled)'
+    bgColor = isPrimary && 'var(--color-disabled)'
+  }
+
   return (
     <ButtonStyled
       data-testid="button"
       onClick={onClick}
       isSmall={isSmall}
       disabled={isDisabled}
-      isOutlined={isOutlined}
+      color={color}
+      bgColor={bgColor}
+      isBold={isPrimary}
     >
       {children}
     </ButtonStyled>
@@ -30,15 +42,13 @@ const ButtonStyled = styled.button`
   background-color: transparent;
   border-radius: 5px;
   padding: 5px 10px;
-  color: ${({ disabled }) =>
-    disabled ? 'var(--color-disabled)' : 'var(--color-button)'};
-  border: 1px solid
-    ${({ isOutlined, color }) => (isOutlined ? color : 'transparent')};
+  font-weight: ${({ isBold }) => (isBold ? 'bold' : 'normal')};
+  color: ${({ color }) => color};
+  background-color: ${({ bgColor }) => bgColor};
 
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
-    fill: ${({ disabled }) =>
-      disabled ? 'var(--color-disabled)' : 'var(--color-button)'};
+    fill: ${({ color }) => color};
   }
 `

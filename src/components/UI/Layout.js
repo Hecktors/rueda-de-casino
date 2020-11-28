@@ -5,13 +5,20 @@ export default function Layout({ children }) {
 }
 
 const Container = styled.div`
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-rows: 80px auto 80px;
   height: 100%;
+  width: 100%;
+  max-width: 699px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 80px auto 100px;
+  margin: auto;
   color: var(--text-color);
+
+  @media (min-width: 700px) and (orientation: landscape) {
+    height: 80%;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
 
   main {
     overflow: auto;
@@ -19,7 +26,8 @@ const Container = styled.div`
 
   footer {
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
 `

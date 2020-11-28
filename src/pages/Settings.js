@@ -37,19 +37,16 @@ export default function Settings({
     setUserInput(updatedUserInput)
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  function handleUpdate() {
     updateSelectedMoves(userInput)
     history.push('/')
   }
 
-  function handleReset(e) {
-    e.preventDefault()
+  function handleReset() {
     setUserInput([])
   }
 
-  function handleCancel(e) {
-    e.preventDefault()
+  function handleCancel() {
     history.push('/')
   }
 
@@ -65,49 +62,33 @@ export default function Settings({
   ))
 
   return (
-    <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
-      <Layout>
-        <Header>
-          <Button onClick={handleReset} isDisabled={hasNoSelect} isSmall>
-            <ResetIcon />
-          </Button>
-          <h1>Settings</h1>
-          <div />
-        </Header>
-        <main>{content}</main>
-        <footer>
-          <Button onClick={handleCancel} color="--color-warning" isOutlined>
-            {' '}
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {}}
-            color="--color-warning"
-            isOutlined
-            isDisabled={hasNoChanges}
-          >
-            SAVE
-          </Button>
-        </footer>
-      </Layout>
-    </FormStyled>
+    <Layout>
+      <Header>
+        <Button onClick={handleReset} isDisabled={hasNoSelect} isSmall>
+          <ResetIcon />
+        </Button>
+        <h1>Settings</h1>
+        <div />
+      </Header>
+      <main>
+        <FormStyled>{content}</FormStyled>
+      </main>
+      <footer>
+        <Button onClick={handleCancel}>Cancel</Button>
+        <Button
+          onClick={handleUpdate}
+          isPrimary={true}
+          isDisabled={hasNoChanges}
+        >
+          Save
+        </Button>
+      </footer>
+    </Layout>
   )
 }
 
 const FormStyled = styled.form`
-  background-color: linear-gradient(to left, #434343, #000000);
-  height: 100%;
-
-  main {
-    padding: 20px;
-    display: inline-grid;
-    grid-auto-rows: max-content;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  footer {
-    display: flex;
-    justify-content: space-evenly;
-  }
+  padding: 20px;
+  display: grid;
+  gap: 10px;
 `

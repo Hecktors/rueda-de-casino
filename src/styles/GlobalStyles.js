@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components/macro'
 
 export default createGlobalStyle`
     :root {
@@ -9,9 +9,10 @@ export default createGlobalStyle`
         /* Title */
         --color-title: #bbb;
         /* Accordion */
-        --bg-color-accordion: #262b34;
         --color-accordion-title: #2ca3d2;
-        --color-accordion-item: #bbb;
+        --bg-color-accordion-title: #0b1644;
+        --color-accordion-title-active: #ff7109;
+        --color-accordion-item: #999;
         --color-accordion-item-active: #ff7109;
         /* Buttons */
         --color-button: #2ca3d2;
@@ -30,12 +31,15 @@ export default createGlobalStyle`
     }
 
     body {
-        font-family: 'Helvetica';
         font-family: 'Open Sans', sans-serif;
-
         font-size: 112.5%;
         color:  var(--color);
         background-color: var(--bg-color);
+    }
+
+    #root {
+        display: flex;
+        align-items: center;
     }
 
     main { 
@@ -61,13 +65,5 @@ export default createGlobalStyle`
     }
     li {
         list-style: none;
-    }
-
-    .warning {
-        color: var(--color-warning)
-    }
-
-    .success {
-        color: var(--color-success)
     }
 `

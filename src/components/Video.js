@@ -50,8 +50,8 @@ const VideoStyled = styled.div`
 
   .button-container {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 0px;
     z-index: 999;
   }
 `
