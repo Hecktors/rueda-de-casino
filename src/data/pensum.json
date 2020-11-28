@@ -1,7 +1,7 @@
   [ 
     {
-      "id": "l1",
-    "name": "beginner",
+      "id": "b1",
+    "name": "Basic 1",
     "moves": [
     {      
       "id": 1,
@@ -54,8 +54,8 @@
   ]
 },
 {
-  "id": "l2",
-  "name": "intermediate",
+  "id": "b2",
+  "name": "Basic 2",
   "moves": [
     {
       "id": 7,
@@ -106,5 +106,55 @@
       "videoStart": "1"
     }
     ]
+  },
+  {
+    "id": "b3",
+    "name": "Basic 3",
+    "moves": []
+  },
+  {
+    "id": "b4",
+    "name": "Basic 4",
+    "moves": []
+  },
+  {
+    "id": "i1",
+    "name": "intermediate 1",
+    "moves": []
+  },
+  {
+    "id": "i2",
+    "name": "intermediate 2",
+    "moves": []
+  },
+  {
+    "id": "i3",
+    "name": "intermediate 3",
+    "moves": []
+  },
+  {
+    "id": "i4",
+    "name": "intermediate 4",
+    "moves": []
+  },
+  {
+    "id": "a1",
+    "name": "Advanced 1",
+    "moves": []
+  },
+  {
+    "id": "a2",
+    "name": "Advanced 2",
+    "moves": []
+  },
+  {
+    "id": "a3",
+    "name": "Advanced3",
+    "moves": []
+  },
+  {
+    "id": "a4",
+    "name": "Advanced 4",
+    "moves": []
   }
 ]

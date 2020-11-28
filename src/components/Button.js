@@ -8,7 +8,9 @@ Button.propTypes = {
 export default function Button({
   onClick,
   isDisabled = false,
-  isSmall,
+  isSmall = false,
+  isOutlined = false,
+  color = 'var(--color-button)',
   children,
 }) {
   return (
@@ -17,6 +19,7 @@ export default function Button({
       onClick={onClick}
       isSmall={isSmall}
       disabled={isDisabled}
+      isOutlined={isOutlined}
     >
       {children}
     </ButtonStyled>
@@ -25,8 +28,12 @@ export default function Button({
 
 const ButtonStyled = styled.button`
   background-color: transparent;
+  border-radius: 5px;
+  padding: 5px 10px;
   color: ${({ disabled }) =>
     disabled ? 'var(--color-disabled)' : 'var(--color-button)'};
+  border: 1px solid
+    ${({ isOutlined, color }) => (isOutlined ? color : 'transparent')};
 
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
