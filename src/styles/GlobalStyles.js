@@ -9,6 +9,7 @@ export default createGlobalStyle`
         /* Title */
         --color-title: #bbb;
         /* Accordion */
+        --bg-color-accordion: #222637;
         --color-accordion-title: #2ca3d2;
         --bg-color-accordion-title: #0b1644;
         --color-accordion-title-active: #ff7109;
