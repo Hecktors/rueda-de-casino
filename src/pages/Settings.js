@@ -99,7 +99,7 @@ const FormStyled = styled.form`
   height: 100%;
 
   main {
-    padding: 0 20px;
+    padding: 20px;
     display: inline-grid;
     grid-auto-rows: max-content;
     gap: 10px;
