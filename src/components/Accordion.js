@@ -60,6 +60,7 @@ export default function LevelAccordion({
 const LevelAccordionStyled = styled.div`
   width: 100%;
   background-color: var(--bg-color-accordion);
+  border-radius: 5px;
 
   input {
     display: none;
@@ -71,8 +72,7 @@ const LevelAccordionStyled = styled.div`
     padding: 7px;
     display: flex;
     justify-content: space-between;
-    border: 1px solid ${({ color }) => color};
-    border-radius: 5px;
+    /* border: 1px solid ${({ color }) => color}; */
     color: ${({ color }) => color};
 
     & .level-name {

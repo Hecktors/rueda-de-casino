@@ -15,12 +15,11 @@ export default function Button({
   isPrimary = false,
   children,
 }) {
-  let color = isPrimary ? 'var(--bg-color)' : 'var(--color-button)'
-  let bgColor = isPrimary ? 'var(--color-primary)' : 'transparent'
+  let color = 'var(--color-button)'
+  color = isPrimary ? 'var(--color-primary)' : 'var(--color-button)'
 
-  if (isDisabled) {
-    color = isPrimary ? 'var(--bg-color)' : 'var(--color-disabled)'
-    bgColor = isPrimary && 'var(--color-disabled)'
+  if (isDisabled && isPrimary) {
+    color = 'var(--color-disabled)'
   }
 
   return (
@@ -30,8 +29,7 @@ export default function Button({
       isSmall={isSmall}
       disabled={isDisabled}
       color={color}
-      bgColor={bgColor}
-      isBold={isPrimary}
+      isPrimary={isPrimary}
     >
       {children}
     </ButtonStyled>
@@ -44,8 +42,8 @@ const ButtonStyled = styled.button`
   padding: 5px 10px;
   font-weight: ${({ isBold }) => (isBold ? 'bold' : 'normal')};
   color: ${({ color }) => color};
-  background-color: ${({ bgColor }) => bgColor};
-
+  border: 1px solid
+    ${({ color, isPrimary }) => (isPrimary ? color : 'transprant')};
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
