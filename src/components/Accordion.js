@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
@@ -7,7 +7,6 @@ import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 LevelAccordion.propTypes = {
   levelName: PropTypes.string.isRequired,
   moves: PropTypes.array.isRequired,
-  selectedMoves: PropTypes.array.isRequired,
   userInput: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
@@ -15,19 +14,11 @@ LevelAccordion.propTypes = {
 export default function LevelAccordion({
   levelName,
   moves,
-  selectedMoves,
   userInput,
   updateUserInput,
 }) {
   const [isOpen, setIsOpen] = useState()
-
-  const selectedMoveIds = selectedMoves.map((move) => move.id)
-  const hasSelectedMove = moves.some((move) =>
-    selectedMoveIds.includes(move.id)
-  )
-  const color = hasSelectedMove
-    ? 'var(--color-accordion-title-active)'
-    : 'var(--color-accordion-title)'
+  const hasInputMove = moves.some((move) => userInput.includes(move.id))
 
   const listItems = moves.map((move) => (
     <li key={move.id}>
@@ -47,7 +38,7 @@ export default function LevelAccordion({
   }
 
   return (
-    <LevelAccordionStyled isOpen={isOpen} color={color}>
+    <LevelAccordionStyled isOpen={isOpen} isActive={hasInputMove}>
       <h3 onClick={toogleLevelList}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
@@ -72,10 +63,12 @@ const LevelAccordionStyled = styled.div`
     padding: 7px;
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid ${({ color }) => color}; */
-    color: ${({ color }) => color};
 
     & .level-name {
+      color: ${({ isActive }) =>
+        isActive
+          ? 'var(--color-accordion-title-active)'
+          : 'var(--color-accordion-title)'};
       flex-grow: 1;
       font-size: inherit;
       font-weight: normal;
@@ -85,6 +78,7 @@ const LevelAccordionStyled = styled.div`
     svg {
       transform: scale(1.5);
       fill: ${({ color }) => color};
+      fill: var(--color-accordion-title);
     }
   }
 

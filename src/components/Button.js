@@ -18,7 +18,7 @@ export default function Button({
   let color = 'var(--color-button)'
   color = isPrimary ? 'var(--color-primary)' : 'var(--color-button)'
 
-  if (isDisabled && isPrimary) {
+  if (isDisabled) {
     color = 'var(--color-disabled)'
   }
 
@@ -47,6 +47,7 @@ const ButtonStyled = styled.button`
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
-    fill: ${({ color }) => color};
+    fill: ${({ color, isDisabled }) =>
+      isDisabled ? 'var(--color-disabled)' : color};
   }
 `

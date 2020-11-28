@@ -55,7 +55,6 @@ export default function Settings({
       key={id}
       levelName={name}
       moves={moves}
-      selectedMoves={selectedMoves}
       userInput={userInput}
       updateUserInput={updateUserInput}
     />
