@@ -3,59 +3,71 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 import Layout from '../components/UI/Layout'
-import LevelAccordion from '../components/Accordion'
+import InputMoves from '../components/InputMoves'
 import Header from '../components/Header'
 import Button from '../components/Button'
+import InputMusicRadio from '../components/InputMusicRadio'
 
 Settings.propTypes = {
   levels: PropTypes.array.isRequired,
-  selectedMoves: PropTypes.array.isRequired,
-  updateSelectedMoves: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 }
 
 export default function Settings({
   history,
   levels,
-  selectedMoves,
-  updateSelectedMoves,
+  settings,
+  updateSettings,
 }) {
-  const [userInput, setUserInput] = useState([])
-  const [selectedMovesIds, setSelectedMovesIds] = useState([])
-  const hasNoChanges =
-    JSON.stringify(userInput) === JSON.stringify(selectedMovesIds)
-  const hasNoSelect = !userInput.length
+  const [userInput, setUserInput] = useState({
+    moveIDs: [],
+    speed: 2900,
+    isMuted: false,
+  })
 
+  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(settings)
+  const hasNoSelect = !userInput.moveIDs.length
   useEffect(() => {
-    setUserInput(selectedMoves.map((move) => move.id))
-    setSelectedMovesIds(selectedMoves.map((move) => move.id))
+    setUserInput(settings)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  function updateUserInput(id) {
-    const updatedUserInput = userInput.includes(id)
-      ? userInput.filter((inputId) => inputId !== id)
-      : [...userInput, id]
-    setUserInput(updatedUserInput)
+  function updateUserInput(event) {
+    const { name, value } = event.target
+    if (name === 'move') {
+      const updatedMoveIDs = userInput.moveIDs.includes(value)
+        ? userInput.moveIDs.filter((moveID) => moveID !== value)
+        : [...userInput.moveIDs, value]
+      setUserInput({ ...userInput, moveIDs: updatedMoveIDs })
+    }
+    if (name === 'speed') {
+      setUserInput({ ...userInput, speed: Number(value) })
+    }
+
+    if (name === 'isMuted') {
+      setUserInput({ ...userInput, isMuted: value === 'true', speed: 2900 })
+    }
   }
 
   function handleUpdate() {
-    updateSelectedMoves(userInput)
+    updateSettings(userInput)
     history.push('/')
   }
 
   function handleReset() {
-    setUserInput([])
+    setUserInput({ ...userInput, moveIDs: [], speed: 2900, isMuted: false })
   }
 
   function handleCancel() {
     history.push('/')
   }
 
-  const content = levels.map(({ id, name, moves }) => (
-    <LevelAccordion
+  const moveSelect = levels.map(({ id, name, moves }) => (
+    <InputMoves
       key={id}
       levelName={name}
-      moves={moves}
-      userInput={userInput}
+      levelMoves={moves}
+      moveIDs={userInput.moveIDs}
       updateUserInput={updateUserInput}
     />
   ))
@@ -70,7 +82,15 @@ export default function Settings({
         <div />
       </Header>
       <main>
-        <FormStyled>{content}</FormStyled>
+        <FormStyled>
+          <div className="levels-container">{moveSelect}</div>
+
+          <InputMusicRadio
+            speed={userInput.speed}
+            isMuted={userInput.isMuted}
+            updateUserInput={updateUserInput}
+          />
+        </FormStyled>
       </main>
       <footer>
         <Button onClick={handleCancel}>Cancel</Button>
@@ -87,7 +107,13 @@ export default function Settings({
 }
 
 const FormStyled = styled.form`
-  padding: 20px;
-  display: grid;
-  gap: 10px;
+  padding: 5px;
+  padding-bottom: 50px;
+
+  .levels-container {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
 `

@@ -9,12 +9,20 @@ import Header from '../components/Header'
 import Button from '../components/Button'
 import MoveList from '../components/MoveList'
 import CurrentMove from '../components/CurrentMove'
+import getRandomMove from '../lib/getRandomMove'
+import Video from '../components/Video'
 
-Session.propTypes = { selectedMoves: PropTypes.array.isRequired }
+Session.propTypes = {
+  moves: PropTypes.array.isRequired,
+  speed: PropTypes.number,
+  isMuted: PropTypes.bool.isRequired,
+}
 
-export default function Session({ history, selectedMoves }) {
+export default function Session({ history, moves, speed, isMuted }) {
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(false)
+  const [video, setVideo] = useState({})
+
   const musicAudioRef = useRef(null)
   const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
@@ -22,53 +30,52 @@ export default function Session({ history, selectedMoves }) {
   const hasCurrentMove = currentMove && currentMove.hasOwnProperty('id')
 
   useEffect(() => {
-    musicAudioRef.current = new Audio(musicUrl)
-    musicAudioRef.current.volume = 0.3
+    if (!isMuted) {
+      musicAudioRef.current = new Audio(musicUrl)
+      musicAudioRef.current.volume = 0.3
+    }
     return () => clearTimeout(timeoutRef.current)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    selectedMoves.length > 0 && startPlaying()
-  }, [selectedMoves]) // eslint-disable-line react-hooks/exhaustive-deps
+    moves.length > 0 && startPlaying()
+  }, [moves]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleSession() {
     isPlaying ? stopPlaying() : startPlaying()
   }
 
   function startPlaying() {
-    musicAudioRef.current.play()
+    !isMuted && musicAudioRef.current.play()
     startMoveTimeout(5000)
     setIsPlaying(true)
   }
 
   function stopPlaying() {
-    musicAudioRef.current.pause()
+    !isMuted && musicAudioRef.current.pause()
     stopMoveAudioProcess()
     setCurrentMove({})
     setIsPlaying(false)
   }
 
   function stopSession() {
-    musicAudioRef.current.currentTime = 0
+    if (!isMuted) {
+      musicAudioRef.current.currentTime = 0
+    }
     history.push('/')
-  }
-
-  function getRandomMove() {
-    const movesNum = selectedMoves.length
-    const randomNum = Math.floor(Math.random() * movesNum)
-    return selectedMoves[randomNum]
   }
 
   function startMoveTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      const nextCurrentMove = getRandomMove()
+      const nextCurrentMove = getRandomMove(moves)
       setCurrentMove(nextCurrentMove)
       moveAudioRef.current = new Audio(
-        `./audio/moves/${nextCurrentMove.filename}`
+        `./assets/audio/moves/${nextCurrentMove.filename}`
       )
+      console.log(speed, nextCurrentMove.steps)
       moveAudioRef.current.play()
       timeoutRef.current = null
-      startMoveTimeout(nextCurrentMove.steps * 2000 + 1000)
+      startMoveTimeout(nextCurrentMove.steps * speed + speed)
     }, ms)
   }
 
@@ -80,6 +87,7 @@ export default function Session({ history, selectedMoves }) {
 
   return (
     <Layout>
+      {video.id && <Video video={video} onClick={() => setVideo({})} />}
       <Header>
         <div />
         {isPlaying ? (
@@ -97,8 +105,12 @@ export default function Session({ history, selectedMoves }) {
         )}
       </Header>
       <main>
-        {hasCurrentMove && <CurrentMove name={currentMove.name} />}
-        {!isPlaying && <MoveList moves={selectedMoves} />}
+        {hasCurrentMove && (
+          <>
+            <CurrentMove name={currentMove.name} />
+          </>
+        )}
+        {!isPlaying && <MoveList moves={moves} onClick={setVideo} />}
       </main>
       <footer>
         <Button onClick={handleSession}>

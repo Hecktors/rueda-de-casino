@@ -10,7 +10,7 @@ const Container = styled.div`
   max-width: 699px;
   position: relative;
   display: grid;
-  grid-template-rows: 80px auto 100px;
+  grid-template-rows: 80px auto 80px;
   margin: auto;
   color: var(--text-color);
 

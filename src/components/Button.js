@@ -37,13 +37,12 @@ export default function Button({
 }
 
 const ButtonStyled = styled.button`
-  background-color: transparent;
   border-radius: 5px;
   padding: 5px 10px;
   font-weight: ${({ isBold }) => (isBold ? 'bold' : 'normal')};
   color: ${({ color }) => color};
   border: 1px solid
-    ${({ color, isPrimary }) => (isPrimary ? color : 'transprant')};
+    ${({ color, isPrimary }) => (isPrimary ? color : 'transparent')};
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;

@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import ReactPlayer from 'react-player'
 import PropTypes from 'prop-types'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import Button from './Button'
@@ -10,48 +11,44 @@ Video.propTypes = {
 
 export default function Video({ video, onClick }) {
   const url = `https://www.youtube.com/embed/${video.id}?controls=0&amp;start=${video.start}`
-  const iframe = (
-    <iframe
-      data-testid="video"
-      title="video"
+
+  const vid = (
+    <ReactPlayer
+      url={url}
+      className="bg-video"
+      playing={true}
+      loop={true}
       width="100%"
-      height="300"
-      src={url}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
     />
   )
 
   return (
     <VideoStyled>
-      <div className="button-container">
-        <Button onClick={onClick} isSmall>
-          <CancelIcon />
-        </Button>
-      </div>
-      {iframe}
+      <Button onClick={onClick} isSmall>
+        <CancelIcon />
+      </Button>
+      {vid}
     </VideoStyled>
   )
 }
 
 const VideoStyled = styled.div`
+  position: absolute;
   height: 100%;
   width: 100%;
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  background-color: var(--bg-color);
-  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  display: grid;
+  place-items: center;
 
-  .button-container {
+  button {
     position: absolute;
     top: 10px;
-    right: 0px;
+    right: 5px;
     z-index: 999;
   }
 `

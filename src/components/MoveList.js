@@ -1,22 +1,18 @@
-import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import youTubeIcon from '../assets/img/youTube.png'
-import Video from './Video'
 
 MoveList.propTypes = {
   moves: PropTypes.array.isRequired,
-  toggleVideo: PropTypes.func,
+  onClick: PropTypes.func,
 }
 
-export default function MoveList({ moves }) {
-  const [video, setVideo] = useState({})
-
+export default function MoveList({ moves, onClick }) {
   const listItems = moves.map(({ name, id, videoId, videoStart }) => (
     <li key={id}>
       <button
         data-testid="listitem-button"
-        onClick={() => setVideo({ id: videoId, start: videoStart })}
+        onClick={() => onClick({ id: videoId, start: videoStart })}
       >
         {name}
         {videoId && <img src={youTubeIcon} alt="youtube" />}
@@ -26,15 +22,16 @@ export default function MoveList({ moves }) {
 
   return (
     <MoveListStyled>
-      {video.id && <Video video={video} onClick={() => setVideo({})} />}
       <ul>{listItems}</ul>
     </MoveListStyled>
   )
 }
 
 const MoveListStyled = styled.div`
-  padding-top: 20%;
-
+  align-self: stretch;
+  padding-bottom: 20vh;
+  display: grid;
+  place-items: center;
   ul {
     padding: 0;
     margin-left: 30px;
@@ -53,7 +50,7 @@ const MoveListStyled = styled.div`
 
     img {
       margin-left: 10px;
-      height: 0.6em;
+      height: 14px;
     }
   }
 `

@@ -2,7 +2,7 @@
 
 exports[`Accordion renders Accordion 1`] = `
 <div
-  class="Accordion__LevelAccordionStyled-sn9tuv-0 nUnai"
+  class="Accordion__LevelAccordionStyled-sn9tuv-0 fjGdfo"
 >
   <h3>
     <svg>
@@ -12,7 +12,7 @@ exports[`Accordion renders Accordion 1`] = `
     <span
       class="level-name"
     >
-      TEST ACCORDION
+      level
     </span>
   </h3>
   <ul>

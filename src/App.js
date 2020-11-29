@@ -7,27 +7,32 @@ import Settings from './pages/Settings'
 import Session from './pages/Session'
 
 export default function App() {
-  const [selectedMoves, setSelectedMoves] = useState([])
+  const [settings, setSettings] = useState({
+    moveIDs: [],
+    speed: 3050,
+    isMuted: false,
+  })
   const [isFirstAppStart, setIsFirstAppStart] = useState(true)
 
+  const moves = settings.moveIDs
+    ? levels
+        .map((level) => level.moves)
+        .flat(1)
+        .filter((move) => settings.moveIDs.includes(move.id))
+    : []
+
   useEffect(() => {
-    const storedSelectedMoves = getLocalStorage('selectedMoves')
-    setSelectedMoves(storedSelectedMoves ?? [])
-    setIsFirstAppStart(!storedSelectedMoves)
+    setSettings(
+      getLocalStorage('settings') ?? { moveIDs: [], isMuted: false, speed: 3 }
+    )
+    setIsFirstAppStart(!settings.moveIDs)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  function updateSelectedMoves(moveIds) {
+  function updateSettings(userInput) {
     isFirstAppStart && setIsFirstAppStart(false)
-    const updatedSelectedMoves = []
-    levels.forEach((level) =>
-      level.moves.forEach(
-        (move) => moveIds.includes(move.id) && updatedSelectedMoves.push(move)
-      )
-    )
-    setSelectedMoves(updatedSelectedMoves)
-    setLocalStorage('selectedMoves', updatedSelectedMoves)
+    setSettings(userInput)
+    setLocalStorage('settings', userInput)
   }
-
   return (
     <Switch>
       <Route
@@ -36,7 +41,8 @@ export default function App() {
         render={(props) => (
           <Home
             {...props}
-            selectedMoves={selectedMoves}
+            moves={moves}
+            speed={settings.speed}
             isFirstAppStart={isFirstAppStart}
             setIsFirstAppStart={setIsFirstAppStart}
           />
@@ -49,16 +55,22 @@ export default function App() {
           <Settings
             {...props}
             levels={levels}
-            selectedMoves={selectedMoves}
-            setSelectedMoves={setLocalStorage}
-            updateSelectedMoves={updateSelectedMoves}
+            settings={settings}
+            updateSettings={updateSettings}
           />
         )}
       />
       <Route
         exact
         path="/session"
-        render={(props) => <Session {...props} selectedMoves={selectedMoves} />}
+        render={(props) => (
+          <Session
+            {...props}
+            moves={moves}
+            speed={settings.speed}
+            isMuted={settings.isMuted}
+          />
+        )}
       />
     </Switch>
   )

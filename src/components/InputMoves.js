@@ -1,32 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
 import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
-LevelAccordion.propTypes = {
+InputMoves.propTypes = {
   levelName: PropTypes.string.isRequired,
-  moves: PropTypes.array.isRequired,
-  userInput: PropTypes.array.isRequired,
+  levelMoves: PropTypes.array.isRequired,
+  moveIDs: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
-export default function LevelAccordion({
+export default function InputMoves({
   levelName,
-  moves,
-  userInput,
+  levelMoves,
+  moveIDs,
   updateUserInput,
 }) {
   const [isOpen, setIsOpen] = useState()
-  const hasInputMove = moves.some((move) => userInput.includes(move.id))
+  const hasInputMove = levelMoves.some((move) => {
+    return moveIDs.includes(move.id)
+  })
 
-  const listItems = moves.map((move) => (
+  useEffect(() => {
+    !hasInputMove && isOpen && setIsOpen(false)
+  }, [hasInputMove]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const listItems = levelMoves.map((move) => (
     <li key={move.id}>
-      <label className={userInput.includes(move.id) ? 'isChecked' : ''}>
+      <label className={moveIDs.includes(move.id) ? 'isChecked' : ''}>
         <input
-          onChange={() => updateUserInput(move.id)}
+          name="move"
+          value={move.id}
+          onChange={updateUserInput}
           type="checkbox"
-          checked={userInput.includes(move.id)}
+          checked={moveIDs.includes(move.id)}
         />{' '}
         {move.name}
       </label>
@@ -38,18 +46,17 @@ export default function LevelAccordion({
   }
 
   return (
-    <LevelAccordionStyled isOpen={isOpen} isActive={hasInputMove}>
+    <InputMovesStyled isOpen={isOpen} isActive={hasInputMove}>
       <h3 onClick={toogleLevelList}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
       </h3>
       <ul>{listItems}</ul>
-    </LevelAccordionStyled>
+    </InputMovesStyled>
   )
 }
 
-const LevelAccordionStyled = styled.div`
-  width: 100%;
+const InputMovesStyled = styled.div`
   background-color: var(--bg-color-accordion);
   border-radius: 5px;
 
@@ -70,8 +77,6 @@ const LevelAccordionStyled = styled.div`
           ? 'var(--color-accordion-title-active)'
           : 'var(--color-accordion-title)'};
       flex-grow: 1;
-      font-size: inherit;
-      font-weight: normal;
       text-align: center;
     }
 
@@ -83,20 +88,21 @@ const LevelAccordionStyled = styled.div`
   }
 
   ul {
-    padding: 0 10px;
+    padding: 0 9px;
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
   }
 
   li {
     &:first-of-type {
-      padding-top: 5px;
+      padding-top: 1px;
     }
     &:last-of-type {
-      padding-bottom: 5px;
+      padding-bottom: 10px;
     }
 
     label {
+      font-size: 0.875rem;
       color: var(--color-accordion-item);
       display: inline-block;
       width: 100%;

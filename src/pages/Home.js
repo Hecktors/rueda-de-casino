@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
+import Video from '../components/Video'
 import Layout from '../components/UI/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
@@ -8,17 +10,21 @@ import Button from '../components/Button'
 import Message from '../components/Message'
 
 Home.propTypes = {
-  selectedMoves: PropTypes.array.isRequired,
+  moves: PropTypes.array.isRequired,
+  speed: PropTypes.number,
   isFirstAppStart: PropTypes.bool.isRequired,
+  setIsFirstAppStart: PropTypes.func.isRequired,
 }
 
 export default function Home({
   history,
-  selectedMoves,
+  moves,
+  speed,
   isFirstAppStart,
   setIsFirstAppStart,
 }) {
-  const hasNotEnoughMoves = selectedMoves.length < 2
+  const [video, setVideo] = useState({})
+  const hasNotEnoughMoves = moves.length < 2
 
   function handleOpenSettings() {
     history.push('/settings')
@@ -27,6 +33,7 @@ export default function Home({
 
   return (
     <Layout>
+      {video.id && <Video video={video} onClick={() => setVideo({})} />}
       <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
@@ -35,11 +42,8 @@ export default function Home({
         </Button>
       </Header>
       <main>
-        {hasNotEnoughMoves ? (
-          <Message isFirstAppStart={isFirstAppStart} />
-        ) : (
-          <MoveList moves={selectedMoves} />
-        )}
+        <MoveList moves={moves} onClick={setVideo} />
+        {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
       </main>
       <footer>
         <Button
