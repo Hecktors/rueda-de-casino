@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 InputMusicRadio.propTypes = {
   isMuted: PropTypes.bool.isRequired,
@@ -11,13 +11,16 @@ export default function InputMusicRadio({ isMuted, speed, updateUserInput }) {
   return (
     <InputMusicRadioStyled>
       <div className="radio-container">
-        Play salsa learning song{' '}
-        <div className="tooltip">
-          &#9432;
-          <span className="tooltiptext">
-            You can use the app with your own music. Just adapt the time between
-            the move calls, if they're too fast or too slow for your song.
-          </span>
+        <div>
+          Play learning song{' '}
+          <div className="tooltip">
+            &#9432;
+            <span className="tooltiptext">
+              You can use the app with your own music. Just disable the onboard
+              learning song and adapt the time between the move calls with the
+              slider, if they're too fast or too slow for your song.
+            </span>
+          </div>
         </div>
         <div className="label-container">
           <label htmlFor="mute">
@@ -56,6 +59,10 @@ export default function InputMusicRadio({ isMuted, speed, updateUserInput }) {
             max="3700"
             step="400"
           />
+          <div class="range-legend">
+            <span>slow</span>
+            <span>fast</span>
+          </div>
         </div>
       )}
     </InputMusicRadioStyled>
@@ -65,6 +72,7 @@ export default function InputMusicRadio({ isMuted, speed, updateUserInput }) {
 const InputMusicRadioStyled = styled.div`
   margin-top: 20px;
   position: relative;
+
   .radio-container {
     display: flex;
     justify-content: space-between;
@@ -91,6 +99,11 @@ const InputMusicRadioStyled = styled.div`
       width: 100%;
     }
   }
+  .range-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
 
   .tooltip {
     display: inline-block;
@@ -98,19 +111,22 @@ const InputMusicRadioStyled = styled.div`
   }
 
   .tooltip .tooltiptext {
-    visibility: hidden;
-    display: block;
     width: 100%;
-
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 20px 10px;
+    height: 300px;
+    display: flex;
+    place-items: center;
+    visibility: hidden;
     position: absolute;
-    z-index: 1;
-    bottom: 100%;
+    top: 0;
     left: 0;
+    z-index: 1;
+    transform: translateY(-100%);
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    line-height: 1.6;
+    color: #fff;
+    background-color: var(--bg-color-message);
   }
 
   .tooltip:hover .tooltiptext {

@@ -22,6 +22,7 @@ export default createGlobalStyle`
         --color-move: #ff7109;
         /* Message */
         --color-message: #666;
+        --bg-color-message: #0f1118d9;
     }
 
     * {

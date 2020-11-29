@@ -43,6 +43,7 @@ const ButtonStyled = styled.button`
   color: ${({ color }) => color};
   border: 1px solid
     ${({ color, isPrimary }) => (isPrimary ? color : 'transparent')};
+
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;

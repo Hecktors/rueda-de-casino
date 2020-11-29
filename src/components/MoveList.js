@@ -28,13 +28,10 @@ export default function MoveList({ moves, onClick }) {
 }
 
 const MoveListStyled = styled.div`
-  align-self: stretch;
-  padding-bottom: 20vh;
-  display: grid;
-  place-items: center;
+  padding: 50px 30px;
+  padding-right: 0;
   ul {
     padding: 0;
-    margin-left: 30px;
 
     li {
       button {

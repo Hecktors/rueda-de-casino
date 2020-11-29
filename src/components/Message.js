@@ -44,6 +44,7 @@ const MessageStyled = styled.div`
   justify-content: flex-end;
   padding: 20px;
   color: var(--color-message);
+  background-color: var(--bg-color-message);
 
   .first-start {
     width: 100%;
