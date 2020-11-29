@@ -72,7 +72,6 @@ export default function Session({ history, moves, speed, isMuted }) {
       moveAudioRef.current = new Audio(
         `./assets/audio/moves/${nextCurrentMove.filename}`
       )
-      console.log(speed, nextCurrentMove.steps)
       moveAudioRef.current.play()
       timeoutRef.current = null
       startMoveTimeout(nextCurrentMove.steps * speed + speed)

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
 import Layout from '../components/UI/Layout'
-import InputMoves from '../components/InputMoves'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import InputMusicRadio from '../components/InputMusicRadio'
+import InputMoves from '../components/Form/InputMoves'
+import InputMusicRadio from '../components/Form/InputMusicRadio'
 
 Settings.propTypes = {
   levels: PropTypes.array.isRequired,
@@ -84,7 +84,6 @@ export default function Settings({
       <main>
         <FormStyled>
           <div className="levels-container">{moveSelect}</div>
-
           <InputMusicRadio
             speed={userInput.speed}
             isMuted={userInput.isMuted}
