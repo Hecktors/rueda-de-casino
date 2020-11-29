@@ -20,6 +20,8 @@ export default createGlobalStyle`
         --color-disabled: #333;
         /* Current move */
         --color-move: #ff7109;
+        /* Message */
+        --color-message: #666;
     }
 
     * {
@@ -44,7 +46,8 @@ export default createGlobalStyle`
     }
 
     main { 
-        place-items: center;
+        position: relative;
+        display: flex;
     }
 
     button {
@@ -60,6 +63,10 @@ export default createGlobalStyle`
         &:hover {
         opacity: 0.8;
         }
+    }
+
+    label {
+        font-size: 1rem;
     }
     ul {
         padding: 0;

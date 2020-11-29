@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 
-export default function Header({ children }) {
-  return <HeaderStyled>{children}</HeaderStyled>
+export default function Header({ className, children }) {
+  return <HeaderStyled className={className}>{children}</HeaderStyled>
 }
 
 const HeaderStyled = styled.header`

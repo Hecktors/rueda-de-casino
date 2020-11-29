@@ -35,14 +35,15 @@ export default function Message({ isFirstAppStart = false }) {
 }
 
 const MessageStyled = styled.div`
+  position: absolute;
   width: 100%;
   height: 100%;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 20px;
-  background-color: var(--bg-color);
-  opacity: 0.5;
+  color: var(--color-message);
 
   .first-start {
     width: 100%;
@@ -69,6 +70,7 @@ const MessageStyled = styled.div`
   }
 
   svg {
+    fill: var(--color-message);
     transform: scale(2.5);
   }
   .top svg {
