@@ -33,18 +33,6 @@ export default function Video({ video, onClick }) {
 }
 
 const VideoStyled = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  display: grid;
-  place-items: center;
-
   button {
     position: absolute;
     top: 10px;

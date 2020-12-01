@@ -8,6 +8,7 @@ import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
 import Message from '../components/Message'
+import Overlay from '../components/UI/Overlay'
 
 Home.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -32,7 +33,13 @@ export default function Home({
 
   return (
     <Layout>
-      {video.id && <Video video={video} onClick={() => setVideo({})} />}
+      {video.id && (
+        <Overlay>
+          <div className="overlay">
+            <Video video={video} onClick={() => setVideo({})} />
+          </div>
+        </Overlay>
+      )}
       <Header>
         <div />
         <h1 className="logo">Salsa time!</h1>
