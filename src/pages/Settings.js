@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
-import Layout from '../components/ui/Layout'
-import Header from '../components/Header'
+import Layout from '../layout/Layout'
 import Button from '../components/Button'
-import LevelListInput from '../components/form/LevelListInput'
-import MusicMuteInput from '../components/form/MusicMuteInput'
-import SongSpeedInput from '../components/form/SongSpeedInput'
+import FormInputLevels from '../components/FormInputLevel'
+import FormInputPlaySong from '../components/FormInputPlaySong'
+import FormInputSongSpeed from '../components/FormInputSongSpeed'
 
 const initState = {
   moveIDs: [],
@@ -72,7 +71,7 @@ export default function Settings({
   }
 
   const moveSelect = levels.map(({ id, name, moves }) => (
-    <LevelListInput
+    <FormInputLevels
       key={id}
       levelName={name}
       levelMoves={moves}
@@ -83,23 +82,23 @@ export default function Settings({
 
   return (
     <Layout>
-      <Header>
+      <header>
         <Button onClick={handleReset} isDisabled={isInitState} isSmall>
           <ResetIcon />
         </Button>
         <h1>Settings</h1>
         <div />
-      </Header>
+      </header>
       <main>
         <FormStyled>
           <div className="levels-container">{moveSelect}</div>
-          <MusicMuteInput
+          <FormInputPlaySong
             isMuted={userInput.isMuted}
             hasChanged={hasIsMutedChanged}
             updateUserInput={updateUserInput}
           />
           {userInput.isMuted && (
-            <SongSpeedInput
+            <FormInputSongSpeed
               hasChanged={hasSpeedChanged}
               speed={userInput.speed}
               updateUserInput={updateUserInput}
@@ -109,11 +108,7 @@ export default function Settings({
       </main>
       <footer>
         <Button onClick={handleCancel}>Cancel</Button>
-        <Button
-          onClick={handleUpdate}
-          isPrimary={true}
-          isDisabled={hasNoChanges}
-        >
+        <Button onClick={handleUpdate} isPrimary isDisabled={hasNoChanges}>
           Save
         </Button>
       </footer>
@@ -123,7 +118,6 @@ export default function Settings({
 
 const FormStyled = styled.form`
   padding: 5px;
-  padding-bottom: 50px;
 
   .levels-container {
     display: grid;

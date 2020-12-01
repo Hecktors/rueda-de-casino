@@ -1,11 +1,11 @@
 import ReactPlayer from 'react-player'
 import PropTypes from 'prop-types'
 
-Video.propTypes = {
+YoutubeVideo.propTypes = {
   video: PropTypes.object.isRequired,
 }
 
-export default function Video({ video }) {
+export default function YoutubeVideo({ video }) {
   const url = `https://www.youtube.com/embed/${video.id}?controls=0&amp;start=${video.start}`
 
   return (

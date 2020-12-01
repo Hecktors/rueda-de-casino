@@ -2,12 +2,12 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import youTubeIcon from '../assets/img/youTube.png'
 
-MoveList.propTypes = {
+SelectedMoveList.propTypes = {
   moves: PropTypes.array.isRequired,
   onClick: PropTypes.func,
 }
 
-export default function MoveList({ moves, onClick }) {
+export default function SelectedMoveList({ moves, onClick }) {
   const listItems = moves.map(({ name, id, videoId, videoStart }) => (
     <li key={id}>
       <button
@@ -25,15 +25,15 @@ export default function MoveList({ moves, onClick }) {
   ))
 
   return (
-    <MoveListStyled>
+    <SelectedMoveListStyled>
       <ul>{listItems}</ul>
-    </MoveListStyled>
+    </SelectedMoveListStyled>
   )
 }
 
-const MoveListStyled = styled.div`
+const SelectedMoveListStyled = styled.div`
   width: 100%;
-  padding: 100px 30px;
+  padding: 30px;
 
   ul {
     padding: 0;

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ReactComponent as ArrowRightIcon } from '../../assets/img/arrow_right.svg'
-import { ReactComponent as ArrowDownIcon } from '../../assets/img/arrow_down.svg'
+import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
+import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
 
-LevelListInput.propTypes = {
+FormInputLevel.propTypes = {
   levelName: PropTypes.string.isRequired,
   levelMoves: PropTypes.array.isRequired,
   moveIDs: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
-export default function LevelListInput({
+export default function FormInputLevel({
   levelName,
   levelMoves,
   moveIDs,
@@ -41,22 +41,22 @@ export default function LevelListInput({
     </li>
   ))
 
-  function toogleLevelListInput() {
+  function toogleFormInputLevel() {
     setIsOpen(!isOpen)
   }
 
   return (
-    <LevelListInputStyled isOpen={isOpen} isActive={hasInputMove}>
-      <h3 onClick={toogleLevelListInput}>
+    <FormInputLevelStyled isOpen={isOpen} isActive={hasInputMove}>
+      <h3 onClick={toogleFormInputLevel}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
       </h3>
       <ul>{listItems}</ul>
-    </LevelListInputStyled>
+    </FormInputLevelStyled>
   )
 }
 
-const LevelListInputStyled = styled.div`
+const FormInputLevelStyled = styled.div`
   background-color: var(--bg-color-accordion);
   border-radius: 5px;
 

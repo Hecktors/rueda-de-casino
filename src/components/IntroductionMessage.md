@@ -1,0 +1,3 @@
+```jsx
+<IntroductionMessage isFirstAppStart={true} />
+```
