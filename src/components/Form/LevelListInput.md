@@ -1,5 +1,5 @@
 ```jsx
-<LevelAccordion
+<LevelListInput
   name="level name"
   moves={[
     {
