@@ -42,6 +42,7 @@ const MusicMuteInputStyled = styled.div`
 
   .info {
     color: var(--color-button);
+    user-select: none;
   }
 
   input {
