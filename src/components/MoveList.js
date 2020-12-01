@@ -33,7 +33,7 @@ export default function MoveList({ moves, onClick }) {
 
 const MoveListStyled = styled.div`
   width: 100%;
-  padding: 50px 30px;
+  padding: 100px 30px;
 
   ul {
     padding: 0;

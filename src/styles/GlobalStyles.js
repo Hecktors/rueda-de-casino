@@ -48,7 +48,9 @@ export default createGlobalStyle`
 
     main { 
         position: relative;
-        display: flex;
+        .absolute {
+            position: absolute
+        }
     }
 
     button {
@@ -75,4 +77,9 @@ export default createGlobalStyle`
     li {
         list-style: none;
     }
+
+    .dark {
+        background-color: #000;
+    }
+    
 `
