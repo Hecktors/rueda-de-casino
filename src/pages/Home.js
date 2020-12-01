@@ -19,7 +19,6 @@ Home.propTypes = {
 export default function Home({
   history,
   moves,
-  speed,
   isFirstAppStart,
   setIsFirstAppStart,
 }) {

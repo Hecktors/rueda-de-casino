@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { ReactComponent as ArrowRightIcon } from '../../assets/img/arrow_right.svg'
 import { ReactComponent as ArrowDownIcon } from '../../assets/img/arrow_down.svg'
 
-InputMoves.propTypes = {
+LevelListInput.propTypes = {
   levelName: PropTypes.string.isRequired,
   levelMoves: PropTypes.array.isRequired,
   moveIDs: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
-export default function InputMoves({
+export default function LevelListInput({
   levelName,
   levelMoves,
   moveIDs,
@@ -41,22 +41,22 @@ export default function InputMoves({
     </li>
   ))
 
-  function toogleLevelList() {
+  function toogleLevelListInput() {
     setIsOpen(!isOpen)
   }
 
   return (
-    <InputMovesStyled isOpen={isOpen} isActive={hasInputMove}>
-      <h3 onClick={toogleLevelList}>
+    <LevelListInputStyled isOpen={isOpen} isActive={hasInputMove}>
+      <h3 onClick={toogleLevelListInput}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
       </h3>
       <ul>{listItems}</ul>
-    </InputMovesStyled>
+    </LevelListInputStyled>
   )
 }
 
-const InputMovesStyled = styled.div`
+const LevelListInputStyled = styled.div`
   background-color: var(--bg-color-accordion);
   border-radius: 5px;
 
@@ -88,6 +88,7 @@ const InputMovesStyled = styled.div`
   }
 
   ul {
+    line-height: 1.7;
     padding: 0 9px;
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};

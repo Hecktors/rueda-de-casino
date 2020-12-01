@@ -9,7 +9,7 @@ import Session from './pages/Session'
 export default function App() {
   const [settings, setSettings] = useState({
     moveIDs: [],
-    speed: 3050,
+    speed: 2900,
     isMuted: false,
   })
   const [isFirstAppStart, setIsFirstAppStart] = useState(true)
@@ -22,10 +22,16 @@ export default function App() {
     : []
 
   useEffect(() => {
+    const StoredData = getLocalStorage('settings')
     setSettings(
-      getLocalStorage('settings') ?? { moveIDs: [], isMuted: false, speed: 3 }
+      StoredData ?? {
+        moveIDs: [],
+        isMuted: false,
+        speed: 3,
+      }
     )
-    setIsFirstAppStart(!settings.moveIDs)
+    setIsFirstAppStart(!StoredData)
+    console.log(!settings.moveIDs)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateSettings(userInput) {
@@ -33,6 +39,7 @@ export default function App() {
     setSettings(userInput)
     setLocalStorage('settings', userInput)
   }
+
   return (
     <Switch>
       <Route

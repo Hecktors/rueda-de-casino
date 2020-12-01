@@ -1,7 +1,7 @@
   [ 
     {
       "id": "b1",
-    "name": "Basic 1",
+    "name": "Level 1",
     "moves": [
     {      
       "id": "m1",
@@ -55,7 +55,7 @@
 },
 {
   "id": "b2",
-  "name": "Basic 2",
+  "name": "Level 2",
   "moves": [
     {
       "id": "m7",
@@ -109,7 +109,7 @@
   },
   {
     "id": "b3",
-    "name": "Basic 3",
+    "name": "Level 3",
     "moves": [
       {
         "id": "b3m7",
@@ -163,7 +163,7 @@
   },
   {
     "id": "b4",
-    "name": "Basic 4",
+    "name": "Level 4",
     "moves": [
       {
         "id": "b4m7",
@@ -217,7 +217,7 @@
   },
   {
     "id": "i1",
-    "name": "Intermediate 1",
+    "name": "level 5",
     "moves": [
       {
         "id": "i1m7",
@@ -271,7 +271,7 @@
   },
   {
     "id": "i2",
-    "name": "Intermediate 2",
+    "name": "level 6",
     "moves": [
       {
         "id": "i2m7",
@@ -325,7 +325,7 @@
   },
   {
     "id": "i3",
-    "name": "Intermediate 3",
+    "name": "level 7",
     "moves": [
       {
         "id": "i3m7",
@@ -379,7 +379,7 @@
   },
   {
     "id": "i4",
-    "name": "Intermediate 4",
+    "name": "level 8",
     "moves": [
       {
         "id": "i4m7",
@@ -433,7 +433,7 @@
   },
   {
     "id": "a1",
-    "name": "Advanced 1",
+    "name": "Level 9",
     "moves": [
       {
         "id": "a1m7",
@@ -487,7 +487,7 @@
   },
   {
     "id": "a2",
-    "name": "Advanced 2",
+    "name": "Level 10",
     "moves": [
       {
         "id": "a2m7",
@@ -541,7 +541,7 @@
   },
   {
     "id": "a3",
-    "name": "Advanced3",
+    "name": "Level 11",
     "moves": [
       {
         "id": "a3m7",
@@ -595,7 +595,7 @@
   },
   {
     "id": "a4",
-    "name": "Advanced 4",
+    "name": "Level 12",
     "moves": [
       {
         "id": "a4m7",
