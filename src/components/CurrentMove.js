@@ -12,14 +12,14 @@ export default function CurrentMove({ name }) {
 }
 
 const NameWrapper = styled.div`
-  height: 100%;
+  position: relative;
+  width: 100%;
+  padding-top: 30%;
   text-align: center;
   font-family: 'Molle', cursive;
-
   span {
     display: inline-block;
     font-size: 4rem;
     color: var(--color-move);
-    margin-top: 10vh;
   }
 `

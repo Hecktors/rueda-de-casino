@@ -1,54 +1,51 @@
-import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import youTubeIcon from '../assets/img/youTube.png'
-import Video from '../components/Video'
 
 MoveList.propTypes = {
   moves: PropTypes.array.isRequired,
-  toggleVideo: PropTypes.func,
+  onClick: PropTypes.func,
 }
 
-export default function MoveList({ moves }) {
-  const [video, setVideo] = useState({})
-
+export default function MoveList({ moves, onClick }) {
   const listItems = moves.map(({ name, id, videoId, videoStart }) => (
     <li key={id}>
       <button
         data-testid="listitem-button"
-        onClick={() => setVideo({ id: videoId, start: videoStart })}
+        onClick={() => onClick({ id: videoId, start: videoStart })}
       >
         {name}
-        {videoId && <img src={youTubeIcon} alt="youtube" />}
-        <span />
+        {videoId && (
+          <span>
+            <img src={youTubeIcon} alt="youtube" />
+          </span>
+        )}
       </button>
     </li>
   ))
 
   return (
     <MoveListStyled>
-      {video.id && <Video video={video} onClick={() => setVideo({})} />}
       <ul>{listItems}</ul>
     </MoveListStyled>
   )
 }
 
 const MoveListStyled = styled.div`
-  height: 80%;
-  display: grid;
-  place-items: center;
+  width: 100%;
+  padding: 50px 30px;
 
   ul {
     padding: 0;
-    width: 100%;
 
     li {
-      margin-left: 15px;
-
       button {
-        font-size: 1.5rem;
-        margin: 5px 0;
+        line-height: 1.4;
+        width: 100%;
+        font-size: 1.3rem;
         color: var(--color-listitem);
+        display: flex;
+        justify-content: space-between;
       }
     }
 
@@ -57,8 +54,7 @@ const MoveListStyled = styled.div`
     }
 
     img {
-      margin-left: 10px;
-      height: 0.6em;
+      height: 14px;
     }
   }
 `

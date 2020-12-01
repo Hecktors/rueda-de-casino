@@ -1,20 +1,30 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components/macro'
 
 export default createGlobalStyle`
-
     :root {
-        --bg-color: #121212;
-        --bg-color-accordion: #201e1e;
-        --color-text: #ccc;
-        --color-button: #fff;
+        /* General */
+        --color-primary: #ff7109;
+        --bg-color: #181b27;
+        --color: #bbb;
+        /* Title */
+        --color-title: #bbb;
+        /* Accordion */
+        --bg-color-accordion: #222637;
+        --color-accordion-title: #2ca3d2;
+        --bg-color-accordion-title: #0b1644;
+        --color-accordion-title-active: #ff7109;
+        --color-accordion-item: #999;
+        --color-accordion-item-active: #ff7109;
+        /* Buttons */
+        --color-button: #2ca3d2;
         --color-disabled: #333;
-        --color-listitem: #999;
-        --color-listitem-active: #ff7109;
+        /* Current move */
         --color-move: #ff7109;
-        --color-title: #ff7109;
-        --color-warning: #d15353;
-        --color-success: green;
+        /* Message */
+        --color-message: #666;
+        --bg-color-message: #0f1118d9;
     }
+
     * {
         box-sizing: border-box;
         margin: 0;
@@ -25,15 +35,20 @@ export default createGlobalStyle`
     }
 
     body {
-        font-family: 'Helvetica';
+        font-family: 'Open Sans', sans-serif;
         font-size: 112.5%;
-        color:  var(--color-text);
+        color:  var(--color);
         background-color: var(--bg-color);
     }
 
+    #root {
+        display: flex;
+        align-items: center;
+    }
+
     main { 
-        place-items: center;
-        padding: 10px;
+        position: relative;
+        display: flex;
     }
 
     button {
@@ -43,25 +58,21 @@ export default createGlobalStyle`
         padding: 0;
         background-color: transparent;
         color:  var(--color-text);
-        font-size: 2.5rem;
+        font-size: 1.5rem;
 
         &:active,
         &:hover {
         opacity: 0.8;
         }
     }
+
+    label {
+        font-size: 1rem;
+    }
     ul {
         padding: 0;
     }
     li {
         list-style: none;
-    }
-
-    .warning {
-        color: var(--color-warning)
-    }
-
-    .success {
-        color: var(--color-success)
     }
 `

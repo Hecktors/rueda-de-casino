@@ -1,9 +1,18 @@
-import ReactDOM from 'react-dom'
 import Header from './Header'
+import { render } from '@testing-library/react'
 
 describe('Header', () => {
   it('renders header', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<Header />, div)
+    const { container } = render(<Header />)
+    expect(container.querySelector('header')).toBeInTheDocument()
+  })
+
+  it('has a title', () => {
+    const { getByText } = render(
+      <Header>
+        <h1>title</h1>
+      </Header>
+    )
+    expect(getByText('title')).toBeInTheDocument()
   })
 })
