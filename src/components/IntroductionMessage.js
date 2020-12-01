@@ -1,10 +1,15 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as NorthIcon } from '../assets/img/north.svg'
 import { ReactComponent as SouthIcon } from '../assets/img/south.svg'
 
-export default function Message({ isFirstAppStart = false }) {
+IntroductionMessage.propTypes = {
+  isFirstAppStart: PropTypes.bool,
+}
+
+export default function IntroductionMessage({ isFirstAppStart = false }) {
   return (
-    <MessageStyled>
+    <IntroductionMessageStyled>
       {isFirstAppStart ? (
         <div className="first-start">
           <div className="top">
@@ -30,12 +35,12 @@ export default function Message({ isFirstAppStart = false }) {
           <span className="text">Select at least 2 moves</span>
         </div>
       )}
-    </MessageStyled>
+    </IntroductionMessageStyled>
   )
 }
 
-const MessageStyled = styled.div`
-  position: absolute;
+const IntroductionMessageStyled = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   z-index: -1;

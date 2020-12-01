@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-MusicMuteInput.propTypes = {
+FormInputPlaySong.propTypes = {
   isMuted: PropTypes.bool.isRequired,
   updateUserInput: PropTypes.func.isRequired,
   hasChanged: PropTypes.bool.isRequired,
 }
 
-export default function MusicMuteInput({
+export default function FormInputPlaySong({
   isMuted,
   updateUserInput,
   hasChanged,
 }) {
   return (
-    <MusicMuteInputStyled hasChanged={hasChanged}>
+    <FormInputPlaySongStyled hasChanged={hasChanged}>
       <input
         id="mute"
         onChange={updateUserInput}
@@ -30,13 +30,13 @@ export default function MusicMuteInput({
           slider, if they're too fast or too slow for your song.
         </span>
       </div>
-    </MusicMuteInputStyled>
+    </FormInputPlaySongStyled>
   )
 }
 
-const MusicMuteInputStyled = styled.div`
+const FormInputPlaySongStyled = styled.div`
   position: relative;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 20px 20px;
   font-size: 1rem;
 
@@ -52,16 +52,15 @@ const MusicMuteInputStyled = styled.div`
   label {
     display: inline-flex;
     user-select: none;
+    color: var(--color-button);
   }
 
   label::before {
     content: '';
     display: block;
-    border: 1px solid
-      ${({ hasChanged }) =>
-        hasChanged ? 'var(--color-primary)' : 'var(--color-button)'};
-    width: 18px;
-    height: 20px;
+    border: 1px solid var(--color-button);
+    width: 17px;
+    height: 19px;
     margin-right: 10px;
     padding-left: 3px;
   }
@@ -76,7 +75,8 @@ const MusicMuteInputStyled = styled.div`
 
   .tooltip {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 15px;
+    user-select: none;
   }
 
   .tooltip .tooltiptext {

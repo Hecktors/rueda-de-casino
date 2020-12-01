@@ -6,14 +6,14 @@ import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import getRandomMove from '../lib/getRandomMove'
 import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
-import Layout from '../components/ui/Layout'
-import Overlay from '../components/ui/Overlay'
-import Header from '../components/Header'
+import Layout from '../layout/Layout'
+import Overlay from '../layout/Overlay'
 import Button from '../components/Button'
-import MoveList from '../components/MoveList'
+import MoveList from '../components/SelectedMoveList'
 import CurrentMove from '../components/CurrentMove'
-import Video from '../components/Video'
+import YoutubeVideo from '../components/YoutubeVideo'
 import BackgroundVideo from '../components/BackgroundVideo'
+import PlayActionWrapper from '../layout/PlayActionWrapper'
 
 Session.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -91,21 +91,16 @@ export default function Session({ history, moves, speed, isMuted }) {
   return (
     <Layout>
       {video.id && (
-        <Overlay>
+        <Overlay full>
           <Button className="topRight" onClick={() => setVideo({})} isSmall>
             <CancelIcon />
           </Button>
-          <Video video={video} />
+          <YoutubeVideo video={video} />
         </Overlay>
       )}
-      <Header className={'dark'}>
+      <header className={'dark'}>
         <div />
-        {isPlaying ? (
-          <>
-            <div />
-            <div />
-          </>
-        ) : (
+        {!isPlaying && (
           <>
             <h1>Pause</h1>
             <Button onClick={stopSession} isSmall>
@@ -113,15 +108,15 @@ export default function Session({ history, moves, speed, isMuted }) {
             </Button>
           </>
         )}
-      </Header>
-      <main>
-        <BackgroundVideo isPlaying={isPlaying} />
-        {hasCurrentMove && (
-          <>
-            <CurrentMove name={currentMove.name} />
-          </>
-        )}
-        {!isPlaying && <MoveList moves={moves} onClick={setVideo} />}
+      </header>
+      <main className="dark">
+        <PlayActionWrapper>
+          <BackgroundVideo isPlaying={isPlaying} />
+          <Overlay>
+            {hasCurrentMove && <CurrentMove name={currentMove.name} />}
+            {!isPlaying && <MoveList moves={moves} onClick={setVideo} />}
+          </Overlay>
+        </PlayActionWrapper>
       </main>
       <footer className={'dark'}>
         <Button onClick={handleSession}>

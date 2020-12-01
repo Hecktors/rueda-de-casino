@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
-CurrentMove.propTypes = { name: PropTypes.string }
+CurrentMove.propTypes = { name: PropTypes.string.isRequired }
 
 export default function CurrentMove({ name }) {
   return (
@@ -13,10 +13,6 @@ export default function CurrentMove({ name }) {
 
 const NameWrapper = styled.div`
   width: 100%;
-  height: 360px;
-  position: relative;
-  display: grid;
-  place-items: center;
   text-align: center;
   font-family: 'Molle', cursive;
   span {

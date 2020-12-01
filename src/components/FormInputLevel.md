@@ -1,5 +1,5 @@
 ```jsx
-<LevelListInput
+<FormInputLevel
   levelName="level"
   levelMoves={[
     {
@@ -22,7 +22,7 @@
   moveIDs={[]}
   updateUserInput={() => {}}
 />
-<LevelListInput
+<FormInputLevel
   levelName="level"
   levelMoves={[
     {

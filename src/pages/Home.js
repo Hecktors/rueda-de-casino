@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
-import Video from '../components/Video'
-import Overlay from '../components/ui/Overlay'
-import Layout from '../components/ui/Layout'
-import Header from '../components/Header'
-import MoveList from '../components/MoveList'
+import YoutubeVideo from '../components/YoutubeVideo'
+import Overlay from '../layout/Overlay'
+import Layout from '../layout/Layout'
+import MoveList from '../components/SelectedMoveList'
 import Button from '../components/Button'
-import Message from '../components/Message'
+import Message from '../components/IntroductionMessage'
 
 Home.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -39,16 +38,16 @@ export default function Home({
           <Button className="topRight" onClick={() => setVideo({})} isSmall>
             <CancelIcon />
           </Button>
-          <Video video={video} />
+          <YoutubeVideo video={video} />
         </Overlay>
       )}
-      <Header>
+      <header>
         <div />
         <h1 className="logo">Salsa time!</h1>
         <Button data-testid="btn-settings" onClick={handleOpenSettings} isSmall>
           <SettingsIcon />
         </Button>
-      </Header>
+      </header>
       <main>
         <MoveList moves={moves} onClick={setVideo} />
         {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
