@@ -16,4 +16,10 @@ const OverlayStyled = styled.div`
   z-index: 999;
   display: grid;
   place-items: center;
+
+  .topRight {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 `

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
+import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
-import Layout from '../components/UI/Layout'
+import Layout from '../components/ui/Layout'
+import Overlay from '../components/ui/Overlay'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import MoveList from '../components/MoveList'
@@ -87,7 +89,14 @@ export default function Session({ history, moves, speed, isMuted }) {
 
   return (
     <Layout>
-      {video.id && <Video video={video} onClick={() => setVideo({})} />}
+      {video.id && (
+        <Overlay>
+          <Button className="topRight" onClick={() => setVideo({})} isSmall>
+            <CancelIcon />
+          </Button>
+          <Video video={video} />
+        </Overlay>
+      )}
       <Header>
         <div />
         {isPlaying ? (

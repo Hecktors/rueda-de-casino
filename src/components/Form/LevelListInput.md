@@ -1,41 +1,48 @@
 ```jsx
 <LevelListInput
-  name="level name"
-  moves={[
+  levelName="level"
+  levelMoves={[
     {
-      id: 1,
+      id: 'm1',
       name: 'la prima',
       steps: 2,
       filename: 'la_prima.mp3',
+      videoId: 'SFxy0cWwEtg',
+      videoStart: '20',
     },
     {
-      id: 2,
-      name: 'sombrero',
-      steps: 2,
-      filename: 'sombrero.mp3',
-    },
-    {
-      id: 3,
+      id: 'm3',
       name: 'sombrero con una mano',
       steps: 2,
       filename: 'sombrero_con_una_mano.mp3',
+      videoId: 'fAMaQ_3HEUE',
+      videoStart: '1',
     },
   ]}
-  selectedMoves={[
+  moveIDs={[]}
+  updateUserInput={() => {}}
+/>
+<LevelListInput
+  levelName="level"
+  levelMoves={[
     {
-      id: 2,
-      name: 'sombrero',
+      id: 'm1',
+      name: 'la prima',
       steps: 2,
-      filename: 'sombrero.mp3',
+      filename: 'la_prima.mp3',
+      videoId: 'SFxy0cWwEtg',
+      videoStart: '20',
     },
     {
-      id: 3,
+      id: 'm3',
       name: 'sombrero con una mano',
       steps: 2,
       filename: 'sombrero_con_una_mano.mp3',
+      videoId: 'fAMaQ_3HEUE',
+      videoStart: '1',
     },
   ]}
-  updateUser={() => {}}
-  userInput={[1]}
+  moveIDs={['m1', 'm3']}
+  updateUserInput={() => {}}
 />
 ```

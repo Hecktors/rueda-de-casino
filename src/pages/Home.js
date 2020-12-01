@@ -2,13 +2,14 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
+import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
 import Video from '../components/Video'
-import Layout from '../components/UI/Layout'
+import Overlay from '../components/ui/Overlay'
+import Layout from '../components/ui/Layout'
 import Header from '../components/Header'
 import MoveList from '../components/MoveList'
 import Button from '../components/Button'
 import Message from '../components/Message'
-import Overlay from '../components/UI/Overlay'
 
 Home.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -35,9 +36,10 @@ export default function Home({
     <Layout>
       {video.id && (
         <Overlay>
-          <div className="overlay">
-            <Video video={video} onClick={() => setVideo({})} />
-          </div>
+          <Button className="topRight" onClick={() => setVideo({})} isSmall>
+            <CancelIcon />
+          </Button>
+          <Video video={video} />
         </Overlay>
       )}
       <Header>
