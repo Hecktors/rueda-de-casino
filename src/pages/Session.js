@@ -4,6 +4,7 @@ import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
 import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
 import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
 import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
+import getRandomMove from '../lib/getRandomMove'
 import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
 import Layout from '../components/ui/Layout'
 import Overlay from '../components/ui/Overlay'
@@ -11,8 +12,8 @@ import Header from '../components/Header'
 import Button from '../components/Button'
 import MoveList from '../components/MoveList'
 import CurrentMove from '../components/CurrentMove'
-import getRandomMove from '../lib/getRandomMove'
 import Video from '../components/Video'
+import BackgroundVideo from '../components/BackgroundVideo'
 
 Session.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -97,7 +98,7 @@ export default function Session({ history, moves, speed, isMuted }) {
           <Video video={video} />
         </Overlay>
       )}
-      <Header>
+      <Header className={'dark'}>
         <div />
         {isPlaying ? (
           <>
@@ -114,6 +115,7 @@ export default function Session({ history, moves, speed, isMuted }) {
         )}
       </Header>
       <main>
+        <BackgroundVideo isPlaying={isPlaying} />
         {hasCurrentMove && (
           <>
             <CurrentMove name={currentMove.name} />
@@ -121,7 +123,7 @@ export default function Session({ history, moves, speed, isMuted }) {
         )}
         {!isPlaying && <MoveList moves={moves} onClick={setVideo} />}
       </main>
-      <footer>
+      <footer className={'dark'}>
         <Button onClick={handleSession}>
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </Button>
