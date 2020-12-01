@@ -27,11 +27,10 @@ export default function App() {
       StoredData ?? {
         moveIDs: [],
         isMuted: false,
-        speed: 3,
+        speed: 3000,
       }
     )
     setIsFirstAppStart(!StoredData)
-    console.log(!settings.moveIDs)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateSettings(userInput) {
