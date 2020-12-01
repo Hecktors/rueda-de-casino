@@ -6,6 +6,7 @@ Button.propTypes = {
   isDisabled: PropTypes.bool,
   isSmall: PropTypes.bool,
   isPrimary: PropTypes.bool,
+  className: PropTypes.string,
 }
 
 export default function Button({
@@ -13,6 +14,7 @@ export default function Button({
   isDisabled = false,
   isSmall = false,
   isPrimary = false,
+  className,
   children,
 }) {
   let color = 'var(--color-button)'
@@ -28,8 +30,9 @@ export default function Button({
       onClick={onClick}
       isSmall={isSmall}
       disabled={isDisabled}
-      color={color}
       isPrimary={isPrimary}
+      color={color}
+      className={className}
     >
       {children}
     </ButtonStyled>

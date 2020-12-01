@@ -1,7 +1,3 @@
 ```jsx
-<SongSpeedInput
-              hasChanged={false}
-              speed={2900}
-              updateUserInput={() => {})t}
-            />
+<SongSpeedInput hasChanged={false} speed={2900} updateUserInput={() => {}} />
 ```

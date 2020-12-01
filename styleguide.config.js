@@ -5,7 +5,8 @@ module.exports = {
   defaultExample: true,
   exampleMode: 'expand',
   usageMode: 'expand',
-  components: 'src/components/[A-Z]*.js',
+  // components: 'src/components/*',
+  components: ['src/components/[A-Z]*.js', 'src/components/form/[A-Z]*.js'],
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'src/styles/StyleWrapper'),
   },

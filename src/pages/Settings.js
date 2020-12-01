@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
-import Layout from '../components/UI/Layout'
+import Layout from '../components/ui/Layout'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import LevelListInput from '../components/Form/LevelListInput'
-import MusicMuteInput from '../components/Form/MusicMuteInput'
-import SongSpeedInput from '../components/Form/SongSpeedInput'
+import LevelListInput from '../components/form/LevelListInput'
+import MusicMuteInput from '../components/form/MusicMuteInput'
+import SongSpeedInput from '../components/form/SongSpeedInput'
 
 const initState = {
   moveIDs: [],
