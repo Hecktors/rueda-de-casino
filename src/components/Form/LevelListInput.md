@@ -1,5 +1,5 @@
 ```jsx
-<InputMoves
+<LevelListInput
   name="level name"
   moves={[
     {

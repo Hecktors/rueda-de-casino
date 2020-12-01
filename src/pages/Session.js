@@ -30,6 +30,7 @@ export default function Session({ history, moves, speed, isMuted }) {
   const hasCurrentMove = currentMove && currentMove.hasOwnProperty('id')
 
   useEffect(() => {
+    !moves && history.push('/')
     if (!isMuted) {
       musicAudioRef.current = new Audio(musicUrl)
       musicAudioRef.current.volume = 0.3

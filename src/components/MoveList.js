@@ -15,7 +15,11 @@ export default function MoveList({ moves, onClick }) {
         onClick={() => onClick({ id: videoId, start: videoStart })}
       >
         {name}
-        {videoId && <img src={youTubeIcon} alt="youtube" />}
+        {videoId && (
+          <span>
+            <img src={youTubeIcon} alt="youtube" />
+          </span>
+        )}
       </button>
     </li>
   ))
@@ -28,16 +32,20 @@ export default function MoveList({ moves, onClick }) {
 }
 
 const MoveListStyled = styled.div`
+  width: 100%;
   padding: 50px 30px;
-  padding-right: 0;
+
   ul {
     padding: 0;
 
     li {
       button {
+        line-height: 1.4;
+        width: 100%;
         font-size: 1.3rem;
-        margin: 1px 0;
         color: var(--color-listitem);
+        display: flex;
+        justify-content: space-between;
       }
     }
 
@@ -46,7 +54,6 @@ const MoveListStyled = styled.div`
     }
 
     img {
-      margin-left: 10px;
       height: 14px;
     }
   }
