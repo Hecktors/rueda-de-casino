@@ -2,13 +2,13 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 FormInputPlaySong.propTypes = {
-  isMuted: PropTypes.bool.isRequired,
+  isSongActive: PropTypes.bool.isRequired,
   updateUserInput: PropTypes.func.isRequired,
   hasChanged: PropTypes.bool.isRequired,
 }
 
 export default function FormInputPlaySong({
-  isMuted,
+  isSongActive,
   updateUserInput,
   hasChanged,
 }) {
@@ -18,8 +18,8 @@ export default function FormInputPlaySong({
         id="mute"
         onChange={updateUserInput}
         type="checkbox"
-        name="isMuted"
-        checked={!isMuted}
+        name="songActive"
+        checked={!isSongActive}
       />
       <label htmlFor="mute">Play learning song </label>
       <div className="tooltip">
@@ -41,7 +41,7 @@ const FormInputPlaySongStyled = styled.div`
   font-size: 1rem;
 
   .info {
-    color: var(--color-button);
+    color: var(--color-secondary);
     user-select: none;
   }
 
@@ -52,13 +52,13 @@ const FormInputPlaySongStyled = styled.div`
   label {
     display: inline-flex;
     user-select: none;
-    color: var(--color-button);
+    color: var(--color-secondary);
   }
 
   label::before {
     content: '';
     display: block;
-    border: 1px solid var(--color-button);
+    border: 1px solid var(--color-secondary);
     width: 17px;
     height: 19px;
     margin-right: 10px;
@@ -68,7 +68,7 @@ const FormInputPlaySongStyled = styled.div`
   input:checked + label::before {
     content: '✔';
     color: ${({ hasChanged }) =>
-      hasChanged ? 'var(--color-primary)' : 'var(--color-button)'};
+      hasChanged ? 'var(--color-primary)' : 'var(--color-secondary)'};
     font-size: 1.2rem;
     line-height: 1;
   }
@@ -95,7 +95,7 @@ const FormInputPlaySongStyled = styled.div`
     text-align: center;
     line-height: 1.6;
     color: #fff;
-    background-color: var(--bg-color-message);
+    background-color: var(--color-bg-message);
   }
 
   .tooltip:hover .tooltiptext {

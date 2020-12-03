@@ -1,6 +1,7 @@
 ```jsx
-import moves from '../data/pensum.json'
+import levels from '../data/pensum.json'
+const moves = levels[0].moves
 ;<div>
-  <SelectedMoveList moves={moves} />
+  <SelectedMoveList moves={moves} onClick={() => {}} />
 </div>
 ```

@@ -12,7 +12,7 @@ export default function App() {
   const [settings, setSettings] = useState({
     moveIDs: [],
     speed: 2900,
-    isMuted: false,
+    isSongActive: false,
   })
   const [isFirstAppStart, setIsFirstAppStart] = useState(true)
 
@@ -28,7 +28,7 @@ export default function App() {
     setSettings(
       StoredData ?? {
         moveIDs: [],
-        isMuted: false,
+        isSongActive: false,
         speed: 3000,
       }
     )
@@ -76,7 +76,7 @@ export default function App() {
             {...props}
             moves={moves}
             speed={settings.speed}
-            isMuted={settings.isMuted}
+            isSongActive={settings.isSongActive}
           />
         )}
       />

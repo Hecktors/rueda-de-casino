@@ -8,7 +8,7 @@ BackgroundVideo.propTypes = {
 export default function BackgroundVideo({ isPlaying }) {
   return (
     <ReactPlayer
-      url="./assets/video/salsa.mp4"
+      url="./assets/video/rueda.mp4"
       className="bg-video"
       playing={isPlaying}
       loop={true}

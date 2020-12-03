@@ -18,6 +18,6 @@ const NameWrapper = styled.div`
   span {
     display: inline-block;
     font-size: 4rem;
-    color: var(--color-move);
+    color: var(--color-primary);
   }
 `

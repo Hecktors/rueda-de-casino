@@ -36,6 +36,7 @@ export default function FormInputSongSpeed({
 }
 
 const FormInputSongSpeedStyled = styled.div`
+  max-width: 400px;
   margin: 0 auto;
   padding: 0 20px;
 
@@ -43,7 +44,7 @@ const FormInputSongSpeedStyled = styled.div`
     direction: rtl;
     display: block;
     width: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--color-bg);
   }
 
   .range-legend {
@@ -70,7 +71,7 @@ const FormInputSongSpeedStyled = styled.div`
     background: #2497e3;
     border-radius: 1px;
     border: 0px solid #000000;
-    background-color: var(--color-button);
+    background-color: var(--color-secondary);
   }
 
   input[type='range']::-webkit-slider-thumb {
@@ -84,7 +85,7 @@ const FormInputSongSpeedStyled = styled.div`
     -webkit-appearance: none;
     margin-top: -7px;
     background-color: ${({ hasChanged }) =>
-      hasChanged ? 'var(--color-primary)' : 'var(--color-button)'};
+      hasChanged ? 'var(--color-primary)' : 'var(--color-secondary)'};
   }
 
   input[type='range']:focus::-webkit-slider-runnable-track {

@@ -9,35 +9,35 @@ import {
   ResetIcon,
 } from '../components/Icons'
 
-const buttonContent = {
-  settings: <SettingsIcon />,
-  play: <PlayIcon />,
-  abort: <CancelIcon />,
-  pause: <PauseIcon />,
-  stop: <StopIcon />,
-  reset: <ResetIcon />,
-  save: 'SAVE',
-  cancel: 'Cancel',
+const button = {
+  settings: { content: <SettingsIcon />, color: 'var(--color-secondary)' },
+  play: { content: <PlayIcon />, color: 'var(--color-primary)' },
+  abort: { content: <CancelIcon />, color: 'var(--color-text)' },
+  pause: { content: <PauseIcon />, color: 'var(--color-secondary)' },
+  stop: { content: <StopIcon />, color: 'var(--color-text)' },
+  reset: { content: <ResetIcon />, color: 'var(--color-secondary)' },
+  save: { content: 'SAVE', color: 'var(--color-primary)' },
+  cancel: { content: 'Cancel', color: 'var(--color-secondary)' },
 }
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  task: PropTypes.string,
   isDisabled: PropTypes.bool,
   isSmall: PropTypes.bool,
-  isPrimary: PropTypes.bool,
-  className: PropTypes.string,
+  isOutlined: PropTypes.bool,
 }
 
 export default function Button({
   onClick,
-  isDisabled,
-  isSmall = false,
-  isPrimary = false,
   className,
   task,
+  isDisabled,
+  isSmall,
+  isOutlined,
 }) {
-  let color = 'var(--color-button)'
-  color = isPrimary ? 'var(--color-primary)' : 'var(--color-button)'
+  let color = button[task].color
 
   if (isDisabled) {
     color = 'var(--color-disabled)'
@@ -49,11 +49,11 @@ export default function Button({
       onClick={onClick}
       isSmall={isSmall}
       disabled={isDisabled}
-      isPrimary={isPrimary}
+      isOutlined={isOutlined}
       color={color}
-      // className={className}
+      className={className}
     >
-      {buttonContent[task]}
+      {button[task].content}
     </ButtonStyled>
   )
 }
@@ -61,10 +61,9 @@ export default function Button({
 const ButtonStyled = styled.button`
   border-radius: 5px;
   padding: 5px 10px;
-  font-weight: ${({ isBold }) => (isBold ? 'bold' : 'normal')};
   color: ${({ color }) => color};
   border: 1px solid
-    ${({ color, isPrimary }) => (isPrimary ? color : 'transparent')};
+    ${({ color, isOutlined }) => (isOutlined ? color : 'transparent')};
 
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
@@ -73,6 +72,6 @@ const ButtonStyled = styled.button`
   }
 
   svg:disabled {
-    fill: var(--color-disabled);
+    fill: ${({ color }) => color};
   }
 `
