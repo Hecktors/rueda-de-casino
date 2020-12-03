@@ -1,20 +1,14 @@
-import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
+import useUserInput from '../hooks/useUserInput'
 import Layout from '../layout/Layout'
 import Button from '../components/Button'
 import FormInputLevels from '../components/FormInputLevel'
 import FormInputPlaySong from '../components/FormInputPlaySong'
 import FormInputSongSpeed from '../components/FormInputSongSpeed'
 
-const initState = {
-  moveIDs: [],
-  speed: 2900,
-  isMuted: false,
-}
-
 Settings.propTypes = {
+  history: PropTypes.object.isRequired,
   levels: PropTypes.array.isRequired,
   settings: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
@@ -26,72 +20,46 @@ export default function Settings({
   settings,
   updateSettings,
 }) {
-  const [userInput, setUserInput] = useState(initState)
-  const [speedPrevVal, setSpeedPrevVal] = useState(settings.speed)
-  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(settings)
-  const isInitState = JSON.stringify(userInput) === JSON.stringify(initState)
-  const hasSpeedChanged = userInput.speed !== speedPrevVal
-  const hasIsMutedChanged =
-    userInput.isMuted !== settings.isMuted && !isInitState
+  const [
+    userInput,
+    updateUserInput,
+    handleInputReset,
+    hasNoChanges,
+    isInitState,
+    hasSpeedChanged,
+    hasIsMutedChanged,
+  ] = useUserInput(settings)
 
-  useEffect(() => {
-    setUserInput(settings)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  function updateUserInput(event) {
-    const { name, value, checked } = event.target
-
-    if (name === 'move') {
-      const updatedMoveIDs = userInput.moveIDs.includes(value)
-        ? userInput.moveIDs.filter((moveID) => moveID !== value)
-        : [...userInput.moveIDs, value]
-      setUserInput({ ...userInput, moveIDs: updatedMoveIDs })
-    }
-    if (name === 'speed') {
-      setUserInput({ ...userInput, speed: Number(value) })
-    }
-
-    if (name === 'isMuted') {
-      setUserInput({ ...userInput, isMuted: !checked })
-    }
-  }
-
-  function handleUpdate() {
+  function handleSettingsUpdate() {
     updateSettings(userInput)
     history.push('/')
   }
 
-  function handleReset() {
-    setUserInput(initState)
-    setSpeedPrevVal(initState.speed)
-  }
-
-  function handleCancel() {
-    history.push('/')
-  }
-
-  const moveSelect = levels.map(({ id, name, moves }) => (
-    <FormInputLevels
-      key={id}
-      levelName={name}
-      levelMoves={moves}
-      moveIDs={userInput.moveIDs}
-      updateUserInput={updateUserInput}
-    />
-  ))
-
   return (
     <Layout>
       <header>
-        <Button onClick={handleReset} isDisabled={isInitState} isSmall>
-          <ResetIcon />
-        </Button>
+        <Button
+          onClick={handleInputReset}
+          task="reset"
+          isDisabled={isInitState}
+          isSmall
+        />
         <h1>Settings</h1>
         <div />
       </header>
       <main>
         <FormStyled>
-          <div className="levels-container">{moveSelect}</div>
+          <div className="levels-container">
+            {levels.map(({ id, name, moves }) => (
+              <FormInputLevels
+                key={id}
+                levelName={name}
+                levelMoves={moves}
+                moveIDs={userInput.moveIDs}
+                updateUserInput={updateUserInput}
+              />
+            ))}
+          </div>
           <FormInputPlaySong
             isMuted={userInput.isMuted}
             hasChanged={hasIsMutedChanged}
@@ -107,10 +75,14 @@ export default function Settings({
         </FormStyled>
       </main>
       <footer>
-        <Button onClick={handleCancel}>Cancel</Button>
-        <Button onClick={handleUpdate} isPrimary isDisabled={hasNoChanges}>
-          Save
-        </Button>
+        <Button onClick={() => history.push('/')} task="cancel" />
+        <div />
+        <Button
+          onClick={handleSettingsUpdate}
+          task="save"
+          isPrimary
+          isDisabled={hasNoChanges}
+        />
       </footer>
     </Layout>
   )

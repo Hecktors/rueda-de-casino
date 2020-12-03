@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ReactComponent as ArrowRightIcon } from '../assets/img/arrow_right.svg'
-import { ReactComponent as ArrowDownIcon } from '../assets/img/arrow_down.svg'
+import { ArrowRightIcon, ArrowDownIcon } from '../components/Icons'
 
 FormInputLevel.propTypes = {
   levelName: PropTypes.string.isRequired,

@@ -1,10 +1,12 @@
 import { Route, Switch } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from './lib/localStorage'
+import { getLocalStorage, setLocalStorage } from './services/localStorage'
 import levels from './data/pensum.json'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Session from './pages/Session'
+
+const STORAGE_KEY = 'settings'
 
 export default function App() {
   const [settings, setSettings] = useState({
@@ -22,7 +24,7 @@ export default function App() {
     : []
 
   useEffect(() => {
-    const StoredData = getLocalStorage('settings')
+    const StoredData = getLocalStorage(STORAGE_KEY)
     setSettings(
       StoredData ?? {
         moveIDs: [],
@@ -36,7 +38,7 @@ export default function App() {
   function updateSettings(userInput) {
     isFirstAppStart && setIsFirstAppStart(false)
     setSettings(userInput)
-    setLocalStorage('settings', userInput)
+    setLocalStorage(STORAGE_KEY, userInput)
   }
 
   return (

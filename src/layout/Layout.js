@@ -1,16 +1,16 @@
 import styled from 'styled-components/macro'
 
 export default function Layout({ children }) {
-  return <Container>{children}</Container>
+  return <LayoutStyled>{children}</LayoutStyled>
 }
 
-const Container = styled.div`
+const LayoutStyled = styled.div`
   height: 100%;
   width: 100%;
   max-width: 499px;
   position: relative;
   display: grid;
-  grid-template-rows: 60px auto 100px;
+  grid-template-rows: 80px auto 100px;
   margin: auto;
   color: var(--text-color);
 
@@ -47,8 +47,10 @@ const Container = styled.div`
 
   footer {
     width: 100%;
-    display: flex;
+    padding: 0 30px;
+    display: grid;
     align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-evenly;
   }
 `
