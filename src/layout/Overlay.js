@@ -26,6 +26,6 @@ const OverlayStyled = styled.div`
   .topRight {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 5px;
   }
 `

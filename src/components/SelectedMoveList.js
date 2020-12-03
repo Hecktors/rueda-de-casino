@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import youTubeIcon from '../assets/img/youTube.png'
+import { YoutubeIcon } from './Icons'
 
 SelectedMoveList.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -17,7 +17,7 @@ export default function SelectedMoveList({ moves, onClick }) {
         {name}
         {videoId && (
           <span>
-            <img src={youTubeIcon} alt="youtube" />
+            <YoutubeIcon />
           </span>
         )}
       </button>
@@ -52,9 +52,13 @@ const SelectedMoveListStyled = styled.div`
     span:hover {
       opacity: 0.6;
     }
-
-    img {
-      height: 14px;
+    span {
+      display: grid;
+      place-items: center;
+      /* height: 50px; */
     }
+    svg {
+      /* height: 100%;
+    } */
   }
 `

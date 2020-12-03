@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ReactComponent as NorthIcon } from '../assets/img/north.svg'
-import { ReactComponent as SouthIcon } from '../assets/img/south.svg'
+import { NorthIcon, SouthIcon } from './Icons'
 
-IntroductionMessage.propTypes = {
+Message.propTypes = {
   isFirstAppStart: PropTypes.bool,
 }
 
-export default function IntroductionMessage({ isFirstAppStart = false }) {
+export default function Message({ isFirstAppStart }) {
   return (
-    <IntroductionMessageStyled>
+    <MessageOverlay>
       {isFirstAppStart ? (
         <div className="first-start">
           <div className="top">
@@ -35,11 +34,11 @@ export default function IntroductionMessage({ isFirstAppStart = false }) {
           <span className="text">Select at least 2 moves</span>
         </div>
       )}
-    </IntroductionMessageStyled>
+    </MessageOverlay>
   )
 }
 
-const IntroductionMessageStyled = styled.div`
+const MessageOverlay = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
