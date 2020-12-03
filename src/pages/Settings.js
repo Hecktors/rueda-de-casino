@@ -1,21 +1,14 @@
-import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
-import Layout from '../components/UI/Layout'
-import Header from '../components/Header'
+import useUserInput from '../hooks/useUserInput'
+import Layout from '../layout/Layout'
 import Button from '../components/Button'
-import LevelListInput from '../components/Form/LevelListInput'
-import MusicMuteInput from '../components/Form/MusicMuteInput'
-import SongSpeedInput from '../components/Form/SongSpeedInput'
-
-const initState = {
-  moveIDs: [],
-  speed: 2900,
-  isMuted: false,
-}
+import FormInputLevels from '../components/FormInputLevel'
+import FormInputPlaySong from '../components/FormInputPlaySong'
+import FormInputSongSpeed from '../components/FormInputSongSpeed'
 
 Settings.propTypes = {
+  history: PropTypes.object.isRequired,
   levels: PropTypes.array.isRequired,
   settings: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
@@ -27,79 +20,53 @@ export default function Settings({
   settings,
   updateSettings,
 }) {
-  const [userInput, setUserInput] = useState(initState)
-  const [speedPrevVal, setSpeedPrevVal] = useState(settings.speed)
-  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(settings)
-  const isInitState = JSON.stringify(userInput) === JSON.stringify(initState)
-  const hasSpeedChanged = userInput.speed !== speedPrevVal
-  const hasIsMutedChanged =
-    userInput.isMuted !== settings.isMuted && !isInitState
+  const [
+    userInput,
+    updateUserInput,
+    handleInputReset,
+    hasNoChanges,
+    isInitState,
+    hasSpeedChanged,
+    hasIsMutedChanged,
+  ] = useUserInput(settings)
 
-  useEffect(() => {
-    setUserInput(settings)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  function updateUserInput(event) {
-    const { name, value, checked } = event.target
-
-    if (name === 'move') {
-      const updatedMoveIDs = userInput.moveIDs.includes(value)
-        ? userInput.moveIDs.filter((moveID) => moveID !== value)
-        : [...userInput.moveIDs, value]
-      setUserInput({ ...userInput, moveIDs: updatedMoveIDs })
-    }
-    if (name === 'speed') {
-      setUserInput({ ...userInput, speed: Number(value) })
-    }
-
-    if (name === 'isMuted') {
-      setUserInput({ ...userInput, isMuted: !checked })
-    }
-  }
-
-  function handleUpdate() {
+  function handleSettingsUpdate() {
     updateSettings(userInput)
     history.push('/')
   }
 
-  function handleReset() {
-    setUserInput(initState)
-    setSpeedPrevVal(initState.speed)
-  }
-
-  function handleCancel() {
-    history.push('/')
-  }
-
-  const moveSelect = levels.map(({ id, name, moves }) => (
-    <LevelListInput
-      key={id}
-      levelName={name}
-      levelMoves={moves}
-      moveIDs={userInput.moveIDs}
-      updateUserInput={updateUserInput}
-    />
-  ))
-
   return (
     <Layout>
-      <Header>
-        <Button onClick={handleReset} isDisabled={isInitState} isSmall>
-          <ResetIcon />
-        </Button>
+      <header>
+        <Button
+          onClick={handleInputReset}
+          task="reset"
+          isDisabled={isInitState}
+          isSmall
+        />
         <h1>Settings</h1>
         <div />
-      </Header>
+      </header>
       <main>
         <FormStyled>
-          <div className="levels-container">{moveSelect}</div>
-          <MusicMuteInput
+          <div className="levels-container">
+            {levels.map(({ id, name, moves }) => (
+              <FormInputLevels
+                key={id}
+                levelName={name}
+                levelMoves={moves}
+                moveIDs={userInput.moveIDs}
+                updateUserInput={updateUserInput}
+              />
+            ))}
+          </div>
+          <FormInputPlaySong
             isMuted={userInput.isMuted}
             hasChanged={hasIsMutedChanged}
             updateUserInput={updateUserInput}
           />
           {userInput.isMuted && (
-            <SongSpeedInput
+            <FormInputSongSpeed
               hasChanged={hasSpeedChanged}
               speed={userInput.speed}
               updateUserInput={updateUserInput}
@@ -108,14 +75,14 @@ export default function Settings({
         </FormStyled>
       </main>
       <footer>
-        <Button onClick={handleCancel}>Cancel</Button>
+        <Button onClick={() => history.push('/')} task="cancel" />
+        <div />
         <Button
-          onClick={handleUpdate}
-          isPrimary={true}
+          onClick={handleSettingsUpdate}
+          task="save"
+          isPrimary
           isDisabled={hasNoChanges}
-        >
-          Save
-        </Button>
+        />
       </footer>
     </Layout>
   )
@@ -123,7 +90,6 @@ export default function Settings({
 
 const FormStyled = styled.form`
   padding: 5px;
-  padding-bottom: 50px;
 
   .levels-container {
     display: grid;

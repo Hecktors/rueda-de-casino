@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-SongSpeedInput.protoTypes = {
+FormInputSongSpeed.protoTypes = {
   speed: PropTypes.number.isRequired,
   updateUserInput: PropTypes.func.isRequired,
   hasChanged: PropTypes.bool.isRequired,
 }
 
-export default function SongSpeedInput({ speed, updateUserInput, hasChanged }) {
+export default function FormInputSongSpeed({
+  speed,
+  updateUserInput,
+  hasChanged,
+}) {
   return (
-    <SongSpeedInputStyled
+    <FormInputSongSpeedStyled
       hasChanged={hasChanged}
       className="range-input-container"
     >
@@ -27,11 +31,11 @@ export default function SongSpeedInput({ speed, updateUserInput, hasChanged }) {
         <span>slow</span>
         <span>fast</span>
       </div>
-    </SongSpeedInputStyled>
+    </FormInputSongSpeedStyled>
   )
 }
 
-const SongSpeedInputStyled = styled.div`
+const FormInputSongSpeedStyled = styled.div`
   margin: 0 auto;
   padding: 0 20px;
 
