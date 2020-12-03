@@ -49,6 +49,14 @@ export default createGlobalStyle`
     main { 
         position: relative;
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow-y: auto;
+        overflow-x: hidden;
+        
+        .absolute {
+            position: absolute
+        }
     }
 
     button {
@@ -75,4 +83,9 @@ export default createGlobalStyle`
     li {
         list-style: none;
     }
+
+    .dark {
+        background-color: #000;
+    }
+    
 `

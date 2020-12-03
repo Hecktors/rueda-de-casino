@@ -1,18 +1,15 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
-import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
-import Video from '../components/Video'
-import Layout from '../components/UI/Layout'
-import Header from '../components/Header'
-import MoveList from '../components/MoveList'
+import YoutubeVideo from '../components/YoutubeVideo'
+import Overlay from '../layout/Overlay'
+import Layout from '../layout/Layout'
+import MoveList from '../components/SelectedMoveList'
 import Button from '../components/Button'
-import Message from '../components/Message'
-import Overlay from '../components/UI/Overlay'
+import Message from '../components/MessageOverlay'
 
 Home.propTypes = {
   moves: PropTypes.array.isRequired,
-  speed: PropTypes.number,
+  speed: PropTypes.number.isRequired,
   isFirstAppStart: PropTypes.bool.isRequired,
   setIsFirstAppStart: PropTypes.func.isRequired,
 }
@@ -35,29 +32,36 @@ export default function Home({
     <Layout>
       {video.id && (
         <Overlay>
-          <div className="overlay">
-            <Video video={video} onClick={() => setVideo({})} />
-          </div>
+          <Button
+            onClick={() => setVideo({})}
+            className="topRight"
+            task="abort"
+            isSmall
+          />
+          <YoutubeVideo video={video} />
         </Overlay>
       )}
-      <Header>
+      <header>
         <div />
         <h1 className="logo">Salsa time!</h1>
-        <Button data-testid="btn-settings" onClick={handleOpenSettings} isSmall>
-          <SettingsIcon />
-        </Button>
-      </Header>
+        <Button
+          onClick={handleOpenSettings}
+          data-testid="btn-settings"
+          task="settings"
+          isSmall
+        />
+      </header>
       <main>
         <MoveList moves={moves} onClick={setVideo} />
         {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
       </main>
       <footer>
+        <div />
         <Button
           onClick={() => history.push('/session')}
+          task="play"
           isDisabled={hasNotEnoughMoves}
-        >
-          <PlayIcon />
-        </Button>
+        />
       </footer>
     </Layout>
   )

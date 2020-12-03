@@ -1,19 +1,40 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import {
+  SettingsIcon,
+  PlayIcon,
+  CancelIcon,
+  PauseIcon,
+  StopIcon,
+  ResetIcon,
+} from '../components/Icons'
+
+const buttonContent = {
+  settings: <SettingsIcon />,
+  play: <PlayIcon />,
+  abort: <CancelIcon />,
+  pause: <PauseIcon />,
+  stop: <StopIcon />,
+  reset: <ResetIcon />,
+  save: 'SAVE',
+  cancel: 'Cancel',
+}
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
   isSmall: PropTypes.bool,
   isPrimary: PropTypes.bool,
+  className: PropTypes.string,
 }
 
 export default function Button({
   onClick,
-  isDisabled = false,
+  isDisabled,
   isSmall = false,
   isPrimary = false,
-  children,
+  className,
+  task,
 }) {
   let color = 'var(--color-button)'
   color = isPrimary ? 'var(--color-primary)' : 'var(--color-button)'
@@ -28,10 +49,11 @@ export default function Button({
       onClick={onClick}
       isSmall={isSmall}
       disabled={isDisabled}
-      color={color}
       isPrimary={isPrimary}
+      color={color}
+      // className={className}
     >
-      {children}
+      {buttonContent[task]}
     </ButtonStyled>
   )
 }
@@ -47,7 +69,10 @@ const ButtonStyled = styled.button`
   svg {
     width: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
     height: ${({ isSmall }) => (isSmall ? '40' : '60')}px;
-    fill: ${({ color, isDisabled }) =>
-      isDisabled ? 'var(--color-disabled)' : color};
+    fill: ${({ color }) => color};
+  }
+
+  svg:disabled {
+    fill: var(--color-disabled);
   }
 `
