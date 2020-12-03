@@ -33,7 +33,9 @@ export default function SelectedMoveList({ moves, onClick }) {
 
 const SelectedMoveListStyled = styled.div`
   width: 100%;
-  padding: 30px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 30px;
 
   ul {
     padding: 0;
@@ -55,10 +57,6 @@ const SelectedMoveListStyled = styled.div`
     span {
       display: grid;
       place-items: center;
-      /* height: 50px; */
     }
-    svg {
-      /* height: 100%;
-    } */
   }
 `

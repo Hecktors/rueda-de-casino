@@ -1,4 +1,9 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
+
+Layout.propTypes = {
+  children: PropTypes.array.isRequired,
+}
 
 export default function Layout({ children }) {
   return <LayoutStyled>{children}</LayoutStyled>
@@ -12,7 +17,6 @@ const LayoutStyled = styled.div`
   display: grid;
   grid-template-rows: 80px auto 100px;
   margin: auto;
-  color: var(--text-color);
 
   @media (min-width: 500px) and (orientation: landscape) {
     height: 80%;

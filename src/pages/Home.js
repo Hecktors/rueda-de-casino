@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import YoutubeVideo from '../components/YoutubeVideo'
 import Overlay from '../layout/Overlay'
+import ActionWrapper from '../layout/ActionWrapper'
 import Layout from '../layout/Layout'
 import MoveList from '../components/SelectedMoveList'
 import Button from '../components/Button'
@@ -34,7 +35,7 @@ export default function Home({
         <Overlay>
           <Button
             onClick={() => setVideo({})}
-            className="topRight"
+            className="top-right"
             task="abort"
             isSmall
           />
@@ -52,7 +53,9 @@ export default function Home({
         />
       </header>
       <main>
-        <MoveList moves={moves} onClick={setVideo} />
+        <ActionWrapper>
+          <MoveList moves={moves} onClick={setVideo} />
+        </ActionWrapper>
         {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
       </main>
       <footer>
