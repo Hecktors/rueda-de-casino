@@ -2,6 +2,7 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
 Overlay.propTypes = {
+  children: PropTypes.array.isRequired,
   full: PropTypes.bool,
 }
 
@@ -17,13 +18,13 @@ const OverlayStyled = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: ${({ full }) =>
-    full ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.6)'};
-  z-index: ${({ full }) => (full ? '999' : '99')};
   display: grid;
   place-items: center;
+  background-color: ${({ full }) =>
+    full ? 'var(--color-bg-overlay-full)' : 'var(--color-bg-overlay)'};
+  z-index: ${({ full }) => (full ? '999' : '99')};
 
-  .topRight {
+  .top-right {
     position: absolute;
     top: 10px;
     right: 5px;

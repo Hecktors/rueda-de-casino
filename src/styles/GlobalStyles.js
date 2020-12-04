@@ -4,25 +4,20 @@ export default createGlobalStyle`
     :root {
         /* General */
         --color-primary: #ff7109;
-        --bg-color: #181b27;
-        --color: #bbb;
-        /* Title */
-        --color-title: #bbb;
-        /* Accordion */
-        --bg-color-accordion: #222637;
-        --color-accordion-title: #2ca3d2;
-        --bg-color-accordion-title: #0b1644;
-        --color-accordion-title-active: #ff7109;
-        --color-accordion-item: #999;
-        --color-accordion-item-active: #ff7109;
-        /* Buttons */
-        --color-button: #2ca3d2;
+        --color-secondary: #2ca3d2;
+        --color-bg: #181b27;
+        --color-bg-dark : #020510;
+        --color-text: #bbb;
         --color-disabled: #333;
-        /* Current move */
-        --color-move: #ff7109;
+        /* Accordion */
+        --color-bg-accordion: #222637;
+        --color-bg-accordion-title: #0b1644;
+        --color-accordion-item: #999;
         /* Message */
         --color-message: #666;
-        --bg-color-message: #0f1118d9;
+        --color-bg-message: #0f1118d9;
+        --color-bg-overlay: #020510b3;
+        --color-bg-overlay-full: #000;
     }
 
     * {
@@ -37,8 +32,8 @@ export default createGlobalStyle`
     body {
         font-family: 'Open Sans', sans-serif;
         font-size: 112.5%;
-        color:  var(--color);
-        background-color: var(--bg-color);
+        color:  var(--color-text);
+        background-color: var(--color-bg);
     }
 
     #root {
@@ -65,7 +60,6 @@ export default createGlobalStyle`
         border: none;
         padding: 0;
         background-color: transparent;
-        color:  var(--color-text);
         font-size: 1.5rem;
 
         &:active,
@@ -85,7 +79,7 @@ export default createGlobalStyle`
     }
 
     .dark {
-        background-color: #000;
+        background-color: var(--color-bg-dark);
     }
     
 `
