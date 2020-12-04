@@ -56,7 +56,7 @@ export default function FormInputLevel({
 }
 
 const FormInputLevelStyled = styled.div`
-  background-color: var(--bg-color-accordion);
+  background-color: var(--color-bg-accordion);
   border-radius: 5px;
 
   input {
@@ -72,9 +72,7 @@ const FormInputLevelStyled = styled.div`
 
     & .level-name {
       color: ${({ isActive }) =>
-        isActive
-          ? 'var(--color-accordion-title-active)'
-          : 'var(--color-accordion-title)'};
+        isActive ? 'var(--color-primary)' : 'var(--color-secondary)'};
       flex-grow: 1;
       text-align: center;
     }
@@ -82,7 +80,7 @@ const FormInputLevelStyled = styled.div`
     svg {
       transform: scale(1.5);
       fill: ${({ color }) => color};
-      fill: var(--color-accordion-title);
+      fill: var(--color-secondary);
     }
   }
 
@@ -103,7 +101,7 @@ const FormInputLevelStyled = styled.div`
 
     label {
       font-size: 0.875rem;
-      color: var(--color-accordion-item);
+      color: var(--color-secondary);
       display: inline-block;
       width: 100%;
 
@@ -114,6 +112,6 @@ const FormInputLevelStyled = styled.div`
   }
 
   .isChecked {
-    color: var(--color-accordion-item-active);
+    color: var(--color-primary);
   }
 `

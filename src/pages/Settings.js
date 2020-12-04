@@ -48,8 +48,8 @@ export default function Settings({
         <div />
       </header>
       <main>
-        <FormStyled>
-          <div className="levels-container">
+        <form>
+          <StyledLevelsContainer>
             {levels.map(({ id, name, moves }) => (
               <FormInputLevels
                 key={id}
@@ -59,20 +59,20 @@ export default function Settings({
                 updateUserInput={updateUserInput}
               />
             ))}
-          </div>
+          </StyledLevelsContainer>
           <FormInputPlaySong
-            isMuted={userInput.isMuted}
+            isSongActive={userInput.isSongActive}
             hasChanged={hasIsMutedChanged}
             updateUserInput={updateUserInput}
           />
-          {userInput.isMuted && (
+          {!userInput.isSongActive && (
             <FormInputSongSpeed
               hasChanged={hasSpeedChanged}
               speed={userInput.speed}
               updateUserInput={updateUserInput}
             />
           )}
-        </FormStyled>
+        </form>
       </main>
       <footer>
         <Button onClick={() => history.push('/')} task="cancel" />
@@ -80,7 +80,7 @@ export default function Settings({
         <Button
           onClick={handleSettingsUpdate}
           task="save"
-          isPrimary
+          isOutlined
           isDisabled={hasNoChanges}
         />
       </footer>
@@ -88,13 +88,10 @@ export default function Settings({
   )
 }
 
-const FormStyled = styled.form`
+const StyledLevelsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 5px;
   padding: 5px;
-
-  .levels-container {
-    display: grid;
-    align-items: start;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-  }
 `
