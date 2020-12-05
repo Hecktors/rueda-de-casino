@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion renders Accordion 1`] = `
+exports[`FormInputLevel renders Accordion 1`] = `
 <div
-  class="Accordion__LevelAccordionStyled-sn9tuv-0 khvdae"
+  class="FormInputLevel__FormInputLevelStyled-fylxmi-0 XIaHt"
 >
   <h3>
     <svg>
@@ -21,7 +21,9 @@ exports[`Accordion renders Accordion 1`] = `
         class=""
       >
         <input
+          name="move"
           type="checkbox"
+          value="1"
         />
          
         la prima
@@ -29,11 +31,12 @@ exports[`Accordion renders Accordion 1`] = `
     </li>
     <li>
       <label
-        class="isChecked"
+        class=""
       >
         <input
-          checked=""
+          name="move"
           type="checkbox"
+          value="2"
         />
          
         sombrero

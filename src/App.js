@@ -10,24 +10,24 @@ const STORAGE_KEY = 'settings'
 
 export default function App() {
   const [settings, setSettings] = useState({
-    moveIDs: [],
+    selectedMoveIDs: [],
     speed: 2900,
     isSongActive: false,
   })
   const [isFirstAppStart, setIsFirstAppStart] = useState(true)
 
-  const moves = settings.moveIDs
+  const moves = settings.selectedMoveIDs
     ? levels
         .map((level) => level.moves)
         .flat(1)
-        .filter((move) => settings.moveIDs.includes(move.id))
+        .filter((move) => settings.selectedMoveIDs.includes(move.id))
     : []
 
   useEffect(() => {
     const StoredData = getLocalStorage(STORAGE_KEY)
     setSettings(
       StoredData ?? {
-        moveIDs: [],
+        selectedMoveIDs: [],
         isSongActive: false,
         speed: 3000,
       }

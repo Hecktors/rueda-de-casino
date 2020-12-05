@@ -22,9 +22,9 @@ describe('FormInputLevel', () => {
     ReactDOM.render(
       <FormInputLevel
         name="test accordion"
-        moves={moves}
+        levelMoves={moves}
         levelName="level"
-        selectedMoves={[]}
+        selectedMoveIds={[]}
         userInput={[2]}
         updateUserInput={() => {}}
       />,
