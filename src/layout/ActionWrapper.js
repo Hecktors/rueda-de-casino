@@ -2,7 +2,6 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
 ActionWrapper.propTypes = {
-  children: PropTypes.array.isRequired,
   className: PropTypes.bool,
 }
 

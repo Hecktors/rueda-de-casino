@@ -6,7 +6,7 @@ useUserInput.propTypes = {
 }
 
 const initState = {
-  moveIDs: [],
+  selectedMoveIDs: [],
   speed: 2900,
   isSongActive: false,
 }
@@ -31,10 +31,10 @@ export default function useUserInput(settings) {
 
   const userInputHandler = {
     move: (value) => {
-      const updatedMoveIDs = userInput.moveIDs.includes(value)
-        ? userInput.moveIDs.filter((moveID) => moveID !== value)
-        : [...userInput.moveIDs, value]
-      setUserInput({ ...userInput, moveIDs: updatedMoveIDs })
+      const updatedMoveIDs = userInput.selectedMoveIDs.includes(value)
+        ? userInput.selectedMoveIDs.filter((moveID) => moveID !== value)
+        : [...userInput.selectedMoveIDs, value]
+      setUserInput({ ...userInput, selectedMoveIDs: updatedMoveIDs })
     },
     speed: (value) => setUserInput({ ...userInput, speed: Number(value) }),
     songActive: (_, checked) =>
