@@ -1,109 +1,69 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { ReactComponent as StopIcon } from '../assets/img/stop-circle.svg'
-import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
-import { ReactComponent as PauseIcon } from '../assets/img/pause.svg'
-import musicUrl from '../assets/audio/music/Uno_dos_tres.mp3'
-import Layout from '../components/UI/Layout'
-import Header from '../components/Header'
+import useSession from '../hooks/useSession'
+import Layout from '../layout/Layout'
+import Overlay from '../layout/Overlay'
 import Button from '../components/Button'
-import MoveList from '../components/MoveList'
+import MoveList from '../components/SelectedMoveList'
 import CurrentMove from '../components/CurrentMove'
+import YoutubeVideo from '../components/YoutubeVideo'
+import BackgroundVideo from '../components/BackgroundVideo'
+import ActionWrapper from '../layout/ActionWrapper'
 
-Session.propTypes = { selectedMoves: PropTypes.array.isRequired }
+Session.propTypes = {
+  history: PropTypes.object.isRequired,
+  moves: PropTypes.array.isRequired,
+  speed: PropTypes.number,
+  isSongActive: PropTypes.bool.isRequired,
+}
 
-export default function Session({ history, selectedMoves }) {
-  const [currentMove, setCurrentMove] = useState({})
-  const [isPlaying, setIsPlaying] = useState(false)
-  const musicAudioRef = useRef(null)
-  const moveAudioRef = useRef(null)
-  const timeoutRef = useRef(null)
+export default function Session({ history, moves, speed, isSongActive }) {
+  const [sessionHandler, isPlaying, currentMove] = useSession(
+    history,
+    moves,
+    speed,
+    isSongActive
+  )
 
-  const hasCurrentMove = currentMove && currentMove.hasOwnProperty('id')
-
-  useEffect(() => {
-    musicAudioRef.current = new Audio(musicUrl)
-    musicAudioRef.current.volume = 0.3
-    return () => clearTimeout(timeoutRef.current)
-  }, [])
-
-  useEffect(() => {
-    selectedMoves.length > 0 && startPlaying()
-  }, [selectedMoves]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  function handleSession() {
-    isPlaying ? stopPlaying() : startPlaying()
-  }
-
-  function startPlaying() {
-    musicAudioRef.current.play()
-    startMoveTimeout(5000)
-    setIsPlaying(true)
-  }
-
-  function stopPlaying() {
-    musicAudioRef.current.pause()
-    stopMoveAudioProcess()
-    setCurrentMove({})
-    setIsPlaying(false)
-  }
-
-  function stopSession() {
-    musicAudioRef.current.currentTime = 0
-    history.push('/')
-  }
-
-  function getRandomMove() {
-    const movesNum = selectedMoves.length
-    const randomNum = Math.floor(Math.random() * movesNum)
-    return selectedMoves[randomNum]
-  }
-
-  function startMoveTimeout(ms) {
-    timeoutRef.current = setTimeout(() => {
-      const nextCurrentMove = getRandomMove()
-      setCurrentMove(nextCurrentMove)
-      moveAudioRef.current = new Audio(
-        `./audio/moves/${nextCurrentMove.filename}`
-      )
-      moveAudioRef.current.play()
-      timeoutRef.current = null
-      startMoveTimeout(nextCurrentMove.steps * 2000 + 1000)
-    }, ms)
-  }
-
-  function stopMoveAudioProcess() {
-    clearTimeout(timeoutRef.current)
-    timeoutRef.current = null
-    moveAudioRef.current = null
-  }
+  const [video, setVideo] = useState({})
 
   return (
     <Layout>
-      <Header>
-        <div />
-        {isPlaying ? (
-          <>
-            <div />
-            <div />
-          </>
+      {video.id && (
+        <Overlay full>
+          <Button
+            className="top-right"
+            onClick={() => setVideo({})}
+            task="abort"
+            isSmall
+          />
+          <YoutubeVideo video={video} />
+        </Overlay>
+      )}
+      <header className={'dark'}>
+        {!isPlaying ? (
+          <Button onClick={sessionHandler.stop} task="stop" isSmall />
         ) : (
-          <>
-            <h1>Pause</h1>
-            <Button onClick={stopSession} isSmall>
-              <StopIcon />
-            </Button>
-          </>
+          <div />
         )}
-      </Header>
-      <main>
-        {hasCurrentMove && <CurrentMove name={currentMove.name} />}
-        {!isPlaying && <MoveList moves={selectedMoves} />}
+        {!isPlaying && <h1>Pause</h1>}
+      </header>
+      <main className="dark">
+        <ActionWrapper isDark>
+          <BackgroundVideo isPlaying={isPlaying} />
+          <Overlay>
+            {currentMove.id && <CurrentMove name={currentMove.name} />}
+            {!isPlaying && <MoveList moves={moves} onClick={setVideo} />}
+          </Overlay>
+        </ActionWrapper>
       </main>
-      <footer>
-        <Button onClick={handleSession}>
-          {isPlaying ? <PauseIcon /> : <PlayIcon />}
-        </Button>
+      <footer className={'dark'}>
+        <div />
+        <Button
+          onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
+          task={isPlaying ? 'pause' : 'play'}
+          isPrimary
+        />
       </footer>
     </Layout>
   )

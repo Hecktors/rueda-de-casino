@@ -1,110 +1,650 @@
   [ 
     {
-      "id": "l1",
-    "name": "beginner",
+      "id": "b1",
+    "name": "Level 1",
     "moves": [
     {      
-      "id": 1,
+      "id": "m1",
       "name": "la prima",
       "steps": 2,
       "filename": "la_prima.mp3",
-      "video_id": "SFxy0cWwEtg",
-      "video_start": "20"
+      "videoId": "SFxy0cWwEtg",
+      "videoStart": "20"
     },
     {
-      "id": 2,
+      "id": "m2",
       "name": "sombrero",
       "steps": 2,
       "filename": "sombrero.mp3",
-      "video_id": "yHjWNiGmTqg",
-      "video_start": "1"
+      "videoId": "yHjWNiGmTqg",
+      "videoStart": "1"
     },
     {
-      "id": 3,
+      "id": "m3",
       "name": "sombrero con una mano",
       "steps": 2,
       "filename": "sombrero_con_una_mano.mp3",
-      "video_id": "fAMaQ_3HEUE",
-      "video_start": "1"
+      "videoId": "fAMaQ_3HEUE",
+      "videoStart": "1"
     },
     { 
-      "id": 4,
+      "id": "m4",
       "name": "doble play",
       "steps": 3,
       "filename": "doble_play.mp3",
-      "video_id": "XAcDUGdLPJg",
-      "video_start": "1"
+      "videoId": "XAcDUGdLPJg",
+      "videoStart": "1"
     },
     {
-      "id": 5,
+      "id": "m5",
       "name": "setenta",
       "steps": 4,
       "filename": "setenta.mp3",
-      "video_id": "riQ_IAmFRJ0",
-      "video_start": "1"
+      "videoId": "riQ_IAmFRJ0",
+      "videoStart": "1"
     },
     {
-      "id": 6,
+      "id": "m6",
       "name": "métele el dedo",
       "steps": 4,
       "filename": "metele_el_dedo.mp3",
-      "video_id": "jk5qW-GRpDg",
-      "video_start": "1"
+      "videoId": "jk5qW-GRpDg",
+      "videoStart": "1"
     }
   ]
 },
 {
-  "id": "l2",
-  "name": "intermediate",
+  "id": "b2",
+  "name": "Level 2",
   "moves": [
     {
-      "id": 7,
+      "id": "m7",
       "name": "vacuna",
       "steps": 4,
       "filename": "vacuna.mp3",
-      "video_id": "",
-      "video_start": ""
+      "videoId": "",
+      "videoStart": ""
     },
     {
-      "id": 8,
+      "id": "m8",
       "name": "enchufla con la buricua",
       "steps": 4,
       "filename": "enchufla_con_la_buricua.mp3",
-      "video_id": "",
-      "video_start": ""
+      "videoId": "",
+      "videoStart": ""
     },
     {
-      "id": 9,
+      "id": "m9",
       "name": "prima con la tía",
       "steps": 3,
       "filename": "prima_con_la_tia.mp3",
-      "video_id": "eQsyayni28c",
-      "video_start": "1"
+      "videoId": "eQsyayni28c",
+      "videoStart": "1"
     },
     {
-      "id": 10,
+      "id": "m10",
       "name": "vacílala",
       "steps": 2,
       "filename": "vacilala.mp3",
-      "video_id": "xRz675LloBE",
-      "video_start": "1"
+      "videoId": "xRz675LloBE",
+      "videoStart": "1"
     },
     {
-      "id": 11,
+      "id": "m11",
       "name": "sesenta y nueve",
       "steps": 4,
       "filename": "sesenta_y_nueve.mp3",
-      "video_id": "e3D1mgLjuk8",
-      "video_start": "1"
+      "videoId": "e3D1mgLjuk8",
+      "videoStart": "1"
     },
     {
-      "id": 12,
+      "id": "m12",
       "name": "enchufla con raulín",
       "steps": 2,
       "filename": "enchulfa_con_raulin.mp3",
-      "video_id": "ko_E78hdQvQ",
-      "video_start": "1"
+      "videoId": "ko_E78hdQvQ",
+      "videoStart": "1"
     }
     ]
+  },
+  {
+    "id": "b3",
+    "name": "Level 3",
+    "moves": [
+      {
+        "id": "b3m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "b3m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "b3m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "b3m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "b3m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "b3m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "b4",
+    "name": "Level 4",
+    "moves": [
+      {
+        "id": "b4m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "b4m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "b4m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "b4m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "b4m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "b4m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "i1",
+    "name": "level 5",
+    "moves": [
+      {
+        "id": "i1m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i1m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i1m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "i1m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "i1m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "i1m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "i2",
+    "name": "level 6",
+    "moves": [
+      {
+        "id": "i2m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i2m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i2m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "i2m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "i2m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "i2m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "i3",
+    "name": "level 7",
+    "moves": [
+      {
+        "id": "i3m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i3m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i3m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "i3m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "i3m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "i3m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "i4",
+    "name": "level 8",
+    "moves": [
+      {
+        "id": "i4m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i4m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "i4m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "i4m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "i4m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "i4m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "a1",
+    "name": "Level 9",
+    "moves": [
+      {
+        "id": "a1m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a1m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a1m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "a1m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "a1m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "a1m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "a2",
+    "name": "Level 10",
+    "moves": [
+      {
+        "id": "a2m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a2m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a2m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "a2m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "a2m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "a2m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "a3",
+    "name": "Level 11",
+    "moves": [
+      {
+        "id": "a3m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a3m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a3m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "a3m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "a3m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "a3m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
+  },
+  {
+    "id": "a4",
+    "name": "Level 12",
+    "moves": [
+      {
+        "id": "a4m7",
+        "name": "vacuna",
+        "steps": 4,
+        "filename": "vacuna.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a4m8",
+        "name": "enchufla con la buricua",
+        "steps": 4,
+        "filename": "enchufla_con_la_buricua.mp3",
+        "videoId": "",
+        "videoStart": ""
+      },
+      {
+        "id": "a4m9",
+        "name": "prima con la tía",
+        "steps": 3,
+        "filename": "prima_con_la_tia.mp3",
+        "videoId": "eQsyayni28c",
+        "videoStart": "1"
+      },
+      {
+        "id": "a4m10",
+        "name": "vacílala",
+        "steps": 2,
+        "filename": "vacilala.mp3",
+        "videoId": "xRz675LloBE",
+        "videoStart": "1"
+      },
+      {
+        "id": "a4m11",
+        "name": "sesenta y nueve",
+        "steps": 4,
+        "filename": "sesenta_y_nueve.mp3",
+        "videoId": "e3D1mgLjuk8",
+        "videoStart": "1"
+      },
+      {
+        "id": "a4m12",
+        "name": "enchufla con raulín",
+        "steps": 2,
+        "filename": "enchulfa_con_raulin.mp3",
+        "videoId": "ko_E78hdQvQ",
+        "videoStart": "1"
+      }
+      ]
   }
 ]

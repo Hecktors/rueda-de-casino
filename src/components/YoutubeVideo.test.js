@@ -1,9 +1,9 @@
 import { screen, render, fireEvent } from '@testing-library/react'
-import Video from './Video'
+import YoutubeVideo from './YoutubeVideo'
 
 describe('Youtube Video', () => {
   const { container } = render(
-    <Video video={{ id: '1234', start: '0' }} onClick={() => {}} />
+    <YoutubeVideo video={{ id: '1234', start: '0' }} onClick={() => {}} />
   )
   const videoFrame = screen.getByTestId('video')
   const button = screen.getByTestId('button')
