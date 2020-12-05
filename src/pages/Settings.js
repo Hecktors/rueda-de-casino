@@ -1,86 +1,97 @@
-import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ReactComponent as CancelIcon } from '../assets/img/cancel.svg'
-import { ReactComponent as ResetIcon } from '../assets/img/reset.svg'
-import Layout from '../components/UI/Layout'
-import LevelAccordion from '../components/Accordion'
-import Header from '../components/Header'
+import useUserInput from '../hooks/useUserInput'
+import Layout from '../layout/Layout'
 import Button from '../components/Button'
+import FormInputLevels from '../components/FormInputLevel'
+import FormInputPlaySong from '../components/FormInputPlaySong'
+import FormInputSongSpeed from '../components/FormInputSongSpeed'
 
 Settings.propTypes = {
-  moves: PropTypes.array.isRequired,
-  selectedMoves: PropTypes.array.isRequired,
-  updateSelectedMoves: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  levels: PropTypes.array.isRequired,
+  settings: PropTypes.object.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 }
 
 export default function Settings({
   history,
-  moves,
-  selectedMoves,
-  updateSelectedMoves,
+  levels,
+  settings,
+  updateSettings,
 }) {
-  const [userInput, setUserInput] = useState([])
+  const [
+    userInput,
+    updateUserInput,
+    handleInputReset,
+    hasNoChanges,
+    isInitState,
+    hasSpeedChanged,
+    hasIsMutedChanged,
+  ] = useUserInput(settings)
 
-  useEffect(() => {
-    setUserInput(selectedMoves.map((move) => move.id))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  function updateUserInput(id) {
-    const updatedUserInput = userInput.includes(id)
-      ? userInput.filter((inputId) => inputId !== id)
-      : [...userInput, id]
-    setUserInput(updatedUserInput)
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    updateSelectedMoves(userInput)
+  function handleSettingsUpdate() {
+    updateSettings(userInput)
     history.push('/')
   }
-
-  function handleReset(e) {
-    e.preventDefault()
-    setUserInput([])
-  }
-
-  function handleCancel(e) {
-    e.preventDefault()
-    history.push('/')
-  }
-
-  const content = moves.map(({ id, name, moves }) => (
-    <LevelAccordion
-      key={id}
-      name={name}
-      moves={moves}
-      selectedMoves={selectedMoves}
-      userInput={userInput}
-      updateUserInput={updateUserInput}
-    />
-  ))
 
   return (
-    <FormStyled onSubmit={handleSubmit} onReset={handleReset} id="settings">
-      <Layout>
-        <Header>
-          <Button onClick={handleReset} isSmall>
-            <ResetIcon />
-          </Button>
-          <h1>Settings</h1>
-          <Button onClick={handleCancel} isSmall>
-            <CancelIcon />
-          </Button>
-        </Header>
-        <main>{content}</main>
-        <footer>
-          <Button onClick={() => {}}>SAVE</Button>
-        </footer>
-      </Layout>
-    </FormStyled>
+    <Layout>
+      <header>
+        <Button
+          onClick={handleInputReset}
+          task="reset"
+          isDisabled={isInitState}
+          isSmall
+        />
+        <h1>Settings</h1>
+        <div />
+      </header>
+      <main>
+        <form>
+          <StyledLevelsContainer>
+            {levels.map(({ id, name, moves }) => (
+              <FormInputLevels
+                key={id}
+                levelName={name}
+                levelMoves={moves}
+                moveIDs={userInput.moveIDs}
+                updateUserInput={updateUserInput}
+              />
+            ))}
+          </StyledLevelsContainer>
+          <FormInputPlaySong
+            isSongActive={userInput.isSongActive}
+            hasChanged={hasIsMutedChanged}
+            updateUserInput={updateUserInput}
+          />
+          {!userInput.isSongActive && (
+            <FormInputSongSpeed
+              hasChanged={hasSpeedChanged}
+              speed={userInput.speed}
+              updateUserInput={updateUserInput}
+            />
+          )}
+        </form>
+      </main>
+      <footer>
+        <Button onClick={() => history.push('/')} task="cancel" />
+        <div />
+        <Button
+          onClick={handleSettingsUpdate}
+          task="save"
+          isOutlined
+          isDisabled={hasNoChanges}
+        />
+      </footer>
+    </Layout>
   )
 }
 
-const FormStyled = styled.form`
-  height: 100%;
+const StyledLevelsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 5px;
+  padding: 5px;
 `

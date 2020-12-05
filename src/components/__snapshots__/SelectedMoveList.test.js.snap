@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoveList renders MoveList 1`] = `
+exports[`SelectedMoveList renders SelectedMoveList 1`] = `
 <div>
   <div
-    class="MoveList__MoveListStyled-skwchu-0 icVvlk"
+    class="SelectedMoveList__SelectedMoveListStyled-sc-1k4i04h-0 dkcHxq"
   >
     <ul>
       <li>

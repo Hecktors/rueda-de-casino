@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import Accordion from './Accordion'
+import FormInputLevel from './FormInputLevel'
 import { render } from '@testing-library/react'
 const moves = [
   {
@@ -16,13 +16,14 @@ const moves = [
   },
 ]
 
-describe('Accordion', () => {
+describe('FormInputLevel', () => {
   it('renders Accordion', () => {
     const div = document.createElement('div')
     ReactDOM.render(
-      <Accordion
+      <FormInputLevel
         name="test accordion"
         moves={moves}
+        levelName="level"
         selectedMoves={[]}
         userInput={[2]}
         updateUserInput={() => {}}

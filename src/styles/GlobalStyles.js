@@ -1,18 +1,25 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components/macro'
 
 export default createGlobalStyle`
-
     :root {
-        --bg-color: #121212;
-        --bg-color-accordion: #201e1e;
-        --color-text: #ccc;
-        --color-button: #fff;
-        --color-disabled: #999;
-        --color-selected: #ff7109;
-        --color-move: #ff7109;
-        --color-warning: #d15353;
-        --color-success: green;
+        /* General */
+        --color-primary: #ff7109;
+        --color-secondary: #2ca3d2;
+        --color-bg: #181b27;
+        --color-bg-dark : #020510;
+        --color-text: #bbb;
+        --color-disabled: #333;
+        /* Accordion */
+        --color-bg-accordion: #222637;
+        --color-bg-accordion-title: #0b1644;
+        --color-accordion-item: #999;
+        /* Message */
+        --color-message: #666;
+        --color-bg-message: #0f1118d9;
+        --color-bg-overlay: #020510b3;
+        --color-bg-overlay-full: #000;
     }
+
     * {
         box-sizing: border-box;
         margin: 0;
@@ -23,15 +30,28 @@ export default createGlobalStyle`
     }
 
     body {
-        font-family: 'Helvetica';
+        font-family: 'Open Sans', sans-serif;
         font-size: 112.5%;
         color:  var(--color-text);
-        background-color: var(--bg-color);
+        background-color: var(--color-bg);
+    }
+
+    #root {
+        display: flex;
+        align-items: center;
     }
 
     main { 
-        place-items: center;
-        padding: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow-y: auto;
+        overflow-x: hidden;
+        
+        .absolute {
+            position: absolute
+        }
     }
 
     button {
@@ -40,13 +60,16 @@ export default createGlobalStyle`
         border: none;
         padding: 0;
         background-color: transparent;
-        color:  var(--color-text);
-        font-size: 2.5rem;
+        font-size: 1.5rem;
 
         &:active,
         &:hover {
         opacity: 0.8;
         }
+    }
+
+    label {
+        font-size: 1rem;
     }
     ul {
         padding: 0;
@@ -54,17 +77,9 @@ export default createGlobalStyle`
     li {
         list-style: none;
     }
-    .msg {
-        font-size: 1.5rem;
-        text-align: center;
-        margin: 20px 0;
-    }
 
-    .warning {
-        color: var(--color-warning)
+    .dark {
+        background-color: var(--color-bg-dark);
     }
-
-    .success {
-        color: var(--color-success)
-    }
+    
 `

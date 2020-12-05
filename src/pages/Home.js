@@ -1,48 +1,70 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { ReactComponent as SettingsIcon } from '../assets/img/settings.svg'
-import { ReactComponent as PlayIcon } from '../assets/img/play.svg'
-import Layout from '../components/UI/Layout'
-import Header from '../components/Header'
-import MoveList from '../components/MoveList'
+import YoutubeVideo from '../components/YoutubeVideo'
+import Overlay from '../layout/Overlay'
+import ActionWrapper from '../layout/ActionWrapper'
+import Layout from '../layout/Layout'
+import MoveList from '../components/SelectedMoveList'
 import Button from '../components/Button'
+import Message from '../components/MessageOverlay'
 
-Home.propTypes = { selectedMoves: PropTypes.array.isRequired }
+Home.propTypes = {
+  moves: PropTypes.array.isRequired,
+  speed: PropTypes.number.isRequired,
+  isFirstAppStart: PropTypes.bool.isRequired,
+  setIsFirstAppStart: PropTypes.func.isRequired,
+}
 
-export default function Home({ history, selectedMoves }) {
-  const hasNotEnoughMoves = selectedMoves.length < 2
+export default function Home({
+  history,
+  moves,
+  isFirstAppStart,
+  setIsFirstAppStart,
+}) {
+  const [video, setVideo] = useState({})
+  const hasNotEnoughMoves = moves.length < 2
 
-  function startSession() {
-    history.push('/session')
-  }
-
-  function openSettings() {
+  function handleOpenSettings() {
     history.push('/settings')
+    setIsFirstAppStart(false)
   }
-
-  const message =
-    selectedMoves.length < 2 ? (
-      <div className="msg warning">Select at least 2 moves to start</div>
-    ) : (
-      <div className="msg success">Ready? Click Play to start!</div>
-    )
 
   return (
     <Layout>
-      <Header>
+      {video.id && (
+        <Overlay>
+          <Button
+            onClick={() => setVideo({})}
+            className="top-right"
+            task="abort"
+            isSmall
+          />
+          <YoutubeVideo video={video} />
+        </Overlay>
+      )}
+      <header>
         <div />
         <h1 className="logo">Salsa time!</h1>
-        <Button data-testid="btn-settings" onClick={openSettings} isSmall>
-          <SettingsIcon />
-        </Button>
-      </Header>
+        <Button
+          onClick={handleOpenSettings}
+          data-testid="btn-settings"
+          task="settings"
+          isSmall
+        />
+      </header>
       <main>
-        {message}
-        <MoveList moves={selectedMoves} />
+        <ActionWrapper>
+          <MoveList moves={moves} onClick={setVideo} />
+        </ActionWrapper>
+        {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
       </main>
       <footer>
-        <Button onClick={startSession} isDisabled={hasNotEnoughMoves}>
-          <PlayIcon />
-        </Button>
+        <div />
+        <Button
+          onClick={() => history.push('/session')}
+          task="play"
+          isDisabled={hasNotEnoughMoves}
+        />
       </footer>
     </Layout>
   )
