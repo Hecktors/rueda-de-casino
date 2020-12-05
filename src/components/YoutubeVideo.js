@@ -10,6 +10,7 @@ export default function YoutubeVideo({ video }) {
 
   return (
     <ReactPlayer
+      data-testid="video"
       url={url}
       className="bg-video"
       playing={true}

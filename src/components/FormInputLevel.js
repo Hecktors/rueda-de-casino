@@ -6,19 +6,19 @@ import { ArrowRightIcon, ArrowDownIcon } from '../components/Icons'
 FormInputLevel.propTypes = {
   levelName: PropTypes.string.isRequired,
   levelMoves: PropTypes.array.isRequired,
-  moveIDs: PropTypes.array.isRequired,
+  selectedMoveIds: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
 export default function FormInputLevel({
   levelName,
   levelMoves,
-  moveIDs,
+  selectedMoveIds,
   updateUserInput,
 }) {
   const [isOpen, setIsOpen] = useState()
   const hasInputMove = levelMoves.some((move) => {
-    return moveIDs.includes(move.id)
+    return selectedMoveIds.includes(move.id)
   })
 
   useEffect(() => {
@@ -27,13 +27,13 @@ export default function FormInputLevel({
 
   const listItems = levelMoves.map((move) => (
     <li key={move.id}>
-      <label className={moveIDs.includes(move.id) ? 'isChecked' : ''}>
+      <label className={selectedMoveIds.includes(move.id) ? 'isChecked' : ''}>
         <input
           name="move"
           value={move.id}
           onChange={updateUserInput}
           type="checkbox"
-          checked={moveIDs.includes(move.id)}
+          checked={selectedMoveIds.includes(move.id)}
         />{' '}
         {move.name}
       </label>

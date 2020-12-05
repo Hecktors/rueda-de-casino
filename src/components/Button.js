@@ -22,8 +22,8 @@ const button = {
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
+  task: PropTypes.string.isRequired,
   className: PropTypes.string,
-  task: PropTypes.string,
   isDisabled: PropTypes.bool,
   isSmall: PropTypes.bool,
   isOutlined: PropTypes.bool,
