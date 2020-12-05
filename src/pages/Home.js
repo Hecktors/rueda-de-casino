@@ -48,9 +48,11 @@ export default function Home({
         <Button onClick={handleOpenSettings} task="settings" isSmall />
       </header>
       <main>
-        <ActionWrapper>
-          <MoveList moves={moves} onClick={setVideo} />
-        </ActionWrapper>
+        {!isFirstAppStart && (
+          <ActionWrapper>
+            <MoveList moves={moves} onClick={setVideo} />
+          </ActionWrapper>
+        )}
         {hasNotEnoughMoves && <Message isFirstAppStart={isFirstAppStart} />}
       </main>
       <footer>

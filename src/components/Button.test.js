@@ -1,6 +1,6 @@
 import Button from './Button'
 import userEvent from '@testing-library/user-event'
-import { getRoles, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 
 describe('Button', () => {
   it('renders button correctly', () => {
