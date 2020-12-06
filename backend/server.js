@@ -9,10 +9,6 @@ require("dotenv").config({});
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
-
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -23,6 +19,9 @@ const connection = mongoose.connection;
 connection.once("open", () =>
   console.log("MongoDB connection established successfully")
 );
+
+const movesRouter = require("./routes/moves");
+app.use("/", movesRouter);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
