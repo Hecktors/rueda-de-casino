@@ -38,6 +38,6 @@ const moveSchema = new Schema({
   },
 });
 
-const Move = moveSchema("Move", moveSchema);
+const Move = mongoose.model("Move", moveSchema);
 
 module.exports = Move;
