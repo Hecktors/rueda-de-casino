@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Move = require("../models/move.model");
+const buildAudio = require("../services/buildAudio");
 
 router.route("/").get((req, res) => {
   Move.find()
@@ -8,12 +9,14 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const name = req.body.name;
+  const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
   const levelID = req.body.levelID;
   const steps = req.body.steps;
-  const audioName = "test";
+  const audioName = name.replace(/\s/g, "_") + ".mp3";
   const videoID = req.body.videoID;
   const videoStart = req.body.videoStart;
+
+  buildAudio(name, audioName);
 
   const newMove = new Move({
     name,
