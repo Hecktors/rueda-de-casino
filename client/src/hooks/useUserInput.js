@@ -8,7 +8,7 @@ useUserInput.propTypes = {
 const initState = {
   selectedMoveIDs: [],
   speed: 2900,
-  isSongActive: false,
+  isSongActive: true,
 }
 
 export default function useUserInput(settings) {
@@ -17,7 +17,7 @@ export default function useUserInput(settings) {
   const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(settings)
   const isInitState = JSON.stringify(userInput) === JSON.stringify(initState)
   const hasSpeedChanged = userInput.speed !== speedPrevVal
-  const hasIsMutedChanged =
+  const hasSongActivityChanged =
     userInput.isSongActive !== settings.isSongActive && !isInitState
 
   useEffect(() => {
@@ -37,8 +37,9 @@ export default function useUserInput(settings) {
       setUserInput({ ...userInput, selectedMoveIDs: updatedMoveIDs })
     },
     speed: (value) => setUserInput({ ...userInput, speed: Number(value) }),
-    songActive: (_, checked) =>
-      setUserInput({ ...userInput, isSongActive: !checked }),
+    songActivity: (_, checked) => {
+      setUserInput({ ...userInput, isSongActive: checked })
+    },
   }
 
   function handleInputReset() {
@@ -53,6 +54,6 @@ export default function useUserInput(settings) {
     hasNoChanges,
     isInitState,
     hasSpeedChanged,
-    hasIsMutedChanged,
+    hasSongActivityChanged,
   ]
 }

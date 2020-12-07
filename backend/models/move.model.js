@@ -10,7 +10,7 @@ const moveSchema = new Schema({
     trim: true,
     minlength: 1,
   },
-  levelID: {
+  levelName: {
     type: String,
     required: true,
   },

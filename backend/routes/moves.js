@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const fs = require("fs");
 const Move = require("../models/move.model");
-// const Level = require("../models/level.model");
 const addAudio = require("../services/addAudio");
 const deleteAudio = require("../services/deleteAudio");
 
@@ -12,10 +10,10 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// Add a move
+// Add move
 router.route("/add").post(async (req, res) => {
   const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
-  const levelID = req.body.levelID;
+  const levelName = req.body.levelName;
   const steps = req.body.steps;
   const audioName = name.replace(/\s/g, "_") + ".mp3";
   const videoID = req.body.videoID;
@@ -23,7 +21,7 @@ router.route("/add").post(async (req, res) => {
 
   const newMove = new Move({
     name,
-    levelID,
+    levelName,
     steps,
     audioName,
     videoID,
@@ -39,7 +37,7 @@ router.route("/add").post(async (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// Get a move
+// Get move
 router.route("/:id").get((req, res) => {
   Move.findById(req.params.id)
     .then((move) => res.json(move))
@@ -62,7 +60,7 @@ router.route("/update/:id").post((req, res) => {
     .then((move) => {
       const prevAudioName = move.audioName;
       move.name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
-      move.levelID = req.body.levelID;
+      move.levelName = req.body.levelName;
       move.steps = req.body.steps;
       move.audioName = req.body.name.replace(/\s/g, "_") + ".mp3";
       move.videoID = req.body.videoID;
