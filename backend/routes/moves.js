@@ -1,13 +1,17 @@
 const router = require("express").Router();
 const Move = require("../models/move.model");
+const getPensum = require("../services/getPensum");
 const addAudio = require("../services/addAudio");
 const deleteAudio = require("../services/deleteAudio");
+const addLevelIfNotExist = require("../services/addLevelIfNotExist");
+const deleteLevelIfEmpty = require("../services/deleteLevelIfEmpty");
 
 // Get all moves
-router.route("/").get((req, res) => {
-  Move.find()
-    .then((moves) => res.json(moves))
-    .catch((err) => res.status(400).json("Error: " + err));
+router.route("/").get(async (req, res) => {
+  const response = await getPensum();
+  response.err
+    ? res.status(400).json("Error" + response.err)
+    : res.json(response.pensum);
 });
 
 // Add move
@@ -32,6 +36,7 @@ router.route("/add").post(async (req, res) => {
     .save()
     .then(() => {
       addAudio(name, audioName);
+      addLevelIfNotExist(levelName);
       res.json("Move added successfully!");
     })
     .catch((err) => res.status(400).json("Error: " + err));
@@ -49,6 +54,7 @@ router.route("/:id").delete((req, res) => {
   Move.findByIdAndDelete(req.params.id)
     .then((move) => {
       deleteAudio(move.audioName);
+      deleteLevelIfEmpty(move.levelName);
       res.json("Move deleted.");
     })
     .catch((err) => res.status(400).json("Error: " + err));
@@ -71,6 +77,8 @@ router.route("/update/:id").post((req, res) => {
         .then(() => {
           if (prevAudioName !== move.audioName) {
             deleteAudio(prevAudioName);
+            addLevelIfNotExist(move.levelName);
+            deleteLevelIfEmpty(move.levelName);
             addAudio(move.name, move.audioName);
           }
           res.json("Move updated!");
