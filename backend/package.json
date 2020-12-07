@@ -15,7 +15,8 @@
     "client": "cd ../client && npm start",
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,md,mdx,html,css,json}\"",
     "server": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "production": "node serve.js && cd ../client npm start"
   },
   "repository": {
     "type": "git",
