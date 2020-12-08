@@ -27,7 +27,7 @@ export default function Settings({
     hasNoChanges,
     isInitState,
     hasSpeedChanged,
-    hasIsMutedChanged,
+    hasSongActivityChanged,
   ] = useUserInput(settings)
 
   function handleSettingsUpdate() {
@@ -62,7 +62,7 @@ export default function Settings({
           </StyledLevelsContainer>
           <FormInputPlaySong
             isSongActive={userInput.isSongActive}
-            hasChanged={hasIsMutedChanged}
+            hasChanged={hasSongActivityChanged}
             updateUserInput={updateUserInput}
           />
           {!userInput.isSongActive && (

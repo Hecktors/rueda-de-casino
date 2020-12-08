@@ -18,8 +18,8 @@ export default function FormInputPlaySong({
         id="mute"
         onChange={updateUserInput}
         type="checkbox"
-        name="songActive"
-        checked={!isSongActive}
+        name="songActivity"
+        checked={isSongActive}
       />
       <label htmlFor="mute">Play learning song </label>
       <div className="tooltip">

@@ -12,7 +12,7 @@ export default function App() {
   const [settings, setSettings] = useState({
     selectedMoveIDs: [],
     speed: 2900,
-    isSongActive: false,
+    isSongActive: true,
   })
   const [isFirstAppStart, setIsFirstAppStart] = useState(true)
 
