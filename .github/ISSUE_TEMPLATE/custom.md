@@ -20,5 +20,5 @@ so that **(a benefit)**
 ## Tasks
 - [ ] (todos for the team)
 
-## Size
-(small, medium, large)
+## Complexity
+(low, medium, high)
