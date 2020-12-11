@@ -157,3 +157,6 @@ client/yarn-error.log*
 
 # styleguidist
 client/styleguide
+
+# cypress
+client/cypress

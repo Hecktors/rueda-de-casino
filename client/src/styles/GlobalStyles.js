@@ -3,12 +3,16 @@ import { createGlobalStyle } from 'styled-components/macro'
 export default createGlobalStyle`
     :root {
         /* General */
-        --color-primary: #ff7109;
+        --color-title: #3a425e;
+        --color-logo: #c6099c;
+        --color-primary: #c65909;
         --color-secondary: #2ca3d2;
-        --color-bg: #181b27;
-        --color-bg-dark : #020510;
-        --color-text: #bbb;
+        --color-text: #999;
+        --color-bg: #11141d;
+        --color-bg-dark : #000;
+        --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
+        --color-warning: #f53030;
         /* Accordion */
         --color-bg-accordion: #222637;
         --color-bg-accordion-title: #0b1644;
@@ -16,8 +20,13 @@ export default createGlobalStyle`
         /* Message */
         --color-message: #666;
         --color-bg-message: #0f1118d9;
-        --color-bg-overlay: #020510b3;
+        /* Overlay */
+        --color-bg-overlay: rgba(0, 0, 0, 0.7);
         --color-bg-overlay-full: #000;
+        /* Selected Moves List */
+        --color-selected-movelist: #2ca3d2;
+        /* --color-bg-overlay-paused: #020510d9; */
+        --color-bg-overlay-paused: rgba(0, 0, 0, 0.8);
     }
 
     * {
@@ -41,24 +50,30 @@ export default createGlobalStyle`
         align-items: center;
     }
 
+    .App {
+        height: 100%;
+        width: 100%;
+        max-width: 800px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
     main { 
+        flex-grow: 1;
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         overflow-y: auto;
         overflow-x: hidden;
-        
-        .absolute {
-            position: absolute
-        }
     }
 
     button {
         cursor: pointer;
         outline: none;
         border: none;
-        padding: 0;
         background-color: transparent;
         font-size: 1.5rem;
 
@@ -81,5 +96,10 @@ export default createGlobalStyle`
     .dark {
         background-color: var(--color-bg-dark);
     }
-    
+
+    .top-right {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 `
