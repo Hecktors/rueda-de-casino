@@ -26,7 +26,6 @@ const audiosRouter = require("./routes/audio");
 app.use("/moves", movesRouter);
 app.use("/audio", audiosRouter);
 
-
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
