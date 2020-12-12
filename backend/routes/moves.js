@@ -43,6 +43,7 @@ router.route("/add").post((req, res) => {
       addAudio(name, audioName);
       addLevelIfNotExist(levelName);
       const response = await getPensum();
+      console.log("new pensum:", response.pensum);
       response.err
         ? res.status(400).json("Error" + response.err)
         : res.json(response.pensum);
@@ -60,10 +61,14 @@ router.route("/:id").get((req, res) => {
 // Delete move
 router.route("/:id").delete((req, res) => {
   Move.findByIdAndDelete(req.params.id)
-    .then((move) => {
+    .then(async (move) => {
       deleteAudio(move.audioName);
       deleteLevelIfEmpty(move.levelName);
-      res.json("Move deleted.");
+      const response = await getPensum();
+      console.log(response.pensum);
+      response.err
+        ? res.status(400).json("Error" + response.err)
+        : res.json(response.pensum);
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });

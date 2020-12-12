@@ -9,6 +9,7 @@ import { ReactComponent as PauseIcon } from './assets/pause.svg'
 import { ReactComponent as PlayIcon } from './assets/play.svg'
 import { ReactComponent as SettingsIcon } from './assets/settings.svg'
 import { ReactComponent as StopIcon } from './assets/stop-circle.svg'
+import { ReactComponent as DeleteIcon } from './assets/delete.svg'
 
 export {
   AddIcon,
@@ -22,4 +23,5 @@ export {
   PlayIcon,
   SettingsIcon,
   StopIcon,
+  DeleteIcon,
 }
