@@ -6,13 +6,13 @@ import Session from '../session/Session'
 import Update from '../update/Update'
 
 export default function App(props) {
-  const [pensum, addMove, updateMove] = usePensum()
-  
+  const [pensum, addMove, updateMove, deleteMove] = usePensum()
+
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
-    )
-    console.log("pensum:", pensum)
-    // console.log("selectedMoveIDS:" , appState.selectedMoveIDs)
+  )
+  console.log('pensum:', pensum)
+  // console.log("selectedMoveIDS:" , appState.selectedMoveIDs)
   const location = useLocation()
   const classes = location.pathname === '/session' ? 'dark' : ''
 
@@ -49,7 +49,13 @@ export default function App(props) {
           exact
           path="/update"
           render={(props) => (
-            <Update {...props} pensum={pensum} addMove={addMove} updateMove={updateMove}/>
+            <Update
+              {...props}
+              pensum={pensum}
+              addMove={addMove}
+              updateMove={updateMove}
+              deleteMove={deleteMove}
+            />
           )}
         />
       </Switch>

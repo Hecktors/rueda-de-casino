@@ -12,21 +12,22 @@ Update.propTypes = {
   pensum: PropTypes.array.isRequired,
   addMove: PropTypes.func.isRequired,
   updateMove: PropTypes.func.isRequired,
+  deleteMove: PropTypes.func.isRequired,
 }
 
-export default function Update({ history, pensum, addMove, updateMove }) {
-  const [isFormOpen, setIsFormOpen] = useState(false)
+export default function Update({
+  history,
+  pensum,
+  addMove,
+  updateMove,
+  deleteMove,
+}) {
+  const [isFormOpen, setIsFormOpen] = useState()
   const [editedMoveID, setEditedMoveID] = useState(null)
 
   useEffect(() => {
-    editedMoveID && setIsFormOpen(true) 
-    
-  },[editedMoveID])
-  // function handleSubmit(updatedLevels) {
-  //   setEditedMoveID(null)
-  //   console.log(updatedLevels)
-  //   addMove(updatedLevels)
-  // }
+    editedMoveID && setIsFormOpen(true)
+  }, [editedMoveID])
 
   return (
     <>
@@ -38,6 +39,7 @@ export default function Update({ history, pensum, addMove, updateMove }) {
           updateMove={updateMove}
           setEditedMoveID={setEditedMoveID}
           setIsFormOpen={setIsFormOpen}
+          deleteMove={deleteMove}
         />
       )}
       <AppHeader cols="110">

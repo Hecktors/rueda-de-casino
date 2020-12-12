@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import Button from '../../app/Buttons/Button'
 import useUserInput from './useUserInput'
 import IconButton from '../../app/Buttons/IconButton'
-import { ResetIcon } from '../../app/Icons/Icons'
+import { DeleteIcon, ResetIcon } from '../../app/Icons/Icons'
 
 Form.propTypes = {
   pensum: PropTypes.array.isRequired,
@@ -12,6 +12,7 @@ Form.propTypes = {
   setIsFormOpen: PropTypes.func.isRequired,
   addMove: PropTypes.func.isRequired,
   updateMove: PropTypes.func.isRequired,
+  deleteMove: PropTypes.func.isRequired,
   setEditedMoveID: PropTypes.func.isRequired,
 }
 
@@ -22,6 +23,7 @@ export default function Form({
   setEditedMoveID,
   addMove,
   updateMove,
+  deleteMove,
 }) {
   const [isLevelInputDisplayed, setIsLevelInputDisplayed] = useState(false)
   const [userInput, updateUserInput, resetUserInput] = useUserInput(
@@ -30,11 +32,14 @@ export default function Form({
     setIsLevelInputDisplayed
   )
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e, removedMoveID) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    isNewMove ? addMove(userInput) : updateMove(userInput)
-    // setIsLevelInputDisplayed(false)
+    if (removedMoveID) {
+      deleteMove(removedMoveID)
+    } else {
+      isNewMove ? addMove(userInput) : updateMove(userInput)
+    }
 
     setIsFormOpen(false)
   }
@@ -50,6 +55,17 @@ export default function Form({
         <ResetIcon />
       </IconButton>
       <h2>Edit {userInput.name}</h2>
+      {id && (
+        <IconButton
+          type="button"
+          onClick={(e) => handleSubmit(e, id)}
+          color={'tertiary'}
+          size={'md'}
+          className="top-right"
+        >
+          <DeleteIcon />
+        </IconButton>
+      )}
 
       {!isLevelInputDisplayed && (
         <div className="form-group">

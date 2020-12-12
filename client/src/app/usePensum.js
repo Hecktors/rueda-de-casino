@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import {
+  getPensum,
   callAddMoveAPI,
   callUpdateMoveAPI,
-  getPensum,
+  callDeleteMoveAPI,
 } from './services/handleAPIs'
 import { getLocalStorage, setLocalStorage } from './services/localStorage'
 
@@ -33,5 +34,12 @@ export default function useAppState(levels) {
     setPensum(updatedPensum)
   }
 
-  return [pensum, addMove, updateMove]
+  async function deleteMove(id) {
+    const updatedPensum = await callDeleteMoveAPI(id)
+
+    console.log(pensum, updatedPensum)
+    setPensum(updatedPensum)
+  }
+
+  return [pensum, addMove, updateMove, deleteMove]
 }

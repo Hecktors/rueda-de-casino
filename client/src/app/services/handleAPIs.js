@@ -44,6 +44,16 @@ export async function callUpdateMoveAPI(move) {
       console.log(error)
     })
 }
+export async function callDeleteMoveAPI(id) {
+  console.log(id)
+  return axios
+    .delete(`${API_URL_MOVES}/${id}`)
+    .then((response) => response.data)
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 // get audio
 
 // export function getAudio() {
