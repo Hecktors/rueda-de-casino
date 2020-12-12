@@ -56,7 +56,7 @@ export default function useSession(history, moves, speed, isSongActive) {
       )
       moveAudioRef.current.play()
       timeoutRef.current = null
-      startTimeout(nextCurrentMove.steps * speed + speed)
+      startTimeout(nextCurrentMove.bars * speed + speed)
     }, ms)
   }
 

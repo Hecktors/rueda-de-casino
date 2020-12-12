@@ -1,16 +1,20 @@
 import { Route, Switch, useLocation } from 'react-router-dom'
-import { useState } from 'react'
-import pensum from './data/pensum.json'
+// import { useState } from 'react'
+// import pensum from './data/pensum.json'
 import useAppState from './useAppState'
+import usePensum from './usePensum'
 import Home from '../home/Home'
 import Session from '../session/Session'
 import Update from '../update/Update'
 
 export default function App(props) {
-  const [levels, setLevels] = useState(pensum)
+  const [pensum, setPensum] = usePensum()
+  
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
-    levels
-  )
+    pensum
+    )
+    console.log("pensum:", pensum)
+    console.log("selectedMoveIDS:" , appState.selectedMoveIDs)
   const location = useLocation()
   const classes = location.pathname === '/session' ? 'dark' : ''
 
@@ -23,7 +27,7 @@ export default function App(props) {
           render={(props) => (
             <Home
               {...props}
-              levels={levels}
+              levels={pensum}
               appState={appState}
               updateAppState={updateAppState}
               resetAppState={resetAppState}
@@ -47,7 +51,7 @@ export default function App(props) {
           exact
           path="/update"
           render={(props) => (
-            <Update {...props} levels={levels} updateLevels={setLevels} />
+            <Update {...props} levels={pensum} updateLevels={setPensum} />
           )}
         />
       </Switch>

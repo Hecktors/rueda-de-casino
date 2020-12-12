@@ -13,18 +13,23 @@ Update.propTypes = {
 }
 
 export default function Update({ history, levels, updateLevels }) {
-  const [editMove, setEditMove] = useState(null)
+  const [editedMoveID, setEditedMoveID] = useState(null)
 
-  function handleSubmit(updatedLevels) {
-    setEditMove(null)
-    console.log(updatedLevels)
-    updateLevels(updatedLevels)
-  }
+  // function handleSubmit(updatedLevels) {
+  //   setEditedMoveID(null)
+  //   console.log(updatedLevels)
+  //   updateLevels(updatedLevels)
+  // }
 
   return (
     <>
-      {editMove && (
-        <Form levels={levels} id={editMove} handleSubmit={handleSubmit} />
+      {editedMoveID && (
+        <Form
+          levels={levels}
+          id={editedMoveID}
+          updateLevels={updateLevels}
+          setEditedMoveID={setEditedMoveID}
+        />
       )}
       <AppHeader cols="110">
         <IconButton
@@ -43,12 +48,12 @@ export default function Update({ history, levels, updateLevels }) {
             <ul key={level.id}>
               <li>{level.name.toUpperCase()}</li>
               {level.moves.map((move) => (
-                <li key={move.id}>
+                <li key={move._id}>
                   {move.name}
                   <IconButton
                     color={'secondary'}
                     size={'xs'}
-                    onClick={() => setEditMove(move.id)}
+                    onClick={() => setEditedMoveID(move._id)}
                   >
                     <EditIcon />
                   </IconButton>

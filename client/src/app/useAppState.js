@@ -7,11 +7,11 @@ const initState = {
   selectedMoveIDs: [],
   speed: 2900,
   isSongActive: false,
+  audios: [],
 }
 
-export default function useAppState(levels) {
+export default function useAppState(pensum) {
   const [appState, setAppState] = useState(initState)
-  // const{selectedMoveIDs, speed, isSongActive} = appState
 
   useEffect(() => {
     setAppState(getLocalStorage(STORAGE_KEY) ?? initState)
@@ -22,14 +22,16 @@ export default function useAppState(levels) {
   }, [appState])
 
   const selectedMoves = appState.selectedMoveIDs
-    ? levels
+    ? pensum
         .map((level) => level.moves)
         .flat(1)
         .filter((move) => appState.selectedMoveIDs.includes(move.id))
     : []
 
   function updateAppState(event) {
+    console.log(event)
     const { name, value, checked } = event.target
+    console.log(name, value, checked)
     appStateHandler[name](value, checked)
   }
 

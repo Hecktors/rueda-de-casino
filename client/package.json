@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-player": "^2.7.0",
@@ -17,8 +18,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "styleguide": "FAST_REFRESH=false styleguidist server",
-    "test:e2e": "start-server-and-test start http://localhost:3000 cy:run",    
-    "cy:run": "cypress run",    
+    "test:e2e": "start-server-and-test start http://localhost:3000 cy:run",
+    "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
   "eslintConfig": {
