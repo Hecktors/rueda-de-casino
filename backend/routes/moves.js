@@ -1,3 +1,4 @@
+var ObjectID = require('mongodb').ObjectID
 const router = require("express").Router();
 const Move = require("../models/move.model");
 const getPensum = require("../services/getPensum");
@@ -17,6 +18,7 @@ router.route("/").get(async (req, res) => {
 
 // Add move
 router.route("/add").post(async (req, res) => {
+  const id = new ObjectID()
   const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
   const levelName = req.body.levelName;
   const bars = req.body.bars;
@@ -25,6 +27,7 @@ router.route("/add").post(async (req, res) => {
   const videoStart = req.body.videoStart;
 
   const newMove = new Move({
+    _id: id,
     name,
     levelName,
     bars,
@@ -33,12 +36,13 @@ router.route("/add").post(async (req, res) => {
     videoStart,
   });
 
+  console.log(newMove)
   newMove
     .save()
     .then(() => {
       addAudio(name, audioName);
       addLevelIfNotExist(levelName);
-      res.json("Move added successfully!");
+      res.json(newMove);
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });

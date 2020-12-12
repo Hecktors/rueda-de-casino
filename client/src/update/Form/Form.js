@@ -2,36 +2,31 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import Button from '../../app/Buttons/Button'
-import useUserInput from '../useUserInput'
+import useUserInput from './useUserInput'
 import IconButton from '../../app/Buttons/IconButton'
 import { ResetIcon } from '../../app/Icons/Icons'
 
 Form.propTypes = {
-  levels: PropTypes.array.isRequired,
+  pensum: PropTypes.array.isRequired,
   id: PropTypes.string,
-  handleSubmit: PropTypes.func.isRequired,
+  setIsFormOpen: PropTypes.func.isRequired,
+  addMove: PropTypes.func.isRequired,
   setEditedMoveID: PropTypes.func.isRequired,
 }
 
-export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
+export default function Form({ pensum, id, setIsFormOpen, setEditedMoveID, addMove }) {
   const [isLevelInputDisplayed, setIsLevelInputDisplayed] = useState(false)
   const [userInput, updateUserInput, resetUserInput] = useUserInput(
-    levels,
+    pensum,
     id,
     setIsLevelInputDisplayed
   )
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const updatedLevels = levels.map((level, i) => {
-      return {
-        ...level,
-        moves: levels[i].moves.map((move) =>
-          move.id === userInput.id ? userInput : move
-        ),
-      }
-    })
-    updateLevels(updatedLevels)
+    const isNewMove = !userInput._id
+    isNewMove && addMove(userInput)
+    setIsFormOpen(false)
   }
 
   return (
@@ -45,22 +40,23 @@ export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
         <ResetIcon />
       </IconButton>
       <h2>Edit {userInput.name}</h2>
+
       <div className="form-group">
         <label htmlFor="">level name</label>
-        <select onChange={updateUserInput} name="levelName" id="levelName">
+        <select onChange={updateUserInput} name="levelName" id="levelName" value={userInput.levelName} required>
           <option value="">Choose the level</option>
-          {levels.map(({ id, name }) => (
+          {pensum.map(({ id, levelName }) => (
             <option
               key={id}
-              value={name}
-              selected={name === userInput.levelName}
+              value={levelName}
             >
-              {name}
+              {levelName}
             </option>
           ))}
           <option value="createLevel">CREATE NEW LEVEL</option>
         </select>
       </div>
+
       {isLevelInputDisplayed && (
         <div className="form-group">
           <label htmlFor="">level name</label>
@@ -70,10 +66,12 @@ export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
             type="text"
             id="levelName"
             name="levelName"
+            required
           />
         </div>
       )}
       {/* <div className="form-group-container"> */}
+
       <div className="form-group">
         <label htmlFor="">move name</label>
         <input
@@ -82,8 +80,10 @@ export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
           type="text"
           id="name"
           name="name"
+          required
         />
       </div>
+
       <div className="form-group">
         <label htmlFor="">num of bars</label>
         <input
@@ -93,8 +93,10 @@ export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
           type="number"
           id="bars"
           name="bars"
+          required
         />
       </div>
+
       {/* </div> */}
       {/* <div className="form-group-container"> */}
       <div className="form-group">
@@ -125,6 +127,7 @@ export default function Form({ levels, id, updateLevels, setEditedMoveID }) {
         <Button
           onClick={() => {
             setEditedMoveID(null)
+            setIsFormOpen(false)
           }}
           color={'tertiary'}
           size={'lg'}

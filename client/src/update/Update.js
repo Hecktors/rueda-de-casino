@@ -5,30 +5,37 @@ import AppHeader from '../app/AppHeader'
 import IconButton from '../app/Buttons/IconButton'
 import { EditIcon, BackIcon, AddIcon } from '../app/Icons/Icons'
 import Form from './Form/Form'
+import { useEffect } from 'react/cjs/react.development'
 
 Update.propTypes = {
   history: PropTypes.object.isRequired,
-  levels: PropTypes.array.isRequired,
-  updateLevels: PropTypes.func.isRequired,
+  pensum: PropTypes.array.isRequired,
+  addMove: PropTypes.func.isRequired,
 }
 
-export default function Update({ history, levels, updateLevels }) {
+export default function Update({ history, pensum, addMove }) {
+  const [isFormOpen, setIsFormOpen] = useState(false)
   const [editedMoveID, setEditedMoveID] = useState(null)
 
+  useEffect(() => {
+    editedMoveID && setIsFormOpen(true) 
+    
+  },[editedMoveID])
   // function handleSubmit(updatedLevels) {
   //   setEditedMoveID(null)
   //   console.log(updatedLevels)
-  //   updateLevels(updatedLevels)
+  //   addMove(updatedLevels)
   // }
 
   return (
     <>
-      {editedMoveID && (
+      {isFormOpen && (
         <Form
-          levels={levels}
+          pensum={pensum}
           id={editedMoveID}
-          updateLevels={updateLevels}
+          addMove={addMove}
           setEditedMoveID={setEditedMoveID}
+          setIsFormOpen={setIsFormOpen}
         />
       )}
       <AppHeader cols="110">
@@ -43,10 +50,10 @@ export default function Update({ history, levels, updateLevels }) {
       </AppHeader>
 
       <UpdateStyled>
-        {levels.map((level) => {
+        {pensum.map((level) => {
           return (
             <ul key={level.id}>
-              <li>{level.name.toUpperCase()}</li>
+              <li>{level.levelName.toUpperCase()}</li>
               {level.moves.map((move) => (
                 <li key={move._id}>
                   {move.name}
@@ -66,7 +73,7 @@ export default function Update({ history, levels, updateLevels }) {
           className="add-button"
           color={'tertiary'}
           size={'lg'}
-          onClick={() => {}}
+          onClick={() => setIsFormOpen(true)}
         >
           <AddIcon />
         </IconButton>
