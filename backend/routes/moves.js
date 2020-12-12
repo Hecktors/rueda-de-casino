@@ -1,4 +1,4 @@
-var ObjectID = require('mongodb').ObjectID
+var ObjectID = require("mongodb").ObjectID;
 const router = require("express").Router();
 const Move = require("../models/move.model");
 const getPensum = require("../services/getPensum");
@@ -9,7 +9,7 @@ const deleteLevelIfEmpty = require("../services/deleteLevelIfEmpty");
 
 // Get all moves
 router.route("/").get(async (req, res) => {
-  console.log("server: ok!")
+  console.log("server: ok!");
   const response = await getPensum();
   response.err
     ? res.status(400).json("Error" + response.err)
@@ -18,7 +18,7 @@ router.route("/").get(async (req, res) => {
 
 // Add move
 router.route("/add").post(async (req, res) => {
-  const id = new ObjectID()
+  const id = new ObjectID();
   const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
   const levelName = req.body.levelName;
   const bars = req.body.bars;
@@ -36,7 +36,7 @@ router.route("/add").post(async (req, res) => {
     videoStart,
   });
 
-  console.log(newMove)
+  console.log(newMove);
   newMove
     .save()
     .then(() => {
@@ -86,7 +86,7 @@ router.route("/update/:id").post((req, res) => {
             deleteLevelIfEmpty(move.levelName);
             addAudio(move.name, move.audioName);
           }
-          res.json("Move updated!");
+          res.json(move);
         })
         .catch((err) => res.status(400).json("Error: " + err));
     })

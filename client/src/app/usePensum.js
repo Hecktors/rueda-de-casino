@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { callAddMoveAPI, getPensum } from './services/handleAPIs'
+import {
+  callAddMoveAPI,
+  callUpdateMoveAPI,
+  getPensum,
+} from './services/handleAPIs'
 import { getLocalStorage, setLocalStorage } from './services/localStorage'
 
 const STORAGE_KEY = 'pensum'
@@ -20,14 +24,24 @@ export default function useAppState(levels) {
 
   async function addMove(userInput) {
     const newMove = await callAddMoveAPI(userInput)
-    const updatedPensum = [...pensum]
-    updatedPensum.forEach(level => {
-      level.levelName === newMove.levelName && level.moves.push(newMove)
-    })
-    setPensum(updatedPensum)
-   
+    console.log(newMove)
+    setPensum(await getPensum())
   }
 
+  async function updateMove(userInput) {
+    const updatedMove = await callUpdateMoveAPI(userInput)
+    console.log(updatedMove)
+    const updatedPensum = pensum.map((level) => {
+      return {
+        ...level,
+        moves: level.moves.map((move) =>
+          move._id === updatedMove.__id ? updatedMove : move
+        ),
+      }
+    })
+    console.log(updatedPensum)
+    setPensum(updatedPensum)
+  }
 
-  return [pensum, addMove]
+  return [pensum, addMove, updateMove]
 }

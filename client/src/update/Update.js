@@ -11,9 +11,10 @@ Update.propTypes = {
   history: PropTypes.object.isRequired,
   pensum: PropTypes.array.isRequired,
   addMove: PropTypes.func.isRequired,
+  updateMove: PropTypes.func.isRequired,
 }
 
-export default function Update({ history, pensum, addMove }) {
+export default function Update({ history, pensum, addMove, updateMove }) {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editedMoveID, setEditedMoveID] = useState(null)
 
@@ -34,6 +35,7 @@ export default function Update({ history, pensum, addMove }) {
           pensum={pensum}
           id={editedMoveID}
           addMove={addMove}
+          updateMove={updateMove}
           setEditedMoveID={setEditedMoveID}
           setIsFormOpen={setIsFormOpen}
         />
