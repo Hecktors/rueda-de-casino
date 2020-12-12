@@ -1,21 +1,18 @@
 import { Route, Switch, useLocation } from 'react-router-dom'
 import useAppState from './useAppState'
-import usePensum from './usePensum'
+import usePensum from './useData'
 import Home from '../home/Home'
 import Session from '../session/Session'
 import EditOverview from '../editOverview/EditOverview'
 import EditForm from '../editForm/EditForm'
 
-export default function App(props) {
-  const [pensum, addMove, updateMove, deleteMove] = usePensum()
-
+export default function App() {
+  const [pensum, addMove, updateMove, deleteMove, audios] = usePensum()
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
   )
-
   const location = useLocation()
   const classes = location.pathname === '/session' ? 'dark' : ''
-
   return (
     <div className={`App ${classes}`}>
       <Switch>
@@ -25,6 +22,7 @@ export default function App(props) {
           render={(props) => (
             <Home
               {...props}
+              audios={audios}
               pensum={pensum}
               appState={appState}
               updateAppState={updateAppState}
@@ -38,7 +36,7 @@ export default function App(props) {
           render={(props) => (
             <Session
               {...props}
-              appState={appState}
+              audios={audios}
               moves={selectedMoves}
               speed={appState.speed}
               isSongActive={appState.isSongActive}
@@ -59,6 +57,7 @@ export default function App(props) {
           )}
         />
         <Route
+          exact
           path="/edit-form/:id?"
           render={(props) => (
             <EditForm

@@ -25,7 +25,7 @@ export default function useAppState(pensum) {
     ? pensum
         .map((level) => level.moves)
         .flat(1)
-        .filter((move) => appState.selectedMoveIDs.includes(move.id))
+        .filter((move) => appState.selectedMoveIDs.includes(move._id))
     : []
 
   function updateAppState(event) {

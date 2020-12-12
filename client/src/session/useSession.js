@@ -9,11 +9,16 @@ useSession.propTypes = {
   isSongActive: PropTypes.bool.isRequired,
 }
 
-export default function useSession(history, moves, speed, isSongActive) {
+export default function useSession(
+  history,
+  moves,
+  audios,
+  speed,
+  isSongActive
+) {
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
   const musicAudioRef = useRef(null)
-  const moveAudioRef = useRef(null)
   const timeoutRef = useRef(null)
 
   useEffect(() => {
@@ -48,21 +53,19 @@ export default function useSession(history, moves, speed, isSongActive) {
 
   function startTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      const nextCurrentMove = getRandomMove(moves)
-      setCurrentMove(nextCurrentMove)
-      moveAudioRef.current = new Audio(
-        `./assets/audio/moves/${nextCurrentMove.filename}`
-      )
-      moveAudioRef.current.play()
+      const newCurrentMove = getRandomMove(moves)
+      setCurrentMove(newCurrentMove)
+      const audio = audios.find((audio) => audio.moveID === newCurrentMove._id)
+        .audio
+      audio.play()
       timeoutRef.current = null
-      startTimeout(nextCurrentMove.bars * speed + speed)
+      startTimeout(newCurrentMove.bars * speed + speed)
     }, ms)
   }
 
   function stopMoveAudioProcess() {
     clearTimeout(timeoutRef.current)
     timeoutRef.current = null
-    moveAudioRef.current = null
   }
   return [sessionHandler, isPlaying, currentMove]
 }
