@@ -10,7 +10,7 @@ import { ResetIcon, EditIcon, PlayIcon } from '../app/Icons/Icons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
-  levels: PropTypes.array.isRequired,
+  pensum: PropTypes.array.isRequired,
   appState: PropTypes.object.isRequired,
   updateAppState: PropTypes.func.isRequired,
   resetAppState: PropTypes.func.isRequired,
@@ -18,7 +18,7 @@ Home.propTypes = {
 
 export default function Home({
   history,
-  levels,
+  pensum,
   appState,
   resetAppState,
   updateAppState,
@@ -50,7 +50,7 @@ export default function Home({
       <MainStyled>
         <form>
           <div className="level-container">
-            {levels.map(({ id, levelName, moves }) => (
+            {pensum.map(({ id, levelName, moves }) => (
               <InputLevel
                 key={id}
                 levelName={levelName}
