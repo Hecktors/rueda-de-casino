@@ -36,7 +36,6 @@ export default function Session({
 
   !moves.length && history.push('/')
   const [video, setVideo] = useState({})
-  console.log(video)
 
   return (
     <>
@@ -57,7 +56,7 @@ export default function Session({
         {!isPlaying && (
           <IconButton
             onClick={sessionHandler.stop}
-            color={'secondary'}
+            color={'tertiary'}
             size={'md'}
           >
             <StopIcon />
@@ -75,7 +74,7 @@ export default function Session({
       <AppFooter>
         <IconButton
           onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
-          color={'secondary'}
+          color={'tertiary'}
           size={'lg'}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
@@ -98,20 +97,3 @@ const StyledMain = styled.main`
     filter: blur(5px);
   }
 `
-
-// const ActionWrapperStyled = styled.div`
-//   position: relative;
-//   overflow-x: hidden;
-//   overflow-y: visible;
-//   .overlay {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     left: 0;
-//     height: 100%;
-//     width: 100%;
-//     background-color: rgba(var(--color-bg-dark), 0.6);
-//     z-index: -1;
-//   }
-// `

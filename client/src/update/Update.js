@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import AppHeader from '../app/AppHeader'
 import IconButton from '../app/Buttons/IconButton'
 import { EditIcon, BackIcon, AddIcon } from '../app/Icons/Icons'
+import Form from './Form/Form'
 
 Update.propTypes = {
   history: PropTypes.object.isRequired,
@@ -11,17 +13,28 @@ Update.propTypes = {
 }
 
 export default function Update({ history, levels, updateLevels }) {
+  const [editMove, setEditMove] = useState(null)
+
+  function handleSubmit(updatedLevels) {
+    setEditMove(null)
+    console.log(updatedLevels)
+    updateLevels(updatedLevels)
+  }
+
   return (
     <>
+      {editMove && (
+        <Form levels={levels} id={editMove} handleSubmit={handleSubmit} />
+      )}
       <AppHeader cols="110">
         <IconButton
-          color={'secondary'}
+          color={'tertiary'}
           size={'md'}
           onClick={() => history.push('/')}
         >
-          <BackIcon />{' '}
+          <BackIcon />
         </IconButton>
-        <h1>Edit Moves</h1>
+        <h1>Moves Update</h1>
       </AppHeader>
 
       <UpdateStyled>
@@ -32,7 +45,11 @@ export default function Update({ history, levels, updateLevels }) {
               {level.moves.map((move) => (
                 <li key={move.id}>
                   {move.name}
-                  <IconButton color={'secondary'} size={'xs'}>
+                  <IconButton
+                    color={'secondary'}
+                    size={'xs'}
+                    onClick={() => setEditMove(move.id)}
+                  >
                     <EditIcon />
                   </IconButton>
                 </li>
@@ -42,7 +59,7 @@ export default function Update({ history, levels, updateLevels }) {
         })}
         <IconButton
           className="add-button"
-          color={'primary'}
+          color={'tertiary'}
           size={'lg'}
           onClick={() => {}}
         >

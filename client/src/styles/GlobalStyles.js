@@ -3,16 +3,18 @@ import { createGlobalStyle } from 'styled-components/macro'
 export default createGlobalStyle`
     :root {
         /* General */
-        --color-title: #3a425e;
+        --color-title: #929292;
         --color-logo: #c6099c;
         --color-primary: #c65909;
         --color-secondary: #2ca3d2;
+        --color-tertiary: #0550ff;
         --color-text: #999;
         --color-bg: #11141d;
         --color-bg-dark : #000;
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
         --color-warning: #f53030;
+
         /* Accordion */
         --color-bg-accordion: #222637;
         --color-bg-accordion-title: #0b1644;
@@ -27,6 +29,11 @@ export default createGlobalStyle`
         --color-selected-movelist: #2ca3d2;
         /* --color-bg-overlay-paused: #020510d9; */
         --color-bg-overlay-paused: rgba(0, 0, 0, 0.8);
+        /* Experimental */
+        /* --color-primary: #c65909; */
+        --color-logo: #c65909;
+        --color-bg: #0e0e15;
+        --color-bg-accordion: #181826;        
     }
 
     * {
