@@ -6,7 +6,7 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
   className: PropTypes.string,
-  isDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
   outlined: PropTypes.bool,
 }
 
@@ -15,7 +15,7 @@ export default function Button({
   onClick,
   color,
   className,
-  isDisabled,
+  disabled,
   outlined,
 }) {
   return (
@@ -23,7 +23,7 @@ export default function Button({
       data-testid="button"
       onClick={onClick}
       className={className}
-      disabled={isDisabled}
+      disabled={disabled}
       color={color}
       outlined={outlined}
     >
@@ -36,16 +36,15 @@ const ButtonStyled = styled.button`
   padding: 5px 10px;
   font-size: 1.4rem;
   border-radius: 5px;
-  border: 1px solid ${(props) => props.color};
-  background-color: ${(props) =>
-    props.outlined ? 'var(--color-bg)' : props.color};
-  color: ${(props) => (props.outlined ? props.color : 'var(--color-bg)')};
+  border: 1px solid var(--color-${(props) => props.color});
+  background-color: var(--color-${(props) =>
+    props.outlined ? 'bg' : props.color});
+  color: var(--color-${(props) => (props.outlined ? props.color : 'bg')});
 
   &:disabled {
     border: 2px solid var(--color-disabled);
-    background-color: ${(props) =>
-      props.outlined ? 'var(--color-bg)' : 'var(--color-disabled)'};
-    color: ${(props) =>
-      props.outlined ? 'var(--color-disabled)' : 'var(--color-bg)'};
-  }
+    background-color: var(--color-${(props) =>
+      props.outlined ? 'bg' : 'disabled'});
+    color: var(--color-${(props) => (props.outlined ? 'disabled' : 'bg')});
+
 `

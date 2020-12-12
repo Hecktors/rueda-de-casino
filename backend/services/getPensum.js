@@ -11,7 +11,7 @@ async function getPensum() {
     .then((levels) => {
       const pensum = levels.map((level) => {
         return {
-          levelID: level.id,
+          id: level.id,
           levelName: level.name,
           moves: movesData.filter((move) => move.levelName === level.name),
         };

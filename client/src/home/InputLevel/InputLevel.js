@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ArrowRightIcon, ArrowDownIcon } from '../../app/Icons/Icons'
@@ -21,9 +21,9 @@ export default function InputLevel({
     return selectedMoveIDs.includes(move.id)
   })
 
-  useEffect(() => {
-    setIsOpen(hasInputMove)
-  }, [hasInputMove]) // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   setIsOpen(hasInputMove)
+  // }, [hasInputMove]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const listItems = levelMoves.map((move) => (
     <li key={move.id}>
@@ -72,7 +72,7 @@ const InputLevelStyled = styled.div`
 
     & .level-name {
       color: ${({ isActive }) =>
-        isActive ? 'var(--color-primary)' : 'var(--color-secondary)'};
+        isActive ? 'var(--color-primary)' : 'var(--color-text)'};
       flex-grow: 1;
       text-align: center;
     }
@@ -80,39 +80,35 @@ const InputLevelStyled = styled.div`
     svg {
       transform: scale(1.5);
       fill: ${({ color }) => color};
-      fill: var(--color-secondary);
+      fill: var(--color-text);
     }
   }
 
   ul {
-    line-height: 1.7;
     padding: 0 9px;
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
-  }
 
-  li {
-    line-height: 1.3;
-    &:first-of-type {
-      padding-top: 1px;
-    }
-    &:last-of-type {
-      padding-bottom: 10px;
-    }
+    li {
+      line-height: 1.3;
+      &:first-of-type {
+        padding-top: 1px;
+      }
+      &:last-of-type {
+        padding-bottom: 10px;
+      }
 
-    label {
-      font-size: 0.875rem;
-      color: var(--color-secondary);
-      display: inline-block;
-      width: 100%;
+      label {
+        font-size: 0.875rem;
 
-      &:hover {
-        cursor: pointer;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
-  }
 
-  .isChecked {
-    color: var(--color-primary);
+    .isChecked {
+      color: var(--color-primary);
+    }
   }
 `

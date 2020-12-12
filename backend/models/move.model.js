@@ -14,7 +14,7 @@ const moveSchema = new Schema({
     type: String,
     required: true,
   },
-  steps: {
+  bars: {
     type: Number,
     required: true,
     max: 20,
@@ -26,7 +26,7 @@ const moveSchema = new Schema({
     minlength: 4,
     maxlength: 20,
   },
-  videoID: {
+  videoUrl: {
     type: String,
     trim: true,
     maxlength: 100,

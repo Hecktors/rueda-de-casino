@@ -6,10 +6,7 @@ FormInputPlaySong.propTypes = {
   isSongActive: PropTypes.bool.isRequired,
 }
 
-export default function FormInputPlaySong({
-  updateAppState,
-  isSongActive,
-}) {
+export default function FormInputPlaySong({ updateAppState, isSongActive }) {
   return (
     <FormInputPlaySongStyled>
       <input
@@ -40,7 +37,7 @@ const FormInputPlaySongStyled = styled.div`
   display: flex;
 
   .info {
-    color: var(--color-secondary);
+    color: var(--color-text);
     user-select: none;
   }
 
@@ -51,13 +48,13 @@ const FormInputPlaySongStyled = styled.div`
   label {
     display: inline-flex;
     user-select: none;
-    color: var(--color-secondary);
+    color: var(--color-text);
   }
 
   label::before {
     content: '';
     display: block;
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-text);
     width: 17px;
     height: 19px;
     margin-right: 10px;

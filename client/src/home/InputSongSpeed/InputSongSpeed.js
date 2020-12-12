@@ -4,19 +4,11 @@ import styled from 'styled-components/macro'
 FormInputSongSpeed.protoTypes = {
   speed: PropTypes.number.isRequired,
   updateAppState: PropTypes.func.isRequired,
-  // hasChanged: PropTypes.bool.isRequired,
 }
 
-export default function FormInputSongSpeed({
-  speed,
-  updateAppState,
-  // hasChanged,
-}) {
+export default function FormInputSongSpeed({ speed, updateAppState }) {
   return (
-    <FormInputSongSpeedStyled
-      // hasChanged={hasChanged}
-      className="range-input-container"
-    >
+    <FormInputSongSpeedStyled className="range-input-container">
       <label htmlFor="speed">Song Speed</label>
       <input
         value={speed}
@@ -71,7 +63,7 @@ const FormInputSongSpeedStyled = styled.div`
     background: #2497e3;
     border-radius: 1px;
     border: 0px solid #000000;
-    background-color: var(--color-secondary);
+    background-color: var(--color-text);
   }
 
   input[type='range']::-webkit-slider-thumb {

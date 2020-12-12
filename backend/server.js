@@ -23,8 +23,9 @@ connection.once("open", () =>
 
 const movesRouter = require("./routes/moves");
 const audiosRouter = require("./routes/audio");
-app.use("/", movesRouter);
+app.use("/moves", movesRouter);
 app.use("/audio", audiosRouter);
+
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

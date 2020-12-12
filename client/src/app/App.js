@@ -48,11 +48,9 @@ export default function App(props) {
           path="/update"
           render={(props) => (
             <Update {...props} levels={levels} updateLevels={setLevels} />
-            // <Update {...props} levels={levels} />
           )}
         />
       </Switch>
-      {/* <AppFooter></AppFooter> */}
     </div>
   )
 }
