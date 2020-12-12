@@ -25,21 +25,6 @@ export default function InputLevel({
   //   setIsOpen(hasInputMove)
   // }, [hasInputMove]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const listItems = levelMoves.map((move) => (
-    <li key={move.id}>
-      <label className={selectedMoveIDs.includes(move.id) ? 'isChecked' : ''}>
-        <input
-          name="move"
-          value={move.id}
-          onChange={updateAppState}
-          type="checkbox"
-          checked={selectedMoveIDs.includes(move.id)}
-        />{' '}
-        {move.name}
-      </label>
-    </li>
-  ))
-
   function toogleInputLevel() {
     setIsOpen(!isOpen)
   }
@@ -50,7 +35,22 @@ export default function InputLevel({
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
       </h3>
-      <ul>{listItems}</ul>
+      <ul>
+        {levelMoves.map((move) => (
+        <li key={move._id}>
+          <label className={selectedMoveIDs.includes(move._id) ? 'isChecked' : ''}>
+            <input
+              name="move"
+              value={move._id}
+              onChange={updateAppState}
+              type="checkbox"
+              checked={selectedMoveIDs.includes(move.id)}
+            />{' '}
+            {move.name}
+          </label>
+        </li>
+        ))}
+      </ul>
     </InputLevelStyled>
   )
 }

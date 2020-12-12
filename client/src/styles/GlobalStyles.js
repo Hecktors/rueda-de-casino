@@ -65,6 +65,8 @@ export default createGlobalStyle`
         display: flex;
         flex-direction: column;
         margin: auto;
+        display: grid;
+        grid-template-rows: 80px auto 100px;
     }
 
     main { 
@@ -104,9 +106,18 @@ export default createGlobalStyle`
         background-color: var(--color-bg-dark);
     }
 
+    .tar {
+        text-align: right;
+    }
+
     .top-right {
         position: absolute;
         top: 10px;
         right: 10px;
+    }
+    .top-left {
+        position: absolute;
+        top: 10px;
+        left: 10px;
     }
 `

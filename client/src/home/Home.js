@@ -50,10 +50,10 @@ export default function Home({
       <MainStyled>
         <form>
           <div className="level-container">
-            {levels.map(({ id, name, moves }) => (
+            {levels.map(({ id, levelName, moves }) => (
               <InputLevel
                 key={id}
-                levelName={name}
+                levelName={levelName}
                 levelMoves={moves}
                 selectedMoveIDs={selectedMoveIDs}
                 updateAppState={updateAppState}
