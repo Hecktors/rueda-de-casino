@@ -6,7 +6,7 @@ import Session from '../session/Session'
 import Update from '../update/Update'
 
 export default function App(props) {
-  const [pensum, addMove] = usePensum()
+  const [pensum, addMove, updateMove] = usePensum()
   
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
@@ -49,7 +49,7 @@ export default function App(props) {
           exact
           path="/update"
           render={(props) => (
-            <Update {...props} pensum={pensum} addMove={addMove} />
+            <Update {...props} pensum={pensum} addMove={addMove} updateMove={updateMove}/>
           )}
         />
       </Switch>

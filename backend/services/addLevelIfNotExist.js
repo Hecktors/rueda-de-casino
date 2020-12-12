@@ -7,7 +7,7 @@ function addLevelIfNotExist(levelName) {
         const newLevel = new Level({ name: levelName });
         newLevel
           .save()
-          .then(() => console.log(levelName + "added"))
+          .then(() => console.log(levelName + " added"))
           .catch((err) => console.log(err));
       }
     })

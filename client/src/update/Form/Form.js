@@ -11,10 +11,18 @@ Form.propTypes = {
   id: PropTypes.string,
   setIsFormOpen: PropTypes.func.isRequired,
   addMove: PropTypes.func.isRequired,
+  updateMove: PropTypes.func.isRequired,
   setEditedMoveID: PropTypes.func.isRequired,
 }
 
-export default function Form({ pensum, id, setIsFormOpen, setEditedMoveID, addMove }) {
+export default function Form({
+  pensum,
+  id,
+  setIsFormOpen,
+  setEditedMoveID,
+  addMove,
+  updateMove,
+}) {
   const [isLevelInputDisplayed, setIsLevelInputDisplayed] = useState(false)
   const [userInput, updateUserInput, resetUserInput] = useUserInput(
     pensum,
@@ -25,7 +33,9 @@ export default function Form({ pensum, id, setIsFormOpen, setEditedMoveID, addMo
   async function handleSubmit(e) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    isNewMove && addMove(userInput)
+    isNewMove ? addMove(userInput) : updateMove(userInput)
+    // setIsLevelInputDisplayed(false)
+
     setIsFormOpen(false)
   }
 
@@ -41,21 +51,26 @@ export default function Form({ pensum, id, setIsFormOpen, setEditedMoveID, addMo
       </IconButton>
       <h2>Edit {userInput.name}</h2>
 
-      <div className="form-group">
-        <label htmlFor="">level name</label>
-        <select onChange={updateUserInput} name="levelName" id="levelName" value={userInput.levelName} required>
-          <option value="">Choose the level</option>
-          {pensum.map(({ id, levelName }) => (
-            <option
-              key={id}
-              value={levelName}
-            >
-              {levelName}
-            </option>
-          ))}
-          <option value="createLevel">CREATE NEW LEVEL</option>
-        </select>
-      </div>
+      {!isLevelInputDisplayed && (
+        <div className="form-group">
+          <label htmlFor="">level name</label>
+          <select
+            onChange={updateUserInput}
+            name="levelName"
+            id="levelName"
+            value={userInput.levelName}
+            required
+          >
+            <option value="">Choose the level</option>
+            {pensum.map(({ id, levelName }) => (
+              <option key={id} value={levelName}>
+                {levelName}
+              </option>
+            ))}
+            <option value="createLevel">CREATE NEW LEVEL</option>
+          </select>
+        </div>
+      )}
 
       {isLevelInputDisplayed && (
         <div className="form-group">
