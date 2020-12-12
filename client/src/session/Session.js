@@ -15,6 +15,7 @@ import { CancelIcon, PauseIcon, PlayIcon, StopIcon } from '../app/Icons/Icons'
 Session.propTypes = {
   history: PropTypes.object.isRequired,
   moves: PropTypes.array.isRequired,
+  audios: PropTypes.array.isRequired,
   speed: PropTypes.number,
   isSongActive: PropTypes.bool.isRequired,
 }
@@ -22,19 +23,19 @@ Session.propTypes = {
 export default function Session({
   history,
   moves,
+  audios,
   speed,
   isSongActive,
-  setPlaymode,
 }) {
   const [sessionHandler, isPlaying, currentMove] = useSession(
     history,
     moves,
+    audios,
     speed,
-    isSongActive,
-    setPlaymode
+    isSongActive
   )
 
-  !moves.length && history.push('/')
+  // !moves.length && history.push('/')
   const [video, setVideo] = useState({})
 
   return (
@@ -67,7 +68,7 @@ export default function Session({
       <StyledMain className="dark no-bg-img">
         <BackgroundVideo isPlaying={isPlaying} />
         <Overlay paused={!isPlaying}>
-          {currentMove.id && <CurrentMove name={currentMove.name} />}
+          {currentMove._id && <CurrentMove name={currentMove.name} />}
           {!isPlaying && <SelectedMoveList moves={moves} onClick={setVideo} />}
         </Overlay>
       </StyledMain>

@@ -8,8 +8,8 @@ SelectedMoveList.propTypes = {
 }
 
 export default function SelectedMoveList({ moves, onClick }) {
-  const listItems = moves.map(({ name, id, videoId, videoStart }) => (
-    <li key={id}>
+  const listItems = moves.map(({ name, _id, videoId, videoStart }) => (
+    <li key={_id}>
       <button
         data-testid="listitem-button"
         onClick={() => onClick({ id: videoId, start: videoStart })}

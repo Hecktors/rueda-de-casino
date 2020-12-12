@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import AppHeader from '../app/AppHeader'
-import AppFooter from '../app/AppFooter'
-import IconButton from '../app/Buttons/IconButton'
+import { ResetIcon, EditIcon, PlayIcon } from '../app/Icons/Icons'
 import InputLevel from './InputLevel/InputLevel'
 import InputPlaySong from './InputPlaySong/InputPlaySong'
 import InputSongSpeed from './InputSongSpeed/InputSongSpeed'
-import { ResetIcon, EditIcon, PlayIcon } from '../app/Icons/Icons'
+import AppHeader from '../app/AppHeader'
+import AppFooter from '../app/AppFooter'
+import IconButton from '../app/Buttons/IconButton'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
@@ -20,12 +20,13 @@ export default function Home({
   history,
   pensum,
   appState,
-  resetAppState,
   updateAppState,
+  resetAppState,
+  audios,
 }) {
   const { selectedMoveIDs, speed, isSongActive } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
-
+  // console.log(audios[0].audio && audios[0].audio)
   return (
     <>
       <AppHeader cols="111">
@@ -47,7 +48,8 @@ export default function Home({
         </IconButton>
       </AppHeader>
 
-      <MainStyled>
+      <MainStyled hasMultiLevels={pensum.length > 1}>
+        <div onClick={() => audios[0].audio.play()}>play</div>
         <form>
           <div className="level-container">
             {pensum.map(({ id, levelName, moves }) => (
@@ -78,6 +80,7 @@ export default function Home({
         msg={hasNotEnoughMoves ? 'Select at least 2 moves to start' : ''}
       >
         <IconButton
+          type={'button'}
           onClick={() => history.push('/session')}
           color={'tertiary'}
           size={'lg'}
@@ -94,7 +97,8 @@ const MainStyled = styled.main`
   padding: 10px;
   .level-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: ${(props) =>
+      props.hasMultiLevels ? '1fr 1fr' : '1fr'};
     align-items: start;
     gap: 5px;
   }
