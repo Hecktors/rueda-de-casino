@@ -15,6 +15,7 @@ IconButton.propTypes = {
   size: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 export default function IconButton({
@@ -25,6 +26,7 @@ export default function IconButton({
   className,
   disabled,
   full,
+  type,
 }) {
   return (
     <IconButtonStyled
@@ -35,6 +37,7 @@ export default function IconButton({
       size={sizes[size]}
       color={color}
       full={full}
+      type={type}
     >
       {children}
     </IconButtonStyled>

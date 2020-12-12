@@ -1,47 +1,17 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import AppHeader from '../app/AppHeader'
 import IconButton from '../app/Buttons/IconButton'
 import { EditIcon, BackIcon, AddIcon } from '../app/Icons/Icons'
-import Form from './Form/Form'
-import { useEffect } from 'react/cjs/react.development'
 
-Update.propTypes = {
+EditOverview.propTypes = {
   history: PropTypes.object.isRequired,
   pensum: PropTypes.array.isRequired,
-  addMove: PropTypes.func.isRequired,
-  updateMove: PropTypes.func.isRequired,
-  deleteMove: PropTypes.func.isRequired,
 }
 
-export default function Update({
-  history,
-  pensum,
-  addMove,
-  updateMove,
-  deleteMove,
-}) {
-  const [isFormOpen, setIsFormOpen] = useState()
-  const [editedMoveID, setEditedMoveID] = useState(null)
-
-  useEffect(() => {
-    editedMoveID && setIsFormOpen(true)
-  }, [editedMoveID])
-
+export default function EditOverview({ history, pensum }) {
   return (
     <>
-      {isFormOpen && (
-        <Form
-          pensum={pensum}
-          id={editedMoveID}
-          addMove={addMove}
-          updateMove={updateMove}
-          setEditedMoveID={setEditedMoveID}
-          setIsFormOpen={setIsFormOpen}
-          deleteMove={deleteMove}
-        />
-      )}
       <AppHeader cols="110">
         <IconButton
           color={'tertiary'}
@@ -50,7 +20,7 @@ export default function Update({
         >
           <BackIcon />
         </IconButton>
-        <h1>Moves Update</h1>
+        <h1>Edit Overview</h1>
       </AppHeader>
 
       <UpdateStyled>
@@ -64,7 +34,7 @@ export default function Update({
                   <IconButton
                     color={'secondary'}
                     size={'xs'}
-                    onClick={() => setEditedMoveID(move._id)}
+                    onClick={() => history.push(`/edit-form/${move._id}`)}
                   >
                     <EditIcon />
                   </IconButton>
@@ -77,7 +47,7 @@ export default function Update({
           className="add-button"
           color={'tertiary'}
           size={'lg'}
-          onClick={() => setIsFormOpen(true)}
+          onClick={() => history.push('/edit-form')}
         >
           <AddIcon />
         </IconButton>

@@ -39,7 +39,7 @@ export default function Home({
         </IconButton>
         <h1 className="logo">Salsa time!</h1>
         <IconButton
-          onClick={() => history.push('/update')}
+          onClick={() => history.push('/edit-overview')}
           color={'tertiary'}
           size={'sm'}
         >

@@ -37,18 +37,20 @@ export default function InputLevel({
       </h3>
       <ul>
         {levelMoves.map((move) => (
-        <li key={move._id}>
-          <label className={selectedMoveIDs.includes(move._id) ? 'isChecked' : ''}>
-            <input
-              name="move"
-              value={move._id}
-              onChange={updateAppState}
-              type="checkbox"
-              checked={selectedMoveIDs.includes(move.id)}
-            />{' '}
-            {move.name}
-          </label>
-        </li>
+          <li key={move._id}>
+            <label
+              className={selectedMoveIDs.includes(move._id) ? 'isChecked' : ''}
+            >
+              <input
+                name="move"
+                value={move._id}
+                onChange={updateAppState}
+                type="checkbox"
+                checked={selectedMoveIDs.includes(move.id)}
+              />{' '}
+              {move.name}
+            </label>
+          </li>
         ))}
       </ul>
     </InputLevelStyled>
@@ -99,6 +101,8 @@ const InputLevelStyled = styled.div`
       }
 
       label {
+        width: 100%;
+        display: inline-block;
         font-size: 0.875rem;
 
         &:hover {

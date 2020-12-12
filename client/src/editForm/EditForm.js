@@ -1,52 +1,52 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import Button from '../../app/Buttons/Button'
+import Button from '../app/Buttons/Button'
 import useUserInput from './useUserInput'
-import IconButton from '../../app/Buttons/IconButton'
-import { DeleteIcon, ResetIcon } from '../../app/Icons/Icons'
+import IconButton from '../app/Buttons/IconButton'
+import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
 
-Form.propTypes = {
+EditForm.propTypes = {
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   pensum: PropTypes.array.isRequired,
-  id: PropTypes.string,
-  setIsFormOpen: PropTypes.func.isRequired,
   addMove: PropTypes.func.isRequired,
   updateMove: PropTypes.func.isRequired,
   deleteMove: PropTypes.func.isRequired,
-  setEditedMoveID: PropTypes.func.isRequired,
 }
 
-export default function Form({
+export default function EditForm({
+  match,
+  history,
   pensum,
-  id,
-  setIsFormOpen,
-  setEditedMoveID,
   addMove,
   updateMove,
   deleteMove,
 }) {
-  const [isLevelInputDisplayed, setIsLevelInputDisplayed] = useState(false)
+  const id = match.params.id || ''
+  const [isLevelInputDisplayed, setIsLevelInputDisplayed] = useState(
+    !pensum.length
+  )
   const [userInput, updateUserInput, resetUserInput] = useUserInput(
     pensum,
     id,
     setIsLevelInputDisplayed
   )
 
-  async function handleSubmit(e, removedMoveID) {
+  async function handleSubmit(e, moveToDelID) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    if (removedMoveID) {
-      deleteMove(removedMoveID)
+    if (moveToDelID) {
+      deleteMove(moveToDelID)
     } else {
       isNewMove ? addMove(userInput) : updateMove(userInput)
     }
-
-    setIsFormOpen(false)
   }
 
   return (
-    <FormStyled onSubmit={handleSubmit}>
+    <EditFormStyled onSubmit={handleSubmit}>
       <IconButton
+        type={'button'}
         onClick={resetUserInput}
         color={'tertiary'}
         size={'md'}
@@ -157,8 +157,7 @@ export default function Form({
       <div className="button-container">
         <Button
           onClick={() => {
-            setEditedMoveID(null)
-            setIsFormOpen(false)
+            history.push('/edit-overview')
           }}
           color={'tertiary'}
           size={'lg'}
@@ -170,11 +169,11 @@ export default function Form({
           Save
         </Button>
       </div>
-    </FormStyled>
+    </EditFormStyled>
   )
 }
 
-const FormStyled = styled.form`
+const EditFormStyled = styled.form`
   position: absolute;
   top: 15px;
   right: 15px;

@@ -29,9 +29,7 @@ export default function useAppState(pensum) {
     : []
 
   function updateAppState(event) {
-    console.log(event)
     const { name, value, checked } = event.target
-    console.log(name, value, checked)
     appStateHandler[name](value, checked)
   }
 

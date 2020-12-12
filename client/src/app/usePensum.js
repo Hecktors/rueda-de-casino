@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import {
   getPensum,
   callAddMoveAPI,
@@ -11,7 +13,7 @@ const STORAGE_KEY = 'pensum'
 
 export default function useAppState(levels) {
   const [pensum, setPensum] = useState([])
-
+  const history = useHistory()
   useEffect(() => {
     async function fetchCall() {
       setPensum(await getPensum())
@@ -24,21 +26,21 @@ export default function useAppState(levels) {
   }, [pensum])
 
   async function addMove(userInput) {
-    const updatedPensum = await callAddMoveAPI(userInput)
-    console.log(updatedPensum)
-    setPensum(updatedPensum)
+    const response = await callAddMoveAPI(userInput)
+    response && setPensum(await getPensum())
+    history.push('/edit-overview')
   }
 
   async function updateMove(userInput) {
-    const updatedPensum = await callUpdateMoveAPI(userInput)
-    setPensum(updatedPensum)
+    const response = await callUpdateMoveAPI(userInput)
+    response && setPensum(await getPensum())
+    history.push('/edit-overview')
   }
 
   async function deleteMove(id) {
-    const updatedPensum = await callDeleteMoveAPI(id)
-
-    console.log(pensum, updatedPensum)
-    setPensum(updatedPensum)
+    const response = await callDeleteMoveAPI(id)
+    response && setPensum(await getPensum())
+    history.push('/edit-overview')
   }
 
   return [pensum, addMove, updateMove, deleteMove]
