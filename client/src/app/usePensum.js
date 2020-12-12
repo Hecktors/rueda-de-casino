@@ -23,23 +23,13 @@ export default function useAppState(levels) {
   }, [pensum])
 
   async function addMove(userInput) {
-    const newMove = await callAddMoveAPI(userInput)
-    console.log(newMove)
-    setPensum(await getPensum())
+    const updatedPensum = await callAddMoveAPI(userInput)
+    console.log(updatedPensum)
+    setPensum(updatedPensum)
   }
 
   async function updateMove(userInput) {
-    const updatedMove = await callUpdateMoveAPI(userInput)
-    console.log(updatedMove)
-    const updatedPensum = pensum.map((level) => {
-      return {
-        ...level,
-        moves: level.moves.map((move) =>
-          move._id === updatedMove.__id ? updatedMove : move
-        ),
-      }
-    })
-    console.log(updatedPensum)
+    const updatedPensum = await callUpdateMoveAPI(userInput)
     setPensum(updatedPensum)
   }
 

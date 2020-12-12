@@ -23,7 +23,9 @@ export async function callAddMoveAPI(move) {
       videoUrl: move.videoUrl,
       videoStart: move.videoStart,
     })
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data
+    })
     .catch(function (error) {
       console.log(error)
     })

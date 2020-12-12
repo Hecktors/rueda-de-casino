@@ -17,7 +17,7 @@ router.route("/").get(async (req, res) => {
 });
 
 // Add move
-router.route("/add").post(async (req, res) => {
+router.route("/add").post((req, res) => {
   const id = new ObjectID();
   const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
   const levelName = req.body.levelName;
@@ -39,10 +39,13 @@ router.route("/add").post(async (req, res) => {
   console.log(newMove);
   newMove
     .save()
-    .then(() => {
+    .then(async () => {
       addAudio(name, audioName);
       addLevelIfNotExist(levelName);
-      res.json(newMove);
+      const response = await getPensum();
+      response.err
+        ? res.status(400).json("Error" + response.err)
+        : res.json(response.pensum);
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -79,14 +82,17 @@ router.route("/update/:id").post((req, res) => {
 
       move
         .save()
-        .then(() => {
+        .then(async () => {
           if (prevAudioName !== move.audioName) {
             deleteAudio(prevAudioName);
             addLevelIfNotExist(move.levelName);
             deleteLevelIfEmpty(move.levelName);
             addAudio(move.name, move.audioName);
           }
-          res.json(move);
+          const response = await getPensum();
+          response.err
+            ? res.status(400).json("Error" + response.err)
+            : res.json(response.pensum);
         })
         .catch((err) => res.status(400).json("Error: " + err));
     })
