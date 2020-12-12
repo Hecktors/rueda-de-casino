@@ -3,7 +3,8 @@ import useAppState from './useAppState'
 import usePensum from './usePensum'
 import Home from '../home/Home'
 import Session from '../session/Session'
-import Update from '../update/Update'
+import EditOverview from '../editOverview/EditOverview'
+import EditForm from '../editForm/EditForm'
 
 export default function App(props) {
   const [pensum, addMove, updateMove, deleteMove] = usePensum()
@@ -11,8 +12,7 @@ export default function App(props) {
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
   )
-  console.log('pensum:', pensum)
-  // console.log("selectedMoveIDS:" , appState.selectedMoveIDs)
+
   const location = useLocation()
   const classes = location.pathname === '/session' ? 'dark' : ''
 
@@ -47,9 +47,21 @@ export default function App(props) {
         />
         <Route
           exact
-          path="/update"
+          path="/edit-overview"
           render={(props) => (
-            <Update
+            <EditOverview
+              {...props}
+              pensum={pensum}
+              addMove={addMove}
+              updateMove={updateMove}
+              deleteMove={deleteMove}
+            />
+          )}
+        />
+        <Route
+          path="/edit-form/:id?"
+          render={(props) => (
+            <EditForm
               {...props}
               pensum={pensum}
               addMove={addMove}

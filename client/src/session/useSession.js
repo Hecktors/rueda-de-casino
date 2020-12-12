@@ -4,7 +4,6 @@ import getRandomMove from './services/getRandomMove'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
 useSession.propTypes = {
-  history: PropTypes.object.isRequired,
   moves: PropTypes.array.isRequired,
   speed: PropTypes.number,
   isSongActive: PropTypes.bool.isRequired,
