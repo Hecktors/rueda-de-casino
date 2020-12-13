@@ -57,20 +57,19 @@ export default function EditOverview({ history, pensum }) {
 }
 
 const UpdateStyled = styled.main`
-  width: 100%;
   position: relative;
+  width: 100%;
   padding: 10px;
   padding-bottom: 50px;
-  display: flex;
 
   ul {
     width: 80%;
     max-width: 264px;
     margin: auto;
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 
     li {
       display: flex;

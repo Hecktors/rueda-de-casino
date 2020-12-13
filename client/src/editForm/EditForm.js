@@ -54,7 +54,9 @@ export default function EditForm({
       >
         <ResetIcon />
       </IconButton>
-      <h2>Edit {userInput.name}</h2>
+      <h2>
+        <span>{userInput.name}</span>
+      </h2>
       {id && (
         <IconButton
           type="button"
@@ -67,9 +69,9 @@ export default function EditForm({
         </IconButton>
       )}
 
-      {!isLevelInputDisplayed && (
-        <div className="form-group">
-          <label htmlFor="">level name</label>
+      <div className="form-group-container">
+        <div className="form-group select">
+          <label htmlFor="">level</label>
           <select
             onChange={updateUserInput}
             name="levelName"
@@ -77,7 +79,6 @@ export default function EditForm({
             value={userInput.levelName}
             required
           >
-            <option value="">Choose the level</option>
             {pensum.map(({ id, levelName }) => (
               <option key={id} value={levelName}>
                 {levelName}
@@ -86,74 +87,74 @@ export default function EditForm({
             <option value="createLevel">CREATE NEW LEVEL</option>
           </select>
         </div>
-      )}
+        {isLevelInputDisplayed && (
+          <div className="form-group">
+            <label htmlFor="">Level Name</label>
+            <input
+              onChange={updateUserInput}
+              value={userInput.levelName}
+              type="text"
+              id="levelName"
+              name="levelName"
+              required
+            />
+          </div>
+        )}
+      </div>
 
-      {isLevelInputDisplayed && (
+      <div className="form-group-container">
         <div className="form-group">
-          <label htmlFor="">level name</label>
+          <label htmlFor="">Move Name</label>
           <input
             onChange={updateUserInput}
-            value={userInput.levelName}
+            value={userInput.name}
             type="text"
-            id="levelName"
-            name="levelName"
+            id="name"
+            name="name"
             required
           />
         </div>
-      )}
-      {/* <div className="form-group-container"> */}
 
-      <div className="form-group">
-        <label htmlFor="">move name</label>
-        <input
-          onChange={updateUserInput}
-          value={userInput.name}
-          type="text"
-          id="name"
-          name="name"
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="">num of bars</label>
-        <input
-          className="tar"
-          onChange={updateUserInput}
-          value={userInput.bars}
-          type="number"
-          id="bars"
-          name="bars"
-          required
-        />
+        <div className="form-group">
+          <label htmlFor="">Num of Bars</label>
+          <input
+            className="tar"
+            onChange={updateUserInput}
+            value={userInput.bars}
+            type="number"
+            id="bars"
+            name="bars"
+            required
+          />
+        </div>
       </div>
 
-      {/* </div> */}
-      {/* <div className="form-group-container"> */}
-      <div className="form-group">
-        <label htmlFor="">Youtube video link</label>
-        <input
-          onChange={updateUserInput}
-          value={userInput.videoUrl}
-          type="text"
-          id="videoUrl"
-          name="videoUrl"
-          placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
-        />
+      <div className="form-group-container">
+        <div className="form-group">
+          <label htmlFor="">Youtube Video Link</label>
+          <input
+            onChange={updateUserInput}
+            value={userInput.videoUrl}
+            type="text"
+            id="videoUrl"
+            name="videoUrl"
+            placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="">Start At Sec</label>
+          <input
+            className="tar"
+            onChange={updateUserInput}
+            value={userInput.videoStart}
+            type="text"
+            id="videoStart"
+            name="videoStart"
+            placeholder="00:15"
+          />
+        </div>
       </div>
-      <div className="form-group">
-        <label htmlFor="">start at</label>
-        <input
-          className="tar"
-          onChange={updateUserInput}
-          value={userInput.videoStart}
-          type="text"
-          id="videoStart"
-          name="videoStart"
-          placeholder="00:15"
-        />
-      </div>
-      {/* </div> */}
+
       <div className="button-container">
         <Button
           onClick={() => {
@@ -180,40 +181,66 @@ const EditFormStyled = styled.form`
   bottom: 15px;
   left: 15px;
   z-index: 9999;
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
-  border: 1px solid #fff;
-  background-color: var(--color-bg);
-
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  /* justify-items: stretch; */
+  box-shadow: 0 8px 6px -6px white;
+  box-shadow: 0 2.8px 2.2px rgba(200, 200, 200, 0.034),
+    0 6.7px 5.3px rgba(200, 200, 200, 0.048),
+    0 12.5px 10px rgba(200, 200, 200, 0.06),
+    0 22.3px 17.9px rgba(200, 200, 200, 0.072),
+    0 41.8px 33.4px rgba(200, 200, 200, 0.086),
+    0 100px 80px rgba(200, 200, 200, 0.12);
 
-  .form-group {
-    grid-column-start: 1;
-    grid-column-end: 8;
-  }
-  .form-group:nth-of-type(1) {
-    grid-row-start: row1-start;
-    grid-row-end: 3;
-  }
   h2 {
     text-align: center;
+    font-size: 1.3rem;
+    span {
+      color: var(--color-primary);
+    }
   }
+
   label {
     display: block;
   }
 
-  input {
+  input,
+  select {
     width: 100%;
+    padding: 3px 10px;
+    font-size: 1rem;
+  }
+
+  select {
+    background-color: var(--color-text);
+  }
+
+  option {
+    text-align: center;
   }
 
   .form-group-container {
-    max-width: calc(100% - 30px);
-    display: grid;
-    grid-template-columns: 70% 30%;
-    grid-template-rows: 60px;
+    display: flex;
+    gap: 20px;
+    &:first-of-type {
+      margin-top: 40px;
+    }
+
+    &:first-of-type {
+      display: block;
+    }
+  }
+  .form-group {
+    margin: 30px 0;
+  }
+
+  .form-group:first-of-type {
+    width: 130%;
+
+    &.select {
+      width: 100%;
+    }
   }
 
   .button-container {
@@ -223,6 +250,5 @@ const EditFormStyled = styled.form`
     right: 30px;
     display: flex;
     justify-content: space-evenly;
-    /* width: 100%; */
   }
 `

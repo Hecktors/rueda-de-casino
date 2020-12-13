@@ -29,17 +29,19 @@ const SelectedMoveListStyled = styled.ul`
   margin: 0 auto;
   display: grid;
   gap: 10px;
+  transform: translateY(-20vh);
 
   li {
     padding-left: 36px;
     button {
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       display: flex;
       color: var(--color-text);
 
       svg {
-        margin-right: 3px;
-        margin-top: 1px;
+        /* background-color: red; */
+        margin-right: 10px;
+        margin-top: 3px;
       }
     }
   }

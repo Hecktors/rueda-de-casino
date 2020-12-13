@@ -13,7 +13,6 @@ export default function App() {
   )
   const location = useLocation()
   const classes = location.pathname === '/session' ? 'dark' : ''
-  console.log(audios)
   return (
     <div className={`App ${classes}`}>
       <Switch>

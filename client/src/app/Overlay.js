@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 Overlay.propTypes = {
   children: PropTypes.array.isRequired,
   full: PropTypes.bool,
-  pause: PropTypes.bool,
+  paused: PropTypes.bool,
 }
 
 export default function Overlay({ full, paused, children }) {
@@ -22,9 +22,9 @@ export default function Overlay({ full, paused, children }) {
 }
 
 const OverlayStyled = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
   top: 0;
   right: 0;
   bottom: 0;

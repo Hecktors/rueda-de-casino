@@ -21,10 +21,6 @@ export default function InputLevel({
     return selectedMoveIDs.includes(move._id)
   })
 
-  // useEffect(() => {
-  //   setIsOpen(hasInputMove)
-  // }, [hasInputMove]) // eslint-disable-line react-hooks/exhaustive-deps
-
   function toogleInputLevel() {
     setIsOpen(!isOpen)
   }
@@ -87,12 +83,15 @@ const InputLevelStyled = styled.div`
   }
 
   ul {
+    display: grid;
+    gap: 3px;
     padding: 0 9px;
     overflow: hidden;
     height: ${(props) => (props.isOpen ? 'auto' : 0)};
 
     li {
       line-height: 1.3;
+
       &:first-of-type {
         padding-top: 1px;
       }
