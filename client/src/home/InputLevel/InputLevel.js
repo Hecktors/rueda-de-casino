@@ -18,7 +18,7 @@ export default function InputLevel({
 }) {
   const [isOpen, setIsOpen] = useState()
   const hasInputMove = levelMoves.some((move) => {
-    return selectedMoveIDs.includes(move.id)
+    return selectedMoveIDs.includes(move._id)
   })
 
   // useEffect(() => {

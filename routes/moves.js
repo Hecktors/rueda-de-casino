@@ -36,7 +36,6 @@ router.route("/add").post((req, res) => {
     videoStart,
   });
 
-  console.log(newMove);
   newMove
     .save()
     .then(async () => {
@@ -77,6 +76,7 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   Move.findById(req.params.id)
     .then((move) => {
+      console.log("move found")
       const prevAudioName = move.audioName;
       move.name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
       move.levelName = req.body.levelName;
@@ -84,10 +84,11 @@ router.route("/update/:id").post((req, res) => {
       move.audioName = req.body.name.replace(/\s/g, "_") + ".mp3";
       move.videoUrl = req.body.videoUrl;
       move.videoStart = req.body.videoStart;
-
-      move
-        .save()
-        .then(async () => {
+      console.log(move)
+      
+      move.save()
+        .then( async() => {
+          console.log("move saved")
           if (prevAudioName !== move.audioName) {
             deleteAudio(prevAudioName);
             addLevelIfNotExist(move.levelName);
@@ -95,9 +96,12 @@ router.route("/update/:id").post((req, res) => {
             addAudio(move.name, move.audioName);
           }
           const response = await getPensum();
-          response.err
+          console.log("ready to send")
+          setTimeout(()=> {
+            response.err
             ? res.status(400).json("Error" + response.err)
             : res.json(response.pensum);
+          }, 500)
         })
         .catch((err) => res.status(400).json("Error: " + err));
     })
