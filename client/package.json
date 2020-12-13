@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-player": "^2.7.0",
@@ -16,7 +17,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "styleguide": "FAST_REFRESH=false styleguidist server"
+    "styleguide": "FAST_REFRESH=false styleguidist server",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cy:run",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +44,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
+    "cypress": "^6.1.0",
     "jest-styled-components": "^7.0.3",
     "react-styleguidist": "^11.1.2"
   }
