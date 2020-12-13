@@ -72,11 +72,11 @@ export default createGlobalStyle`
     main { 
         flex-grow: 1;
         position: relative;
-        display: flex;
+        /* display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-between; */
         overflow-y: auto;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
     }
 
     button {

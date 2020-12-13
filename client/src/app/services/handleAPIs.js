@@ -1,19 +1,20 @@
 import axios from 'axios'
 
-const API_URL_MOVES = 'http://192.168.1.140:3001/moves'
-const API_URL_AUDIO = 'http://192.168.1.140:3001/audio/'
+// const API_URL = 'http://192.168.1.140:3001'
+const API_URL = 'http://localhost:3001'
 
-// get all moves
+// Get all moves
 export async function fetchGetPensum() {
   return axios
-    .get(API_URL_MOVES)
+    .get(`${API_URL}/moves`)
     .then((res) => res.data)
     .catch((err) => console.log(err))
 }
 
+// Add move
 export async function fetchAddMove(move) {
   return axios
-    .post(`${API_URL_MOVES}/add`, {
+    .post(`${API_URL}/moves/add`, {
       name: move.name,
       levelName: move.levelName,
       bars: move.bars,
@@ -27,9 +28,11 @@ export async function fetchAddMove(move) {
       console.log(error)
     })
 }
+
+// Update move
 export async function fetchUpdateMove(move) {
   return axios
-    .post(`${API_URL_MOVES}/update/${move._id}`, {
+    .post(`${API_URL}/moves/update/${move._id}`, {
       name: move.name,
       levelName: move.levelName,
       bars: move.bars,
@@ -41,22 +44,20 @@ export async function fetchUpdateMove(move) {
       console.log(error)
     })
 }
+
+// Delete move
 export async function fetchDeleteMove(id) {
   return axios
-    .delete(`${API_URL_MOVES}/${id}`)
+    .delete(`${API_URL}/moves/${id}`)
     .then((response) => response.data)
     .catch(function (error) {
       console.log(error)
     })
 }
 
-// get audio
-export function fetchAudio(moveID) {
-  return new Audio(`${API_URL_AUDIO}${moveID}`)
-}
-// get multi audios
-export function fetchAllAudios(moveIDs) {
+// Get multi audios
+export function fetchAudios(moveIDs) {
   return moveIDs.map((moveID) => {
-    return { moveID: moveID, audio: new Audio(`${API_URL_AUDIO}${moveID}`) }
+    return { moveID: moveID, audio: new Audio(`${API_URL}/audio/${moveID}`) }
   })
 }

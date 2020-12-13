@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getLocalStorage, setLocalStorage } from './services/localStorage'
-import {
-  getAllAudios,
-  updateAudios,
-  deleteAudio,
-} from './services/handleAudios'
+import { getAudios } from './services/handleAudios'
 import {
   fetchGetPensum,
   fetchAddMove,
@@ -23,36 +19,38 @@ export default function useAppState(levels) {
   useEffect(() => {
     async function initfetch() {
       const fetchedPensum = await fetchGetPensum()
-
-      setPensum(getLocalStorage('pensum') || (await fetchGetPensum()))
-      // setPensum(fetchedPensum)
-      !audios.length && setAudios(await getAllAudios(fetchedPensum))
+      setPensum(getLocalStorage('pensum') || fetchedPensum)
+      !audios.length && setAudios(await getAudios(fetchedPensum))
     }
     initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setLocalStorage(STORAGE_KEY, pensum)
+    async function fetchData() {
+      const fetchedPensum = await fetchGetPensum()
+      pensum.length
+        ? setLocalStorage(STORAGE_KEY, fetchedPensum)
+        : localStorage.removeItem(STORAGE_KEY)
+      setAudios(await getAudios(fetchedPensum))
+    }
+    fetchData()
   }, [pensum])
 
   async function addMove(userInput) {
-    const response = await fetchAddMove(userInput)
-    response && setPensum(await fetchGetPensum())
-    response && setAudios(await updateAudios(audios, response))
+    await fetchAddMove(userInput)
+    setPensum(await fetchGetPensum())
     history.push('/edit-overview')
   }
 
   async function updateMove(userInput) {
-    const response = await fetchUpdateMove(userInput)
-    response && setPensum(await fetchGetPensum())
-    response && setAudios(await updateAudios(audios, response))
+    await fetchUpdateMove(userInput)
+    setPensum(await fetchGetPensum())
     history.push('/edit-overview')
   }
 
   async function deleteMove(id) {
-    const response = await fetchDeleteMove(id)
-    response && setPensum(await fetchGetPensum())
-    response && setAudios(await deleteAudio(audios, response))
+    await fetchDeleteMove(id)
+    setPensum(await fetchGetPensum())
     history.push('/edit-overview')
   }
 
