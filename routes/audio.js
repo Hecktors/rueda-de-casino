@@ -2,7 +2,6 @@ const router = require("express").Router();
 const Move = require("../models/move.model");
 const path = require("path");
 
-// Get audioUrl
 router.route("/:id").get((req, res) => {
   Move.findById(req.params.id)
     .then((move) => {

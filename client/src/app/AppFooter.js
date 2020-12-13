@@ -8,7 +8,7 @@ Footer.propTypes = {
 export default function Footer({ msg = '', children }) {
   return (
     <FooterStyled>
-      <div className="msg-container">{msg}</div>
+      {msg && <div className="msg-container">{msg}</div>}
       <div className="button-container">{children}</div>
     </FooterStyled>
   )
@@ -16,6 +16,7 @@ export default function Footer({ msg = '', children }) {
 
 const FooterStyled = styled.footer`
   position: relative;
+  z-index: 999;
   height: 100px;
   display: grid;
   grid-template-rows: auto 1fr;

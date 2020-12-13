@@ -35,7 +35,6 @@ export default function Header({ cols, children }) {
 const HeaderStyled = styled.header`
   height: 80px;
   position: relative;
-  top: 0;
   z-index: 999;
   display: grid;
   grid-template-columns: 40px auto 40px;

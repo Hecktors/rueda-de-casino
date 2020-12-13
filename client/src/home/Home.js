@@ -22,11 +22,9 @@ export default function Home({
   appState,
   updateAppState,
   resetAppState,
-  audios,
 }) {
   const { selectedMoveIDs, speed, isSongActive } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
-  // console.log(audios[0].audio && audios[0].audio)
   return (
     <>
       <AppHeader cols="111">
@@ -49,7 +47,6 @@ export default function Home({
       </AppHeader>
 
       <MainStyled hasMultiLevels={pensum.length > 1}>
-        <div onClick={() => audios[0].audio.play()}>play</div>
         <form>
           <div className="level-container">
             {pensum.map(({ id, levelName, moves }) => (

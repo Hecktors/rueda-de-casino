@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components/macro'
 import useSession from './useSession'
 import AppHeader from '../app/AppHeader'
 import AppFooter from '../app/AppFooter'
@@ -35,7 +34,6 @@ export default function Session({
     isSongActive
   )
 
-  // !moves.length && history.push('/')
   const [video, setVideo] = useState({})
 
   return (
@@ -65,13 +63,13 @@ export default function Session({
         )}
         {!isPlaying && <h1>Pause</h1>}
       </AppHeader>
-      <StyledMain className="dark no-bg-img">
-        <BackgroundVideo isPlaying={isPlaying} />
+      <main className="dark no-bg-img">
         <Overlay paused={!isPlaying}>
           {currentMove._id && <CurrentMove name={currentMove.name} />}
           {!isPlaying && <SelectedMoveList moves={moves} onClick={setVideo} />}
         </Overlay>
-      </StyledMain>
+        <BackgroundVideo isPlaying={isPlaying} />
+      </main>
       <AppFooter>
         <IconButton
           onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
@@ -84,17 +82,3 @@ export default function Session({
     </>
   )
 }
-
-const StyledMain = styled.main`
-  /* height: calc(100% * 0.75); */
-  /* display: grid; */
-  place-items: center;
-  .bg-video {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%) scale(1);
-    left: 0;
-    z-index: 0;
-    filter: blur(5px);
-  }
-`

@@ -3,37 +3,32 @@ import { createGlobalStyle } from 'styled-components/macro'
 export default createGlobalStyle`
     :root {
         /* General */
-        --color-title: #929292;
-        --color-logo: #c6099c;
         --color-primary: #c65909;
         --color-secondary: #2ca3d2;
         --color-tertiary: #0550ff;
+        --color-tertiary: #326efa;
         --color-text: #999;
-        --color-bg: #11141d;
+        --color-bg: #0e0e15;
         --color-bg-dark : #000;
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
         --color-warning: #f53030;
-
+        /* Header */
+        --color-title: #929292;
+        --color-logo: #c65909;
         /* Accordion */
-        --color-bg-accordion: #222637;
+        --color-bg-accordion: #181826;        
         --color-bg-accordion-title: #0b1644;
         --color-accordion-item: #999;
         /* Message */
         --color-message: #666;
         --color-bg-message: #0f1118d9;
         /* Overlay */
-        --color-bg-overlay: rgba(0, 0, 0, 0.7);
+        --color-bg-overlay: rgba(0, 0, 0, 0.5);
         --color-bg-overlay-full: #000;
         /* Selected Moves List */
         --color-selected-movelist: #2ca3d2;
-        /* --color-bg-overlay-paused: #020510d9; */
         --color-bg-overlay-paused: rgba(0, 0, 0, 0.8);
-        /* Experimental */
-        /* --color-primary: #c65909; */
-        --color-logo: #c65909;
-        --color-bg: #0e0e15;
-        --color-bg-accordion: #181826;        
     }
 
     * {
@@ -62,21 +57,15 @@ export default createGlobalStyle`
         width: 100%;
         max-width: 800px;
         position: relative;
-        display: flex;
-        flex-direction: column;
         margin: auto;
         display: grid;
-        grid-template-rows: 80px auto 100px;
+        grid-template-rows: 100px auto 100px;
     }
 
     main { 
         flex-grow: 1;
         position: relative;
-        /* display: flex;
-        flex-direction: column;
-        justify-content: space-between; */
         overflow-y: auto;
-        /* overflow-x: hidden; */
     }
 
     button {

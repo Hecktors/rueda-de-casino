@@ -39,7 +39,6 @@ export default function useUserInput(pensum, id, setIsLevelInputDisplayed) {
       setIsLevelInputDisplayed(true)
     }
     if (name === 'levelName') {
-      // setIsLevelInputDisplayed(false)
     }
     setUserInput({ ...userInput, [name]: value })
   }
