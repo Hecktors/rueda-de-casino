@@ -6,7 +6,9 @@ YoutubeVideo.propTypes = {
 }
 
 export default function YoutubeVideo({ video }) {
-  const url = `https://www.youtube.com/embed/${video.id}?controls=0&amp;start=${video.start}`
+  // const videoID = video.url.slice(video.url.indexOf('=') + 1, -1)
+  // const url = `https://www.youtube.com/embed/${videoID}?controls=0&amp`
+  const url = `${video.url}`
 
   return (
     <ReactPlayer

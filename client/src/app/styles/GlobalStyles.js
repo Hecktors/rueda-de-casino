@@ -3,9 +3,8 @@ import { createGlobalStyle } from 'styled-components/macro'
 export default createGlobalStyle`
     :root {
         /* General */
-        --color-primary: #c65909;
+        --color-primary: #d04b1f;
         --color-secondary: #2ca3d2;
-        --color-tertiary: #0550ff;
         --color-tertiary: #326efa;
         --color-text: #999;
         --color-bg: #0e0e15;
@@ -15,7 +14,7 @@ export default createGlobalStyle`
         --color-warning: #f53030;
         /* Header */
         --color-title: #929292;
-        --color-logo: #c65909;
+        --color-logo: #d04b1f;
         /* Accordion */
         --color-bg-accordion: #181826;        
         --color-bg-accordion-title: #0b1644;

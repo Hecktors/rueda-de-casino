@@ -24,7 +24,7 @@ const moveSchema = new Schema({
     required: true,
     trim: true,
     minlength: 4,
-    maxlength: 20,
+    maxlength: 50,
   },
   videoUrl: {
     type: String,

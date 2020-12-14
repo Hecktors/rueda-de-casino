@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
+import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
+import IconButton from '../app/Buttons/IconButton'
 import Button from '../app/Buttons/Button'
 import useUserInput from './useUserInput'
-import IconButton from '../app/Buttons/IconButton'
-import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
 
 EditForm.propTypes = {
   match: PropTypes.object.isRequired,
@@ -71,12 +71,11 @@ export default function EditForm({
 
       <div className="form-group-container">
         <div className="form-group select">
-          <label htmlFor="">level</label>
+          <label htmlFor="">Level</label>
           <select
             onChange={updateUserInput}
             name="levelName"
             id="levelName"
-            value={userInput.levelName}
             required
           >
             {pensum.map(({ id, levelName }) => (
@@ -84,7 +83,7 @@ export default function EditForm({
                 {levelName}
               </option>
             ))}
-            <option value="createLevel">CREATE NEW LEVEL</option>
+            <option value="new Level">CREATE NEW LEVEL</option>
           </select>
         </div>
         {isLevelInputDisplayed && (
@@ -94,8 +93,10 @@ export default function EditForm({
               onChange={updateUserInput}
               value={userInput.levelName}
               type="text"
-              id="levelName"
-              name="levelName"
+              id="newLevel"
+              name="new Level"
+              onFocus={(e) => e.target.select()}
+              onContextMenu={(e) => e.preventDefault()}
               required
             />
           </div>
@@ -111,6 +112,8 @@ export default function EditForm({
             type="text"
             id="name"
             name="name"
+            onFocus={(e) => e.target.select()}
+            onContextMenu={(e) => e.preventDefault()}
             required
           />
         </div>
@@ -124,6 +127,9 @@ export default function EditForm({
             type="number"
             id="bars"
             name="bars"
+            placeholder="0"
+            onFocus={(e) => e.target.select()}
+            onContextMenu={(e) => e.preventDefault()}
             required
           />
         </div>
@@ -139,6 +145,8 @@ export default function EditForm({
             id="videoUrl"
             name="videoUrl"
             placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
+            onFocus={(e) => e.target.select()}
+            onContextMenu={(e) => e.preventDefault()}
           />
         </div>
         <div className="form-group">
@@ -150,7 +158,9 @@ export default function EditForm({
             type="text"
             id="videoStart"
             name="videoStart"
-            placeholder="00:15"
+            placeholder="00:00"
+            onFocus={(e) => e.target.select()}
+            onContextMenu={(e) => e.preventDefault()}
           />
         </div>
       </div>
@@ -161,12 +171,11 @@ export default function EditForm({
             history.push('/edit-overview')
           }}
           color={'tertiary'}
-          size={'lg'}
           outlined
         >
           Cancel
         </Button>
-        <Button onClick={() => {}} color={'primary'} size={'lg'}>
+        <Button onClick={() => {}} color={'primary'}>
           Save
         </Button>
       </div>
@@ -194,8 +203,10 @@ const EditFormStyled = styled.form`
     0 100px 80px rgba(200, 200, 200, 0.12);
 
   h2 {
+    padding: 9px 0;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+
     span {
       color: var(--color-primary);
     }
@@ -223,8 +234,9 @@ const EditFormStyled = styled.form`
   .form-group-container {
     display: flex;
     gap: 20px;
+
     &:first-of-type {
-      margin-top: 40px;
+      margin-top: 20px;
     }
 
     &:first-of-type {

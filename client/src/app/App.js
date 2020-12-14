@@ -22,7 +22,6 @@ export default function App() {
           render={(props) => (
             <Home
               {...props}
-              audios={audios}
               pensum={pensum}
               appState={appState}
               updateAppState={updateAppState}

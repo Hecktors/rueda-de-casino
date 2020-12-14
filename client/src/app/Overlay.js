@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 
 Overlay.propTypes = {
   children: PropTypes.array.isRequired,
-  full: PropTypes.bool,
+  fullCovered: PropTypes.bool,
   paused: PropTypes.bool,
 }
 
-export default function Overlay({ full, paused, children }) {
+export default function Overlay({ fullCovered, paused, children }) {
   const bgColor = paused
     ? 'var(--color-bg-overlay-paused)'
-    : full
+    : fullCovered
     ? 'var(--color-bg-overlay-full)'
     : 'var(--color-bg-overlay)'
 
   return (
-    <OverlayStyled full={full} bgColor={bgColor}>
+    <OverlayStyled full={fullCovered} bgColor={bgColor}>
       {children}
     </OverlayStyled>
   )
@@ -32,10 +32,11 @@ const OverlayStyled = styled.div`
   display: grid;
   place-items: center;
   background-color: ${({ bgColor }) => bgColor};
-  z-index: ${({ full }) => (full ? '999' : '99')};
+  z-index: ${({ full }) => (full ? '9999' : '99')};
 
   .top-right {
     position: absolute;
+    z-index: 9999;
     top: 10px;
     right: 5px;
   }

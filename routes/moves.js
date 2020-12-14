@@ -1,4 +1,3 @@
-var ObjectID = require("mongodb").ObjectID;
 const router = require("express").Router();
 const Move = require("../models/move.model");
 const getPensum = require("../services/getPensum");
@@ -17,7 +16,6 @@ router.route("/").get(async (req, res) => {
 
 // Add move
 router.route("/add").post((req, res) => {
-  const id = new ObjectID();
   const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
   const levelName = req.body.levelName;
   const bars = req.body.bars;
@@ -26,7 +24,6 @@ router.route("/add").post((req, res) => {
   const videoStart = req.body.videoStart;
 
   const newMove = new Move({
-    _id: id,
     name,
     levelName,
     bars,
@@ -80,9 +77,10 @@ router.route("/update/:id").post((req, res) => {
       move.audioName = req.body.name.replace(/\s/g, "_") + ".mp3";
       move.videoUrl = req.body.videoUrl;
       move.videoStart = req.body.videoStart;
-      
-      move.save()
-        .then( async() => {
+
+      move
+        .save()
+        .then(async () => {
           if (prevAudioName !== move.audioName) {
             deleteAudio(prevAudioName);
             addLevelIfNotExist(move.levelName);
@@ -90,11 +88,11 @@ router.route("/update/:id").post((req, res) => {
             addAudio(move.name, move.audioName);
           }
           const response = await getPensum();
-          setTimeout(()=> {
+          setTimeout(() => {
             response.err
-            ? res.status(400).json("Error" + response.err)
-            : res.json(response.pensum);
-          }, 500)
+              ? res.status(400).json("Error" + response.err)
+              : res.json(response.pensum);
+          }, 500);
         })
         .catch((err) => res.status(400).json("Error: " + err));
     })

@@ -1,6 +1,6 @@
 import { fetchAudios } from './handleAPIs'
 
-export async function getAudios(pensum) {
+export default async function getAudios(pensum) {
   const ids = pensum
     .map((level) => level.moves)
     .flat()
