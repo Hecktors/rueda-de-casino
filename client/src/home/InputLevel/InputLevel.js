@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ArrowRightIcon, ArrowDownIcon } from '../../app/Icons/Icons'
@@ -17,6 +17,11 @@ export default function InputLevel({
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
+
+  useEffect(() => {
+    !selectedMoveIDs.length && setIsOpen(false)
+  }, [selectedMoveIDs])
+
   const hasInputMove = levelMoves.some((move) => {
     return selectedMoveIDs.includes(move._id)
   })

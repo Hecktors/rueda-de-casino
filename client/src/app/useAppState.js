@@ -6,8 +6,7 @@ const STORAGE_KEY = 'appState'
 const initState = {
   selectedMoveIDs: [],
   speed: 2900,
-  isSongActive: false,
-  audios: [],
+  isSongActive: true,
 }
 
 export default function useAppState(pensum) {

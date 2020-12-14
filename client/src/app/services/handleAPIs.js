@@ -56,8 +56,11 @@ export async function fetchDeleteMove(id) {
 }
 
 // Get multi audios
-export function fetchAudios(moveIDs) {
+export async function fetchAudios(moveIDs) {
   return moveIDs.map((moveID) => {
-    return { moveID: moveID, audio: new Audio(`${API_URL}/audio/${moveID}`) }
+    return {
+      moveID: moveID,
+      audioElement: new Audio(`${API_URL}/audios/${moveID}`),
+    }
   })
 }

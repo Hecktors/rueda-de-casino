@@ -92,6 +92,7 @@ export default function Home({
 
 const MainStyled = styled.main`
   padding: 10px;
+  padding-top: 40px;
   .level-container {
     display: grid;
     grid-template-columns: ${(props) =>

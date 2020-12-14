@@ -38,8 +38,8 @@ export default function Session({
 
   return (
     <>
-      {video.id && (
-        <Overlay full>
+      {video.url && (
+        <Overlay fullCovered={video.url}>
           <IconButton
             onClick={() => setVideo({})}
             className="top-right"

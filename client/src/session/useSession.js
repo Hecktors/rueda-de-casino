@@ -56,7 +56,7 @@ export default function useSession(
       const newCurrentMove = getRandomMove(moves)
       setCurrentMove(newCurrentMove)
       const audio = audios.find((audio) => audio.moveID === newCurrentMove._id)
-        .audio
+        .audioElement
       audio.play()
       timeoutRef.current = null
       startTimeout(newCurrentMove.bars * speed + speed)

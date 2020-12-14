@@ -25,7 +25,6 @@ export default function IconButton({
   size,
   className,
   disabled,
-  full,
   type,
 }) {
   return (
@@ -36,7 +35,6 @@ export default function IconButton({
       disabled={disabled}
       size={sizes[size]}
       color={color}
-      full={full}
       type={type}
     >
       {children}

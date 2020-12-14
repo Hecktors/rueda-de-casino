@@ -8,13 +8,13 @@ SelectedMoveList.propTypes = {
 }
 
 export default function SelectedMoveList({ moves, onClick }) {
-  const listItems = moves.map(({ name, _id, videoId, videoStart }) => (
+  const listItems = moves.map(({ name, _id, videoUrl, videoStart }) => (
     <li key={_id}>
       <button
         data-testid="listitem-button"
-        onClick={() => onClick({ id: videoId, start: videoStart })}
+        onClick={() => onClick({ url: videoUrl, start: videoStart })}
       >
-        <span>{videoId ? <YoutubeIcon /> : <YoutubeIconDisabled />}</span>
+        <span>{videoUrl ? <YoutubeIcon /> : <YoutubeIconDisabled />}</span>
         {name}
       </button>
     </li>
@@ -32,14 +32,14 @@ const SelectedMoveListStyled = styled.ul`
   transform: translateY(-20vh);
 
   li {
-    padding-left: 36px;
+    padding-left: 24px;
     button {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       display: flex;
       color: var(--color-text);
 
       svg {
-        /* background-color: red; */
+        /* background-color: green; */
         margin-right: 10px;
         margin-top: 3px;
       }
