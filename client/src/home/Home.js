@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { ResetIcon, EditIcon, PlayIcon } from '../app/Icons/Icons'
+import AppFooter from '../app/AppFooter'
+import AppHeader from '../app/AppHeader'
+import IconButton from '../app/Buttons/IconButton'
 import InputLevel from './InputLevel/InputLevel'
 import InputPlaySong from './InputPlaySong/InputPlaySong'
 import InputSongSpeed from './InputSongSpeed/InputSongSpeed'
-import AppHeader from '../app/AppHeader'
-import AppFooter from '../app/AppFooter'
-import IconButton from '../app/Buttons/IconButton'
+import { EditIcon, PlayIcon, ResetIcon } from '../app/Icons/Icons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
@@ -30,7 +30,7 @@ export default function Home({
       <AppHeader cols="111">
         <IconButton
           onClick={resetAppState}
-          color={'tertiary'}
+          action={'tertiary'}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
         >
@@ -39,7 +39,7 @@ export default function Home({
         <h1 className="logo">Salsa time!</h1>
         <IconButton
           onClick={() => history.push('/edit-overview')}
-          color={'tertiary'}
+          action={'tertiary'}
           size={'sm'}
         >
           <EditIcon />
@@ -79,7 +79,7 @@ export default function Home({
         <IconButton
           type={'button'}
           onClick={() => history.push('/session')}
-          color={'tertiary'}
+          action={'tertiary'}
           size={'lg'}
           disabled={hasNotEnoughMoves}
         >

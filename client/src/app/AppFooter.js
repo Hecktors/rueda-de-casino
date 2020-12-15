@@ -1,5 +1,5 @@
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 
 Footer.propTypes = {
   msg: PropTypes.string,
@@ -28,10 +28,10 @@ const FooterStyled = styled.footer`
     position: absolute;
     top: -20px;
     width: 100%;
-    text-align: center;
     padding: 5px 0;
-    color: var(--color-warning);
+    text-align: center;
     background-color: var(--color-bg);
+    color: var(--color-warning);
   }
   .button-container {
     width: 100%;

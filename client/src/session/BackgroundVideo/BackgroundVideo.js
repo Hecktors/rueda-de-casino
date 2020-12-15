@@ -1,6 +1,6 @@
-import ReactPlayer from 'react-player'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
+import ReactPlayer from 'react-player'
 
 BackgroundVideo.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
@@ -23,8 +23,8 @@ const BackgroundVideoStyled = styled.section`
   .bg-video {
     position: fixed;
     top: 50%;
-    transform: translateY(-50%) scale(1.5);
     left: 0;
+    transform: translateY(-50%) scale(1.5);
     z-index: 0;
     filter: blur(3px);
   }
