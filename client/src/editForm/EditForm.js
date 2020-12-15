@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
-import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
-import IconButton from '../app/Buttons/IconButton'
 import Button from '../app/Buttons/Button'
+import IconButton from '../app/Buttons/IconButton'
+import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
 import useUserInput from './useUserInput'
 
 EditForm.propTypes = {
@@ -48,7 +48,7 @@ export default function EditForm({
       <IconButton
         type={'button'}
         onClick={resetUserInput}
-        color={'tertiary'}
+        action={'tertiary'}
         size={'md'}
         className="top-left"
       >
@@ -61,7 +61,7 @@ export default function EditForm({
         <IconButton
           type="button"
           onClick={(e) => handleSubmit(e, id)}
-          color={'tertiary'}
+          action={'tertiary'}
           size={'md'}
           className="top-right"
         >
@@ -170,12 +170,12 @@ export default function EditForm({
           onClick={() => {
             history.push('/edit-overview')
           }}
-          color={'tertiary'}
+          action={'tertiary'}
           outlined
         >
           Cancel
         </Button>
-        <Button onClick={() => {}} color={'primary'}>
+        <Button onClick={() => {}} action={'primary'}>
           Save
         </Button>
       </div>

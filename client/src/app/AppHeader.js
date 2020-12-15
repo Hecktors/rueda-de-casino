@@ -1,5 +1,5 @@
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 
 Header.propTypes = {
   cols: PropTypes.string.isRequired,
@@ -35,26 +35,26 @@ export default function Header({ cols, children }) {
 const HeaderStyled = styled.header`
   height: 80px;
   position: relative;
-  z-index: 999;
   display: grid;
   grid-template-columns: 40px auto 40px;
   place-items: center;
   padding: 0 15px;
+  z-index: 999;
 
   h1 {
     text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-    font-weight: lighter;
     text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.5rem;
+    font-weight: lighter;
     color: var(--color-title);
   }
 
   .logo {
     text-transform: none;
-    font-family: 'Molle', cursive;
-    color: var(--color-logo);
     letter-spacing: 0px;
     font-size: 2.3rem;
+    font-family: 'Molle', cursive;
+    color: var(--color-logo);
   }
 `

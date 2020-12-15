@@ -1,5 +1,5 @@
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 import { YoutubeIcon, YoutubeIconDisabled } from '../Icons/Icons'
 
 SelectedMoveList.propTypes = {
@@ -8,25 +8,28 @@ SelectedMoveList.propTypes = {
 }
 
 export default function SelectedMoveList({ moves, onClick }) {
-  const listItems = moves.map(({ name, _id, videoUrl, videoStart }) => (
-    <li key={_id}>
-      <button
-        data-testid="listitem-button"
-        onClick={() => onClick({ url: videoUrl, start: videoStart })}
-      >
-        <span>{videoUrl ? <YoutubeIcon /> : <YoutubeIconDisabled />}</span>
-        {name}
-      </button>
-    </li>
-  ))
-
-  return <SelectedMoveListStyled>{listItems}</SelectedMoveListStyled>
+  return (
+    <SelectedMoveListStyled>
+      {moves.map(({ name, _id, videoUrl, videoStart }) => (
+        <li key={_id}>
+          <button
+            data-testid="listitem-button"
+            onClick={() => onClick({ url: videoUrl, start: videoStart })}
+          >
+            <span>{videoUrl ? <YoutubeIcon /> : <YoutubeIconDisabled />}</span>
+            {name}
+          </button>
+        </li>
+      ))}
+    </SelectedMoveListStyled>
+  )
 }
 
 const SelectedMoveListStyled = styled.ul`
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 10vh;
   display: grid;
   gap: 10px;
   transform: translateY(-20vh);
@@ -39,7 +42,6 @@ const SelectedMoveListStyled = styled.ul`
       color: var(--color-text);
 
       svg {
-        /* background-color: green; */
         margin-right: 10px;
         margin-top: 3px;
       }
