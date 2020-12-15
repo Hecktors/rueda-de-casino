@@ -52,10 +52,10 @@ export default createGlobalStyle`
     }
 
     .App {
+        position: relative;
         height: 100%;
         width: 100%;
         max-width: 800px;
-        position: relative;
         margin: auto;
         display: grid;
         grid-template-rows: 100px auto 100px;
