@@ -1,15 +1,15 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import useSession from './useSession'
-import AppHeader from '../app/AppHeader'
 import AppFooter from '../app/AppFooter'
+import AppHeader from '../app/AppHeader'
 import IconButton from '../app/Buttons/IconButton'
-import Overlay from '../app/Overlay'
-import SelectedMoveList from './SelectedMoveList/SelectedMoveList'
-import CurrentMove from './CurrentMove/CurrentMove'
-import YoutubeVideo from './YoutubeVideo/YoutubeVideo'
-import BackgroundVideo from './BackgroundVideo/BackgroundVideo'
 import { CancelIcon, PauseIcon, PlayIcon, StopIcon } from '../app/Icons/Icons'
+import Overlay from '../app/Overlay'
+import BackgroundVideo from './BackgroundVideo/BackgroundVideo'
+import CurrentMove from './CurrentMove/CurrentMove'
+import SelectedMoveList from './SelectedMoveList/SelectedMoveList'
+import YoutubeVideo from './YoutubeVideo/YoutubeVideo'
 
 Session.propTypes = {
   history: PropTypes.object.isRequired,

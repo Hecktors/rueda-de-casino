@@ -13,7 +13,7 @@ module.exports = {
   defaultExample: true,
   exampleMode: 'expand',
   usageMode: 'expand',
-  components: ['src/components/[A-Z]*.js'],
+  components: ['src/app/[A-Z]*/[A-Z]*.js'],
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'src/app/styles/StyleWrapper'),
   },

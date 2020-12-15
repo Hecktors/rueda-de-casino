@@ -6,8 +6,6 @@ YoutubeVideo.propTypes = {
 }
 
 export default function YoutubeVideo({ video }) {
-  // const videoID = video.url.slice(video.url.indexOf('=') + 1, -1)
-  // const url = `https://www.youtube.com/embed/${videoID}?controls=0&amp`
   const url = `${video.url}`
 
   return (
@@ -18,6 +16,13 @@ export default function YoutubeVideo({ video }) {
       playing={true}
       loop={true}
       width="100%"
+      config={{
+        youtube: {
+          playerVars: {
+            start: video.start,
+          },
+        },
+      }}
     />
   )
 }

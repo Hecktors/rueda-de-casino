@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import getRandomMove from './services/getRandomMove'
+import getRandomArrayElement from '../app/lib/getRandomArrayElement'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
 useSession.propTypes = {
   moves: PropTypes.array.isRequired,
+  audios: PropTypes.array.isRequired,
   speed: PropTypes.number,
   isSongActive: PropTypes.bool.isRequired,
 }
@@ -53,7 +54,7 @@ export default function useSession(
 
   function startTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      const newCurrentMove = getRandomMove(moves)
+      const newCurrentMove = getRandomArrayElement(moves)
       setCurrentMove(newCurrentMove)
       const audio = audios.find((audio) => audio.moveID === newCurrentMove._id)
         .audioElement
