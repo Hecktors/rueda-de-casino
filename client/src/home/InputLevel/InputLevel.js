@@ -17,21 +17,22 @@ export default function InputLevel({
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
+  const hasInputMove = levelMoves.some((move) => {
+    return selectedMoveIDs.includes(move._id)
+  })
+  const color = hasInputMove ? 'var(--color-primary)' : 'var(--color-text)'
+  const ulHeight = isOpen ? 'auto' : 0
 
   useEffect(() => {
     !selectedMoveIDs.length && setIsOpen(false)
   }, [selectedMoveIDs])
-
-  const hasInputMove = levelMoves.some((move) => {
-    return selectedMoveIDs.includes(move._id)
-  })
 
   function toogleInputLevel() {
     setIsOpen(!isOpen)
   }
 
   return (
-    <InputLevelStyled isOpen={isOpen} isActive={hasInputMove}>
+    <InputLevelStyled isOpen={isOpen} color={color} ulHeight={ulHeight}>
       <h3 onClick={toogleInputLevel}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
@@ -48,7 +49,7 @@ export default function InputLevel({
                 onChange={updateAppState}
                 type="checkbox"
                 checked={selectedMoveIDs.includes(move.id)}
-              />{' '}
+              />
               {move.name}
             </label>
           </li>
@@ -62,10 +63,6 @@ const InputLevelStyled = styled.div`
   background-color: var(--color-bg-accordion);
   border-radius: 5px;
 
-  input {
-    display: none;
-  }
-
   h3 {
     cursor: pointer;
     font-size: 1rem;
@@ -74,9 +71,8 @@ const InputLevelStyled = styled.div`
     justify-content: space-between;
 
     & .level-name {
-      color: ${({ isActive }) =>
-        isActive ? 'var(--color-primary)' : 'var(--color-text)'};
-      flex-grow: 1;
+      width: 100%;
+      color: ${({ color }) => color};
       text-align: center;
     }
 
@@ -92,14 +88,19 @@ const InputLevelStyled = styled.div`
     gap: 3px;
     padding: 0 9px;
     overflow: hidden;
-    height: ${(props) => (props.isOpen ? 'auto' : 0)};
+    height: ${({ ulHeight }) => ulHeight};
 
     li {
       line-height: 1.3;
 
+      input {
+        display: none;
+      }
+
       &:first-of-type {
         padding-top: 1px;
       }
+
       &:last-of-type {
         padding-bottom: 10px;
       }
