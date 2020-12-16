@@ -38,21 +38,21 @@ export default function Session({
     isSongActive
   )
 
-  const [video, setVideo] = useState({})
+  const [YoutubeVideoObj, setYoutubeVideoOjb] = useState({})
+  console.log(YoutubeVideoObj)
 
-  return (
+  return YoutubeVideoObj.url ? (
+    <Overlay fullCovered={!!YoutubeVideoObj.url}>
+      <CancelIconButton
+        onClick={() => setYoutubeVideoOjb({})}
+        className="top-right"
+        color={'text'}
+        size={'md'}
+      />
+      <YoutubeVideo video={YoutubeVideoObj} />
+    </Overlay>
+  ) : (
     <>
-      {video.url && (
-        <Overlay fullCovered={video.url}>
-          <CancelIconButton
-            onClick={() => setVideo({})}
-            className="top-right"
-            color={'text'}
-            size={'md'}
-          />
-          <YoutubeVideo video={video} />
-        </Overlay>
-      )}
       <AppHeader cols={isPlaying ? '000' : '110'}>
         {!isPlaying && (
           <StopIconButton
@@ -66,7 +66,9 @@ export default function Session({
       <main className="dark no-bg-img">
         <Overlay paused={!isPlaying}>
           {currentMove._id && <CurrentMove name={currentMove.name} />}
-          {!isPlaying && <SelectedMoveList moves={moves} onClick={setVideo} />}
+          {!isPlaying && (
+            <SelectedMoveList moves={moves} onClick={setYoutubeVideoOjb} />
+          )}
         </Overlay>
         <BackgroundVideo isPlaying={isPlaying} />
       </main>
