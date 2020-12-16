@@ -8,7 +8,7 @@ Overlay.propTypes = {
 }
 
 export default function Overlay({ children, fullCovered, paused }) {
-  const zIndex = fullCovered ? 999 : 99
+  const zIndex = fullCovered ? 9999 : 99
   const bgColor = paused
     ? 'var(--color-bg-overlay-paused)'
     : fullCovered
