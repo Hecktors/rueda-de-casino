@@ -1,12 +1,11 @@
 import axios from 'axios'
-
-// const REACT_APP_BASE = 'http://192.168.1.140:3001'
-const REACT_APP_BASE = 'http://localhost:3001'
+console.log('env:', process.env.REACT_APP_BASE)
+const base = process.env.REACT_APP_BASE
 
 // Get all moves
 export async function fetchGetPensum() {
   return axios
-    .get(`${REACT_APP_BASE}/moves`)
+    .get(`${base}/moves`)
     .then((res) => res.data)
     .catch((err) => console.log(err))
 }
@@ -14,7 +13,7 @@ export async function fetchGetPensum() {
 // Add move
 export async function fetchAddMove(move) {
   return axios
-    .post(`${REACT_APP_BASE}/moves/add`, {
+    .post(`${base}/moves/add`, {
       name: move.name,
       levelName: move.levelName,
       bars: move.bars,
@@ -32,7 +31,7 @@ export async function fetchAddMove(move) {
 // Update move
 export async function fetchUpdateMove(move) {
   return axios
-    .post(`${REACT_APP_BASE}/moves/update/${move._id}`, {
+    .post(`${base}/moves/update/${move._id}`, {
       name: move.name,
       levelName: move.levelName,
       bars: move.bars,
@@ -48,7 +47,7 @@ export async function fetchUpdateMove(move) {
 // Delete move
 export async function fetchDeleteMove(id) {
   return axios
-    .delete(`${REACT_APP_BASE}/moves/${id}`)
+    .delete(`${base}/moves/${id}`)
     .then((response) => response.data)
     .catch(function (error) {
       console.log(error)
@@ -60,7 +59,7 @@ export async function fetchAudios(moveIDs) {
   return moveIDs.map((moveID) => {
     return {
       moveID: moveID,
-      audioElement: new Audio(`${REACT_APP_BASE}/audios/${moveID}`),
+      audioElement: new Audio(`${base}/audios/${moveID}`),
     }
   })
 }

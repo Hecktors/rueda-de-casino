@@ -2,11 +2,14 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
-import IconButton from '../app/Buttons/IconButton'
-import InputLevel from './InputLevel/InputLevel'
+import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong/InputPlaySong'
 import InputSongSpeed from './InputSongSpeed/InputSongSpeed'
-import { EditIcon, PlayIcon, ResetIcon } from '../app/Icons/Icons'
+import {
+  EditIconButton,
+  PlayIconButton,
+  ResetIconButton,
+} from '../app/buttons/IconButtons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
@@ -28,22 +31,18 @@ export default function Home({
   return (
     <>
       <AppHeader cols="111">
-        <IconButton
+        <ResetIconButton
           onClick={resetAppState}
-          action={'tertiary'}
+          color={'tertiary'}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
-        >
-          <ResetIcon />
-        </IconButton>
+        />
         <h1 className="logo">Salsa time!</h1>
-        <IconButton
+        <EditIconButton
           onClick={() => history.push('/edit-overview')}
-          action={'tertiary'}
+          color={'tertiary'}
           size={'sm'}
-        >
-          <EditIcon />
-        </IconButton>
+        />
       </AppHeader>
 
       <MainStyled hasMultiLevels={pensum.length > 1}>
@@ -76,15 +75,13 @@ export default function Home({
       <AppFooter
         msg={hasNotEnoughMoves ? 'Select at least 2 moves to start' : ''}
       >
-        <IconButton
+        <PlayIconButton
           type={'button'}
           onClick={() => history.push('/session')}
-          action={'tertiary'}
+          color={'tertiary'}
           size={'lg'}
           disabled={hasNotEnoughMoves}
-        >
-          <PlayIcon />
-        </IconButton>
+        />
       </AppFooter>
     </>
   )

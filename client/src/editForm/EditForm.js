@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import Button from '../app/Buttons/Button'
-import IconButton from '../app/Buttons/IconButton'
-import { DeleteIcon, ResetIcon } from '../app/Icons/Icons'
+import Button from '../app/buttons/Button'
+import { DeleteIconButton, ResetIconButton } from '../app/buttons/IconButtons'
 import useUserInput from './useUserInput'
 
 EditForm.propTypes = {
@@ -45,28 +44,24 @@ export default function EditForm({
 
   return (
     <EditFormStyled onSubmit={handleSubmit}>
-      <IconButton
+      <ResetIconButton
         type={'button'}
         onClick={resetUserInput}
-        action={'tertiary'}
+        color={'tertiary'}
         size={'md'}
         className="top-left"
-      >
-        <ResetIcon />
-      </IconButton>
+      />
       <h2>
         <span>{userInput.name}</span>
       </h2>
       {id && (
-        <IconButton
+        <DeleteIconButton
           type="button"
           onClick={(e) => handleSubmit(e, id)}
-          action={'tertiary'}
+          color={'tertiary'}
           size={'md'}
           className="top-right"
-        >
-          <DeleteIcon />
-        </IconButton>
+        />
       )}
 
       <div className="form-group-container">
@@ -170,12 +165,12 @@ export default function EditForm({
           onClick={() => {
             history.push('/edit-overview')
           }}
-          action={'tertiary'}
+          color={'tertiary'}
           outlined
         >
           Cancel
         </Button>
-        <Button onClick={() => {}} action={'primary'}>
+        <Button onClick={() => {}} color={'primary'}>
           Save
         </Button>
       </div>
