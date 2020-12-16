@@ -1,7 +1,9 @@
 import { fetchAudios } from './handleAPIs'
 
 export default async function getAudios(pensum) {
-  console.log(pensum)
+  if (!pensum) {
+    return
+  }
   const ids = pensum
     .map((level) => level.moves)
     .flat()

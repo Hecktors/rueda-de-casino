@@ -3,8 +3,8 @@ import useAppState from './useAppState'
 import useData from './useData'
 import Home from '../home/Home'
 import Session from '../session/Session'
-import EditForm from '../editForm/EditForm'
-import EditOverview from '../editOverview/EditOverview'
+import EditForm from '../edit/editForm/EditForm'
+import EditOverview from '../edit/EditOverview/EditOverview'
 
 export default function App() {
   const [pensum, addMove, updateMove, deleteMove, audios] = useData()

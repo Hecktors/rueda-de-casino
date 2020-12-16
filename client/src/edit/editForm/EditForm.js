@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import Button from '../app/buttons/Button'
-import { DeleteIconButton, ResetIconButton } from '../app/buttons/IconButtons'
+import Button from '../../app/buttons/Button'
+import {
+  DeleteIconButton,
+  ResetIconButton,
+} from '../../app/buttons/IconButtons'
 import useUserInput from './useUserInput'
 
 EditForm.propTypes = {
@@ -219,7 +222,7 @@ const EditFormStyled = styled.form`
   }
 
   select {
-    background-color: var(--color-text);
+    background-color: var(--color-bg-select);
   }
 
   option {

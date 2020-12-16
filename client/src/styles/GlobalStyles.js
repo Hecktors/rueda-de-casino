@@ -28,6 +28,8 @@ export default createGlobalStyle`
         /* Selected Moves List */
         --color-selected-movelist: #2ca3d2;
         --color-bg-overlay-paused: rgba(0, 0, 0, 0.8);
+        /* Edit Form */
+        --color-bg-select: #8aa7ea;
     }
 
     * {
