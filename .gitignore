@@ -119,6 +119,7 @@ client/build
 
 # misc
 client/.DS_Store
+client/.env
 client/.env.local
 client/.env.development.local
 client/.env.test.local
@@ -130,33 +131,3 @@ client/yarn-error.log*
 
 # styleguidist
 client/styleguide
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-client/node_modules
-client/.pnp
-client/.pnp.js
-
-# testing
-client/coverage
-
-# production
-client/build
-
-# misc
-client/.DS_Store
-client/.env.local
-client/.env.development.local
-client/.env.test.local
-client/.env.production.local
-
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
-
-# styleguidist
-client/styleguide
-
-# cypress
-client/cypress

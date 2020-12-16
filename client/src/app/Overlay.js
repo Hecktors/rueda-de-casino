@@ -7,7 +7,8 @@ Overlay.propTypes = {
   paused: PropTypes.bool,
 }
 
-export default function Overlay({ fullCovered, paused, children }) {
+export default function Overlay({ children, fullCovered, paused }) {
+  const zIndex = fullCovered ? 999 : 99
   const bgColor = paused
     ? 'var(--color-bg-overlay-paused)'
     : fullCovered
@@ -15,7 +16,7 @@ export default function Overlay({ fullCovered, paused, children }) {
     : 'var(--color-bg-overlay)'
 
   return (
-    <OverlayStyled full={fullCovered} bgColor={bgColor}>
+    <OverlayStyled zIndex={zIndex} bgColor={bgColor}>
       {children}
     </OverlayStyled>
   )
@@ -32,7 +33,7 @@ const OverlayStyled = styled.div`
   display: grid;
   place-items: center;
   background-color: ${({ bgColor }) => bgColor};
-  z-index: ${({ full }) => (full ? '9999' : '99')};
+  z-index: ${({ zIndex }) => zIndex};
 
   .top-right {
     position: absolute;

@@ -20,6 +20,7 @@ export default function useAppState(levels) {
     async function initfetch() {
       const fetchedPensum = await fetchGetPensum()
       setPensum(getLocalStorage('pensum') || fetchedPensum)
+      // setPensum([])
       !audios.length && setAudios(await getAudios(fetchedPensum))
     }
     initfetch()
