@@ -15,6 +15,6 @@ module.exports = {
   usageMode: 'expand',
   components: ['src/app/[A-Z]*/[A-Z]*.js'],
   styleguideComponents: {
-    Wrapper: path.join(__dirname, 'src/app/styles/StyleWrapper'),
+    Wrapper: path.join(__dirname, 'src/styles/StyleWrapper'),
   },
 }
