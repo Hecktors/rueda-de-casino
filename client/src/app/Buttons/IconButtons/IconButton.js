@@ -18,7 +18,7 @@ const colors = {
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
   onClick: PropTypes.func.isRequired,
-  action: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -30,11 +30,11 @@ export default function IconButton({
   type,
   className,
   disabled,
-  action,
+  color,
   size,
   onClick,
 }) {
-  const color = disabled ? colors['disabled'] : colors[action]
+  const fillColor = disabled ? colors['disabled'] : colors[color]
 
   return (
     <IconButtonStyled
@@ -42,7 +42,7 @@ export default function IconButton({
       data-testid="button"
       className={className}
       disabled={disabled}
-      color={color}
+      fillColor={fillColor}
       size={sizes[size]}
       onClick={onClick}
     >
@@ -52,11 +52,9 @@ export default function IconButton({
 }
 
 const IconButtonStyled = styled.button`
-  border-radius: 3px;
-
   svg {
     width: ${({ size }) => size};
     height: ${({ size }) => size};
-    fill: ${({ color }) => color};
+    fill: ${({ fillColor }) => fillColor};
   }
 `

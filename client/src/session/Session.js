@@ -3,13 +3,17 @@ import { useState } from 'react'
 import useSession from './useSession'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
-import IconButton from '../app/Buttons/IconButton'
-import { CancelIcon, PauseIcon, PlayIcon, StopIcon } from '../app/Icons/Icons'
 import Overlay from '../app/Overlay'
 import BackgroundVideo from './BackgroundVideo/BackgroundVideo'
 import CurrentMove from './CurrentMove/CurrentMove'
 import SelectedMoveList from './SelectedMoveList/SelectedMoveList'
 import YoutubeVideo from './YoutubeVideo/YoutubeVideo'
+import {
+  CancelIconButton,
+  PauseIconButton,
+  PlayIconButton,
+  StopIconButton,
+} from '../app/buttons/IconButtons'
 
 Session.propTypes = {
   history: PropTypes.object.isRequired,
@@ -40,26 +44,22 @@ export default function Session({
     <>
       {video.url && (
         <Overlay fullCovered={video.url}>
-          <IconButton
+          <CancelIconButton
             onClick={() => setVideo({})}
             className="top-right"
             color={'text'}
             size={'md'}
-          >
-            <CancelIcon />
-          </IconButton>
+          />
           <YoutubeVideo video={video} />
         </Overlay>
       )}
       <AppHeader cols={isPlaying ? '000' : '110'}>
         {!isPlaying && (
-          <IconButton
+          <StopIconButton
             onClick={sessionHandler.stop}
             color={'tertiary'}
             size={'md'}
-          >
-            <StopIcon />
-          </IconButton>
+          />
         )}
         {!isPlaying && <h1>Pause</h1>}
       </AppHeader>
@@ -71,13 +71,19 @@ export default function Session({
         <BackgroundVideo isPlaying={isPlaying} />
       </main>
       <AppFooter>
-        <IconButton
-          onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
-          color={'tertiary'}
-          size={'lg'}
-        >
-          {isPlaying ? <PauseIcon /> : <PlayIcon />}
-        </IconButton>
+        {isPlaying ? (
+          <PlayIconButton
+            onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
+            color={'tertiary'}
+            size={'lg'}
+          />
+        ) : (
+          <PauseIconButton
+            onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
+            color={'tertiary'}
+            size={'lg'}
+          />
+        )}
       </AppFooter>
     </>
   )

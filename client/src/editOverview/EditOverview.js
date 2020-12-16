@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import AppHeader from '../app/AppHeader'
-import IconButton from '../app/Buttons/IconButton'
-import { EditIcon, BackIcon, AddIcon } from '../app/Icons/Icons'
+import {
+  AddIconButton,
+  BackIconButton,
+  EditIconButton,
+} from '../app/buttons/IconButtons/'
 
 EditOverview.propTypes = {
   history: PropTypes.object.isRequired,
@@ -13,13 +16,11 @@ export default function EditOverview({ history, pensum }) {
   return (
     <>
       <AppHeader cols="110">
-        <IconButton
-          action={'tertiary'}
+        <BackIconButton
+          color={'tertiary'}
           size={'md'}
           onClick={() => history.push('/')}
-        >
-          <BackIcon />
-        </IconButton>
+        />
         <h1>Edit Overview</h1>
       </AppHeader>
 
@@ -31,26 +32,22 @@ export default function EditOverview({ history, pensum }) {
               {level.moves.map((move) => (
                 <li key={move._id}>
                   {move.name}
-                  <IconButton
-                    action={'secondary'}
+                  <EditIconButton
+                    color={'secondary'}
                     size={'xs'}
                     onClick={() => history.push(`/edit-form/${move._id}`)}
-                  >
-                    <EditIcon />
-                  </IconButton>
+                  />
                 </li>
               ))}
             </ul>
           )
         })}
-        <IconButton
+        <AddIconButton
           className="add-button"
-          action={'tertiary'}
+          color={'tertiary'}
           size={'lg'}
           onClick={() => history.push('/edit-form')}
-        >
-          <AddIcon />
-        </IconButton>
+        />
       </UpdateStyled>
     </>
   )

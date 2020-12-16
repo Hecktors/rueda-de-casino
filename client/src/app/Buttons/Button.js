@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 Button.propTypes = {
   children: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  action: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
@@ -19,17 +19,22 @@ const colors = {
   disabled: 'var(--color-disabled)',
 }
 
+export const LoginButton = (props) => (
+  <Button color="primary" outlined {...props} />
+)
+
 export default function Button({
   children,
   type,
   className,
   disabled,
-  action,
+  color,
   outlined,
   onClick,
 }) {
-  let color = outlined ? colors[action] : colors['bg']
-  let bgColor = outlined ? colors['bg'] : colors[action]
+  let textColor = outlined ? colors[color] : colors['bg']
+  let bgColor = outlined ? colors['bg'] : colors[color]
+  let bdColor = outlined ? textColor : bgColor
 
   if (disabled) {
     color = outlined ? colors['disabled'] : colors['bg']
@@ -41,8 +46,9 @@ export default function Button({
       type={type}
       data-testid="button"
       className={className}
-      color={color}
+      textColor={textColor}
       bgColor={bgColor}
+      bdColor={bdColor}
       onClick={onClick}
     >
       {children}
@@ -54,7 +60,7 @@ const ButtonStyled = styled.button`
   padding: 5px 10px;
   font-size: 1.4rem;
   border-radius: 5px;
-  border: 1px solid ${({ color }) => color};
+  border: 1px solid ${({ bdColor }) => bdColor};
   background-color: ${({ bgColor }) => bgColor};
-  color: ${({ color }) => color};
+  color: ${({ textColor }) => textColor};
 `
