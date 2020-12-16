@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import AppHeader from '../app/AppHeader'
+import AppHeader from '../../app/AppHeader'
 import {
   AddIconButton,
   BackIconButton,
   EditIconButton,
-} from '../app/buttons/IconButtons/'
+} from '../../app/buttons/IconButtons'
 
 EditOverview.propTypes = {
   history: PropTypes.object.isRequired,
