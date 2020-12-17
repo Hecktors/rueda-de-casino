@@ -30,8 +30,7 @@ const OverlayStyled = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: grid;
-  place-items: center;
+  padding-top: 100px;
   background-color: ${({ bgColor }) => bgColor};
   z-index: ${({ zIndex }) => zIndex};
 

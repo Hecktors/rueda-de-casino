@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 import getRandomArrayElement from '../app/lib/getRandomArrayElement'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
+const songVolume = 0.3
+const moveVolume = 0.1
+const callsStart = 2000
+
 useSession.propTypes = {
   moves: PropTypes.array.isRequired,
   audios: PropTypes.array.isRequired,
@@ -19,6 +23,8 @@ export default function useSession(
 ) {
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
+  const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
+
   const musicAudioRef = useRef(null)
   const timeoutRef = useRef(null)
 
@@ -26,7 +32,7 @@ export default function useSession(
     !moves && history.push('/')
     if (isSongActive) {
       musicAudioRef.current = new Audio(musicUrl)
-      musicAudioRef.current.volume = 0.3
+      musicAudioRef.current.volume = songVolume
     }
     sessionHandler.play()
     return () => clearTimeout(timeoutRef.current)
@@ -35,7 +41,7 @@ export default function useSession(
   const sessionHandler = {
     play: () => {
       isSongActive && musicAudioRef.current.play()
-      startTimeout(5000)
+      startTimeout(callsStart)
       setIsPlaying(true)
     },
     pause: () => {
@@ -56,9 +62,8 @@ export default function useSession(
     timeoutRef.current = setTimeout(() => {
       const newCurrentMove = getRandomArrayElement(moves)
       setCurrentMove(newCurrentMove)
-      const audio = audios.find((audio) => audio.moveID === newCurrentMove._id)
-        .audioElement
-      audio.play()
+      setIsMoveDisplayed(true)
+      playAudio(newCurrentMove._id)
       timeoutRef.current = null
       startTimeout(newCurrentMove.bars * speed + speed)
     }, ms)
@@ -68,5 +73,19 @@ export default function useSession(
     clearTimeout(timeoutRef.current)
     timeoutRef.current = null
   }
-  return [sessionHandler, isPlaying, currentMove]
+
+  function playAudio(moveID) {
+    const moveAudio = audios.find((audio) => audio.moveID === moveID)
+      .audioElement
+    moveAudio.volume = moveVolume
+    moveAudio.play()
+  }
+
+  return [
+    sessionHandler,
+    isPlaying,
+    currentMove,
+    isMoveDisplayed,
+    setIsMoveDisplayed,
+  ]
 }

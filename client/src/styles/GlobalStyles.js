@@ -23,15 +23,15 @@ export default createGlobalStyle`
         --color-message: #666;
         --color-bg-message: #0f1118d9;
         /* Overlay */
-        --color-bg-overlay: rgba(0, 0, 0, 0.5);
+        --color-bg-overlay: rgba(0, 0, 0, 0.7);
         --color-bg-overlay-full: #000;
         /* Selected Moves List */
         --color-selected-movelist: #2ca3d2;
-        --color-bg-overlay-paused: rgba(0, 0, 0, 0.8);
+        --color-bg-overlay-paused: rgba(0, 0, 0, 0.85);
         /* Edit Form */
-        --color-bg-select: #8aa7ea;
+        --color-select: #ccc;
+        --color-bg-select: #0e0e15;
     }
-
     * {
         box-sizing: border-box;
         margin: 0;
