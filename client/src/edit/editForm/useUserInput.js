@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function useUserInput(pensum, id, setIsLevelInputDisplayed) {
+export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   const initState = {
     _id: null,
     name: '',
@@ -10,6 +10,8 @@ export default function useUserInput(pensum, id, setIsLevelInputDisplayed) {
     videoStart: '',
   }
   const [userInput, setUserInput] = useState(initState)
+  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
+  const isValid = userInput.name && userInput.levelName && userInput.bars
 
   useEffect(() => {
     const move = pensum
@@ -29,23 +31,27 @@ export default function useUserInput(pensum, id, setIsLevelInputDisplayed) {
 
   function resetUserInput() {
     setUserInput(initState)
+    setIsNewLevelSelected(false)
   }
 
   function updateUserInput(event) {
-    const { name, value } = event.target
-    if (name === 'levelName' && value === 'new Level') {
-      setIsLevelInputDisplayed(true)
-    }
-    if (name === 'levelName' && value !== 'new Level') {
-      setIsLevelInputDisplayed(false)
-    }
-
-    if (name === 'new Level') {
-      setUserInput({ ...userInput, levelName: value })
-    } else {
-      setUserInput({ ...userInput, [name]: value })
-    }
+    event.target.name === 'levelName' && setIsNewLevelSelected(false)
+    const key =
+      event.target.name === 'newLevel' ? 'levelName' : event.target.name
+    setUserInput({ ...userInput, [key]: event.target.value })
   }
 
-  return [userInput, updateUserInput, resetUserInput]
+  function openNewLevelInput() {
+    setIsNewLevelSelected(true)
+    setUserInput({ ...userInput, levelName: '' })
+  }
+
+  return [
+    userInput,
+    updateUserInput,
+    resetUserInput,
+    openNewLevelInput,
+    hasNoChanges,
+    isValid,
+  ]
 }

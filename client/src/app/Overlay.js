@@ -2,13 +2,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 Overlay.propTypes = {
-  children: PropTypes.array.isRequired,
   fullCovered: PropTypes.bool,
   paused: PropTypes.bool,
 }
 
 export default function Overlay({ children, fullCovered, paused }) {
-  const zIndex = fullCovered ? 999 : 99
+  const zIndex = fullCovered ? 9999 : 99
   const bgColor = paused
     ? 'var(--color-bg-overlay-paused)'
     : fullCovered
@@ -30,8 +29,7 @@ const OverlayStyled = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: grid;
-  place-items: center;
+  padding-top: 100px;
   background-color: ${({ bgColor }) => bgColor};
   z-index: ${({ zIndex }) => zIndex};
 
