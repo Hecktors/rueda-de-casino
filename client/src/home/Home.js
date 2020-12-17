@@ -9,7 +9,7 @@ import {
   EditIconButton,
   PlayIconButton,
   ResetIconButton,
-} from '../app/buttons/IconButtons'
+} from '../app/buttons/IconButtons/IconButtons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
