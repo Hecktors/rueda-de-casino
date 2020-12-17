@@ -58,17 +58,19 @@ export default function Home({
               />
             ))}
           </div>
-          <InputPlaySong
-            isSongActive={appState.isSongActive}
-            updateAppState={updateAppState}
-          />
-          {!isSongActive && (
-            <InputSongSpeed
-              isSongActive={isSongActive}
-              speed={speed}
+          <div className="form-group-container">
+            <InputPlaySong
+              isSongActive={appState.isSongActive}
               updateAppState={updateAppState}
             />
-          )}
+            {!isSongActive && (
+              <InputSongSpeed
+                isSongActive={isSongActive}
+                speed={speed}
+                updateAppState={updateAppState}
+              />
+            )}
+          </div>
         </form>
       </MainStyled>
 
@@ -90,6 +92,7 @@ export default function Home({
 const MainStyled = styled.main`
   padding: 10px;
   padding-top: 40px;
+
   .level-container {
     display: grid;
     grid-template-columns: ${(props) =>
@@ -97,7 +100,9 @@ const MainStyled = styled.main`
     align-items: start;
     gap: 5px;
   }
-
+  .form-group-container {
+    height: 130px;
+  }
   .btn-update {
     width: 50%;
     margin: 50px 0;

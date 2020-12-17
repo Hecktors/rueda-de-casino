@@ -46,6 +46,10 @@ export default createGlobalStyle`
         font-size: 112.5%;
         color:  var(--color-text);
         background-color: var(--color-bg);
+        background-image: url('./assets/img/dancing.svg');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     #root {
