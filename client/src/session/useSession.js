@@ -4,8 +4,8 @@ import getRandomArrayElement from '../app/lib/getRandomArrayElement'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
 const songVolume = 0.3
-const moveVolume = 0.1
-const callsStart = 2000
+const moveVolume = 0.8
+const callsStart = 5000
 
 useSession.propTypes = {
   moves: PropTypes.array.isRequired,

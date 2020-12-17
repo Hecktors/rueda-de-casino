@@ -66,17 +66,17 @@ export default function Session({
 
       <main className="dark no-bg-img">
         <Overlay paused={!isPlaying}>
-          <CSSTransition
-            in={isMoveDisplayed}
-            timeout={4000}
-            classNames="fade"
-            unmountOnExit
-            onMountOnExit={true}
-            onEntered={() => setIsMoveDisplayed(false)}
-          >
-            <CurrentMove name={currentMove.name} />
-          </CSSTransition>
-          {!isPlaying && (
+          {isPlaying ? (
+            <CSSTransition
+              in={isMoveDisplayed}
+              timeout={2000}
+              classNames="fade"
+              onMountOnExit={true}
+              onEntered={() => setIsMoveDisplayed(false)}
+            >
+              <CurrentMove name={currentMove.name} />
+            </CSSTransition>
+          ) : (
             <SelectedMoveList moves={moves} onClick={setYoutubeVideoOjb} />
           )}
         </Overlay>

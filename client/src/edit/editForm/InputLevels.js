@@ -5,6 +5,7 @@ import { ArrowRightIcon, ArrowDownIcon } from '../../app/Icons/Icons'
 
 InputLevels.propTypes = {
   selectedLevelName: PropTypes.string.isRequired,
+  isNewLevelSelected: PropTypes.bool.isRequired,
   pensum: PropTypes.array.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
@@ -15,11 +16,12 @@ export default function InputLevels({
   isNewLevelSelected,
   updateUserInput,
 }) {
-  const [isOpen, setIsOpen] = useState()
+  const [isOpen, setIsOpen] = useState(false)
   const ulHeight = isOpen ? 'auto' : 0
   const bdRdButtom = isOpen ? 0 : '5px'
-  const header = isNewLevelSelected ? 'New Level' : selectedLevelName
-
+  const header = isNewLevelSelected
+    ? 'New Level'
+    : selectedLevelName.toUpperCase()
   function toogleInputLevels() {
     setIsOpen(!isOpen)
   }

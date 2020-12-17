@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-CurrentMove.propTypes = { name: PropTypes.string.isRequired }
+CurrentMove.propTypes = { name: PropTypes.string }
 
 export default function CurrentMove({ name }) {
   return <NameWrapper>{name}</NameWrapper>
@@ -9,7 +9,7 @@ export default function CurrentMove({ name }) {
 
 const NameWrapper = styled.div`
   width: 100%;
-  margin-top: -20vh;
+  margin-top: 15vh;
   text-align: center;
   font-family: 'Molle', cursive;
   font-size: 4rem;
@@ -31,7 +31,7 @@ const NameWrapper = styled.div`
   }
   &.fade-exit-active {
     opacity: 0;
-    transition: opacity 2000ms;
+    transition: opacity 3000ms;
   }
   &.fade-exit-done {
     opacity: 0;

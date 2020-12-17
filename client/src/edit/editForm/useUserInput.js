@@ -10,6 +10,8 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
     videoStart: '',
   }
   const [userInput, setUserInput] = useState(initState)
+  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
+  const isValid = userInput.name && userInput.levelName && userInput.bars
 
   useEffect(() => {
     const move = pensum
@@ -29,12 +31,13 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
 
   function resetUserInput() {
     setUserInput(initState)
+    setIsNewLevelSelected(false)
   }
 
   function updateUserInput(event) {
+    event.target.name === 'levelName' && setIsNewLevelSelected(false)
     const key =
       event.target.name === 'newLevel' ? 'levelName' : event.target.name
-    key === 'levelName' && setIsNewLevelSelected(false)
     setUserInput({ ...userInput, [key]: event.target.value })
   }
 
@@ -43,5 +46,12 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
     setUserInput({ ...userInput, levelName: '' })
   }
 
-  return [userInput, updateUserInput, resetUserInput, openNewLevelInput]
+  return [
+    userInput,
+    updateUserInput,
+    resetUserInput,
+    openNewLevelInput,
+    hasNoChanges,
+    isValid,
+  ]
 }

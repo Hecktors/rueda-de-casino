@@ -39,6 +39,7 @@ export default function Button({
   if (disabled) {
     color = outlined ? colors['disabled'] : colors['bg']
     bgColor = outlined ? colors['bg'] : colors['disabled']
+    bdColor = colors['disabled']
   }
 
   return (
