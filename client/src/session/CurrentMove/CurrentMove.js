@@ -14,4 +14,26 @@ const NameWrapper = styled.div`
   font-family: 'Molle', cursive;
   font-size: 4rem;
   color: var(--color-primary);
+
+  &.fade-enter {
+    transform: scale(0);
+  }
+  &.fade-enter-active {
+    transform: scale(1);
+    transition: transform 500ms;
+  }
+  &.fade-enter-done {
+    transform: scale(1);
+  }
+
+  &.fade-exit {
+    opacity: 1;
+  }
+  &.fade-exit-active {
+    opacity: 0;
+    transition: opacity 2000ms;
+  }
+  &.fade-exit-done {
+    opacity: 0;
+  }
 `

@@ -21,7 +21,7 @@ export default function EditOverview({ history, pensum }) {
           size={'md'}
           onClick={() => history.push('/')}
         />
-        <h1>Edit Overview</h1>
+        <h1>Moves Overview</h1>
       </AppHeader>
 
       <UpdateStyled>

@@ -9,22 +9,20 @@ export default function YoutubeVideo({ video }) {
   const url = `${video.url}`
 
   return (
-    <div className="player-wrapper">
-      <ReactPlayer
-        data-testid="video"
-        url={url}
-        className="bg-video"
-        playing={true}
-        loop={true}
-        width="100%"
-        config={{
-          youtube: {
-            playerVars: {
-              start: video.start,
-            },
+    <ReactPlayer
+      data-testid="video"
+      url={url}
+      className="bg-video"
+      playing={true}
+      loop={true}
+      width="100%"
+      config={{
+        youtube: {
+          playerVars: {
+            start: video.start,
           },
-        }}
-      />
-    </div>
+        },
+      }}
+    />
   )
 }
