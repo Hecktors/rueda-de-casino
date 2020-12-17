@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 Overlay.propTypes = {
-  children: PropTypes.array.isRequired,
   fullCovered: PropTypes.bool,
   paused: PropTypes.bool,
 }

@@ -34,6 +34,8 @@ export default function EditForm({
     updateUserInput,
     resetUserInput,
     openNewLevelInput,
+    hasNoChanges,
+    isValid,
   ] = useUserInput(pensum, id, setIsNewLevelSelected)
 
   function handleSubmit(e, moveToDelID) {
@@ -53,6 +55,7 @@ export default function EditForm({
         color={'tertiary'}
         size={'md'}
         className="top-left"
+        disabled={hasNoChanges}
       />
       <h2>EDIT</h2>
       {id && (
@@ -173,7 +176,11 @@ export default function EditForm({
         >
           Cancel
         </Button>
-        <Button onClick={() => {}} color={'primary'}>
+        <Button
+          onClick={() => {}}
+          color={'primary'}
+          disabled={hasNoChanges || !isValid}
+        >
           Save
         </Button>
       </div>
