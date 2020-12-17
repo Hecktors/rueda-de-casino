@@ -29,10 +29,10 @@ const SelectedMoveListStyled = styled.ul`
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
   display: grid;
   gap: 10px;
-  transform: translateY(-20vh);
+  /* transform: translateY(-20vh); */
 
   li {
     padding-left: 24px;

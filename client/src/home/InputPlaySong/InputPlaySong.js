@@ -30,6 +30,7 @@ export default function FormInputPlaySong({ updateAppState, isSongActive }) {
 }
 
 const FormInputPlaySongStyled = styled.div`
+  width: 100%;
   position: relative;
   max-width: 400px;
   margin: 0 auto;

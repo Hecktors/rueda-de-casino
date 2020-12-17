@@ -79,7 +79,6 @@ const InputLevelStyled = styled.div`
     svg {
       transform: scale(1.5);
       fill: ${({ color }) => color};
-      fill: var(--color-text);
     }
   }
 

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import useSession from './useSession'
+import { CSSTransition } from 'react-transition-group'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
 import Overlay from '../app/Overlay'
@@ -30,29 +31,28 @@ export default function Session({
   speed,
   isSongActive,
 }) {
-  const [sessionHandler, isPlaying, currentMove] = useSession(
-    history,
-    moves,
-    audios,
-    speed,
-    isSongActive
-  )
+  const [
+    sessionHandler,
+    isPlaying,
+    currentMove,
+    isMoveDisplayed,
+    setIsMoveDisplayed,
+  ] = useSession(history, moves, audios, speed, isSongActive)
 
-  const [video, setVideo] = useState({})
+  const [YoutubeVideoObj, setYoutubeVideoOjb] = useState({})
 
-  return (
+  return YoutubeVideoObj.url ? (
+    <Overlay fullCovered={!!YoutubeVideoObj.url}>
+      <CancelIconButton
+        onClick={() => setYoutubeVideoOjb({})}
+        className="top-right"
+        color={'text'}
+        size={'md'}
+      />
+      <YoutubeVideo video={YoutubeVideoObj} />
+    </Overlay>
+  ) : (
     <>
-      {video.url && (
-        <Overlay fullCovered={video.url}>
-          <CancelIconButton
-            onClick={() => setVideo({})}
-            className="top-right"
-            color={'text'}
-            size={'md'}
-          />
-          <YoutubeVideo video={video} />
-        </Overlay>
-      )}
       <AppHeader cols={isPlaying ? '000' : '110'}>
         {!isPlaying && (
           <StopIconButton
@@ -63,23 +63,36 @@ export default function Session({
         )}
         {!isPlaying && <h1>Pause</h1>}
       </AppHeader>
+
       <main className="dark no-bg-img">
         <Overlay paused={!isPlaying}>
-          {currentMove._id && <CurrentMove name={currentMove.name} />}
-          {!isPlaying && <SelectedMoveList moves={moves} onClick={setVideo} />}
+          {isPlaying ? (
+            <CSSTransition
+              in={isMoveDisplayed}
+              timeout={2000}
+              classNames="fade"
+              onMountOnExit={true}
+              onEntered={() => setIsMoveDisplayed(false)}
+            >
+              <CurrentMove name={currentMove.name} />
+            </CSSTransition>
+          ) : (
+            <SelectedMoveList moves={moves} onClick={setYoutubeVideoOjb} />
+          )}
         </Overlay>
         <BackgroundVideo isPlaying={isPlaying} />
       </main>
+
       <AppFooter>
         {isPlaying ? (
-          <PlayIconButton
-            onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
+          <PauseIconButton
+            onClick={sessionHandler.pause}
             color={'tertiary'}
             size={'lg'}
           />
         ) : (
-          <PauseIconButton
-            onClick={isPlaying ? sessionHandler.pause : sessionHandler.play}
+          <PlayIconButton
+            onClick={sessionHandler.play}
             color={'tertiary'}
             size={'lg'}
           />
