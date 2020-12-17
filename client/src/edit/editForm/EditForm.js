@@ -6,7 +6,7 @@ import {
   AddIconButton,
   DeleteIconButton,
   ResetIconButton,
-} from '../../app/buttons/IconButtons'
+} from '../../app/buttons/IconButtons/IconButtons'
 import InputLevels from './InputLevels'
 import useUserInput from './useUserInput'
 
