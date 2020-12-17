@@ -28,6 +28,7 @@ export default function Home({
 }) {
   const { selectedMoveIDs, speed, isSongActive } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
+
   return (
     <>
       <AppHeader cols="111">
