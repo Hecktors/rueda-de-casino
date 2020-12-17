@@ -14,7 +14,7 @@ import {
   PauseIconButton,
   PlayIconButton,
   StopIconButton,
-} from '../app/buttons/IconButtons'
+} from '../app/buttons/IconButtons/IconButtons'
 
 Session.propTypes = {
   history: PropTypes.object.isRequired,

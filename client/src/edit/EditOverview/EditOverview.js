@@ -5,7 +5,7 @@ import {
   AddIconButton,
   BackIconButton,
   EditIconButton,
-} from '../../app/buttons/IconButtons'
+} from '../../app/buttons/IconButtons/IconButtons'
 
 EditOverview.propTypes = {
   history: PropTypes.object.isRequired,
