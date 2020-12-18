@@ -5,16 +5,16 @@ import { CSSTransition } from 'react-transition-group'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
 import Overlay from '../app/Overlay'
-import BackgroundVideo from './BackgroundVideo/BackgroundVideo'
-import CurrentMove from './CurrentMove/CurrentMove'
-import SelectedMoveList from './SelectedMoveList/SelectedMoveList'
-import YoutubeVideo from './YoutubeVideo/YoutubeVideo'
+import BackgroundVideo from './BackgroundVideo'
+import CurrentMove from './CurrentMove'
+import SelectedMoveList from './SelectedMoveList'
+import YoutubeVideo from './YoutubeVideo'
 import {
   CancelIconButton,
   PauseIconButton,
   PlayIconButton,
   StopIconButton,
-} from '../app/buttons/IconButtons/IconButtons'
+} from '../app/buttons/IconButtons'
 
 Session.propTypes = {
   history: PropTypes.object.isRequired,

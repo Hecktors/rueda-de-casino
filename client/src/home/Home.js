@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
 import InputLevel from './InputLevel'
-import InputPlaySong from './InputPlaySong/InputPlaySong'
-import InputSongSpeed from './InputSongSpeed/InputSongSpeed'
+import InputPlaySong from './InputPlaySong'
+import InputSongSpeed from './InputSongSpeed'
 import {
   EditIconButton,
   PlayIconButton,
   ResetIconButton,
-} from '../app/buttons/IconButtons/IconButtons'
+} from '../app/buttons/IconButtons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,

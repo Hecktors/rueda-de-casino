@@ -10,6 +10,8 @@ import { ReactComponent as PlayIcon } from './assets/play.svg'
 import { ReactComponent as SettingsIcon } from './assets/settings.svg'
 import { ReactComponent as StopIcon } from './assets/stop-circle.svg'
 import { ReactComponent as DeleteIcon } from './assets/delete_outline.svg'
+import { ReactComponent as YoutubeIcon } from './assets/youtube.svg'
+import { ReactComponent as YoutubeGreyIcon } from './assets/youtube-grey.svg'
 
 export {
   AddIcon,
@@ -24,4 +26,6 @@ export {
   SettingsIcon,
   StopIcon,
   DeleteIcon,
+  YoutubeIcon,
+  YoutubeGreyIcon,
 }
