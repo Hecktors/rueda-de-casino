@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import Button from '../../app/buttons/Button'
+import { CancelButton, SaveButton } from '../../app/buttons/Buttons'
+
 import {
   AddIconButton,
   DeleteIconButton,
@@ -150,6 +151,7 @@ export default function EditForm({
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="">Start at sec</label>
           <input
@@ -167,22 +169,12 @@ export default function EditForm({
       </div>
 
       <div className="button-container">
-        <Button
+        <CancelButton
           onClick={() => {
             history.push('/edit-overview')
           }}
-          color={'tertiary'}
-          outlined
-        >
-          Cancel
-        </Button>
-        <Button
-          onClick={() => {}}
-          color={'primary'}
-          disabled={hasNoChanges || !isValid}
-        >
-          Save
-        </Button>
+        />
+        <SaveButton onClick={() => {}} disabled={hasNoChanges || !isValid} />
       </div>
     </EditFormStyled>
   )

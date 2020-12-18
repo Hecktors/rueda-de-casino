@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { getLocalStorage, setLocalStorage } from './services/localStorage'
+import { getLocalStorage, setLocalStorage } from './lib/localStorage'
 import getAudios from './services/getAudios'
 import {
   fetchGetPensum,
