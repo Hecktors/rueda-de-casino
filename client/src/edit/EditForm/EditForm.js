@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { CancelButton, SaveButton } from '../../app/buttons/Buttons'
+
 import {
   AddIconButton,
   DeleteIconButton,
@@ -150,6 +151,7 @@ export default function EditForm({
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="">Start at sec</label>
           <input
