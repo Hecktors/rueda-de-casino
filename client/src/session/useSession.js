@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import getRandomArrayElement from '../app/lib/getRandomArrayElement'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
-const songVolume = 0.3
+const songVolume = 0.2
 const moveVolume = 0.8
 const callsStart = 5000
 
