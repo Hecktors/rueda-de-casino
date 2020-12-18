@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from './services/localStorage'
+import { getLocalStorage, setLocalStorage } from './lib/localStorage'
 
 const STORAGE_KEY = 'appState'
 
@@ -13,11 +13,14 @@ export default function useAppState(pensum) {
   const [appState, setAppState] = useState(initState)
 
   useEffect(() => {
-    setAppState(getLocalStorage(STORAGE_KEY) ?? initState)
+    setAppState(getLocalStorage(STORAGE_KEY) || initState)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setLocalStorage(STORAGE_KEY, appState)
+    JSON.stringify(appState) !== JSON.stringify(initState) &&
+      JSON.stringify(appState) !==
+        JSON.stringify(getLocalStorage('appState')) &&
+      setLocalStorage(STORAGE_KEY, appState)
   }, [appState])
 
   const selectedMoves = appState.selectedMoveIDs
