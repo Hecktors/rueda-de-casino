@@ -1,6 +1,6 @@
 import axios from 'axios'
 const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
-console.log(process.env.REACT_APP_BASE)
+
 // Get all moves
 export async function fetchGetPensum() {
   return axios
