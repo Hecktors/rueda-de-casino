@@ -1,10 +1,10 @@
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useAppState from './useAppState'
 import useData from './useData'
-import Home from '../home/Home'
-import Session from '../session/Session'
-import EditForm from '../edit/EditForm/EditForm'
-import EditOverview from '../edit/EditOverview/EditOverview'
+import Home from '../home'
+import Session from '../session'
+import EditForm from '../edit/EditForm'
+import EditOverview from '../edit/EditOverview'
 
 export default function App() {
   const [pensum, addMove, updateMove, deleteMove, audios] = useData()
@@ -69,6 +69,7 @@ export default function App() {
             />
           )}
         />
+        <Redirect to="/" />
       </Switch>
     </div>
   )

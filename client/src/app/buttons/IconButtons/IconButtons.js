@@ -11,6 +11,10 @@ import {
 } from '../../Icons'
 import IconButton from './IconButton'
 
+/**
+ * @visibleName IconButtons
+ */
+
 export const PlayIconButton = (props) => (
   <IconButton {...props}>
     <PlayIcon />

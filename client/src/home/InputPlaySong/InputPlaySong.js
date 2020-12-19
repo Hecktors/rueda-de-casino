@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-FormInputPlaySong.propTypes = {
+InputPlaySong.propTypes = {
   updateAppState: PropTypes.func.isRequired,
   isSongActive: PropTypes.bool.isRequired,
 }
 
-export default function FormInputPlaySong({ updateAppState, isSongActive }) {
+export default function InputPlaySong({ updateAppState, isSongActive }) {
   return (
     <FormInputPlaySongStyled>
       <input

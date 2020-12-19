@@ -29,7 +29,6 @@ export default function useSession(
   const timeoutRef = useRef(null)
 
   useEffect(() => {
-    !moves && history.push('/')
     if (isSongActive) {
       musicAudioRef.current = new Audio(musicUrl)
       musicAudioRef.current.volume = songVolume
@@ -40,9 +39,11 @@ export default function useSession(
 
   const sessionHandler = {
     play: () => {
-      isSongActive && musicAudioRef.current.play()
-      startTimeout(callsStart)
-      setIsPlaying(true)
+      if (moves.length) {
+        isSongActive && musicAudioRef.current.play()
+        startTimeout(callsStart)
+        setIsPlaying(true)
+      }
     },
     pause: () => {
       isSongActive && musicAudioRef.current.pause()

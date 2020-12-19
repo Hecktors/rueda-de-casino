@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-FormInputSongSpeed.protoTypes = {
+InputSongSpeed.protoTypes = {
   speed: PropTypes.number.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
-export default function FormInputSongSpeed({ speed, updateAppState }) {
+export default function InputSongSpeed({ speed, updateAppState }) {
   return (
     <FormInputSongSpeedStyled className="range-input-container">
       <label htmlFor="speed">Song Speed</label>

@@ -1,9 +1,9 @@
 ```jsx
-<FormInputLevel
+<InputLevel
   levelName="level"
   levelMoves={[
     {
-      id: 'm1',
+      _id: 'm1',
       name: 'la prima',
       steps: 2,
       filename: 'la_prima.mp3',
@@ -11,7 +11,7 @@
       videoStart: '20',
     },
     {
-      id: 'm3',
+      _id: 'm3',
       name: 'sombrero con una mano',
       steps: 2,
       filename: 'sombrero_con_una_mano.mp3',
@@ -19,14 +19,14 @@
       videoStart: '1',
     },
   ]}
-  moveIDs={[]}
+  selectedMoveIDs={[]}
   updateUserInput={() => {}}
-/>
-<FormInputLevel
+/><br/>
+<InputLevel
   levelName="level"
   levelMoves={[
     {
-      id: 'm1',
+      _id: 'm1',
       name: 'la prima',
       steps: 2,
       filename: 'la_prima.mp3',
@@ -34,7 +34,7 @@
       videoStart: '20',
     },
     {
-      id: 'm3',
+      _id: 'm3',
       name: 'sombrero con una mano',
       steps: 2,
       filename: 'sombrero_con_una_mano.mp3',
@@ -42,7 +42,6 @@
       videoStart: '1',
     },
   ]}
-  moveIDs={['m1', 'm3']}
-  updateUserInput={() => {}}
+  selectedMoveIDs={['m1', 'm3']}
 />
 ```

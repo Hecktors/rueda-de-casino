@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 import AppFooter from '../app/AppFooter'
 import AppHeader from '../app/AppHeader'
 import InputLevel from './InputLevel'
-import InputPlaySong from './InputPlaySong/InputPlaySong'
-import InputSongSpeed from './InputSongSpeed/InputSongSpeed'
+import InputPlaySong from './InputPlaySong'
+import InputSongSpeed from './InputSongSpeed'
 import {
   EditIconButton,
   PlayIconButton,
   ResetIconButton,
-} from '../app/buttons/IconButtons/IconButtons'
+} from '../app/buttons/IconButtons'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
@@ -34,14 +34,12 @@ export default function Home({
       <AppHeader cols="111">
         <ResetIconButton
           onClick={resetAppState}
-          color={'tertiary'}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
         <EditIconButton
           onClick={() => history.push('/edit-overview')}
-          color={'tertiary'}
           size={'sm'}
         />
       </AppHeader>
@@ -81,7 +79,6 @@ export default function Home({
         <PlayIconButton
           type={'button'}
           onClick={() => history.push('/session')}
-          color={'tertiary'}
           size={'lg'}
           disabled={hasNotEnoughMoves}
         />
