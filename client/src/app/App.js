@@ -12,10 +12,13 @@ export default function App() {
     pensum
   )
   const location = useLocation()
-  const classes = location.pathname === '/session' ? 'dark' : ''
+  const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
 
   return (
-    <div className={`App ${classes}`}>
+    <div className={`App${classes}`}>
+      <div className="desktop-only">
+        This application is optimized for mobile devices.
+      </div>
       <Switch>
         <Route
           exact

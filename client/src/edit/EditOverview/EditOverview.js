@@ -48,7 +48,6 @@ export default function EditOverview({ history, pensum }) {
 }
 
 const UpdateStyled = styled.main`
-  position: relative;
   width: 100%;
   padding: 10px;
   padding-bottom: 50px;
@@ -74,7 +73,7 @@ const UpdateStyled = styled.main`
   }
 
   .add-button {
-    position: fixed;
+    position: absolute;
     bottom: 15px;
     right: 15px;
   }
