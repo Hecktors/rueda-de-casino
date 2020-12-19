@@ -39,12 +39,12 @@ export default function Session({
     setIsMoveDisplayed,
   ] = useSession(history, moves, audios, speed, isSongActive)
 
-  const [YoutubeVideoObj, setYoutubeVideoOjb] = useState({})
+  const [YoutubeVideoObj, setYoutubeVideoObj] = useState({})
 
   return YoutubeVideoObj.url ? (
     <Overlay fullCovered={!!YoutubeVideoObj.url}>
       <CancelIconButton
-        onClick={() => setYoutubeVideoOjb({})}
+        onClick={() => setYoutubeVideoObj({})}
         className="top-right"
         color={'text'}
         size={'md'}
@@ -77,7 +77,7 @@ export default function Session({
               <CurrentMove name={currentMove.name} />
             </CSSTransition>
           ) : (
-            <SelectedMoveList moves={moves} onClick={setYoutubeVideoOjb} />
+            <SelectedMoveList moves={moves} onClick={setYoutubeVideoObj} />
           )}
         </Overlay>
         <BackgroundVideo isPlaying={isPlaying} />
