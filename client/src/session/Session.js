@@ -39,6 +39,7 @@ export default function Session({
     setIsMoveDisplayed,
   ] = useSession(history, moves, audios, speed, isSongActive)
 
+  !moves.length && history.push('/')
   const [YoutubeVideoObj, setYoutubeVideoObj] = useState({})
 
   return YoutubeVideoObj.url ? (
