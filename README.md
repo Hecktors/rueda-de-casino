@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+#
+# Salsa time! - Learn Rueda de Casino
+ ![](./assets/img/salsa_dancing_banner.jpg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## <code>Description</code>
 
-## Available Scripts
+### Indroduction
+<br/>
+At the Rueda De Casino, the moves of Cuban Salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
+The whole thing is not a choreography, it happens out of the spontaneity of the announcer.
+With up to 200 dance figures, a lot of training is required to master the dance figures and to have the appropriate move ready when it's called up. </br> </br>
 
-In the project directory, you can run:
+### What does the app?
+The application simulates this announcer. To drill the reaction and the dance figures you make a selection of moves. In the session it calls up a random one and after a break, whose length depends on the size of this figure, the next.
 
-### `npm start`
+### Features
+- Create, update, delete moves
+- Audio files for each move name are created by google-text-to-speech plugin
+- Make a selection of moves to train
+- Youtube videos for moves are callable if available
+- In session mode selected moves are called randomly both visually and acoustically
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+</br>
 
-### `npm test`
+# ![](./assets/img/readme_mock.jpg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### <code>Demo</code>
 
-### `npm run build`
+A hosted version can be found here:
+[salsa-time.herokuapp.com](https://salsa-time.herokuapp.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## <code>Tech Stack</code>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- React Router
+- React Hooks
+- Styled Components
+- Node.js
+- Express
+- Heroku
+- Styleguidist
+- Jest
+- Cypress
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## <code>Project setup</code>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Clone this repository
+- Enter the created folder:
+<code>cd &lt;repoitory name&gt;</code>
+- Install all npm dependencies server side:
+<code>npm install</code>
+- Install all npm dependencies client side:
+<code>cd client && npm install && cd..</code>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Create on [www.mongodb.com](https://www.mongodb.com/) a database called 'salsaApp'
+- Copy its connection string
+- Create a <code>.env</code> file on project root level and asign the connection string to a <code>ATLAS_URI</code> key
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Start server and client:
+<code>npm run dev</code>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- To run Styleguidist use <code>npm run styleguide</code>
+- To run Jest unit tests use <code>npm test</code>
+- To run Cypress tests use <code>npm run cypress</code>
