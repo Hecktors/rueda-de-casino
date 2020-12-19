@@ -16,7 +16,14 @@ module.exports = {
   defaultExample: true,
   exampleMode: 'expand',
   usageMode: 'expand',
-  components: ['src/app/buttons/[A-Z]*/[A-Z]*.js'],
+  components: [
+    'src/app/buttons/[A-Z]*/[A-Z]*.js',
+    'src/home/InputLevel/[A-Z]*.js',
+    'src/home/InputPlaySong/[A-Z]*.js',
+    'src/home/InputSongSpeed/[A-Z]*.js',
+    'src/session/CurrentMove/[A-Z]*.js',
+    'src/session/SelectedMoveList/[A-Z]*.js',
+  ],
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'src/styles/StyleWrapper'),
   },

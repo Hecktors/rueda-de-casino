@@ -13,5 +13,5 @@ export default function StyleWrapper({ children }) {
 }
 
 const WrapperStyled = styled.div`
-  padding: 20px; ;
+  padding: 15px; ;
 `
