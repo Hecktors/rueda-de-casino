@@ -53,7 +53,10 @@ export default function Session({
     </Overlay>
   ) : (
     <>
-      <AppHeader cols={isPlaying ? '000' : '110'}>
+      <AppHeader
+        cols={isPlaying ? '000' : '110'}
+        className={!isPlaying ? 'dark' : ''}
+      >
         {!isPlaying && (
           <StopIconButton onClick={sessionHandler.stop} size={'md'} />
         )}
@@ -79,7 +82,7 @@ export default function Session({
         <BackgroundVideo isPlaying={isPlaying} />
       </main>
 
-      <AppFooter>
+      <AppFooter className={!isPlaying ? 'dark' : ''}>
         {isPlaying ? (
           <PauseIconButton onClick={sessionHandler.pause} size={'lg'} />
         ) : (

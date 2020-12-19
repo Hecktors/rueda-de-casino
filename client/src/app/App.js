@@ -12,10 +12,10 @@ export default function App() {
     pensum
   )
   const location = useLocation()
-  const classes = location.pathname === '/session' ? 'dark' : ''
+  // const classes = location.pathname === '/session' ? 'dark' : ''
 
   return (
-    <div className={`App ${classes}`}>
+    <div className="App">
       <Switch>
         <Route
           exact

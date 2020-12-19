@@ -61,10 +61,22 @@ export default createGlobalStyle`
         position: relative;
         height: 100%;
         width: 100%;
-        max-width: 800px;
+        max-width: 736px;
         margin: auto;
         display: grid;
         grid-template-rows: 100px auto 100px;
+    }
+    @media (orientation: landscape) {
+        .App {
+            max-height: 414px !important;
+            grid-template-rows: 80px auto 80px;
+        }
+        main {
+            padding-top: 0 !important
+        }
+        .msg-container {
+            background-color: transparent !important;
+        }
     }
 
     main { 

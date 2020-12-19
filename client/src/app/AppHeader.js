@@ -3,9 +3,10 @@ import styled from 'styled-components/macro'
 
 Header.propTypes = {
   cols: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
-export default function Header({ cols, children }) {
+export default function Header({ cols, className, children }) {
   if (!children.isArray) {
     children = [children]
   }
@@ -24,7 +25,7 @@ export default function Header({ cols, children }) {
   let colRight = hasColRight ? children[indexLeft] : <Placeholder />
 
   return (
-    <HeaderStyled>
+    <HeaderStyled className={className}>
       {colLeft}
       {colCenter}
       {colRight}
@@ -33,7 +34,7 @@ export default function Header({ cols, children }) {
 }
 
 const HeaderStyled = styled.header`
-  height: 80px;
+  /* height: 80px; */
   position: relative;
   display: grid;
   grid-template-columns: 40px auto 40px;
