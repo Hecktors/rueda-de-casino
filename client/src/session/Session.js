@@ -47,7 +47,6 @@ export default function Session({
       <CancelIconButton
         onClick={() => setYoutubeVideoObj({})}
         className="top-right"
-        color={'text'}
         size={'md'}
       />
       <YoutubeVideo video={YoutubeVideoObj} />
@@ -56,11 +55,7 @@ export default function Session({
     <>
       <AppHeader cols={isPlaying ? '000' : '110'}>
         {!isPlaying && (
-          <StopIconButton
-            onClick={sessionHandler.stop}
-            color={'tertiary'}
-            size={'md'}
-          />
+          <StopIconButton onClick={sessionHandler.stop} size={'md'} />
         )}
         {!isPlaying && <h1>Pause</h1>}
       </AppHeader>
@@ -86,17 +81,9 @@ export default function Session({
 
       <AppFooter>
         {isPlaying ? (
-          <PauseIconButton
-            onClick={sessionHandler.pause}
-            color={'tertiary'}
-            size={'lg'}
-          />
+          <PauseIconButton onClick={sessionHandler.pause} size={'lg'} />
         ) : (
-          <PlayIconButton
-            onClick={sessionHandler.play}
-            color={'tertiary'}
-            size={'lg'}
-          />
+          <PlayIconButton onClick={sessionHandler.play} size={'lg'} />
         )}
       </AppFooter>
     </>

@@ -52,7 +52,6 @@ export default function EditForm({
       <ResetIconButton
         type={'button'}
         onClick={resetUserInput}
-        color={'tertiary'}
         size={'md'}
         className="top-left"
         disabled={hasNoChanges}
@@ -62,7 +61,6 @@ export default function EditForm({
         <DeleteIconButton
           type="button"
           onClick={(e) => handleSubmit(e, id)}
-          color={'tertiary'}
           size={'md'}
           className="top-right"
         />
@@ -82,7 +80,6 @@ export default function EditForm({
             onClick={openNewLevelInput}
             type={'button'}
             size={'sm'}
-            color={'tertiary'}
             disabled={isNewLevelSelected}
           />
         </div>

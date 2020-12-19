@@ -16,11 +16,7 @@ export default function EditOverview({ history, pensum }) {
   return (
     <>
       <AppHeader cols="110">
-        <BackIconButton
-          color={'tertiary'}
-          size={'md'}
-          onClick={() => history.push('/')}
-        />
+        <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <h1>Moves Overview</h1>
       </AppHeader>
 
@@ -33,7 +29,6 @@ export default function EditOverview({ history, pensum }) {
                 <li key={move._id}>
                   {move.name}
                   <EditIconButton
-                    color={'secondary'}
                     size={'xs'}
                     onClick={() => history.push(`/edit-form/${move._id}`)}
                   />
@@ -44,7 +39,6 @@ export default function EditOverview({ history, pensum }) {
         })}
         <AddIconButton
           className="add-button"
-          color={'tertiary'}
           size={'lg'}
           onClick={() => history.push('/edit-form')}
         />

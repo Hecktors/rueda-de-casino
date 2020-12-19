@@ -19,10 +19,6 @@ const colors = {
   disabled: 'var(--color-disabled)',
 }
 
-export const LoginButton = (props) => (
-  <Button color="primary" outlined {...props} />
-)
-
 export default function Button({
   children,
   type,
