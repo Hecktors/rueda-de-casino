@@ -1,4 +1,4 @@
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useAppState from './useAppState'
 import useData from './useData'
 import Home from '../home'
@@ -69,6 +69,7 @@ export default function App() {
             />
           )}
         />
+        <Redirect to="/" />
       </Switch>
     </div>
   )
