@@ -11,7 +11,6 @@ const sizes = {
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
   onClick: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
