@@ -30,6 +30,8 @@ const BackgroundVideoStyled = styled.section`
   }
   @media (orientation: landscape) {
     overflow: hidden;
+  }
+  @media screen and (min-width: 800px) {
     .bg-video {
       position: relative;
     }
