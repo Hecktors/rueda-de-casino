@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { CancelButton, SaveButton } from '../../app/buttons/Buttons'
-
 import {
   AddIconButton,
   DeleteIconButton,
@@ -53,7 +52,6 @@ export default function EditForm({
       <ResetIconButton
         type={'button'}
         onClick={resetUserInput}
-        color={'tertiary'}
         size={'md'}
         className="top-left"
         disabled={hasNoChanges}
@@ -63,7 +61,6 @@ export default function EditForm({
         <DeleteIconButton
           type="button"
           onClick={(e) => handleSubmit(e, id)}
-          color={'tertiary'}
           size={'md'}
           className="top-right"
         />
@@ -83,7 +80,6 @@ export default function EditForm({
             onClick={openNewLevelInput}
             type={'button'}
             size={'sm'}
-            color={'tertiary'}
             disabled={isNewLevelSelected}
           />
         </div>
@@ -151,7 +147,6 @@ export default function EditForm({
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="">Start at sec</label>
           <input

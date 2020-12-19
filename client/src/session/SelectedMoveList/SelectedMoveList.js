@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { YoutubeIcon, YoutubeIconDisabled } from '../Icons/Icons'
+import { YoutubeIcon, YoutubeGreyIcon } from '../../app/Icons'
 
 SelectedMoveList.propTypes = {
   moves: PropTypes.array.isRequired,
@@ -16,7 +16,7 @@ export default function SelectedMoveList({ moves, onClick }) {
             data-testid="listitem-button"
             onClick={() => onClick({ url: videoUrl, start: videoStart })}
           >
-            <span>{videoUrl ? <YoutubeIcon /> : <YoutubeIconDisabled />}</span>
+            <span>{videoUrl ? <YoutubeIcon /> : <YoutubeGreyIcon />}</span>
             {name}
           </button>
         </li>
