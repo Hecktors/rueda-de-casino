@@ -1,5 +1,3 @@
-## Iconbuttons
-
 ```jsx
 import {
   PlayIconButton,

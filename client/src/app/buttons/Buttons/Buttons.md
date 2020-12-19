@@ -1,5 +1,3 @@
-## Buttons
-
 ```jsx
 import Button, { SaveButton, CancelButton } from './Buttons.js'
 ;<div>
