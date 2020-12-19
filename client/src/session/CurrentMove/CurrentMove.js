@@ -9,7 +9,6 @@ export default function CurrentMove({ name }) {
 
 const NameWrapper = styled.div`
   width: 100%;
-  margin-top: 10vh;
   text-align: center;
   font-family: 'Molle', cursive;
   font-size: 4rem;
@@ -35,8 +34,5 @@ const NameWrapper = styled.div`
   }
   &.fade-exit-done {
     opacity: 0;
-  }
-  @media (orientation: landscape) {
-    margin-top: 5vh;
   }
 `

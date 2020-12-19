@@ -14,7 +14,6 @@ export default createGlobalStyle`
         --color-warning: #f53030;
         /* Header */
         --color-title: #929292;
-        --color-logo: #d04b1f;
         /* Accordion */
         --color-bg-accordion: #181826;        
         --color-bg-accordion-title: #0b1644;
@@ -65,23 +64,14 @@ export default createGlobalStyle`
         margin: auto;
         display: grid;
         grid-template-rows: 100px auto 100px;
-    }
-    @media (orientation: landscape) {
-        .App {
-            max-height: 414px !important;
-            grid-template-rows: 80px auto 80px;
-        }
-        main {
-            padding-top: 0 !important
-        }
-        .msg-container {
-            background-color: transparent !important;
+
+        &.no-footer {
+        grid-template-rows: 100px auto;
         }
     }
 
     main { 
         flex-grow: 1;
-        position: relative;
         overflow-y: auto;
     }
 
@@ -101,9 +91,11 @@ export default createGlobalStyle`
     label {
         font-size: 1rem;
     }
+
     ul {
         padding: 0;
     }
+
     li {
         list-style: none;
     }
@@ -125,5 +117,32 @@ export default createGlobalStyle`
         position: absolute;
         top: 10px;
         left: 10px;
+    }
+
+    .desktop-only {
+        display: none;
+        position: absolute;
+        width:100%;
+        text-align: center;
+        top: -10vh;
+        left: 0;
+        
+    }
+
+    @media (orientation: landscape) {
+        .App {
+            max-height: 414px !important;
+            grid-template-rows: 80px auto 80px;
+        }
+
+        main {
+            padding-top: 0 !important;
+        }
+    }
+
+    @media screen and (min-width: 800px) {
+        .desktop-only {
+            display: block;
+        }
     }
 `
