@@ -16,6 +16,7 @@ export default function YoutubeVideo({ video }) {
       playing={true}
       loop={true}
       width="100%"
+      height="100%"
       config={{
         youtube: {
           playerVars: {

@@ -3,11 +3,12 @@ import styled from 'styled-components/macro'
 
 Footer.propTypes = {
   msg: PropTypes.string,
+  className: PropTypes.string,
 }
 
-export default function Footer({ msg = '', children }) {
+export default function Footer({ msg = '', className, children }) {
   return (
-    <FooterStyled>
+    <FooterStyled className={className}>
       {msg && <div className="msg-container">{msg}</div>}
       <div className="button-container">{children}</div>
     </FooterStyled>
@@ -17,7 +18,6 @@ export default function Footer({ msg = '', children }) {
 const FooterStyled = styled.footer`
   position: relative;
   z-index: 999;
-  height: 100px;
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-rows: auto;
@@ -30,7 +30,6 @@ const FooterStyled = styled.footer`
     width: 100%;
     padding: 5px 0;
     text-align: center;
-    background-color: var(--color-bg);
     color: var(--color-warning);
   }
   .button-container {
