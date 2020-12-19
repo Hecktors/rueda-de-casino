@@ -18,7 +18,6 @@ export default function Footer({ msg = '', className, children }) {
 const FooterStyled = styled.footer`
   position: relative;
   z-index: 999;
-  /* height: 100px; */
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-rows: auto;
@@ -31,7 +30,6 @@ const FooterStyled = styled.footer`
     width: 100%;
     padding: 5px 0;
     text-align: center;
-    background-color: var(--color-bg);
     color: var(--color-warning);
   }
   .button-container {

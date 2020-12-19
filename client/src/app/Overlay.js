@@ -8,7 +8,7 @@ Overlay.propTypes = {
 
 export default function Overlay({ children, fullCovered, paused }) {
   const zIndex = fullCovered ? 9999 : 99
-  const padding = fullCovered ? '0' : '100px 0'
+  const paddingBottom = fullCovered ? '0' : '20vh'
   const bgColor = paused
     ? 'var(--color-bg-overlay-paused)'
     : fullCovered
@@ -16,24 +16,30 @@ export default function Overlay({ children, fullCovered, paused }) {
     : 'var(--color-bg-overlay)'
 
   return (
-    <OverlayStyled zIndex={zIndex} bgColor={bgColor} padding={padding}>
+    <OverlayStyled
+      zIndex={zIndex}
+      bgColor={bgColor}
+      paddingBottom={paddingBottom}
+    >
       {children}
     </OverlayStyled>
   )
 }
 
 const OverlayStyled = styled.div`
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
+  position: absolute;
+  height: 100%;
+  width: 100%;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 120px 0;
   background-color: ${({ bgColor }) => bgColor};
   overflow-y: scroll;
   z-index: ${({ zIndex }) => zIndex};
+  display: grid;
+  place-items: center;
+  padding-bottom: ${({ paddingBottom }) => paddingBottom};
 
   .top-right {
     position: absolute;
@@ -43,6 +49,6 @@ const OverlayStyled = styled.div`
   }
 
   @media (orientation: landscape) {
-    padding: ${({ padding }) => padding};
+    padding-bottom: 0;
   }
 `

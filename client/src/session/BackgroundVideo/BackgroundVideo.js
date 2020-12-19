@@ -24,8 +24,14 @@ const BackgroundVideoStyled = styled.section`
     position: fixed;
     top: 50%;
     left: 0;
-    transform: translateY(-50%) scale(1.5);
+    transform: translateY(-50%) scale(2);
     z-index: 0;
     filter: blur(3px);
+  }
+  @media (orientation: landscape) {
+    overflow: hidden;
+    .bg-video {
+      position: relative;
+    }
   }
 `

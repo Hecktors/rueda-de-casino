@@ -34,7 +34,6 @@ export default function Header({ cols, className, children }) {
 }
 
 const HeaderStyled = styled.header`
-  /* height: 80px; */
   position: relative;
   display: grid;
   grid-template-columns: 40px auto 40px;
@@ -49,13 +48,13 @@ const HeaderStyled = styled.header`
     font-size: 1.5rem;
     font-weight: lighter;
     color: var(--color-title);
-  }
 
-  .logo {
-    text-transform: none;
-    letter-spacing: 0px;
-    font-size: 2.3rem;
-    font-family: 'Molle', cursive;
-    color: var(--color-logo);
+    &.logo {
+      text-transform: none;
+      letter-spacing: 0px;
+      font-size: 2.3rem;
+      font-family: 'Molle', cursive;
+      color: var(--color-primary);
+    }
   }
 `
