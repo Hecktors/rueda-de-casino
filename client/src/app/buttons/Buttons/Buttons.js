@@ -1,4 +1,7 @@
 import Button from './Button'
+/**
+ * @visibleName Default Buttons
+ */
 
 export const SaveButton = (props) => (
   <Button color={'primary'} {...props}>

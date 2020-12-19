@@ -34,14 +34,12 @@ export default function Home({
       <AppHeader cols="111">
         <ResetIconButton
           onClick={resetAppState}
-          color={'tertiary'}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
         <EditIconButton
           onClick={() => history.push('/edit-overview')}
-          color={'tertiary'}
           size={'sm'}
         />
       </AppHeader>
@@ -81,7 +79,6 @@ export default function Home({
         <PlayIconButton
           type={'button'}
           onClick={() => history.push('/session')}
-          color={'tertiary'}
           size={'lg'}
           disabled={hasNotEnoughMoves}
         />
