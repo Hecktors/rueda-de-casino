@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const moveSchema = new Schema({
   name: {
@@ -36,8 +36,8 @@ const moveSchema = new Schema({
     trim: true,
     maxlength: 10,
   },
-});
+})
 
-const Move = mongoose.model("Move", moveSchema);
+const Move = mongoose.model("Move", moveSchema)
 
-module.exports = Move;
+module.exports = Move
