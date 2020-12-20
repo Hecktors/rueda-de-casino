@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const emailCheck = require("../lib/emailCheck");
 const User = require('../models/user.model');
 
@@ -19,7 +20,7 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({msg: "The entered passwords are not equal."})
         };
 
-        const existingUser = await User.find({email: email})[0]
+        const existingUser = await User.findOne({email: email})
 
         if (existingUser) {
             return res.status(400).json({msg: "User already exists."})
@@ -27,11 +28,22 @@ router.post('/register', async (req, res) => {
 
         if(!displayName) { displayName = email};
 
+        const salt = await bcrypt.genSalt();
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        const newUser = new User({
+            email,
+            password: passwordHash,
+            displayName
+        });
+
+        const savedUser = await newUser.save();
+        res.json({msg: `Welcome ${savedUser.displayName}}`});
+
     } catch(err) {
-        res.status(500).json(err)
+        res.status(500).json({error: err.message})
     };
         
-    res.json({msg: "Welcome ", displayName});
 });
 
 module.exports = router;
