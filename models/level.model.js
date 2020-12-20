@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const levelSchema = new Schema({
   name: {
@@ -10,8 +10,8 @@ const levelSchema = new Schema({
     trim: true,
     minlength: 1,
   },
-});
+})
 
-const Level = mongoose.model("Level", levelSchema);
+const Level = mongoose.model("Level", levelSchema)
 
-module.exports = Level;
+module.exports = Level
