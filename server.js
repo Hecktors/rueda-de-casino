@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const port = process.env.PORT || 3001;
 const app = express();
 require("dotenv").config({});
 
@@ -30,13 +29,15 @@ app.use("/moves", movesRouter);
 app.use("/audios", audiosRouter);
 
 app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "client/build", "index.html"))
+res.sendFile(path.join(__dirname, "client/build", "index.html"))
 );
 
 app.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "client/build", "index.html"))
+res.sendFile(path.join(__dirname, "client/build", "index.html"))
 );
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening at http://localhost:${port}`);
 });
