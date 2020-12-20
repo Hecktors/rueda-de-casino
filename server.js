@@ -22,9 +22,11 @@ connection.once("open", () =>
 console.log("MongoDB connection established successfully")
 );
 
+const userRouter = require("./routes/user")
 const movesRouter = require("./routes/moves");
 const audiosRouter = require("./routes/audios");
 
+app.use("/users", userRouter);
 app.use("/moves", movesRouter);
 app.use("/audios", audiosRouter);
 
@@ -39,5 +41,5 @@ res.sendFile(path.join(__dirname, "client/build", "index.html"))
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-  console.log(`Server is listening at http://localhost:${port}`);
+  console.log(`Server is listening at http://localhost:${PORT}`);
 });
