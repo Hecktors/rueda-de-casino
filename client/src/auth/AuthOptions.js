@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import AppContext from '../context/AppContext'
+import UserContext from '../app/context/UserContext'
 import { useHistory } from 'react-router-dom'
 import Header from '../app/AppHeader'
 import Button from '../app/buttons/Buttons/Button'
@@ -8,7 +8,7 @@ import Footer from '../app/AppFooter'
 
 export default function AuthOptions() {
   const history = useHistory()
-  const { userData, setUserData } = useContext(AppContext)
+  const { userData } = useContext(UserContext)
   console.log({ userData })
 
   return (

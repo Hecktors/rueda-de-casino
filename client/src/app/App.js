@@ -1,8 +1,8 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useUser from './hooks/useUser'
-import AppContext from '../context/AppContext'
+import UserContext from './context/UserContext'
 import useAppState from './hooks/useAppState'
-import useData from './hooks/useData'
+import usePensum from './hooks/usePensum'
 import AuthOptions from '../auth/AuthOptions'
 import Register from '../auth/Register'
 import Login from '../auth/Login'
@@ -13,9 +13,9 @@ import EditOverview from '../edit/EditOverview'
 import UserSettings from '../auth/UserSettings'
 
 export default function App() {
-  const [userData, setUserData] = useUser()
+  const { userData, setUserData } = useUser()
   console.log(userData)
-  const [pensum, addMove, updateMove, deleteMove, audios] = useData()
+  const [pensum, addMove, updateMove, deleteMove, audios] = usePensum()
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
   )
@@ -30,7 +30,7 @@ export default function App() {
       <div className="desktop-only">
         This application is optimized for mobile devices.
       </div>
-      <AppContext.Provider value={{ userData, setUserData }}>
+      <UserContext.Provider value={{ userData, setUserData }}>
         <Switch>
           {userData.user ? (
             <Route
@@ -93,7 +93,7 @@ export default function App() {
           />
           <Redirect to="/" />
         </Switch>
-      </AppContext.Provider>
+      </UserContext.Provider>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import AppContext from '../context/AppContext'
+import AppContext from '../app/context/UserContext'
 import { useHistory } from 'react-router-dom'
 import Header from '../app/AppHeader'
 import Button from '../app/buttons/Buttons/Button'

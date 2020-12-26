@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { setLocalStorage } from '../lib/localStorage'
 import { getUser, validateToken } from '../services/handleAPIs'
 
 export default function useUser() {
@@ -27,5 +28,9 @@ export default function useUser() {
     initfetch()
   }, [])
 
-  return [userData, setUserData]
+  useEffect(() => {
+    setLocalStorage('auth-token', userData.token)
+  }, [userData])
+
+  return { userData, setUserData }
 }

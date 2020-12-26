@@ -5,6 +5,7 @@ import {
   CancelIcon,
   DeleteIcon,
   EditIcon,
+  EyeIcon,
   PauseIcon,
   PlayIcon,
   ResetIcon,
@@ -17,9 +18,39 @@ import {
  * @visibleName IconButtons
  */
 
-export const PlayIconButton = (props) => (
+export const AddIconButton = (props) => (
   <IconButton {...props}>
-    <PlayIcon />
+    <AddIcon />
+  </IconButton>
+)
+
+export const BackIconButton = (props) => (
+  <IconButton {...props}>
+    <BackIcon />
+  </IconButton>
+)
+
+export const CancelIconButton = (props) => (
+  <IconButton {...props}>
+    <CancelIcon />
+  </IconButton>
+)
+
+export const DeleteIconButton = (props) => (
+  <IconButton {...props}>
+    <DeleteIcon />
+  </IconButton>
+)
+
+export const EditIconButton = (props) => (
+  <IconButton {...props}>
+    <EditIcon />
+  </IconButton>
+)
+
+export const EyeIconButton = (props) => (
+  <IconButton {...props}>
+    <EyeIcon />
   </IconButton>
 )
 
@@ -29,45 +60,27 @@ export const PauseIconButton = (props) => (
   </IconButton>
 )
 
-export const StopIconButton = (props) => (
+export const PlayIconButton = (props) => (
   <IconButton {...props}>
-    <StopIcon />
+    <PlayIcon />
   </IconButton>
 )
-export const CancelIconButton = (props) => (
-  <IconButton {...props}>
-    <CancelIcon />
-  </IconButton>
-)
-export const BackIconButton = (props) => (
-  <IconButton {...props}>
-    <BackIcon />
-  </IconButton>
-)
-export const AddIconButton = (props) => (
-  <IconButton {...props}>
-    <AddIcon />
-  </IconButton>
-)
-export const DeleteIconButton = (props) => (
-  <IconButton {...props}>
-    <DeleteIcon />
-  </IconButton>
-)
+
 export const ResetIconButton = (props) => (
   <IconButton {...props}>
     <ResetIcon />
-  </IconButton>
-)
-export const EditIconButton = (props) => (
-  <IconButton {...props}>
-    <EditIcon />
   </IconButton>
 )
 
 export const SettingsIconButton = (props) => (
   <IconButton {...props}>
     <SettingsIcon />
+  </IconButton>
+)
+
+export const StopIconButton = (props) => (
+  <IconButton {...props}>
+    <StopIcon />
   </IconButton>
 )
 
