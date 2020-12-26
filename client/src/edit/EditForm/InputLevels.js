@@ -71,7 +71,7 @@ const InputLevelStyled = styled.div`
   h3 {
     cursor: pointer;
     font-size: 1rem;
-    padding: 7px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
 

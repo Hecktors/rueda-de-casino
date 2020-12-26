@@ -56,5 +56,5 @@ export default function useAppState(pensum) {
     setAppState(initState)
   }
 
-  return [appState, selectedMoves, updateAppState, resetAppState]
+  return { appState, selectedMoves, updateAppState, resetAppState }
 }

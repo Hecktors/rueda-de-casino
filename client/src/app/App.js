@@ -14,11 +14,13 @@ import UserSettings from '../auth/UserSettings'
 
 export default function App() {
   const { userData, setUserData } = useUser()
-  console.log(userData)
-  const [pensum, addMove, updateMove, deleteMove, audios] = usePensum()
-  const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
-    pensum
-  )
+  const { pensum, addMove, updateMove, deleteMove, audios } = usePensum()
+  const {
+    appState,
+    selectedMoves,
+    updateAppState,
+    resetAppState,
+  } = useAppState(pensum)
   const location = useLocation()
   const classes =
     location.pathname === '/edit-overview' || location.pathname === '/'
@@ -68,15 +70,7 @@ export default function App() {
           <Route
             exact
             path="/edit-overview"
-            render={(props) => (
-              <EditOverview
-                {...props}
-                pensum={pensum}
-                addMove={addMove}
-                updateMove={updateMove}
-                deleteMove={deleteMove}
-              />
-            )}
+            render={(props) => <EditOverview {...props} pensum={pensum} />}
           />
           <Route
             exact

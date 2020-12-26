@@ -21,12 +21,15 @@ export default function UserSettings() {
   return (
     <>
       <Header cols="110">
-        <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
-        <h1>User Settings</h1>
+        <BackIconButton
+          size={'sm'}
+          onClick={() => history.push('/edit-overview')}
+        />
+        <h1>User</h1>
       </Header>
       <UserSettingsStyled>
-        User: {userData.user.displayName}
-        <Button onClick={handelLogout} color={'secondary'} outlined>
+        <p>User: {userData.user.displayName}</p>
+        <Button onClick={handelLogout} color={'secondary'}>
           Log out
         </Button>
       </UserSettingsStyled>
@@ -44,7 +47,7 @@ const UserSettingsStyled = styled.main`
   padding: 10px;
   display: flex;
 
-  button {
-    width: 100%;
+  p {
+    margin-bottom: 10px;
   }
 `
