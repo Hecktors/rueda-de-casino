@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { getLocalStorage, setLocalStorage } from './lib/localStorage'
-import getAudios from './services/getAudios'
+import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
+import getAudios from '../services/getAudios'
 import {
   fetchGetPensum,
   fetchAddMove,
   fetchUpdateMove,
   fetchDeleteMove,
-} from './services/handleAPIs'
+} from '../services/handleAPIs'
 
 const STORAGE_KEY = 'pensum'
 

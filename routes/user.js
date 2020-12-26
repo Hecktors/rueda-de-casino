@@ -111,4 +111,12 @@ router.post("/validateToken", async (req, res) => {
     }
 })
 
+router.get("/", auth, async (req, res) => {
+    const user = await User.findById(req.user)
+    res.json({
+        id: user._id,
+        displayName: user.displayName
+    })
+})
+
 module.exports = router

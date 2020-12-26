@@ -1,6 +1,8 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
-import useAppState from './useAppState'
-import useData from './useData'
+import useUser from './hooks/useUser'
+import AppContext from '../context/AppContext'
+import useAppState from './hooks/useAppState'
+import useData from './hooks/useData'
 import AuthOptions from '../auth/AuthOptions'
 import Register from '../auth/Register'
 import Login from '../auth/Login'
@@ -10,7 +12,7 @@ import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
 
 export default function App() {
-  const isLoggedIn = false
+  const [userData, setUserData] = useUser()
   const [pensum, addMove, updateMove, deleteMove, audios] = useData()
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
@@ -26,67 +28,69 @@ export default function App() {
       <div className="desktop-only">
         This application is optimized for mobile devices.
       </div>
-      <Switch>
-        {isLoggedIn ? (
+      <AppContext.Provider value={{ userData, setUserData }}>
+        <Switch>
+          {userData.user ? (
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <Home
+                  {...props}
+                  pensum={pensum}
+                  appState={appState}
+                  updateAppState={updateAppState}
+                  resetAppState={resetAppState}
+                />
+              )}
+            />
+          ) : (
+            <Route exact path="/" component={AuthOptions} />
+          )}
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route
             exact
-            path="/"
+            path="/session"
             render={(props) => (
-              <Home
+              <Session
                 {...props}
-                pensum={pensum}
-                appState={appState}
-                updateAppState={updateAppState}
-                resetAppState={resetAppState}
+                audios={audios}
+                moves={selectedMoves}
+                speed={appState.speed}
+                isSongActive={appState.isSongActive}
               />
             )}
           />
-        ) : (
-          <Route exact path="/" component={AuthOptions} />
-        )}
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route
-          exact
-          path="/session"
-          render={(props) => (
-            <Session
-              {...props}
-              audios={audios}
-              moves={selectedMoves}
-              speed={appState.speed}
-              isSongActive={appState.isSongActive}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/edit-overview"
-          render={(props) => (
-            <EditOverview
-              {...props}
-              pensum={pensum}
-              addMove={addMove}
-              updateMove={updateMove}
-              deleteMove={deleteMove}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/edit-form/:id?"
-          render={(props) => (
-            <EditForm
-              {...props}
-              pensum={pensum}
-              addMove={addMove}
-              updateMove={updateMove}
-              deleteMove={deleteMove}
-            />
-          )}
-        />
-        <Redirect to="/" />
-      </Switch>
+          <Route
+            exact
+            path="/edit-overview"
+            render={(props) => (
+              <EditOverview
+                {...props}
+                pensum={pensum}
+                addMove={addMove}
+                updateMove={updateMove}
+                deleteMove={deleteMove}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/edit-form/:id?"
+            render={(props) => (
+              <EditForm
+                {...props}
+                pensum={pensum}
+                addMove={addMove}
+                updateMove={updateMove}
+                deleteMove={deleteMove}
+              />
+            )}
+          />
+          <Redirect to="/" />
+        </Switch>
+      </AppContext.Provider>
     </div>
   )
 }
