@@ -14,7 +14,6 @@ Button.propTypes = {
 const colors = {
   primary: 'var(--color-primary)',
   secondary: 'var(--color-secondary)',
-  tertiary: 'var(--color-tertiary)',
   bg: 'var(--color-bg)',
   disabled: 'var(--color-disabled)',
 }
@@ -54,8 +53,9 @@ export default function Button({
 }
 
 const ButtonStyled = styled.button`
-  padding: 5px 10px;
-  font-size: 1.4rem;
+  margin: 15px 0;
+  padding: 10px 16px;
+  font-size: 1.1rem;
   border-radius: 5px;
   border: 1px solid ${({ bdColor }) => bdColor};
   background-color: ${({ bgColor }) => bgColor};

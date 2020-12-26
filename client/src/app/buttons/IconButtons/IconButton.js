@@ -22,7 +22,6 @@ export default function IconButton({
   type,
   className,
   disabled,
-  color,
   size,
   onClick,
 }) {
@@ -32,8 +31,8 @@ export default function IconButton({
 
   return (
     <IconButtonStyled
-      type={type}
       data-testid="button"
+      type={type}
       className={className}
       disabled={disabled}
       fillColor={fillColor}

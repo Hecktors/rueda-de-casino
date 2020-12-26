@@ -5,7 +5,6 @@ export default createGlobalStyle`
         /* General */
         --color-primary: #d04b1f;
         --color-secondary: #2ca3d2;
-        --color-tertiary: #326efa;
         --color-text: #999;
         --color-bg: #0e0e15;
         --color-bg-dark : #000;
@@ -34,6 +33,7 @@ export default createGlobalStyle`
     * {
         box-sizing: border-box;
         margin: 0;
+        padding: 0;
     }
 
     html, body, #root {
@@ -98,6 +98,10 @@ export default createGlobalStyle`
 
     li {
         list-style: none;
+    }
+
+    a {
+        text-decoration: unset;
     }
 
     .dark {
