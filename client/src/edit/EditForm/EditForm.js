@@ -191,7 +191,7 @@ const EditFormStyled = styled.form`
   flex-direction: column;
   grid-template-rows: 80px auto 80px;
 
-  h2 {
+  /* h2 {
     padding: 9px 0;
     text-align: center;
     font-size: 1.2rem;
@@ -199,22 +199,22 @@ const EditFormStyled = styled.form`
     span {
       color: var(--color-primary);
     }
-  }
+  } */
 
   label {
     display: block;
   }
 
-  input,
+  /* input,
   select {
     width: 100%;
     padding: 3px 10px;
     font-size: 1rem;
-  }
+  } */
 
-  option {
+  /* option {
     text-align: center;
-  }
+  } */
 
   .form-group-container {
     display: flex;

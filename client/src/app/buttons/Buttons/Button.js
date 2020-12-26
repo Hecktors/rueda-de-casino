@@ -53,10 +53,13 @@ export default function Button({
 }
 
 const ButtonStyled = styled.button`
-  margin: 15px 0;
+  margin: 15px auto;
   padding: 10px 16px;
-  font-size: 1.1rem;
-  border-radius: 5px;
+  font-size: 1rem;
+  border-radius: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   border: 1px solid ${({ bdColor }) => bdColor};
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};

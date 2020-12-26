@@ -29,6 +29,9 @@ export default createGlobalStyle`
         /* Edit Form */
         --color-select: #ccc;
         --color-bg-select: #0e0e15;
+        /* Input */
+        --color-input: #ccc;
+        --color-bg-input: #282b3f;
     }
     * {
         box-sizing: border-box;
@@ -88,10 +91,6 @@ export default createGlobalStyle`
         }
     }
 
-    label {
-        font-size: 1rem;
-    }
-
     ul {
         padding: 0;
     }
@@ -100,16 +99,47 @@ export default createGlobalStyle`
         list-style: none;
     }
 
-    a {
+    a, .link {
         text-decoration: unset;
+        color: var(--color-secondary)
     }
+
+    label {
+        font-size: 1.2rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.1rem;
+        outline: none;
+        border: none;
+        color: var(--color-input);
+        background-color: var(--color-bg-input);
+    }
+
+    /* .input-icon {
+        position: absolute;
+        top: 54%;
+        right: 10px;
+        transform: translateY(-50%)
+    } */
 
     .dark {
         background-color: var(--color-bg-dark);
     }
 
+    .tac {
+        text-align: center;
+    }
+
     .tar {
         text-align: right;
+    }
+
+    .pos {
+        position: relative;
     }
 
     .top-right {
@@ -130,7 +160,6 @@ export default createGlobalStyle`
         text-align: center;
         top: -10vh;
         left: 0;
-        
     }
 
     @media (orientation: landscape) {
