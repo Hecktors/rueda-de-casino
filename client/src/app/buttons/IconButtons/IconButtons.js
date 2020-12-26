@@ -1,3 +1,4 @@
+import IconButton from './IconButton'
 import {
   AddIcon,
   BackIcon,
@@ -9,7 +10,6 @@ import {
   ResetIcon,
   StopIcon,
 } from '../../Icons'
-import IconButton from './IconButton'
 
 /**
  * @visibleName IconButtons

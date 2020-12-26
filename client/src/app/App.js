@@ -1,18 +1,25 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useAppState from './useAppState'
 import useData from './useData'
+import AuthOptions from '../auth/AuthOptions'
+import Register from '../auth/Register'
+import Login from '../auth/Login'
 import Home from '../home'
 import Session from '../session'
 import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
 
 export default function App() {
+  const isLoggedIn = false
   const [pensum, addMove, updateMove, deleteMove, audios] = useData()
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
   )
   const location = useLocation()
-  const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
+  const classes =
+    location.pathname === '/edit-overview' || location.pathname === '/'
+      ? ' no-footer'
+      : ''
 
   return (
     <div className={`App${classes}`}>
@@ -20,19 +27,25 @@ export default function App() {
         This application is optimized for mobile devices.
       </div>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => (
-            <Home
-              {...props}
-              pensum={pensum}
-              appState={appState}
-              updateAppState={updateAppState}
-              resetAppState={resetAppState}
-            />
-          )}
-        />
+        {isLoggedIn ? (
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <Home
+                {...props}
+                pensum={pensum}
+                appState={appState}
+                updateAppState={updateAppState}
+                resetAppState={resetAppState}
+              />
+            )}
+          />
+        ) : (
+          <Route exact path="/" component={AuthOptions} />
+        )}
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
         <Route
           exact
           path="/session"
