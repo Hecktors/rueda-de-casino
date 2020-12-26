@@ -6,9 +6,9 @@ import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 import {
-  EditIconButton,
   PlayIconButton,
   ResetIconButton,
+  SettingsIconButton,
 } from '../app/buttons/IconButtons'
 
 Home.propTypes = {
@@ -38,7 +38,7 @@ export default function Home({
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
-        <EditIconButton
+        <SettingsIconButton
           onClick={() => history.push('/edit-overview')}
           size={'sm'}
         />
