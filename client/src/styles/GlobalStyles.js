@@ -105,18 +105,33 @@ export default createGlobalStyle`
     }
 
     label {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     input,
     select {
         width: 100%;
         padding: 10px;
-        font-size: 1.1rem;
+        font-size: 1rem;
         outline: none;
         border: none;
         color: var(--color-input);
         background-color: var(--color-bg-input);
+    }
+    input:focus {
+        box-shadow: inset 0px 0px 5px var(--color-secondary);
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 
     /* .input-icon {

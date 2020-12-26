@@ -18,9 +18,9 @@ export default function EditOverview({ history, pensum }) {
     <>
       <AppHeader cols="111">
         <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
-        <h1>Moves Overview</h1>
+        <h1>Moves</h1>
         <UserIconButton
-          size={'sm'}
+          size={'md'}
           onClick={() => history.push('/user-settings')}
         />
       </AppHeader>

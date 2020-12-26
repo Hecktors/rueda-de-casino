@@ -106,7 +106,7 @@ export default function EditForm({
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="">Move name</label>
+            <label htmlFor="">Move name*</label>
             <input
               onChange={updateUserInput}
               value={userInput.name}
@@ -120,7 +120,7 @@ export default function EditForm({
           </div>
 
           <div className="form-group">
-            <label htmlFor="">Num of bars</label>
+            <label htmlFor="">Num of bars*</label>
             <input
               className="tar"
               onChange={updateUserInput}
@@ -138,7 +138,7 @@ export default function EditForm({
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="">Youtube Video Link</label>
+            <label htmlFor="">Youtube link</label>
             <input
               onChange={updateUserInput}
               value={userInput.videoUrl}
@@ -171,8 +171,13 @@ export default function EditForm({
           onClick={() => {
             history.push('/edit-overview')
           }}
+          inline
         />
-        <SaveButton onClick={() => {}} disabled={hasNoChanges || !isValid} />
+        <SaveButton
+          onClick={() => {}}
+          disabled={hasNoChanges || !isValid}
+          inline
+        />
       </AppFooter>
     </EditFormStyled>
   )
@@ -233,7 +238,7 @@ const EditFormStyled = styled.form`
   }
 
   .form-group:first-of-type {
-    width: 130%;
+    width: 100%;
 
     &.select {
       width: 100%;

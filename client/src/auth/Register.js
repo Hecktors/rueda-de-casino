@@ -98,7 +98,7 @@ export default function Register() {
           <input
             onChange={handleChange}
             value={userInput.passwordCheck}
-            type="passwordCheck"
+            type="password"
             id="passwordCheck"
             name="passwordCheck"
             onFocus={(e) => e.target.select()}

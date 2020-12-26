@@ -55,5 +55,5 @@ export default function useAppState(levels) {
     history.push('/edit-overview')
   }
 
-  return [pensum, addMove, updateMove, deleteMove, audios]
+  return { pensum, addMove, updateMove, deleteMove, audios }
 }

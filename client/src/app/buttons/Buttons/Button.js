@@ -8,6 +8,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
+  inline: PropTypes.bool,
   type: PropTypes.string,
 }
 
@@ -25,8 +26,10 @@ export default function Button({
   disabled,
   color,
   outlined,
+  inline,
   onClick,
 }) {
+  const width = inline ? '30%' : '50%'
   let textColor = outlined ? colors[color] : colors['bg']
   let bgColor = outlined ? colors['bg'] : colors[color]
   let bdColor = outlined ? textColor : bgColor
@@ -42,6 +45,7 @@ export default function Button({
       type={type}
       data-testid="button"
       className={className}
+      width={width}
       textColor={textColor}
       bgColor={bgColor}
       bdColor={bdColor}
@@ -53,6 +57,7 @@ export default function Button({
 }
 
 const ButtonStyled = styled.button`
+  width: ${({ width }) => width};
   margin: 15px auto;
   padding: 10px 16px;
   font-size: 1rem;

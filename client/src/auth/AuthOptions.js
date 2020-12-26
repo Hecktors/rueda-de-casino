@@ -45,8 +45,4 @@ const AuthStyled = styled.main`
   justify-content: center;
   padding: 10px;
   display: flex;
-
-  button {
-    width: 100%;
-  }
 `
