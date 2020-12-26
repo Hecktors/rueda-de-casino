@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from './lib/localStorage'
+import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 
 const STORAGE_KEY = 'appState'
 
@@ -13,7 +13,11 @@ export default function useAppState(pensum) {
   const [appState, setAppState] = useState(initState)
 
   useEffect(() => {
-    setAppState(getLocalStorage(STORAGE_KEY) || initState)
+    async function initfetch() {
+      const storedData = await getLocalStorage(STORAGE_KEY)
+      setAppState(storedData || initState)
+    }
+    initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

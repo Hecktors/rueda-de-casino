@@ -25,7 +25,7 @@ export default function AuthOptions() {
           color={'secondary'}
           outlined
         >
-          Login
+          Log in
         </Button>
         <p onClick={() => history.push('/login')}>not now</p>
       </AuthStyled>
