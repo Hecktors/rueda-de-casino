@@ -1,11 +1,15 @@
-import React from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
+import AppContext from '../context/AppContext'
 import { useHistory } from 'react-router-dom'
 import Header from '../app/AppHeader'
 import Button from '../app/buttons/Buttons/Button'
+import Footer from '../app/AppFooter'
 
 export default function AuthOptions() {
   const history = useHistory()
+  const { userData, setUserData } = useContext(AppContext)
+  console.log({ userData })
 
   return (
     <>
@@ -27,8 +31,8 @@ export default function AuthOptions() {
         >
           Log in
         </Button>
-        <p onClick={() => history.push('/login')}>not now</p>
       </AuthStyled>
+      <Footer />
     </>
   )
 }

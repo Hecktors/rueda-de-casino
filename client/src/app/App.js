@@ -10,9 +10,11 @@ import Home from '../home'
 import Session from '../session'
 import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
+import UserSettings from '../auth/UserSettings'
 
 export default function App() {
   const [userData, setUserData] = useUser()
+  console.log(userData)
   const [pensum, addMove, updateMove, deleteMove, audios] = useData()
   const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
     pensum
@@ -62,6 +64,7 @@ export default function App() {
               />
             )}
           />
+          <Route path="/user-settings" component={UserSettings} />
           <Route
             exact
             path="/edit-overview"

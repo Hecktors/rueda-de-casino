@@ -5,6 +5,7 @@ import {
   AddIconButton,
   BackIconButton,
   EditIconButton,
+  UserIconButton,
 } from '../../app/buttons/IconButtons'
 
 EditOverview.propTypes = {
@@ -15,9 +16,13 @@ EditOverview.propTypes = {
 export default function EditOverview({ history, pensum }) {
   return (
     <>
-      <AppHeader cols="110">
-        <BackIconButton size={'sm'} onClick={() => history.push('/')} />
+      <AppHeader cols="111">
+        <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
         <h1>Moves Overview</h1>
+        <UserIconButton
+          size={'sm'}
+          onClick={() => history.push('/user-settings')}
+        />
       </AppHeader>
 
       <UpdateStyled>
