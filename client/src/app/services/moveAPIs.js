@@ -1,26 +1,6 @@
 import axios from 'axios'
 const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
 
-// Get token
-export function validateToken(token) {
-  return axios
-    .post(`${base}/users/validateToken`, null, {
-      headers: { 'x-auth-token': token },
-    })
-    .then((res) => res.data)
-    .catch((err) => console.log(err))
-}
-
-// Get user
-export function getUser(token) {
-  return axios
-    .get(`${base}/users/`, {
-      headers: { 'x-auth-token': token },
-    })
-    .then((res) => res.data)
-    .catch((err) => console.log(err))
-}
-
 // Get all moves
 export function fetchGetPensum() {
   return axios
@@ -71,14 +51,4 @@ export function fetchDeleteMove(id) {
     .catch(function (error) {
       console.log(error)
     })
-}
-
-// Get multi audios
-export function fetchAudios(moveIDs) {
-  return moveIDs.map((moveID) => {
-    return {
-      moveID: moveID,
-      audioElement: new Audio(`${base}/audios/${moveID}`),
-    }
-  })
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { setLocalStorage } from '../lib/localStorage'
-import { getUser, validateToken } from '../services/handleAPIs'
+import { getUser, validateToken } from '../services/userAPIs'
 
 export default function useUser() {
   const [userData, setUserData] = useState({

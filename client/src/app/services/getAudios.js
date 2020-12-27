@@ -1,4 +1,4 @@
-import { fetchAudios } from './handleAPIs'
+import { fetchAudios } from './audioAPIs'
 
 export default async function getAudios(pensum) {
   if (!pensum) {

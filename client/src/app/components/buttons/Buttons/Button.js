@@ -29,7 +29,7 @@ export default function Button({
   inline,
   onClick,
 }) {
-  const width = inline ? '30%' : '50%'
+  const width = inline ? '30%' : '60%'
   let textColor = outlined ? colors[color] : colors['bg']
   let bgColor = outlined ? colors['bg'] : colors[color]
   let bdColor = outlined ? textColor : bgColor
@@ -58,12 +58,12 @@ export default function Button({
 
 const ButtonStyled = styled.button`
   width: ${({ width }) => width};
-  margin: 15px auto;
+  max-width: 240px;
+  margin: 15px;
   padding: 10px 16px;
   font-size: 1rem;
-  border-radius: 30px;
+  border-radius: 10px;
   font-weight: bold;
-  letter-spacing: 1px;
   text-transform: uppercase;
   border: 1px solid ${({ bdColor }) => bdColor};
   background-color: ${({ bgColor }) => bgColor};

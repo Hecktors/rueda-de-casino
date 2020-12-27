@@ -118,8 +118,9 @@ export default createGlobalStyle`
         color: var(--color-input);
         background-color: var(--color-bg-input);
     }
+
     input:focus {
-        box-shadow: inset 0px 0px 5px var(--color-secondary);
+        box-shadow: inset 0px 0px 4px var(--color-secondary);
     }
 
     /* Chrome, Safari, Edge, Opera */
@@ -133,13 +134,6 @@ export default createGlobalStyle`
     input[type=number] {
         -moz-appearance: textfield;
     }
-
-    /* .input-icon {
-        position: absolute;
-        top: 54%;
-        right: 10px;
-        transform: translateY(-50%)
-    } */
 
     .dark {
         background-color: var(--color-bg-dark);
@@ -162,6 +156,7 @@ export default createGlobalStyle`
         top: 10px;
         right: 10px;
     }
+    
     .top-left {
         position: absolute;
         top: 10px;
