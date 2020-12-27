@@ -22,10 +22,7 @@ export default function App() {
     resetAppState,
   } = useAppState(pensum)
   const location = useLocation()
-  const classes =
-    location.pathname === '/edit-overview' || location.pathname === '/'
-      ? ' no-footer'
-      : ''
+  const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
 
   return (
     <div className={`App${classes}`}>

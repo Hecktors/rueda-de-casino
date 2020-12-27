@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react'
+import UserContext from '../app/context/UserContext'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import Header from '../app/AppHeader'
-import Button from '../app/buttons/Buttons/Button'
-import { BackIconButton } from '../app/buttons/IconButtons'
-import UserContext from '../app/context/UserContext'
 import { loginUser } from '../app/services/userAPIs'
+import { LoginButton } from '../app/components/buttons/Buttons'
+import { BackIconButton } from '../app/components/buttons/IconButtons'
+import Header from '../app/components/AppHeader'
 
 export default function Login() {
   const { setUserData } = useContext(UserContext)
@@ -75,9 +75,7 @@ export default function Login() {
           </div>
         </div>
 
-        <Button onClick={() => {}} color={'secondary'}>
-          Login
-        </Button>
+        <LoginButton onClick={() => {}} />
       </LoginStyled>
     </>
   )

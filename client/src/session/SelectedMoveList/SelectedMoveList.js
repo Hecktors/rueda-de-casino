@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { YoutubeIcon, YoutubeGreyIcon } from '../../app/Icons'
+import { YoutubeIcon, YoutubeGreyIcon } from '../../app/components/Icons'
 
 SelectedMoveList.propTypes = {
   moves: PropTypes.array.isRequired,

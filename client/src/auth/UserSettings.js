@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import styled from 'styled-components'
 import AppContext from '../app/context/UserContext'
+import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import Header from '../app/AppHeader'
-import Button from '../app/buttons/Buttons/Button'
-import { BackIconButton } from '../app/buttons/IconButtons'
+import Header from '../app/components/AppHeader'
+import { LogoutButton } from '../app/components/buttons/Buttons'
+import { BackIconButton } from '../app/components/buttons/IconButtons'
 import { setLocalStorage } from '../app/lib/localStorage'
 
 export default function UserSettings() {
@@ -29,9 +29,7 @@ export default function UserSettings() {
       </Header>
       <UserSettingsStyled>
         <p>User: {userData.user.displayName}</p>
-        <Button onClick={handelLogout} color={'secondary'}>
-          Log out
-        </Button>
+        <LogoutButton onClick={handelLogout} />
       </UserSettingsStyled>
     </>
   )

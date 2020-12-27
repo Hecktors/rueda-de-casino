@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react'
+import UserContext from '../app/context/UserContext'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import Header from '../app/AppHeader'
-import Button from '../app/buttons/Buttons/Button'
-import { BackIconButton } from '../app/buttons/IconButtons'
-import UserContext from '../app/context/UserContext'
+import Header from '../app/components/AppHeader'
 import { registerUser } from '../app/services/userAPIs'
+import { RegisterButton } from '../app/components/buttons/Buttons'
+import { BackIconButton } from '../app/components/buttons/IconButtons'
 
 export default function Register() {
   const { setUserData } = useContext(UserContext)
@@ -70,7 +70,7 @@ export default function Register() {
             name="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            required
+            // required
           />
         </div>
 
@@ -87,7 +87,7 @@ export default function Register() {
               name="password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
-              required
+              // required
             />
           </div>
         </div>
@@ -103,13 +103,12 @@ export default function Register() {
             name="passwordCheck"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            required
+            // required
           />
         </div>
 
-        <Button onClick={() => {}} color={'secondary'}>
-          Register
-        </Button>
+        <RegisterButton onClick={() => {}} />
+
         <p className="tac">
           Already have an account?{' '}
           <span className="link" onClick={() => history.push('/login')}>
