@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
         const existingUser = await User.findOne({email: email})
 
         if (existingUser) {
-            return res.status(400).json({error: "User already exists."})
+            return res.status(400).json({msg: "User already exists."})
         }
 
         if(!displayName) { displayName = email}
@@ -40,11 +40,11 @@ router.post("/register", async (req, res) => {
         })
 
         await newUser.save()
-        .then(user => res.json({msg: "success"}))
+        .then(user => res.json({msg: user._id}))
         .catch(err => res.status(404).json({msg: err.message}))
 
     } catch(err) {
-        res.status(500).json({error: err.message})
+        res.status(500).json({msg: err.message})
     }
     
 })
@@ -73,7 +73,7 @@ router.post("/login", async (req,res) => {
         
         res.json({token, user: {id: user._id, displayName: user.displayName}})
     } catch(err) {
-        res.status(500).json({error: err.message})
+        res.status(500).json({msg: err.message})
     }
 })
 

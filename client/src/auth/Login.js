@@ -6,10 +6,12 @@ import { loginUser } from '../app/services/userAPIs'
 import { LoginButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
+import ErrorMsg from '../app/components/ErrorMsg'
 
 export default function Login() {
   const { setUserData } = useContext(UserContext)
   const history = useHistory()
+  const [error, setError] = useState('')
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',
@@ -24,15 +26,22 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const loginRes = await loginUser(userInput)
-    if (loginRes) {
-      setUserData(loginRes)
+    const loginResponse = await loginUser({
+      email: userInput.email,
+      password: userInput.password,
+    })
+    if (loginResponse.status !== 200) {
+      setError(loginResponse.data.msg)
+    } else {
+      error && setError('')
+      setUserData(loginResponse.data)
       history.push('/')
     }
   }
 
   return (
     <>
+      {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <Header cols="110">
         <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <Link to="/">
@@ -53,7 +62,7 @@ export default function Login() {
             name="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            required
+            // required
           />
         </div>
 
@@ -70,7 +79,7 @@ export default function Login() {
               name="password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
-              required
+              // required
             />
           </div>
         </div>
