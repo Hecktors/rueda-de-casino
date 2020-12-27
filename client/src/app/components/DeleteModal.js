@@ -6,11 +6,8 @@ export default function DeleteModal({ cancel, handleDelete, deleteItem }) {
   return (
     <DeleteModalStyled>
       <div className="msg-box">
-        <h2>Are You Sure?</h2>
-        <p>
-          Do you really want to delete this {deleteItem}? This process cannot be
-          undone.
-        </p>
+        <h2>Delete {deleteItem}</h2>
+        <p>Are you sure? This process cannot be undone.</p>
         <div>
           <CancelButton onClick={cancel} />
           <DeleteButton onClick={handleDelete} />{' '}

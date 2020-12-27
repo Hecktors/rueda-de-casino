@@ -59,7 +59,7 @@ export default function Button({
 const ButtonStyled = styled.button`
   width: ${({ width }) => width};
   max-width: 240px;
-  margin: 15px;
+  margin: 15px auto;
   padding: 10px 16px;
   font-size: 1rem;
   border-radius: 10px;
