@@ -9,6 +9,18 @@ export const CancelButton = (props) => (
   </Button>
 )
 
+export const DeleteButton = (props) => (
+  <Button color={'primary'} {...props}>
+    Delete
+  </Button>
+)
+
+export const DeleteAccountButton = (props) => (
+  <Button color={'primary'} {...props}>
+    Delete Account
+  </Button>
+)
+
 export const LoginButton = (props) => (
   <Button color={'secondary'} {...props}>
     Log in

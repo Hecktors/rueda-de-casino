@@ -23,4 +23,12 @@ const ErrorMsgStyled = styled.div`
   font-size: 0.9rem;
   background-color: #e07c7c;
   color: var(--color-bg);
+
+  @media screen and (min-width: 800px) {
+    max-width: 716px;
+    top: -40px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
 `

@@ -7,7 +7,7 @@ import {
   fetchAddMove,
   fetchUpdateMove,
   fetchDeleteMove,
-} from '../services/handleAPIs'
+} from '../services/moveAPIs'
 
 const STORAGE_KEY = 'pensum'
 

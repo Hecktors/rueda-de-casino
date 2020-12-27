@@ -1,15 +1,21 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import AppContext from '../app/context/UserContext'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import Header from '../app/components/AppHeader'
-import { LogoutButton } from '../app/components/buttons/Buttons'
+import {
+  DeleteAccountButton,
+  LogoutButton,
+} from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import { setLocalStorage } from '../app/lib/localStorage'
+import { deleteUser } from '../app/services/userAPIs'
+import DeleteModal from '../app/components/DeleteModal'
 
 export default function UserSettings() {
   const history = useHistory()
   const { userData, setUserData } = useContext(AppContext)
+  const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   console.log({ userData })
 
   function handelLogout() {
@@ -18,8 +24,21 @@ export default function UserSettings() {
     history.push('/')
   }
 
+  async function handleDelete() {
+    setIsDeleteModalDisplayed(false)
+    const deleteResponse = await deleteUser(userData.token)
+    console.log(deleteResponse)
+  }
+
   return (
     <>
+      {isDeleteModalDisplayed && (
+        <DeleteModal
+          cancel={() => setIsDeleteModalDisplayed(false)}
+          handleDelete={handleDelete}
+          deleteItem="user account"
+        />
+      )}
       <Header cols="110">
         <BackIconButton
           size={'sm'}
@@ -30,6 +49,10 @@ export default function UserSettings() {
       <UserSettingsStyled>
         <p>User: {userData.user.displayName}</p>
         <LogoutButton onClick={handelLogout} />
+        <DeleteAccountButton
+          onClick={() => setIsDeleteModalDisplayed(true)}
+          outlined
+        />
       </UserSettingsStyled>
     </>
   )

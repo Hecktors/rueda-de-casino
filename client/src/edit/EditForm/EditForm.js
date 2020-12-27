@@ -11,6 +11,7 @@ import {
 } from '../../app//components/buttons/IconButtons/IconButtons'
 import InputLevels from './InputLevels'
 import useUserInput from './useUserInput'
+import DeleteModal from '../../app/components/DeleteModal'
 
 EditForm.propTypes = {
   match: PropTypes.object.isRequired,
@@ -31,6 +32,8 @@ export default function EditForm({
 }) {
   const id = match.params.id || ''
   const [isNewLevelSelected, setIsNewLevelSelected] = useState(!pensum.length)
+  const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
+
   const [
     userInput,
     updateUserInput,
@@ -40,17 +43,21 @@ export default function EditForm({
     isValid,
   ] = useUserInput(pensum, id, setIsNewLevelSelected)
 
-  function handleSubmit(e, moveToDelID) {
+  function handleSubmit(e) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    if (moveToDelID) {
-      deleteMove(moveToDelID)
-    } else {
-      isNewMove ? addMove(userInput) : updateMove(userInput)
-    }
+    isNewMove ? addMove(userInput) : updateMove(userInput)
   }
+
   return (
     <EditFormStyled onSubmit={handleSubmit}>
+      {isDeleteModalDisplayed && (
+        <DeleteModal
+          cancel={() => setIsDeleteModalDisplayed(false)}
+          handleDelete={() => deleteMove(id)}
+          deleteItem="user account"
+        />
+      )}
       <AppHeader cols={id ? '111' : '110'}>
         <ResetIconButton
           type={'button'}
@@ -62,7 +69,7 @@ export default function EditForm({
         {id && (
           <DeleteIconButton
             type="button"
-            onClick={(e) => handleSubmit(e, id)}
+            onClick={() => setIsDeleteModalDisplayed(true)}
             size={'md'}
           />
         )}

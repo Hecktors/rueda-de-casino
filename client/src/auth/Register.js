@@ -45,7 +45,6 @@ export default function Register() {
   return (
     <>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
-      {/* Name */}
       <Header cols="110">
         <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <Link to="/">
@@ -69,7 +68,6 @@ export default function Register() {
           />
         </div>
 
-        {/* Email */}
         <div className="form-group">
           <label htmlFor="email">Email*</label>
           <input
@@ -80,11 +78,9 @@ export default function Register() {
             name="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            // required
           />
         </div>
 
-        {/* Password */}
         <div className="form-group">
           <label htmlFor="password">Password*</label>
           <div className="pos">
@@ -97,12 +93,10 @@ export default function Register() {
               name="password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
-              // required
             />
           </div>
         </div>
 
-        {/* PasswordCheck */}
         <div className="form-group">
           <label htmlFor="passwordCheck">Confirm Password*</label>
           <input
@@ -113,7 +107,6 @@ export default function Register() {
             name="passwordCheck"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            // required
           />
         </div>
 
