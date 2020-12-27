@@ -3,13 +3,15 @@ import UserContext from '../app/context/UserContext'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../app/components/AppHeader'
-import { registerUser } from '../app/services/userAPIs'
+import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
+import ErrorMsg from '../app/components/ErrorMsg'
 
 export default function Register() {
   const { setUserData } = useContext(UserContext)
   const history = useHistory()
+  const [error, setError] = useState('')
   const [userInput, setUserInput] = useState({
     name: '',
     email: '',
@@ -26,15 +28,24 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const loginRes = await registerUser(userInput)
-    if (loginRes) {
-      setUserData(loginRes)
+    const registerResponse = await registerUser(userInput)
+    if (registerResponse.status !== 200) {
+      setError(registerResponse.data.msg)
+    } else {
+      error && setError('')
+      const loginResponse = await loginUser({
+        email: userInput.email,
+        password: userInput.password,
+      })
+      setUserData(loginResponse.data)
       history.push('/')
     }
   }
 
   return (
     <>
+      {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
+      {/* Name */}
       <Header cols="110">
         <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <Link to="/">
@@ -44,7 +55,6 @@ export default function Register() {
         </Link>
       </Header>
       <RegisterStyled onSubmit={handleSubmit}>
-        {/* Name */}
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input

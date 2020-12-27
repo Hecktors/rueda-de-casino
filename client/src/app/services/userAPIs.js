@@ -10,12 +10,8 @@ export async function registerUser(user) {
       password: user.password,
       passwordCheck: user.passwordCheck,
     })
-    .then(async (res) => {
-      if (res.data.msg === 'success') {
-        return await loginUser({ email: user.email, password: user.password })
-      }
-    })
-    .catch((err) => console.log(err))
+    .then((res) => res)
+    .catch((err) => err.response)
 }
 
 export async function loginUser({ email, password }) {
@@ -24,6 +20,6 @@ export async function loginUser({ email, password }) {
       email,
       password,
     })
-    .then((res) => res.data)
-    .catch((err) => console.log(err))
+    .then((res) => res)
+    .catch((err) => err.response)
 }
