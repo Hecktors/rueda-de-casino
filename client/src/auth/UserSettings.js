@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import AppContext from '../app/context/UserContext'
+import UserContext from '../app/context/UserContext'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import Header from '../app/components/AppHeader'
@@ -14,9 +14,8 @@ import DeleteModal from '../app/components/DeleteModal'
 
 export default function UserSettings() {
   const history = useHistory()
-  const { userData, setUserData } = useContext(AppContext)
+  const { userData, setUserData } = useContext(UserContext)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
-  console.log({ userData })
 
   function handelLogout() {
     setUserData({ token: null, user: null })
@@ -27,7 +26,9 @@ export default function UserSettings() {
   async function handleDelete() {
     setIsDeleteModalDisplayed(false)
     const deleteResponse = await deleteUser(userData.token)
-    console.log(deleteResponse)
+    if (deleteResponse.status === 200) {
+      handelLogout()
+    }
   }
 
   return (
@@ -36,7 +37,7 @@ export default function UserSettings() {
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
           handleDelete={handleDelete}
-          deleteItem="user account"
+          deleteItem="User Account"
         />
       )}
       <Header cols="110">
@@ -46,14 +47,16 @@ export default function UserSettings() {
         />
         <h1>User</h1>
       </Header>
-      <UserSettingsStyled>
-        <p>User: {userData.user.displayName}</p>
-        <LogoutButton onClick={handelLogout} />
-        <DeleteAccountButton
-          onClick={() => setIsDeleteModalDisplayed(true)}
-          outlined
-        />
-      </UserSettingsStyled>
+      {userData.user && (
+        <UserSettingsStyled>
+          <p>User: {userData.user.displayName}</p>
+          <LogoutButton onClick={handelLogout} />
+          <DeleteAccountButton
+            onClick={() => setIsDeleteModalDisplayed(true)}
+            outlined
+          />
+        </UserSettingsStyled>
+      )}
     </>
   )
 }

@@ -31,7 +31,9 @@ export default function App() {
       </div>
       <UserContext.Provider value={{ userData, setUserData }}>
         <Switch>
-          {userData.user ? (
+          {!userData.user ? (
+            <Route exact path="/" component={AuthOptions} />
+          ) : (
             <Route
               exact
               path="/"
@@ -45,8 +47,6 @@ export default function App() {
                 />
               )}
             />
-          ) : (
-            <Route exact path="/" component={AuthOptions} />
           )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />

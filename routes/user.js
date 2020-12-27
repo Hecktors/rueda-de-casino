@@ -81,10 +81,7 @@ router.delete("/", auth, async (req, res) => {
     console.log(req.user)
     try {
         const deletedUser =  await User.findByIdAndDelete(req.user)
-
         res.json({msg: `User acount of ${deletedUser.email} has been deleted.`})
-
-
     } catch(err) {
         res.status(500).json({error: err.message})
     }

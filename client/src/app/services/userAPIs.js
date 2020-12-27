@@ -46,7 +46,7 @@ export async function loginUser({ email, password }) {
 
 export async function deleteUser(token) {
   return await axios
-    .delete(`${base}/users`, null, {
+    .delete(`${base}/users`, {
       headers: { 'x-auth-token': token },
     })
     .then((res) => res)

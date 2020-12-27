@@ -33,6 +33,10 @@ export default function EditForm({
   const id = match.params.id || ''
   const [isNewLevelSelected, setIsNewLevelSelected] = useState(!pensum.length)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
+  const moveName = pensum
+    .map((level) => level.moves)
+    .flat()
+    .find((move) => move._id === id)
 
   const [
     userInput,
@@ -41,7 +45,7 @@ export default function EditForm({
     openNewLevelInput,
     hasNoChanges,
     isValid,
-  ] = useUserInput(pensum, id, setIsNewLevelSelected)
+  ] = useUserInput(pensum, id, moveName, setIsNewLevelSelected)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -49,13 +53,18 @@ export default function EditForm({
     isNewMove ? addMove(userInput) : updateMove(userInput)
   }
 
+  function handleDelete(id) {
+    setIsDeleteModalDisplayed(false)
+    deleteMove(id)
+  }
+
   return (
     <EditFormStyled onSubmit={handleSubmit}>
       {isDeleteModalDisplayed && (
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
-          handleDelete={() => deleteMove(id)}
-          deleteItem="user account"
+          handleDelete={() => handleDelete(id)}
+          deleteItem={moveName.name}
         />
       )}
       <AppHeader cols={id ? '111' : '110'}>
