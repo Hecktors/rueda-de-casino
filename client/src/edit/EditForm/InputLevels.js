@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ArrowRightIcon, ArrowDownIcon } from '../../app/Icons/Icons'
+import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 InputLevels.propTypes = {
   selectedLevelName: PropTypes.string.isRequired,

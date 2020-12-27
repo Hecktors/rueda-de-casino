@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import AppFooter from '../app/AppFooter'
-import AppHeader from '../app/AppHeader'
-import InputLevel from './InputLevel'
-import InputPlaySong from './InputPlaySong'
-import InputSongSpeed from './InputSongSpeed'
+import AppFooter from '../app/components/AppFooter'
+import AppHeader from '../app/components/AppHeader'
 import {
   PlayIconButton,
   ResetIconButton,
   SettingsIconButton,
-} from '../app/buttons/IconButtons'
+} from '../app/components/buttons/IconButtons'
+import InputLevel from './InputLevel'
+import InputPlaySong from './InputPlaySong'
+import InputSongSpeed from './InputSongSpeed'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,

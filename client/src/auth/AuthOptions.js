@@ -1,15 +1,11 @@
-import { useContext } from 'react'
 import styled from 'styled-components'
-import UserContext from '../app/context/UserContext'
 import { useHistory } from 'react-router-dom'
-import Header from '../app/AppHeader'
-import Button from '../app/buttons/Buttons/Button'
-import Footer from '../app/AppFooter'
+import Header from '../app/components/AppHeader'
+import Footer from '../app/components/AppFooter'
+import { LoginButton, RegisterButton } from '../app/components/buttons/Buttons'
 
 export default function AuthOptions() {
   const history = useHistory()
-  const { userData } = useContext(UserContext)
-  console.log({ userData })
 
   return (
     <>
@@ -17,20 +13,8 @@ export default function AuthOptions() {
         <h1 className="logo">Salsa time!</h1>
       </Header>
       <AuthStyled>
-        <Button
-          onClick={() => history.push('/register')}
-          color={'secondary'}
-          outlined
-        >
-          Register
-        </Button>
-        <Button
-          onClick={() => history.push('/login')}
-          color={'secondary'}
-          outlined
-        >
-          Log in
-        </Button>
+        <RegisterButton onClick={() => history.push('/register')} outlined />
+        <LoginButton onClick={() => history.push('/login')} outlined />
       </AuthStyled>
       <Footer />
     </>

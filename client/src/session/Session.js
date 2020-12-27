@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
-import AppFooter from '../app/AppFooter'
-import AppHeader from '../app/AppHeader'
-import Overlay from '../app/Overlay'
+import AppFooter from '../app/components/AppFooter'
+import AppHeader from '../app/components/AppHeader'
+import Overlay from '../app/components/Overlay'
 import BackgroundVideo from './BackgroundVideo'
 import CurrentMove from './CurrentMove'
 import SelectedMoveList from './SelectedMoveList'
@@ -14,7 +14,7 @@ import {
   PauseIconButton,
   PlayIconButton,
   StopIconButton,
-} from '../app/buttons/IconButtons'
+} from '../app/components/buttons/IconButtons'
 
 Session.propTypes = {
   history: PropTypes.object.isRequired,

@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import AppHeader from '../../app/AppHeader'
-import AppFooter from '../../app/AppFooter'
-
-import { CancelButton, SaveButton } from '../../app/buttons/Buttons'
+import AppHeader from '../../app/components/AppHeader'
+import AppFooter from '../../app/components/AppFooter'
+import { CancelButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
   DeleteIconButton,
   ResetIconButton,
-} from '../../app/buttons/IconButtons/IconButtons'
+} from '../../app//components/buttons/IconButtons/IconButtons'
 import InputLevels from './InputLevels'
 import useUserInput from './useUserInput'
 
@@ -171,7 +170,9 @@ export default function EditForm({
           onClick={() => {
             history.push('/edit-overview')
           }}
+          type={'button'}
           inline
+          outlined
         />
         <SaveButton
           onClick={() => {}}
