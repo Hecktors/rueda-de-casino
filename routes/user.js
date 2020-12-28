@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
         }
         
         if(!emailCheck(email)) {
-            return res.status(400).json({mgs: "The entered email is not valid."})
+            return res.status(400).json({msg: "The entered email is not valid."})
         }
         
         if(password !== passwordCheck) {
