@@ -10,6 +10,8 @@ const addLevelIfNotExist = require("../services/addLevelIfNotExist")
 const deleteLevelIfEmpty = require("../services/deleteLevelIfEmpty")
 const { json } = require("express")
 const Level = require("../models/level.model")
+const checkMoveExistence = require("../services/checkMoveExistence")
+const addMoveToPensum = require("../services/addMoveToPesum")
 
 // Add move
 router.post("/add", auth, async (req, res) => {
@@ -20,8 +22,7 @@ router.post("/add", auth, async (req, res) => {
   const audioName = moveName.replace(/\s/g, "_") + ".mp3"
   const videoUrl = req.body.videoUrl
   const videoStart = req.body.videoStart
-  // 2. Find level, add if not exists
-  // 3. Find move, add if not exists 
+
   const newMove = new Move({
     name: moveName,
     bars,
@@ -30,36 +31,14 @@ router.post("/add", auth, async (req, res) => {
     videoStart
   })
 
-  // Find pensum and add if not exists
-  const pensum = await Pensum.findOne({userID: userID})
-  .then(foundPensum => {
-    if(!foundPensum) {
-      const newPensum = new Pensum({userID: userID})
-      return newPensum.save()
-      .then(res => res)
-      .catch(err => res.status(400).json({msg: "Error: " + err}))
-    }
-    return foundPensum
-  })
-  .catch((err) => res.status(400).json("Error: " + err))
+  const pensum = await getPensum(userID)
 
-  //  Find level and add if not exists
-  let hasLevel = pensum.levels.find(level => level.name === levelName)
-  if(!hasLevel) {
-    const newLevel = new Level({name: levelName})
-    pensum.levels.push(newLevel)
-  }
+  addLevelIfNotExist(pensum, levelName)
+  checkMoveExistence(pensum, newMove.name)
+  if(checkMoveExistence(pensum, newMove.name)) {return res.status(400).json({msg: "Move allready exists."})}
 
-  //  Find move and add if not exists
-  const hasMove = pensum.levels.map(level => level.moves).flat().some(move => move.name === newMove.name)
-
-  if(hasMove) {
-    return res.status(400).json({msg: "Move allready exists."})
-  }
-  
-  pensum.levels.forEach((level, index) => level.name === levelName && pensum.levels[index].moves.push(newMove))
-  pensum.markModified('levels');
-  pensum.save()
+  const updatedPensum = addMoveToPensum(pensum, levelName, newMove)
+  updatedPensum.save()
   .then(() => {
     addAudio(newMove.name, audioName)
     res.json(pensum)
