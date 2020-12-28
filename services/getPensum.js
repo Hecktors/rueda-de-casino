@@ -1,25 +1,9 @@
-const Move = require("../models/move.model")
-const Level = require("../models/level.model")
+const Pensum = require("../models/pensum.model")
 
-async function getPensum() {
-  let movesData = []
-  let response = { response: { err: "", pensum: [] } }
-  await Move.find()
-    .then((moves) => (movesData = moves))
-    .catch((err) => (response.err = err))
-  await Level.find()
-    .then((levels) => {
-      const pensum = levels.map((level) => {
-        return {
-          id: level.id,
-          levelName: level.name,
-          moves: movesData.filter((move) => move.levelName === level.name),
-        }
-      })
-      response.pensum = pensum
-    })
-    .catch((err) => (response.err = "Error: " + err))
-  return response
+async function getPensum(userID) {
+  return await Pensum.findOne({userID: userID})
+    .then((pensum) => pensum)
+    .catch((err) => {return {msg: err}})
 }
 
 module.exports = getPensum

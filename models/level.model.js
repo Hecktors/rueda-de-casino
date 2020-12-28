@@ -10,6 +10,7 @@ const levelSchema = new Schema({
     trim: true,
     minlength: 1,
   },
+  moves: []
 })
 
 const Level = mongoose.model("Level", levelSchema)
