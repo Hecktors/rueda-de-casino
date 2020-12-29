@@ -11,6 +11,13 @@ const initState = {
 
 export default function useAppState(pensum) {
   const [appState, setAppState] = useState(initState)
+  const [error, setError] = useState('')
+  if (error) {
+    setTimeout(() => {
+      setError('')
+    }, 5000)
+  }
+
   const selectedMoves =
     pensum &&
     pensum
@@ -31,5 +38,5 @@ export default function useAppState(pensum) {
       setLocalStorage(STORAGE_KEY, appState)
   }, [appState])
 
-  return { appState, setAppState, selectedMoves }
+  return { appState, setAppState, selectedMoves, error, setError }
 }

@@ -31,13 +31,13 @@ export default function usePensum(userData) {
       pensum.length
         ? setLocalStorage(STORAGE_KEY, fetchedPensum)
         : localStorage.removeItem(STORAGE_KEY)
-      setAudios(await getAudios(fetchedPensum))
+      // setAudios(await getAudios(fetchedPensum))
     }
     fetchData()
   }, [pensum])
 
   async function refreshPensum() {
-    setPensum(await getPensum)
+    setPensum(await getPensum(token))
   }
 
   return { pensum, refreshPensum, audios }

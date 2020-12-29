@@ -6,12 +6,10 @@ import { loginUser } from '../app/services/userAPIs'
 import { LoginButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
-import ErrorMsg from '../app/components/ErrorMsg'
 
 export default function Login() {
-  const { setUserData } = useContext(AppContext)
+  const { setUserData, setError } = useContext(AppContext)
   const history = useHistory()
-  const [error, setError] = useState('')
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',
@@ -33,7 +31,7 @@ export default function Login() {
     if (loginResponse.status !== 200) {
       setError(loginResponse.data.msg)
     } else {
-      error && setError('')
+      setError('')
       setUserData(loginResponse.data)
       history.push('/')
     }
@@ -41,7 +39,6 @@ export default function Login() {
 
   return (
     <>
-      {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <Header cols="110">
         <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <Link to="/">

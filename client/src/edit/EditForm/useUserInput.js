@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react'
 
-export default function useUserInput(pensum, id, setIsNewLevelSelected) {
+export default function useUserInput(
+  pensum,
+  userID,
+  moveID,
+  setIsNewLevelSelected
+) {
   const initState = {
-    _id: null,
+    userID: userID,
     moveName: '',
     levelName: pensum.length ? pensum[0].name : '',
     bars: '',
@@ -12,13 +17,12 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   const [userInput, setUserInput] = useState(initState)
   const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
   const isValid = userInput.moveName && userInput.levelName && userInput.bars
-  console.log(userInput.levelName)
-
+  console.log(userInput)
   useEffect(() => {
     let levelName, move
     pensum.forEach((level) =>
       level.moves.forEach((moveItem) => {
-        if (moveItem._id === id) {
+        if (moveItem._id === moveID) {
           levelName = level.name
           move = moveItem
         }
@@ -27,7 +31,7 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
 
     move &&
       setUserInput({
-        _id: move._id,
+        userID: userID,
         moveName: move.name,
         levelName: levelName,
         bars: move.bars,

@@ -19,13 +19,14 @@ export default function useHome(pensum, appState, setAppState) {
 
   const appStateHandler = {
     move: (value) => {
-      const updatedSelectedMoves = appState.selectedMoves
-        .map((move) => move.id)
-        .flat()
-        .includes(value)
-        ? appState.updatedSelectedMoves.filter((move) => move._id !== value)
-        : [...appState.updatedSelectedMoves, value]
-      setAppState({ ...appState, selectedMoveIDs: updatedSelectedMoves })
+      console.log(value)
+      // const selectedMoves = appState.selectecMoveIDs
+      //   .map((move) => move.id)
+      //   .flat()
+      //   .includes(value)
+      //   ? appState.updatedSelectedMoves.filter((move) => move._id !== value)
+      //   : [...appState.updatedSelectedMoves, value]
+      // setAppState({ ...appState, selectedMoveIDs: updatedSelectedMoves })
 
       const updatedMoveIDs = appState.selectedMoveIDs.includes(value)
         ? appState.selectedMoveIDs.filter((moveID) => moveID !== value)

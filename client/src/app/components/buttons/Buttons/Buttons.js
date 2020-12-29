@@ -28,7 +28,7 @@ export const LoginButton = (props) => (
 )
 
 export const LogoutButton = (props) => (
-  <Button color={'secondary'} {...props}>
+  <Button color={'primary'} {...props}>
     Log out
   </Button>
 )
@@ -36,6 +36,12 @@ export const LogoutButton = (props) => (
 export const MsgButton = (props) => (
   <Button color={'primary'} {...props}>
     Clear
+  </Button>
+)
+
+export const ResetButton = (props) => (
+  <Button color={'secondary'} {...props}>
+    Reset
   </Button>
 )
 

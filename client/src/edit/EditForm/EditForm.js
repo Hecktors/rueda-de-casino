@@ -5,11 +5,11 @@ import { addMove, deleteMove, updateMove } from './services/moveAPIs'
 import AppContext from '../../app/context/AppContext'
 import AppHeader from '../../app/components/AppHeader'
 import AppFooter from '../../app/components/AppFooter'
-import { CancelButton, SaveButton } from '../../app/components/buttons/Buttons'
+import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
+  BackIconButton,
   DeleteIconButton,
-  ResetIconButton,
 } from '../../app//components/buttons/IconButtons/IconButtons'
 import InputLevels from './InputLevels'
 import useUserInput from './useUserInput'
@@ -21,14 +21,19 @@ EditForm.propTypes = {
 }
 
 export default function EditForm({ match, history }) {
-  const { pensum, refreshPensum } = useContext(AppContext)
-  const id = match.params.id || ''
-  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!id)
+  const { userData, pensum, refreshPensum, setError } = useContext(AppContext)
+  const moveID = match.params.id || ''
+  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!moveID)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
-  const moveName = pensum
-    .map((level) => level.moves)
-    .flat()
-    .find((move) => move._id === id)
+  const { token, user } = userData
+
+  // console.log(pensum)
+  // console.log('userDAta:', userData, user.id)
+
+  // const move = pensum
+  //   .map((level) => level.moves)
+  //   .flat()
+  //   .find((move) => move._id === id)
 
   const [
     userInput,
@@ -37,13 +42,22 @@ export default function EditForm({ match, history }) {
     openNewLevelInput,
     hasNoChanges,
     isValid,
-  ] = useUserInput(pensum, id, moveName, setIsNewLevelSelected)
+  ] = useUserInput(pensum, user.id, moveID, setIsNewLevelSelected)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    isNewMove ? addMove(userInput) : updateMove(userInput)
-    refreshPensum()
+    const response = isNewMove
+      ? await addMove(token, userInput)
+      : await updateMove(token, userInput)
+    console.log(response.status, response.data.msg)
+
+    if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      refreshPensum()
+      history.push('/edit-overview')
+    }
   }
 
   function handleDelete(id) {
@@ -56,22 +70,21 @@ export default function EditForm({ match, history }) {
       {isDeleteModalDisplayed && (
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
-          handleDelete={() => handleDelete(id)}
-          deleteItem={moveName.name}
+          handleDelete={() => handleDelete(moveID)}
+          deleteItem={moveID}
         />
       )}
-      <AppHeader cols={id ? '111' : '110'}>
-        <ResetIconButton
-          type={'button'}
-          onClick={resetUserInput}
-          size={'md'}
-          disabled={hasNoChanges}
+      <AppHeader cols={moveID ? '111' : '110'}>
+        <BackIconButton
+          onClick={() => history.push('/edit-overview')}
+          size={'sm'}
+          type="button"
         />
-        <h2>EDIT</h2>
-        {id && (
+        <h1 className="logo">Salsa time!</h1>
+        {moveID && (
           <DeleteIconButton
-            type="button"
             onClick={() => setIsDeleteModalDisplayed(true)}
+            type="button"
             size={'md'}
           />
         )}
@@ -175,10 +188,9 @@ export default function EditForm({ match, history }) {
         </div>
       </main>
       <AppFooter>
-        <CancelButton
-          onClick={() => {
-            history.push('/edit-overview')
-          }}
+        <ResetButton
+          onClick={resetUserInput}
+          disabled={hasNoChanges}
           type={'button'}
           inline
           outlined
@@ -200,36 +212,18 @@ const EditFormStyled = styled.form`
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  padding: 10px;
   border-radius: 5px;
   display: grid;
   flex-direction: column;
-  grid-template-rows: 80px auto 80px;
+  grid-template-rows: 100px auto 100px;
 
-  /* h2 {
-    padding: 9px 0;
-    text-align: center;
-    font-size: 1.2rem;
-
-    span {
-      color: var(--color-primary);
-    }
-  } */
+  main {
+    padding: 10px;
+  }
 
   label {
     display: block;
   }
-
-  /* input,
-  select {
-    width: 100%;
-    padding: 3px 10px;
-    font-size: 1rem;
-  } */
-
-  /* option {
-    text-align: center;
-  } */
 
   .form-group-container {
     display: flex;
