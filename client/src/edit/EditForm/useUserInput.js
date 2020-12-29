@@ -4,7 +4,7 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   const initState = {
     _id: null,
     moveName: '',
-    levelName: pensum.length ? pensum[0].levelName : '',
+    levelName: pensum.length ? pensum[0].name : '',
     bars: '',
     videoUrl: '',
     videoStart: '',
@@ -12,17 +12,24 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   const [userInput, setUserInput] = useState(initState)
   const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
   const isValid = userInput.moveName && userInput.levelName && userInput.bars
+  console.log(userInput.levelName)
 
   useEffect(() => {
-    const move = pensum
-      .map((level) => level.moves)
-      .flat()
-      .find((move) => move._id === id)
+    let levelName, move
+    pensum.forEach((level) =>
+      level.moves.forEach((moveItem) => {
+        if (moveItem._id === id) {
+          levelName = level.name
+          move = moveItem
+        }
+      })
+    )
+
     move &&
       setUserInput({
         _id: move._id,
-        moveName: move.moveName,
-        levelName: move.levelName,
+        moveName: move.name,
+        levelName: levelName,
         bars: move.bars,
         videoUrl: move.videoUrl,
         videoStart: move.videoStart,

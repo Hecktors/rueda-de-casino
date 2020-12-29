@@ -5,8 +5,8 @@ import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 InputLevels.propTypes = {
   selectedLevelName: PropTypes.string.isRequired,
-  isNewLevelSelected: PropTypes.bool.isRequired,
   pensum: PropTypes.array.isRequired,
+  isNewLevelSelected: PropTypes.bool.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
