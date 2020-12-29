@@ -28,6 +28,7 @@ export default function useUser() {
   }, [])
 
   useEffect(() => {
+    console.log('######################')
     setLocalStorage('auth-token', userData.token)
   }, [userData])
 

@@ -20,7 +20,7 @@ export default function EditOverview({ history }) {
     <>
       <AppHeader cols="111">
         <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
-        <h1>Moves</h1>
+        <h1 className="logo">Salsa time!</h1>
         <UserIconButton
           size={'md'}
           onClick={() => history.push('/user-settings')}

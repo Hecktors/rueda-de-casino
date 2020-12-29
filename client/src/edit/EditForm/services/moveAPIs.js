@@ -3,14 +3,14 @@ const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
 
 // Add move
 export function addMove(token, data) {
+  console.log(token, data)
   return axios
     .post(`${base}/moves/add`, data, { headers: { 'x-auth-token': token } })
     .then((response) => {
+      console.log(token, response)
       return response.data
     })
-    .catch(function (error) {
-      console.log(error)
-    })
+    .catch((err) => err.response)
 }
 
 // Update move
@@ -23,10 +23,8 @@ export function updateMove(move) {
       videoUrl: move.videoUrl,
       videoStart: move.videoStart,
     })
-    .then((response) => response.data)
-    .catch(function (error) {
-      console.log(error)
-    })
+    .then((response) => response)
+    .catch((err) => err.response)
 }
 
 // Delete move

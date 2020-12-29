@@ -43,7 +43,7 @@ export default function UserSettings() {
           size={'sm'}
           onClick={() => history.push('/edit-overview')}
         />
-        <h1>User</h1>
+        <h1 className="logo">Salsa time!</h1>
       </Header>
       {userData.user && (
         <UserSettingsStyled>
