@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react'
-import AppContext from '../../app/context/AppContext'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import { addMove, deleteMove, updateMove } from './services/moveAPIs'
+import AppContext from '../../app/context/AppContext'
 import AppHeader from '../../app/components/AppHeader'
 import AppFooter from '../../app/components/AppFooter'
 import { CancelButton, SaveButton } from '../../app/components/buttons/Buttons'
@@ -23,7 +23,7 @@ EditForm.propTypes = {
 export default function EditForm({ match, history }) {
   const { pensum, refreshPensum } = useContext(AppContext)
   const id = match.params.id || ''
-  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!pensum.length)
+  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!id)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   const moveName = pensum
     .map((level) => level.moves)
