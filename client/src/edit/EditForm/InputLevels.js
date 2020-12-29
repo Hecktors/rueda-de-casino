@@ -42,8 +42,8 @@ export default function InputLevels({
         <span className="level-name">{header}</span>
       </h3>
       <ul>
-        {pensum.map(({ id, levelName }) => (
-          <li key={id}>
+        {pensum.map(({ _id, name: levelName }) => (
+          <li key={_id}>
             <label>
               <input
                 name="levelName"

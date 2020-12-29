@@ -1,6 +1,8 @@
+import { useState, useContext } from 'react'
+import AppContext from '../../app/context/AppContext'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 import styled from 'styled-components/macro'
+import { addMove, deleteMove, updateMove } from './services/moveAPIs'
 import AppHeader from '../../app/components/AppHeader'
 import AppFooter from '../../app/components/AppFooter'
 import { CancelButton, SaveButton } from '../../app/components/buttons/Buttons'
@@ -16,20 +18,10 @@ import DeleteModal from '../../app/components/DeleteModal'
 EditForm.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
-  addMove: PropTypes.func.isRequired,
-  updateMove: PropTypes.func.isRequired,
-  deleteMove: PropTypes.func.isRequired,
 }
 
-export default function EditForm({
-  match,
-  history,
-  pensum,
-  addMove,
-  updateMove,
-  deleteMove,
-}) {
+export default function EditForm({ match, history }) {
+  const { pensum, refreshPensum } = useContext(AppContext)
   const id = match.params.id || ''
   const [isNewLevelSelected, setIsNewLevelSelected] = useState(!pensum.length)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
@@ -51,6 +43,7 @@ export default function EditForm({
     e.preventDefault()
     const isNewMove = !userInput._id
     isNewMove ? addMove(userInput) : updateMove(userInput)
+    refreshPensum()
   }
 
   function handleDelete(id) {
@@ -121,13 +114,13 @@ export default function EditForm({
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="">Move name*</label>
+            <label htmlFor="moveName">Move name*</label>
             <input
               onChange={updateUserInput}
-              value={userInput.name}
+              value={userInput.moveName}
               type="text"
-              id="name"
-              name="name"
+              id="moveName"
+              name="moveName"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
               required

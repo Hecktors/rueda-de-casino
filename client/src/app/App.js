@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useUser from './hooks/useUser'
-import UserContext from './context/UserContext'
+import AppContext from './context/AppContext'
 import useAppState from './hooks/useAppState'
 import usePensum from './hooks/usePensum'
 import AuthOptions from '../auth/AuthOptions'
@@ -14,13 +14,8 @@ import UserSettings from '../auth/UserSettings'
 
 export default function App() {
   const { userData, setUserData } = useUser()
-  const { pensum, addMove, updateMove, deleteMove, audios } = usePensum()
-  const {
-    appState,
-    selectedMoves,
-    updateAppState,
-    resetAppState,
-  } = useAppState(pensum)
+  const { pensum, refreshPensum, audios } = usePensum(userData)
+  const { appState, setAppState, selectedMoves } = useAppState()
   const location = useLocation()
   const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
 
@@ -29,24 +24,21 @@ export default function App() {
       <div className="desktop-only">
         This application is optimized for mobile devices.
       </div>
-      <UserContext.Provider value={{ userData, setUserData }}>
+      <AppContext.Provider
+        value={{
+          userData,
+          setUserData,
+          pensum,
+          refreshPensum,
+          appState,
+          setAppState,
+        }}
+      >
         <Switch>
           {!userData.user ? (
             <Route exact path="/" component={AuthOptions} />
           ) : (
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <Home
-                  {...props}
-                  pensum={pensum}
-                  appState={appState}
-                  updateAppState={updateAppState}
-                  resetAppState={resetAppState}
-                />
-              )}
-            />
+            <Route exact path="/" render={(props) => <Home {...props} />} />
           )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
@@ -67,24 +59,16 @@ export default function App() {
           <Route
             exact
             path="/edit-overview"
-            render={(props) => <EditOverview {...props} pensum={pensum} />}
+            render={(props) => <EditOverview {...props} />}
           />
           <Route
             exact
             path="/edit-form/:id?"
-            render={(props) => (
-              <EditForm
-                {...props}
-                pensum={pensum}
-                addMove={addMove}
-                updateMove={updateMove}
-                deleteMove={deleteMove}
-              />
-            )}
+            render={(props) => <EditForm {...props} />}
           />
           <Redirect to="/" />
         </Switch>
-      </UserContext.Provider>
+      </AppContext.Provider>
     </div>
   )
 }

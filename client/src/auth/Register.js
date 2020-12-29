@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
-import UserContext from '../app/context/UserContext'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import AppContext from '../app/context/AppContext'
 import Header from '../app/components/AppHeader'
 import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
@@ -9,7 +9,7 @@ import { BackIconButton } from '../app/components/buttons/IconButtons'
 import ErrorMsg from '../app/components/ErrorMsg'
 
 export default function Register() {
-  const { setUserData } = useContext(UserContext)
+  const { setUserData } = useContext(AppContext)
   const history = useHistory()
   const [error, setError] = useState('')
   const [userInput, setUserInput] = useState({
