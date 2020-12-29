@@ -15,6 +15,7 @@ const addMoveToPensum = require("../services/addMoveToPesum")
 
 // Add move
 router.post("/add", auth, async (req, res) => {
+  console.log(req.body)
   const userID = req.body.userID
   const levelName = req.body.levelName
   const moveName = req.body.moveName.toLowerCase().trim().replace(/\s+/g, " ")
@@ -34,8 +35,9 @@ router.post("/add", auth, async (req, res) => {
   const pensum = await getPensum(userID)
 
   addLevelIfNotExist(pensum, levelName)
-  checkMoveExistence(pensum, newMove.name)
-  if(checkMoveExistence(pensum, newMove.name)) {return res.status(400).json({msg: "Move allready exists."})}
+  if(checkMoveExistence(pensum, newMove.name)) {
+    return res.status(400).json({msg: "Move allready exists."})
+  }
 
   const updatedPensum = addMoveToPensum(pensum, levelName, newMove)
   updatedPensum.save()

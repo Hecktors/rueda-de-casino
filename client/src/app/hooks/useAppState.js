@@ -11,6 +11,12 @@ const initState = {
 
 export default function useAppState(pensum) {
   const [appState, setAppState] = useState(initState)
+  const selectedMoves =
+    pensum &&
+    pensum
+      .map((level) => level.moves)
+      .flat()
+      .filter((move) => appState.selectedMoveIDs.includes(move._id))
 
   useEffect(() => {
     async function initfetch() {
@@ -21,40 +27,9 @@ export default function useAppState(pensum) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    JSON.stringify(appState) !== JSON.stringify(initState) &&
-      JSON.stringify(appState) !==
-        JSON.stringify(getLocalStorage('appState')) &&
+    JSON.stringify(appState) !== JSON.stringify(getLocalStorage('appState')) &&
       setLocalStorage(STORAGE_KEY, appState)
   }, [appState])
 
-  const selectedMoves = appState.selectedMoveIDs
-    ? pensum
-        .map((level) => level.moves)
-        .flat(1)
-        .filter((move) => appState.selectedMoveIDs.includes(move._id))
-    : []
-
-  function updateAppState(event) {
-    const { name, value, checked } = event.target
-    appStateHandler[name](value, checked)
-  }
-
-  const appStateHandler = {
-    move: (value) => {
-      const updatedMoveIDs = appState.selectedMoveIDs.includes(value)
-        ? appState.selectedMoveIDs.filter((moveID) => moveID !== value)
-        : [...appState.selectedMoveIDs, value]
-      setAppState({ ...appState, selectedMoveIDs: updatedMoveIDs })
-    },
-    speed: (value) => setAppState({ ...appState, speed: Number(value) }),
-    songActivity: (_, checked) => {
-      setAppState({ ...appState, isSongActive: checked })
-    },
-  }
-
-  function resetAppState() {
-    setAppState(initState)
-  }
-
-  return { appState, selectedMoves, updateAppState, resetAppState }
+  return { appState, setAppState, selectedMoves }
 }

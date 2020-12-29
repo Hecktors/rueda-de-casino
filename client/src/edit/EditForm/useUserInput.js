@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   const initState = {
     _id: null,
-    name: '',
+    moveName: '',
     levelName: pensum.length ? pensum[0].levelName : '',
     bars: '',
     videoUrl: '',
@@ -11,7 +11,7 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
   }
   const [userInput, setUserInput] = useState(initState)
   const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
-  const isValid = userInput.name && userInput.levelName && userInput.bars
+  const isValid = userInput.moveName && userInput.levelName && userInput.bars
 
   useEffect(() => {
     const move = pensum
@@ -21,7 +21,7 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
     move &&
       setUserInput({
         _id: move._id,
-        name: move.name,
+        moveName: move.moveName,
         levelName: move.levelName,
         bars: move.bars,
         videoUrl: move.videoUrl,

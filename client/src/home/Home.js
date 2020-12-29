@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import AppFooter from '../app/components/AppFooter'
@@ -10,22 +11,20 @@ import {
 import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
+import AppContext from '../app/context/AppContext'
+import useHome from './useHome'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
-  appState: PropTypes.object.isRequired,
-  updateAppState: PropTypes.func.isRequired,
-  resetAppState: PropTypes.func.isRequired,
 }
 
-export default function Home({
-  history,
-  pensum,
-  appState,
-  updateAppState,
-  resetAppState,
-}) {
+export default function Home({ history }) {
+  const { pensum, appState, setAppState } = useContext(AppContext)
+  const { updateAppState, resetAppState } = useHome(
+    pensum,
+    appState,
+    setAppState
+  )
   const { selectedMoveIDs, speed, isSongActive } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
 
@@ -47,10 +46,10 @@ export default function Home({
       <MainStyled hasMultiLevels={pensum.length > 1}>
         <form>
           <div className="level-container">
-            {pensum.map(({ id, levelName, moves }) => (
+            {pensum.map(({ _id, name, moves }) => (
               <InputLevel
-                key={id}
-                levelName={levelName}
+                key={_id}
+                levelName={name}
                 levelMoves={moves}
                 selectedMoveIDs={selectedMoveIDs}
                 updateAppState={updateAppState}

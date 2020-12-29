@@ -1,34 +1,33 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 import getAudios from '../services/getAudios'
-import {
-  fetchGetPensum,
-  fetchAddMove,
-  fetchUpdateMove,
-  fetchDeleteMove,
-} from '../services/moveAPIs'
+import { getPensum } from '../services/pensumAPIs'
 
 const STORAGE_KEY = 'pensum'
 
-export default function useAppState(levels) {
+export default function usePensum(userData) {
   const [pensum, setPensum] = useState([])
   const [audios, setAudios] = useState([])
-  const history = useHistory()
+  const { token } = userData
+
+  console.log(userData)
 
   useEffect(() => {
     async function initfetch() {
-      const fetchedPensum = await fetchGetPensum()
-      setPensum(getLocalStorage('pensum') || fetchedPensum)
+      if (token) {
+        const fetchedPensum = await getPensum(token)
+        console.log(fetchedPensum)
+        setPensum(getLocalStorage('pensum') || fetchedPensum)
+        // !audios.length && setAudios(await getAudios(fetchedPensum))
+      }
       // setPensum([])
-      !audios.length && setAudios(await getAudios(fetchedPensum))
     }
     initfetch()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userData]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     async function fetchData() {
-      const fetchedPensum = await fetchGetPensum()
+      const fetchedPensum = await getPensum(token)
       pensum.length
         ? setLocalStorage(STORAGE_KEY, fetchedPensum)
         : localStorage.removeItem(STORAGE_KEY)
@@ -37,23 +36,9 @@ export default function useAppState(levels) {
     fetchData()
   }, [pensum])
 
-  async function addMove(userInput) {
-    await fetchAddMove(userInput)
-    setPensum(await fetchGetPensum())
-    history.push('/edit-overview')
+  async function refreshPensum() {
+    setPensum(await getPensum)
   }
 
-  async function updateMove(userInput) {
-    await fetchUpdateMove(userInput)
-    setPensum(await fetchGetPensum())
-    history.push('/edit-overview')
-  }
-
-  async function deleteMove(id) {
-    await fetchDeleteMove(id)
-    setPensum(await fetchGetPensum())
-    history.push('/edit-overview')
-  }
-
-  return { pensum, addMove, updateMove, deleteMove, audios }
+  return { pensum, refreshPensum, audios }
 }

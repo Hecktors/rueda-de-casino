@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import AppContext from '../../app/context/AppContext'
 import styled from 'styled-components/macro'
 import AppHeader from '../../app/components/AppHeader'
 import {
@@ -10,10 +12,10 @@ import {
 
 EditOverview.propTypes = {
   history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
 }
 
-export default function EditOverview({ history, pensum }) {
+export default function EditOverview({ history }) {
+  const { pensum } = useContext(AppContext)
   return (
     <>
       <AppHeader cols="111">
@@ -26,11 +28,11 @@ export default function EditOverview({ history, pensum }) {
       </AppHeader>
 
       <UpdateStyled>
-        {pensum.map((level) => {
+        {pensum.map(({ _id, name, moves }) => {
           return (
-            <ul key={level.id}>
-              <li>{level.levelName.toUpperCase()}</li>
-              {level.moves.map((move) => (
+            <ul key={_id}>
+              <li>{name.toUpperCase()}</li>
+              {moves.map((move) => (
                 <li key={move._id}>
                   {move.name}
                   <EditIconButton

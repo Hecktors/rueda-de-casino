@@ -1,25 +1,23 @@
 import { useState, useContext } from 'react'
-import UserContext from '../app/context/UserContext'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+import AppContext from '../app/context/AppContext'
 import Header from '../app/components/AppHeader'
 import {
   DeleteAccountButton,
   LogoutButton,
 } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
-import { setLocalStorage } from '../app/lib/localStorage'
 import { deleteUser } from '../app/services/userAPIs'
 import DeleteModal from '../app/components/DeleteModal'
 
 export default function UserSettings() {
   const history = useHistory()
-  const { userData, setUserData } = useContext(UserContext)
+  const { userData, setUserData } = useContext(AppContext)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
 
   function handelLogout() {
-    setUserData({ token: null, user: null })
-    setLocalStorage('auth-token', '')
+    setUserData({ token: '', user: null })
     history.push('/')
   }
 
