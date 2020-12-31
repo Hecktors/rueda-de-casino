@@ -9,8 +9,8 @@ export default function DeleteModal({ cancel, handleDelete, deleteItem }) {
         <h2>Delete {deleteItem}</h2>
         <p>Are you sure? This process cannot be undone.</p>
         <div>
-          <CancelButton onClick={cancel} />
-          <DeleteButton onClick={handleDelete} />{' '}
+          <CancelButton onClick={cancel} type="button" />
+          <DeleteButton onClick={handleDelete} type="button" />{' '}
         </div>
       </div>
     </DeleteModalStyled>

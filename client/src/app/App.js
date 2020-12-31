@@ -2,7 +2,7 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useUser from './hooks/useUser'
 import AppContext from './context/AppContext'
 import useAppState from './hooks/useAppState'
-import usePensum from './hooks/usePensum'
+import useMoves from './hooks/useLevels'
 import AuthOptions from '../auth/AuthOptions'
 import Register from '../auth/Register'
 import Login from '../auth/Login'
@@ -15,7 +15,7 @@ import ErrorMsg from './components/ErrorMsg'
 
 export default function App() {
   const { userData, setUserData } = useUser()
-  const { pensum, refreshPensum, audios } = usePensum(userData)
+  const { levels, refreshLevels, audios } = useMoves(userData)
   const {
     appState,
     setAppState,
@@ -37,8 +37,8 @@ export default function App() {
         value={{
           userData,
           setUserData,
-          pensum,
-          refreshPensum,
+          levels,
+          refreshLevels,
           appState,
           setAppState,
           setError,

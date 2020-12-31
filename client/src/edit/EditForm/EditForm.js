@@ -1,7 +1,6 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { addMove, deleteMove, updateMove } from './services/moveAPIs'
 import AppContext from '../../app/context/AppContext'
 import AppHeader from '../../app/components/AppHeader'
 import AppFooter from '../../app/components/AppFooter'
@@ -14,6 +13,7 @@ import {
 import InputLevels from './InputLevels'
 import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
+import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 
 EditForm.propTypes = {
   match: PropTypes.object.isRequired,
@@ -21,19 +21,21 @@ EditForm.propTypes = {
 }
 
 export default function EditForm({ match, history }) {
-  const { userData, pensum, refreshPensum, setError } = useContext(AppContext)
+  const { userData, levels, refreshLevels, setError } = useContext(AppContext)
   const moveID = match.params.id || ''
-  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!moveID)
+  const [isNewLevel, setIsNewLevel] = useState(false)
+  const hasNoLevels = !levels.length
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
-  const { token, user } = userData
+  const { token } = userData
+  const editedMove = levels
+    .map((level) => level.moves)
+    .flat()
+    .find((move) => move._id === moveID)
 
-  // console.log(pensum)
-  // console.log('userDAta:', userData, user.id)
+  let initLevelName = levels.length > 0 ? levels[levels.length - 1].name : ''
+  if (editedMove) initLevelName = editedMove.levelName
 
-  // const move = pensum
-  //   .map((level) => level.moves)
-  //   .flat()
-  //   .find((move) => move._id === id)
+  !token && history.push('/')
 
   const [
     userInput,
@@ -42,27 +44,35 @@ export default function EditForm({ match, history }) {
     openNewLevelInput,
     hasNoChanges,
     isValid,
-  ] = useUserInput(pensum, user.id, moveID, setIsNewLevelSelected)
+  ] = useUserInput(editedMove, setIsNewLevel, initLevelName, hasNoLevels)
+
+  useEffect(() => {
+    !initLevelName && setIsNewLevel(true)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleSubmit(e) {
     e.preventDefault()
     const isNewMove = !userInput._id
     const response = isNewMove
       ? await addMove(token, userInput)
-      : await updateMove(token, userInput)
-    console.log(response.status, response.data.msg)
-
+      : await updateMove(token, moveID, userInput)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {
-      refreshPensum()
+      refreshLevels()
       history.push('/edit-overview')
     }
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
+    const response = await deleteMove(token, id)
     setIsDeleteModalDisplayed(false)
-    deleteMove(id)
+    if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      refreshLevels()
+      history.push('/edit-overview')
+    }
   }
 
   return (
@@ -71,7 +81,7 @@ export default function EditForm({ match, history }) {
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
           handleDelete={() => handleDelete(moveID)}
-          deleteItem={moveID}
+          deleteItem={editedMove.name}
         />
       )}
       <AppHeader cols={moveID ? '111' : '110'}>
@@ -93,9 +103,9 @@ export default function EditForm({ match, history }) {
         <div className="form-group-container">
           <div className="form-group">
             <InputLevels
-              pensum={pensum}
+              levels={levels}
               selectedLevelName={userInput.levelName}
-              isNewLevelSelected={isNewLevelSelected}
+              isNewLevel={isNewLevel}
               updateUserInput={updateUserInput}
             />
           </div>
@@ -104,12 +114,12 @@ export default function EditForm({ match, history }) {
               onClick={openNewLevelInput}
               type={'button'}
               size={'sm'}
-              disabled={isNewLevelSelected}
+              disabled={isNewLevel}
             />
           </div>
         </div>
 
-        {isNewLevelSelected && (
+        {isNewLevel && (
           <div className="form-group">
             <label htmlFor="">Level name</label>
             <input
@@ -127,13 +137,13 @@ export default function EditForm({ match, history }) {
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="moveName">Move name*</label>
+            <label htmlFor="name">Move name*</label>
             <input
               onChange={updateUserInput}
-              value={userInput.moveName}
+              value={userInput.name}
               type="text"
-              id="moveName"
-              name="moveName"
+              id="name"
+              name="name"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
               required
@@ -239,6 +249,7 @@ const EditFormStyled = styled.form`
   .form-group {
     max-width: 400px;
     margin: 20px auto;
+    display: grid;
   }
 
   .form-group:first-of-type {

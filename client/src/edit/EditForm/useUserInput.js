@@ -1,48 +1,47 @@
 import { useState, useEffect } from 'react'
 
 export default function useUserInput(
-  pensum,
-  userID,
-  moveID,
-  setIsNewLevelSelected
+  move,
+  setIsNewLevelSelected,
+  initLevelName,
+  hasNoLevels
 ) {
   const initState = {
-    userID: userID,
-    moveName: '',
-    levelName: pensum.length ? pensum[0].name : '',
+    _id: '',
+    name: '',
+    levelName: initLevelName,
     bars: '',
     videoUrl: '',
     videoStart: '',
   }
   const [userInput, setUserInput] = useState(initState)
-  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
-  const isValid = userInput.moveName && userInput.levelName && userInput.bars
-  console.log(userInput)
-  useEffect(() => {
-    let levelName, move
-    pensum.forEach((level) =>
-      level.moves.forEach((moveItem) => {
-        if (moveItem._id === moveID) {
-          levelName = level.name
-          move = moveItem
-        }
-      })
-    )
+  const isValid = userInput.name && userInput.levelName && userInput.bars
+  const hasNoChanges = move
+    ? JSON.stringify(userInput) === JSON.stringify(move)
+    : JSON.stringify(userInput) === JSON.stringify(initState)
 
-    move &&
+  useEffect(() => {
+    setInitState()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function setInitState() {
+    if (move) {
       setUserInput({
-        userID: userID,
-        moveName: move.name,
-        levelName: levelName,
+        _id: move._id,
+        name: move.name,
+        levelName: move.levelName,
         bars: move.bars,
         videoUrl: move.videoUrl,
         videoStart: move.videoStart,
       })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    } else {
+      setUserInput(initState)
+    }
+  }
 
   function resetUserInput() {
-    setUserInput(initState)
-    setIsNewLevelSelected(false)
+    setInitState()
+    !hasNoLevels && setIsNewLevelSelected(false)
   }
 
   function updateUserInput(event) {

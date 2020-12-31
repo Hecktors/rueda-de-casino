@@ -17,9 +17,9 @@ export default function InputLevel({
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
-  const hasInputMove = levelMoves.some((move) => {
-    return selectedMoveIDs.includes(move._id)
-  })
+  const hasInputMove = levelMoves.some((move) =>
+    selectedMoveIDs.includes(move._id)
+  )
   const color = hasInputMove ? 'var(--color-primary)' : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
 

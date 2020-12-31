@@ -35,7 +35,7 @@ export default function Button({
   let bdColor = outlined ? textColor : bgColor
 
   if (disabled) {
-    color = outlined ? colors['disabled'] : colors['bg']
+    textColor = outlined ? colors['disabled'] : colors['bg']
     bgColor = outlined ? colors['bg'] : colors['disabled']
     bdColor = colors['disabled']
   }
@@ -45,6 +45,7 @@ export default function Button({
       type={type}
       data-testid="button"
       className={className}
+      disabled={disabled}
       width={width}
       textColor={textColor}
       bgColor={bgColor}
