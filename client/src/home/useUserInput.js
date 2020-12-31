@@ -4,11 +4,10 @@ const initState = {
   isSongActive: true,
 }
 
-export default function useHome(pensum, appState, setAppState) {
+export default function useUserInput(levels, appState, setAppState) {
   const selectedMoves = appState.selectedMoveIDs
-    ? pensum
+    ? levels
         .map((level) => level.moves)
-        .flat(1)
         .filter((move) => appState.selectedMoveIDs.includes(move._id))
     : []
 
@@ -19,15 +18,6 @@ export default function useHome(pensum, appState, setAppState) {
 
   const appStateHandler = {
     move: (value) => {
-      console.log(value)
-      // const selectedMoves = appState.selectecMoveIDs
-      //   .map((move) => move.id)
-      //   .flat()
-      //   .includes(value)
-      //   ? appState.updatedSelectedMoves.filter((move) => move._id !== value)
-      //   : [...appState.updatedSelectedMoves, value]
-      // setAppState({ ...appState, selectedMoveIDs: updatedSelectedMoves })
-
       const updatedMoveIDs = appState.selectedMoveIDs.includes(value)
         ? appState.selectedMoveIDs.filter((moveID) => moveID !== value)
         : [...appState.selectedMoveIDs, value]

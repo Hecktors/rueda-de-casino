@@ -15,7 +15,9 @@ EditOverview.propTypes = {
 }
 
 export default function EditOverview({ history }) {
-  const { pensum } = useContext(AppContext)
+  const { userData, levels } = useContext(AppContext)
+  !userData.token && history.push('/')
+
   return (
     <>
       <AppHeader cols="111">
@@ -28,19 +30,23 @@ export default function EditOverview({ history }) {
       </AppHeader>
 
       <UpdateStyled>
-        {pensum.map(({ _id, name, moves }) => {
+        {levels.map(({ name, moves }) => {
           return (
-            <ul key={_id}>
+            <ul key={name}>
               <li>{name.toUpperCase()}</li>
-              {moves.map((move) => (
-                <li key={move._id}>
-                  {move.name}
-                  <EditIconButton
-                    size={'xs'}
-                    onClick={() => history.push(`/edit-form/${move._id}`)}
-                  />
-                </li>
-              ))}
+              {moves.map((move) => {
+                return move.levelName === name ? (
+                  <li key={move._id}>
+                    {move.name}
+                    <EditIconButton
+                      size={'xs'}
+                      onClick={() => history.push(`/edit-form/${move._id}`)}
+                    />
+                  </li>
+                ) : (
+                  ''
+                )
+              })}
             </ul>
           )
         })}

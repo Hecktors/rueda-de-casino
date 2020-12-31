@@ -11,10 +11,6 @@ export default function useUser() {
   useEffect(() => {
     async function initfetch() {
       let token = JSON.parse(localStorage.getItem('auth-token'))
-      // if (token === null) {
-      //   localStorage.setItem('auth-token', '')
-      //   token = ''
-      // }
       const tokenRes = await validateToken(token)
       if (tokenRes) {
         const userResponse = await getUser(token)
@@ -28,7 +24,6 @@ export default function useUser() {
   }, [])
 
   useEffect(() => {
-    console.log('######################')
     setLocalStorage('auth-token', userData.token)
   }, [userData])
 

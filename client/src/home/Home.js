@@ -12,16 +12,16 @@ import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 import AppContext from '../app/context/AppContext'
-import useHome from './useHome'
+import useUserInput from './useUserInput'
 
 Home.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
 export default function Home({ history }) {
-  const { pensum, appState, setAppState } = useContext(AppContext)
-  const { updateAppState, resetAppState } = useHome(
-    pensum,
+  const { levels, appState, setAppState } = useContext(AppContext)
+  const { updateAppState, resetAppState } = useUserInput(
+    levels,
     appState,
     setAppState
   )
@@ -43,12 +43,12 @@ export default function Home({ history }) {
         />
       </AppHeader>
 
-      <MainStyled hasMultiLevels={pensum.length > 1}>
+      <MainStyled hasMultiLevels={levels.length > 1}>
         <form>
           <div className="level-container">
-            {pensum.map(({ _id, name, moves }) => (
+            {levels.map(({ name, moves }) => (
               <InputLevel
-                key={_id}
+                key={name}
                 levelName={name}
                 levelMoves={moves}
                 selectedMoveIDs={selectedMoveIDs}

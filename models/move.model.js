@@ -6,13 +6,14 @@ const moveSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
-    minlength: 1,
+    maxlength: 30,
   },
   levelName: {
     type: String,
     required: true,
+    trim: true,
+    maxLength: 30
   },
   bars: {
     type: Number,

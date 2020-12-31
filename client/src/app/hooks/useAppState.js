@@ -9,7 +9,7 @@ const initState = {
   isSongActive: true,
 }
 
-export default function useAppState(pensum) {
+export default function useAppState(moves) {
   const [appState, setAppState] = useState(initState)
   const [error, setError] = useState('')
   if (error) {
@@ -19,8 +19,8 @@ export default function useAppState(pensum) {
   }
 
   const selectedMoves =
-    pensum &&
-    pensum
+    moves &&
+    moves
       .map((level) => level.moves)
       .flat()
       .filter((move) => appState.selectedMoveIDs.includes(move._id))

@@ -5,23 +5,21 @@ import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 InputLevels.propTypes = {
   selectedLevelName: PropTypes.string.isRequired,
-  pensum: PropTypes.array.isRequired,
-  isNewLevelSelected: PropTypes.bool.isRequired,
+  levels: PropTypes.array.isRequired,
+  isNewLevel: PropTypes.bool.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
 export default function InputLevels({
   selectedLevelName,
-  pensum,
-  isNewLevelSelected,
+  levels,
+  isNewLevel,
   updateUserInput,
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const ulHeight = isOpen ? 'auto' : 0
   const bdRdButtom = isOpen ? 0 : '5px'
-  const header = isNewLevelSelected
-    ? 'New Level'
-    : selectedLevelName.toUpperCase()
+  const header = isNewLevel ? 'New Level' : selectedLevelName.toUpperCase()
   function toogleInputLevels() {
     setIsOpen(!isOpen)
   }
@@ -42,8 +40,8 @@ export default function InputLevels({
         <span className="level-name">{header}</span>
       </h3>
       <ul>
-        {pensum.map(({ _id, name: levelName }) => (
-          <li key={_id}>
+        {levels.map(({ name: levelName }) => (
+          <li key={levelName}>
             <label>
               <input
                 name="levelName"

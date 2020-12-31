@@ -17,8 +17,10 @@ const userSchema = new Schema({
     },
     displayName: {
         type: String
-    }
-    
+    },
+    moveIDs: [{
+        type: String
+    }]
 })
 
 const User = mongoose.model('User', userSchema)
