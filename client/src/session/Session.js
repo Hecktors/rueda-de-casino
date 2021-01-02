@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
 import AppFooter from '../app/components/AppFooter'
@@ -15,31 +15,22 @@ import {
   PlayIconButton,
   StopIconButton,
 } from '../app/components/buttons/IconButtons'
+import AppContext from '../app/context/AppContext'
 
-Session.propTypes = {
-  history: PropTypes.object.isRequired,
-  moves: PropTypes.array.isRequired,
-  audios: PropTypes.array.isRequired,
-  speed: PropTypes.number,
-  isSongActive: PropTypes.bool.isRequired,
-}
+export default function Session() {
+  const history = useHistory()
+  const { levels, audios, appState } = useContext(AppContext)
 
-export default function Session({
-  history,
-  moves,
-  audios,
-  speed,
-  isSongActive,
-}) {
   const [
+    selectedMoves,
     sessionHandler,
     isPlaying,
     currentMove,
     isMoveDisplayed,
     setIsMoveDisplayed,
-  ] = useSession(history, moves, audios, speed, isSongActive)
+  ] = useSession(history, levels, audios, appState)
 
-  !moves.length && history.push('/')
+  !selectedMoves.length && history.push('/')
   const [YoutubeVideoObj, setYoutubeVideoObj] = useState({})
 
   return YoutubeVideoObj.url ? (
@@ -76,7 +67,10 @@ export default function Session({
               <CurrentMove name={currentMove.name} />
             </CSSTransition>
           ) : (
-            <SelectedMoveList moves={moves} onClick={setYoutubeVideoObj} />
+            <SelectedMoveList
+              moves={selectedMoves}
+              onClick={setYoutubeVideoObj}
+            />
           )}
         </Overlay>
         <BackgroundVideo isPlaying={isPlaying} />
