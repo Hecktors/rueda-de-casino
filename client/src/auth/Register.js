@@ -2,16 +2,14 @@ import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import AppContext from '../app/context/AppContext'
-import Header from '../app/components/AppHeader'
 import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
-import ErrorMsg from '../app/components/ErrorMsg'
+import Header from '../app/components/AppHeader'
 
 export default function Register() {
-  const { setUserData } = useContext(AppContext)
   const history = useHistory()
-  const [error, setError] = useState('')
+  const { setUserData, setError } = useContext(AppContext)
   const [userInput, setUserInput] = useState({
     name: '',
     email: '',
@@ -28,15 +26,22 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    if (!userInput.email || !userInput.password || !userInput.passwordCheck) {
+      setError('All required field have to been filled.')
+      return
+    }
+
     const registerResponse = await registerUser(userInput)
+
     if (registerResponse.status !== 200) {
       setError(registerResponse.data.msg)
     } else {
-      error && setError('')
       const loginResponse = await loginUser({
         email: userInput.email,
         password: userInput.password,
       })
+
       setUserData(loginResponse.data)
       history.push('/')
     }
@@ -44,7 +49,6 @@ export default function Register() {
 
   return (
     <>
-      {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <Header cols="110">
         <BackIconButton size={'sm'} onClick={() => history.push('/')} />
         <Link to="/">
@@ -53,6 +57,7 @@ export default function Register() {
           </h1>
         </Link>
       </Header>
+
       <RegisterStyled onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>

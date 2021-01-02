@@ -1,8 +1,10 @@
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppFooter from '../app/components/AppFooter'
+import useUserInput from './useUserInput'
+import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
+import AppFooter from '../app/components/AppFooter'
 import {
   PlayIconButton,
   ResetIconButton,
@@ -11,14 +13,9 @@ import {
 import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
-import AppContext from '../app/context/AppContext'
-import useUserInput from './useUserInput'
 
-Home.propTypes = {
-  history: PropTypes.object.isRequired,
-}
-
-export default function Home({ history }) {
+export default function Home() {
+  const history = useHistory()
   const { levels, appState, setAppState } = useContext(AppContext)
   const { updateAppState, resetAppState } = useUserInput(
     levels,
@@ -39,7 +36,7 @@ export default function Home({ history }) {
         <h1 className="logo">Salsa time!</h1>
         <SettingsIconButton
           onClick={() => history.push('/edit-overview')}
-          size={'sm'}
+          size={'md'}
         />
       </AppHeader>
 

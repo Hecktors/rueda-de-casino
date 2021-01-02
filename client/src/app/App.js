@@ -17,9 +17,9 @@ export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels, audios } = useMoves(userData)
   const {
+    selectedMoves,
     appState,
     setAppState,
-    selectedMoves,
     error,
     setError,
   } = useAppState()

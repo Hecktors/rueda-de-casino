@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react'
-import AppContext from '../app/context/AppContext'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import AppContext from '../app/context/AppContext'
 import { loginUser } from '../app/services/userAPIs'
 import { LoginButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
 
 export default function Login() {
-  const { setUserData, setError } = useContext(AppContext)
   const history = useHistory()
+  const { setUserData, setError } = useContext(AppContext)
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',
@@ -24,10 +24,16 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    if (!userInput.email || !userInput.password) {
+      setError('All required field have to been filled.')
+      return
+    }
     const loginResponse = await loginUser({
       email: userInput.email,
       password: userInput.password,
     })
+
     if (loginResponse.status !== 200) {
       setError(loginResponse.data.msg)
     } else {

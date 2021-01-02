@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired,
+  type: PropTypes.string,
   className: PropTypes.string,
+  color: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
   inline: PropTypes.bool,
-  type: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 }
 
 const colors = {
@@ -23,8 +23,8 @@ export default function Button({
   children,
   type,
   className,
-  disabled,
   color,
+  disabled,
   outlined,
   inline,
   onClick,

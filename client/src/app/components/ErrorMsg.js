@@ -1,5 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
+ErrorMsg.propTypes = {
+  msg: PropTypes.string.isRequired,
+  clearError: PropTypes.func.isRequired,
+}
 
 export default function ErrorMsg({ msg, clearError }) {
   return (

@@ -11,8 +11,8 @@ const sizes = {
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
   onClick: PropTypes.func.isRequired,
-  size: PropTypes.string.isRequired,
   className: PropTypes.string,
+  size: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   type: PropTypes.string,
 }
@@ -21,8 +21,8 @@ export default function IconButton({
   children,
   type,
   className,
-  disabled,
   size,
+  disabled,
   onClick,
 }) {
   const fillColor = disabled
@@ -34,9 +34,9 @@ export default function IconButton({
       data-testid="button"
       type={type}
       className={className}
+      size={sizes[size]}
       disabled={disabled}
       fillColor={fillColor}
-      size={sizes[size]}
       onClick={onClick}
     >
       {children}
