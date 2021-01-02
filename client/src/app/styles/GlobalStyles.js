@@ -113,6 +113,7 @@ export default createGlobalStyle`
         padding: 10px;
         font-size: 1rem;
         outline: none;
+        border-radius: 3px;
         border: none;
         color: var(--color-input);
         background-color: var(--color-bg-input);
