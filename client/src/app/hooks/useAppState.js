@@ -12,11 +12,6 @@ const initState = {
 export default function useAppState(moves) {
   const [appState, setAppState] = useState(initState)
   const [error, setError] = useState('')
-  if (error) {
-    setTimeout(() => {
-      setError('')
-    }, 5000)
-  }
 
   const selectedMoves =
     moves &&
@@ -38,5 +33,14 @@ export default function useAppState(moves) {
       setLocalStorage(STORAGE_KEY, appState)
   }, [appState])
 
-  return { appState, setAppState, selectedMoves, error, setError }
+  useEffect(() => {
+    if (error) {
+      console.log('ERRor')
+      setTimeout(() => {
+        setError('')
+      }, 5000)
+    }
+  }, [error])
+
+  return { selectedMoves, appState, setAppState, error, setError }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import PropTypes from 'prop-types'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import AppContext from '../../app/context/AppContext'
 import AppHeader from '../../app/components/AppHeader'
@@ -15,14 +15,11 @@ import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
 import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 
-EditForm.propTypes = {
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-}
-
-export default function EditForm({ match, history }) {
+export default function EditForm() {
+  const history = useHistory()
+  const params = useParams()
   const { userData, levels, refreshLevels, setError } = useContext(AppContext)
-  const moveID = match.params.id || ''
+  const moveID = params.id || ''
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)

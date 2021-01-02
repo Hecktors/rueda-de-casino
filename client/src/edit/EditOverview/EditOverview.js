@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import AppContext from '../../app/context/AppContext'
 import styled from 'styled-components/macro'
 import AppHeader from '../../app/components/AppHeader'
@@ -10,12 +10,10 @@ import {
   UserIconButton,
 } from '../../app/components/buttons/IconButtons'
 
-EditOverview.propTypes = {
-  history: PropTypes.object.isRequired,
-}
-
-export default function EditOverview({ history }) {
+export default function EditOverview() {
+  const history = useHistory()
   const { userData, levels } = useContext(AppContext)
+
   !userData.token && history.push('/')
 
   return (

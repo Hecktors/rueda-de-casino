@@ -2,14 +2,14 @@ import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import AppContext from '../app/context/AppContext'
-import Header from '../app/components/AppHeader'
+import { deleteUser } from '../app/services/userAPIs'
+import DeleteModal from '../app/components/DeleteModal'
 import {
   DeleteAccountButton,
   LogoutButton,
 } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
-import { deleteUser } from '../app/services/userAPIs'
-import DeleteModal from '../app/components/DeleteModal'
+import Header from '../app/components/AppHeader'
 
 export default function UserSettings() {
   const history = useHistory()

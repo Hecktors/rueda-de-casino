@@ -1,8 +1,15 @@
 import React from 'react'
+import Proptypes from 'prop-types'
 import styled from 'styled-components'
 import { CancelButton, DeleteButton } from './buttons/Buttons'
 
-export default function DeleteModal({ cancel, handleDelete, deleteItem }) {
+DeleteModal.propTypes = {
+  deleteItem: Proptypes.string.isRequired,
+  cancel: Proptypes.func.isRequired,
+  handleDelete: Proptypes.func.isRequired,
+}
+
+export default function DeleteModal({ deleteItem, cancel, handleDelete }) {
   return (
     <DeleteModalStyled>
       <div className="msg-box">
@@ -47,7 +54,7 @@ const DeleteModalStyled = styled.div`
 
     div {
       display: flex;
-      justify-content: space-evenly;
+      gap: 40px;
     }
   }
 `

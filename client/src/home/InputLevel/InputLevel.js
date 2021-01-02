@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 InputLevel.propTypes = {

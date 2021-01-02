@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import { LoginButton, RegisterButton } from '../app/components/buttons/Buttons'
 import Header from '../app/components/AppHeader'
 import Footer from '../app/components/AppFooter'
-import { LoginButton, RegisterButton } from '../app/components/buttons/Buttons'
 
 export default function AuthOptions() {
   const history = useHistory()
