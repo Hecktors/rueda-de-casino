@@ -18,8 +18,12 @@ export default function InputLevels({
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const ulHeight = isOpen ? 'auto' : 0
-  const bdRdButtom = isOpen ? 0 : '5px'
+  const bdRdButtom = isOpen ? 0 : '3px'
   const header = isNewLevel ? 'New Level' : selectedLevelName.toUpperCase()
+  const border = isOpen
+    ? 'solid 1px var(--color-secondary)'
+    : 'solid 1px transparent'
+
   function toogleInputLevels() {
     setIsOpen(!isOpen)
   }
@@ -31,9 +35,9 @@ export default function InputLevels({
 
   return (
     <InputLevelStyled
-      isOpen={isOpen}
       ulHeight={ulHeight}
       bdRdButtom={bdRdButtom}
+      border={border}
     >
       <h3 onClick={toogleInputLevels}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
@@ -61,17 +65,19 @@ export default function InputLevels({
 
 const InputLevelStyled = styled.div`
   position: relative;
-  border-radius: 5px;
-  border-bottom-left-radius: ${({ bdRdButtom }) => bdRdButtom};
-  border-bottom-right-radius: ${({ bdRdButtom }) => bdRdButtom};
-  background-color: var(--color-bg-accordion);
 
   h3 {
     cursor: pointer;
-    font-size: 1rem;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
+    padding: 10px;
+    border: ${({ border }) => border};
+    border-radius: 3px;
+    border-bottom-left-radius: ${({ bdRdButtom }) => bdRdButtom};
+    border-bottom-right-radius: ${({ bdRdButtom }) => bdRdButtom};
+    border-bottom: none;
+    font-size: 1rem;
+    background-color: var(--color-bg-accordion);
 
     & .level-name {
       width: 100%;
@@ -92,9 +98,11 @@ const InputLevelStyled = styled.div`
     gap: 10px;
     padding: 0 9px;
     overflow: hidden;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     height: ${({ ulHeight }) => ulHeight};
+    border: ${({ border }) => border};
+    border-top: none;
     background-color: var(--color-bg-accordion);
 
     li {
