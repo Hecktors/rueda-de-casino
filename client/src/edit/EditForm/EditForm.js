@@ -10,7 +10,7 @@ import {
   BackIconButton,
   DeleteIconButton,
 } from '../../app//components/buttons/IconButtons/IconButtons'
-import InputLevels from './InputLevels'
+import LevelAccordion from './LevelAccordion'
 import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
 import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
@@ -99,7 +99,7 @@ export default function EditForm() {
       <main>
         <div className="form-group-container">
           <div className="form-group">
-            <InputLevels
+            <LevelAccordion
               levels={levels}
               selectedLevelName={userInput.levelName}
               isNewLevel={isNewLevel}

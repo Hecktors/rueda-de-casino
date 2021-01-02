@@ -9,6 +9,7 @@ export default async function getLevels(token) {
       return { name: name, moves: [] }
     }
   )
+
   moves.forEach((move) =>
     levels.forEach(
       (level) => level.name === move.levelName && level.moves.push(move)

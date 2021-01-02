@@ -2,7 +2,9 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import useUser from './hooks/useUser'
 import AppContext from './context/AppContext'
 import useAppState from './hooks/useAppState'
-import useMoves from './hooks/useLevels'
+import useLevels from './hooks/useLevels'
+import useAudios from './hooks/useAudios'
+import ErrorMsg from './components/ErrorMsg'
 import AuthOptions from '../auth/AuthOptions'
 import Register from '../auth/Register'
 import Login from '../auth/Login'
@@ -11,18 +13,15 @@ import Session from '../session'
 import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
 import UserSettings from '../auth/UserSettings'
-import ErrorMsg from './components/ErrorMsg'
 
 export default function App() {
   const { userData, setUserData } = useUser()
-  const { levels, refreshLevels, audios } = useMoves(userData)
-  const {
-    selectedMoves,
-    appState,
-    setAppState,
-    error,
-    setError,
-  } = useAppState()
+  const { levels, refreshLevels } = useLevels(userData)
+  const { audios } = useAudios(userData, levels)
+  const { appState, setAppState, error, setError } = useAppState()
+
+  console.log('audioELs: ', audios)
+  // console.log('levels: ', levels)
 
   const location = useLocation()
   const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
@@ -36,10 +35,11 @@ export default function App() {
       <AppContext.Provider
         value={{
           userData,
-          setUserData,
           levels,
-          refreshLevels,
           appState,
+          audios,
+          setUserData,
+          refreshLevels,
           setAppState,
           setError,
         }}
@@ -48,34 +48,14 @@ export default function App() {
           {!userData.user ? (
             <Route exact path="/" component={AuthOptions} />
           ) : (
-            <Route exact path="/" render={(props) => <Home {...props} />} />
+            <Route exact path="/" component={Home} />
           )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route
-            exact
-            path="/session"
-            render={(props) => (
-              <Session
-                {...props}
-                audios={audios}
-                moves={selectedMoves}
-                speed={appState.speed}
-                isSongActive={appState.isSongActive}
-              />
-            )}
-          />
+          <Route path="/session" component={Session} />
           <Route path="/user-settings" component={UserSettings} />
-          <Route
-            exact
-            path="/edit-overview"
-            render={(props) => <EditOverview {...props} />}
-          />
-          <Route
-            exact
-            path="/edit-form/:id?"
-            render={(props) => <EditForm {...props} />}
-          />
+          <Route path="/edit-overview" component={EditOverview} />
+          <Route path="/edit-form/:id?" component={EditForm} />
           <Redirect to="/" />
         </Switch>
       </AppContext.Provider>

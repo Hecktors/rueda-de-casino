@@ -3,14 +3,14 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
-InputLevels.propTypes = {
+LevelAccordion.propTypes = {
   selectedLevelName: PropTypes.string.isRequired,
   levels: PropTypes.array.isRequired,
   isNewLevel: PropTypes.bool.isRequired,
   updateUserInput: PropTypes.func.isRequired,
 }
 
-export default function InputLevels({
+export default function LevelAccordion({
   selectedLevelName,
   levels,
   isNewLevel,
@@ -24,7 +24,7 @@ export default function InputLevels({
     ? 'solid 1px var(--color-secondary)'
     : 'solid 1px transparent'
 
-  function toogleInputLevels() {
+  function toogleLevelAccordion() {
     setIsOpen(!isOpen)
   }
 
@@ -39,7 +39,7 @@ export default function InputLevels({
       bdRdButtom={bdRdButtom}
       border={border}
     >
-      <h3 onClick={toogleInputLevels}>
+      <h3 onClick={toogleLevelAccordion}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{header}</span>
       </h3>
