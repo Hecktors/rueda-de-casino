@@ -3,6 +3,8 @@ const User = require('../models/user.model')
 const Move = require("../models/move.model")
 const auth = require("../middleware/auth")
 const checkExistenzOfMoveName = require("../services/checkExistenzOfMoveName")
+const saveAudio = require("../services/saveAudio")
+const deleteAudio = require("../services/deleteAudio")
 
 // Add move
 router.post("/add", auth, async (req, res) => {
@@ -14,23 +16,23 @@ router.post("/add", auth, async (req, res) => {
   const audioName = name.replace(/\s/g, "_") + ".mp3"
   const videoUrl = req.body.videoUrl
   const videoStart = req.body.videoStart
-
+  
   if(!name || !levelName || !bars) {
     return res.status(400).json({msg: "All required field have to been filled."})
   }
-
+  
   if(name.length >= 30) {
     return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
   }
-
+  
   if(levelName.length >= 30) {
     return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
   }
-
+  
   if(bars >= 20) {
     return res.status(400).json({msg: "The number of bars is to long. Max num: 20."})
   }
-
+  
   if(await checkExistenzOfMoveName(userID, name)){
     return res.status(400).json({msg: `${name} allready exists.`})
   }
@@ -43,13 +45,16 @@ router.post("/add", auth, async (req, res) => {
     videoUrl,
     videoStart
   })
-
+  
   return await move.save()
   .then(newMove =>  User.findById(userID)
+  .then(user => {
+    user.moveIDs = [...user.moveIDs, newMove._id]
+    user.save()
     .then(user => {
-      user.moveIDs = [...user.moveIDs, newMove._id]
-      user.save()
+      saveAudio(user.id, move)
       res.json({msg: newMove})
+    })
     })
     .catch(err => err)
   )
@@ -72,14 +77,17 @@ router.get("/", auth, (req,res) => {
 })
 
 // Delete move
-router.delete("/:id", auth, (req, res)=> {
-  Move.findByIdAndDelete(req.params.id)
+router.delete("/:moveID", auth, (req, res)=> {
+  Move.findByIdAndDelete(req.params.moveID)
   .then(move => {
     User.findById(req.user)
     .then(user => {
       user.moveIDs = user.moveIDs.filter(moveID => moveID !== String(move._id))
       user.save()
-      res.json({msg: move})
+      .then(() => {
+        deleteAudio(req.user, move.audioName)
+        res.json({msg: move})
+      })
     })
     .catch(err => res.status(400).json({msg: err}))
   })

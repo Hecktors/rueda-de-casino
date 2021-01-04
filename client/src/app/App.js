@@ -17,14 +17,13 @@ import UserSettings from '../auth/UserSettings'
 export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
-  const { audios } = useAudios(userData, levels)
+  const audios = useAudios(userData, levels)
   const { appState, setAppState, error, setError } = useAppState()
-
-  console.log('audioELs: ', audios)
-  // console.log('levels: ', levels)
 
   const location = useLocation()
   const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
+  console.log(audios)
+  audios[0] && console.log(audios[0].audioElement)
 
   return (
     <div className={`App${classes}`}>

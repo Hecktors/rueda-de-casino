@@ -5,20 +5,20 @@ export default function useAudios(userData, levels) {
   const token = userData.token
   const [audios, setAudios] = useState([])
   const moves = levels.map((level) => level.moves).flat()
-  console.log('audios:', audios)
 
   useEffect(() => {
-    async function initfetch() {
-      setAudios(
-        moves.map((move) => {
-          return {
-            moveID: move._id,
-            audioElement: new Audio(getAudio(token, move.audioName)),
-          }
+    async function fetchData() {
+      const updatedAudios = []
+      moves.forEach(async (move) => {
+        const response = await getAudio(token, move.audioName)
+        updatedAudios.push({
+          moveID: move._id,
+          audioElement: new Audio(response),
         })
-      )
+      })
+      setAudios(updatedAudios)
     }
-    initfetch()
+    fetchData()
   }, [levels]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return audios
