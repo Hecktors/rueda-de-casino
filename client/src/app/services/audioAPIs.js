@@ -9,8 +9,7 @@ export async function getAudio(token, audioName) {
       headers: { 'x-auth-token': token },
     })
     .then((response) => {
-      // console.log(response)
-      return response.data
+      return response.config.url
     })
     .catch((err) => console.log(err))
 }
