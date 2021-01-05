@@ -31,12 +31,12 @@ const FormInputSongSpeedStyled = styled.div`
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
 
   input {
-    direction: rtl;
-    display: block;
     width: 100%;
+    display: block;
+    direction: rtl;
     background-color: var(--color-bg);
   }
 
@@ -47,9 +47,9 @@ const FormInputSongSpeedStyled = styled.div`
   }
 
   input[type='range'] {
+    width: 100%;
     height: 25px;
     -webkit-appearance: none;
-    width: 100%;
   }
 
   input[type='range']:focus {
@@ -57,24 +57,22 @@ const FormInputSongSpeedStyled = styled.div`
   }
 
   input[type='range']::-webkit-slider-runnable-track {
+    cursor: pointer;
     width: 100%;
     height: 5px;
-    cursor: pointer;
     box-shadow: 0px 0px 0px #000000;
-    background: #2497e3;
     border-radius: 1px;
     border: 0px solid #000000;
     background-color: var(--color-text);
   }
 
   input[type='range']::-webkit-slider-thumb {
-    box-shadow: 0px 0px 0px #000000;
-    border: 1px solid #2497e3;
+    cursor: pointer;
+    border-radius: 25px;
     height: 18px;
     width: 18px;
-    border-radius: 25px;
-    background: #a1d0ff;
-    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000;
+    border: 1px solid #2497e3;
     -webkit-appearance: none;
     margin-top: -7px;
     background-color: var(--color-secondary)};
@@ -85,29 +83,29 @@ const FormInputSongSpeedStyled = styled.div`
   }
 
   input[type='range']::-moz-range-track {
+    cursor: pointer;
     width: 100%;
     height: 5px;
-    cursor: pointer;
     box-shadow: 0px 0px 0px #000000;
-    background: #2497e3;
     border-radius: 1px;
     border: 0px solid #000000;
+    background: #2497e3;
   }
 
   input[type='range']::-moz-range-thumb {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
     box-shadow: 0px 0px 0px #000000;
     border: 1px solid #2497e3;
-    height: 18px;
-    width: 18px;
     border-radius: 25px;
     background: #a1d0ff;
-    cursor: pointer;
   }
 
   input[type='range']::-ms-track {
+    cursor: pointer;
     width: 100%;
     height: 5px;
-    cursor: pointer;
     background: transparent;
     border-color: transparent;
     color: transparent;
@@ -126,7 +124,9 @@ const FormInputSongSpeedStyled = styled.div`
     border-radius: 2px;
     box-shadow: 0px 0px 0px #000000;
   }
+
   input[type='range']::-ms-thumb {
+    cursor: pointer;
     margin-top: 1px;
     box-shadow: 0px 0px 0px #000000;
     border: 1px solid #2497e3;
@@ -134,12 +134,12 @@ const FormInputSongSpeedStyled = styled.div`
     width: 18px;
     border-radius: 25px;
     background: #a1d0ff;
-    cursor: pointer;
   }
 
   input[type='range']:focus::-ms-fill-lower {
     background: #2497e3;
   }
+
   input[type='range']:focus::-ms-fill-upper {
     background: #2497e3;
   }

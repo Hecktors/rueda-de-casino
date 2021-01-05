@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
 import getRandomArrayElement from '../app/lib/getRandomArrayElement'
 import musicUrl from './assets/Uno_dos_tres.mp3'
 
@@ -7,23 +6,16 @@ const songVolume = 0.2
 const moveVolume = 0.8
 const callsStart = 5000
 
-useSession.propTypes = {
-  moves: PropTypes.array.isRequired,
-  audios: PropTypes.array.isRequired,
-  speed: PropTypes.number,
-  isSongActive: PropTypes.bool.isRequired,
-}
-
-export default function useSession(
-  history,
-  moves,
-  audios,
-  speed,
-  isSongActive
-) {
+export default function useSession(history, levels, audios, appState) {
+  const { selectedMoveIDs, isSongActive, speed } = appState
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
+
+  const selectedMoves = levels
+    .map((level) => level.moves)
+    .flat()
+    .filter((move) => selectedMoveIDs.includes(move._id))
 
   const musicAudioRef = useRef(null)
   const timeoutRef = useRef(null)
@@ -39,7 +31,7 @@ export default function useSession(
 
   const sessionHandler = {
     play: () => {
-      if (moves.length) {
+      if (selectedMoveIDs.length) {
         isSongActive && musicAudioRef.current.play()
         startTimeout(callsStart)
         setIsPlaying(true)
@@ -61,7 +53,7 @@ export default function useSession(
 
   function startTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      const newCurrentMove = getRandomArrayElement(moves)
+      const newCurrentMove = getRandomArrayElement(selectedMoves)
       setCurrentMove(newCurrentMove)
       setIsMoveDisplayed(true)
       playAudio(newCurrentMove._id)
@@ -83,6 +75,7 @@ export default function useSession(
   }
 
   return [
+    selectedMoves,
     sessionHandler,
     isPlaying,
     currentMove,

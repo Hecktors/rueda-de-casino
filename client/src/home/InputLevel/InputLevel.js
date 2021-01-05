@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { ArrowRightIcon, ArrowDownIcon } from '../../app/Icons/Icons'
+import styled from 'styled-components/macro'
+import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 InputLevel.propTypes = {
   levelName: PropTypes.string.isRequired,
@@ -17,9 +17,9 @@ export default function InputLevel({
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
-  const hasInputMove = levelMoves.some((move) => {
-    return selectedMoveIDs.includes(move._id)
-  })
+  const hasInputMove = levelMoves.some((move) =>
+    selectedMoveIDs.includes(move._id)
+  )
   const color = hasInputMove ? 'var(--color-primary)' : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
 

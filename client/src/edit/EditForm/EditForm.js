@@ -1,37 +1,39 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppHeader from '../../app/AppHeader'
-import AppFooter from '../../app/AppFooter'
-
-import { CancelButton, SaveButton } from '../../app/buttons/Buttons'
+import AppContext from '../../app/context/AppContext'
+import AppHeader from '../../app/components/AppHeader'
+import AppFooter from '../../app/components/AppFooter'
+import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
+  BackIconButton,
   DeleteIconButton,
-  ResetIconButton,
-} from '../../app/buttons/IconButtons/IconButtons'
-import InputLevels from './InputLevels'
+} from '../../app//components/buttons/IconButtons/IconButtons'
+import LevelAccordion from './LevelAccordion'
 import useUserInput from './useUserInput'
+import DeleteModal from '../../app/components/DeleteModal'
+import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 
-EditForm.propTypes = {
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
-  addMove: PropTypes.func.isRequired,
-  updateMove: PropTypes.func.isRequired,
-  deleteMove: PropTypes.func.isRequired,
-}
+export default function EditForm() {
+  const history = useHistory()
+  const params = useParams()
+  const { userData, levels, refreshLevels, setError } = useContext(AppContext)
+  const moveID = params.id || ''
+  const [isNewLevel, setIsNewLevel] = useState(false)
+  const hasNoLevels = !levels.length
+  const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
+  const { token } = userData
+  const editedMove = levels
+    .map((level) => level.moves)
+    .flat()
+    .find((move) => move._id === moveID)
 
-export default function EditForm({
-  match,
-  history,
-  pensum,
-  addMove,
-  updateMove,
-  deleteMove,
-}) {
-  const id = match.params.id || ''
-  const [isNewLevelSelected, setIsNewLevelSelected] = useState(!pensum.length)
+  let initLevelName = levels.length > 0 ? levels[levels.length - 1].name : ''
+  if (editedMove) initLevelName = editedMove.levelName
+
+  !token && history.push('/')
+
   const [
     userInput,
     updateUserInput,
@@ -39,31 +41,57 @@ export default function EditForm({
     openNewLevelInput,
     hasNoChanges,
     isValid,
-  ] = useUserInput(pensum, id, setIsNewLevelSelected)
+  ] = useUserInput(editedMove, setIsNewLevel, initLevelName, hasNoLevels)
 
-  function handleSubmit(e, moveToDelID) {
+  useEffect(() => {
+    !initLevelName && setIsNewLevel(true)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function handleSubmit(e) {
     e.preventDefault()
     const isNewMove = !userInput._id
-    if (moveToDelID) {
-      deleteMove(moveToDelID)
+    const response = isNewMove
+      ? await addMove(token, userInput)
+      : await updateMove(token, moveID, userInput)
+    if (response.status !== 200) {
+      setError(response.data.msg)
     } else {
-      isNewMove ? addMove(userInput) : updateMove(userInput)
+      refreshLevels()
+      history.push('/edit-overview')
     }
   }
+
+  async function handleDelete(id) {
+    const response = await deleteMove(token, id)
+    setIsDeleteModalDisplayed(false)
+    if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      refreshLevels()
+      history.push('/edit-overview')
+    }
+  }
+
   return (
     <EditFormStyled onSubmit={handleSubmit}>
-      <AppHeader cols={id ? '111' : '110'}>
-        <ResetIconButton
-          type={'button'}
-          onClick={resetUserInput}
-          size={'md'}
-          disabled={hasNoChanges}
+      {isDeleteModalDisplayed && (
+        <DeleteModal
+          cancel={() => setIsDeleteModalDisplayed(false)}
+          handleDelete={() => handleDelete(moveID)}
+          deleteItem={editedMove.name}
         />
-        <h2>EDIT</h2>
-        {id && (
+      )}
+      <AppHeader cols={moveID ? '111' : '110'}>
+        <BackIconButton
+          onClick={() => history.push('/edit-overview')}
+          size={'sm'}
+          type="button"
+        />
+        <h1 className="logo">Salsa time!</h1>
+        {moveID && (
           <DeleteIconButton
+            onClick={() => setIsDeleteModalDisplayed(true)}
             type="button"
-            onClick={(e) => handleSubmit(e, id)}
             size={'md'}
           />
         )}
@@ -71,10 +99,10 @@ export default function EditForm({
       <main>
         <div className="form-group-container">
           <div className="form-group">
-            <InputLevels
-              pensum={pensum}
+            <LevelAccordion
+              levels={levels}
               selectedLevelName={userInput.levelName}
-              isNewLevelSelected={isNewLevelSelected}
+              isNewLevel={isNewLevel}
               updateUserInput={updateUserInput}
             />
           </div>
@@ -83,12 +111,12 @@ export default function EditForm({
               onClick={openNewLevelInput}
               type={'button'}
               size={'sm'}
-              disabled={isNewLevelSelected}
+              disabled={isNewLevel}
             />
           </div>
         </div>
 
-        {isNewLevelSelected && (
+        {isNewLevel && (
           <div className="form-group">
             <label htmlFor="">Level name</label>
             <input
@@ -106,7 +134,7 @@ export default function EditForm({
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="">Move name</label>
+            <label htmlFor="name">Move name*</label>
             <input
               onChange={updateUserInput}
               value={userInput.name}
@@ -120,7 +148,7 @@ export default function EditForm({
           </div>
 
           <div className="form-group">
-            <label htmlFor="">Num of bars</label>
+            <label htmlFor="">Num of bars*</label>
             <input
               className="tar"
               onChange={updateUserInput}
@@ -138,7 +166,7 @@ export default function EditForm({
 
         <div className="form-group-container">
           <div className="form-group">
-            <label htmlFor="">Youtube Video Link</label>
+            <label htmlFor="">Youtube link</label>
             <input
               onChange={updateUserInput}
               value={userInput.videoUrl}
@@ -167,12 +195,18 @@ export default function EditForm({
         </div>
       </main>
       <AppFooter>
-        <CancelButton
-          onClick={() => {
-            history.push('/edit-overview')
-          }}
+        <ResetButton
+          onClick={resetUserInput}
+          disabled={hasNoChanges}
+          type={'button'}
+          inline
+          outlined
         />
-        <SaveButton onClick={() => {}} disabled={hasNoChanges || !isValid} />
+        <SaveButton
+          onClick={() => {}}
+          disabled={hasNoChanges || !isValid}
+          inline
+        />
       </AppFooter>
     </EditFormStyled>
   )
@@ -185,35 +219,17 @@ const EditFormStyled = styled.form`
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  padding: 10px;
   border-radius: 5px;
   display: grid;
   flex-direction: column;
-  grid-template-rows: 80px auto 80px;
+  grid-template-rows: 100px auto 100px;
 
-  h2 {
-    padding: 9px 0;
-    text-align: center;
-    font-size: 1.2rem;
-
-    span {
-      color: var(--color-primary);
-    }
+  main {
+    padding: 10px;
   }
 
   label {
     display: block;
-  }
-
-  input,
-  select {
-    width: 100%;
-    padding: 3px 10px;
-    font-size: 1rem;
-  }
-
-  option {
-    text-align: center;
   }
 
   .form-group-container {
@@ -230,10 +246,11 @@ const EditFormStyled = styled.form`
   .form-group {
     max-width: 400px;
     margin: 20px auto;
+    display: grid;
   }
 
   .form-group:first-of-type {
-    width: 130%;
+    width: 100%;
 
     &.select {
       width: 100%;

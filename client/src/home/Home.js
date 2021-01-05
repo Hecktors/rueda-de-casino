@@ -1,31 +1,27 @@
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppFooter from '../app/AppFooter'
-import AppHeader from '../app/AppHeader'
+import useUserInput from './useUserInput'
+import AppContext from '../app/context/AppContext'
+import AppHeader from '../app/components/AppHeader'
+import AppFooter from '../app/components/AppFooter'
+import {
+  PlayIconButton,
+  ResetIconButton,
+  SettingsIconButton,
+} from '../app/components/buttons/IconButtons'
 import InputLevel from './InputLevel'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
-import {
-  EditIconButton,
-  PlayIconButton,
-  ResetIconButton,
-} from '../app/buttons/IconButtons'
 
-Home.propTypes = {
-  history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
-  appState: PropTypes.object.isRequired,
-  updateAppState: PropTypes.func.isRequired,
-  resetAppState: PropTypes.func.isRequired,
-}
-
-export default function Home({
-  history,
-  pensum,
-  appState,
-  updateAppState,
-  resetAppState,
-}) {
+export default function Home() {
+  const history = useHistory()
+  const { levels, appState, setAppState } = useContext(AppContext)
+  const { updateAppState, resetAppState } = useUserInput(
+    levels,
+    appState,
+    setAppState
+  )
   const { selectedMoveIDs, speed, isSongActive } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
 
@@ -38,19 +34,19 @@ export default function Home({
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
-        <EditIconButton
+        <SettingsIconButton
           onClick={() => history.push('/edit-overview')}
-          size={'sm'}
+          size={'md'}
         />
       </AppHeader>
 
-      <MainStyled hasMultiLevels={pensum.length > 1}>
+      <MainStyled hasMultiLevels={levels.length > 1}>
         <form>
           <div className="level-container">
-            {pensum.map(({ id, levelName, moves }) => (
+            {levels.map(({ name, moves }) => (
               <InputLevel
-                key={id}
-                levelName={levelName}
+                key={name}
+                levelName={name}
                 levelMoves={moves}
                 selectedMoveIDs={selectedMoveIDs}
                 updateAppState={updateAppState}

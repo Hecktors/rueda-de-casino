@@ -1,79 +1,63 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
-import useAppState from './useAppState'
-import useData from './useData'
+import useUser from './hooks/useUser'
+import AppContext from './context/AppContext'
+import useAppState from './hooks/useAppState'
+import useLevels from './hooks/useLevels'
+import useAudios from './hooks/useAudios'
+import ErrorMsg from './components/ErrorMsg'
+import AuthOptions from '../auth/AuthOptions'
+import Register from '../auth/Register'
+import Login from '../auth/Login'
 import Home from '../home'
 import Session from '../session'
 import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
+import UserSettings from '../auth/UserSettings'
 
 export default function App() {
-  const [pensum, addMove, updateMove, deleteMove, audios] = useData()
-  const [appState, selectedMoves, updateAppState, resetAppState] = useAppState(
-    pensum
-  )
+  const { userData, setUserData } = useUser()
+  const { levels, refreshLevels } = useLevels(userData)
+  const audios = useAudios(userData, levels)
+  const { appState, setAppState, error, setError } = useAppState()
+
   const location = useLocation()
   const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
+  console.log(audios)
+  audios[0] && console.log(audios[0].audioElement)
 
   return (
     <div className={`App${classes}`}>
+      {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <div className="desktop-only">
         This application is optimized for mobile devices.
       </div>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => (
-            <Home
-              {...props}
-              pensum={pensum}
-              appState={appState}
-              updateAppState={updateAppState}
-              resetAppState={resetAppState}
-            />
+      <AppContext.Provider
+        value={{
+          userData,
+          levels,
+          appState,
+          audios,
+          setUserData,
+          refreshLevels,
+          setAppState,
+          setError,
+        }}
+      >
+        <Switch>
+          {!userData.user ? (
+            <Route exact path="/" component={AuthOptions} />
+          ) : (
+            <Route exact path="/" component={Home} />
           )}
-        />
-        <Route
-          exact
-          path="/session"
-          render={(props) => (
-            <Session
-              {...props}
-              audios={audios}
-              moves={selectedMoves}
-              speed={appState.speed}
-              isSongActive={appState.isSongActive}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/edit-overview"
-          render={(props) => (
-            <EditOverview
-              {...props}
-              pensum={pensum}
-              addMove={addMove}
-              updateMove={updateMove}
-              deleteMove={deleteMove}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/edit-form/:id?"
-          render={(props) => (
-            <EditForm
-              {...props}
-              pensum={pensum}
-              addMove={addMove}
-              updateMove={updateMove}
-              deleteMove={deleteMove}
-            />
-          )}
-        />
-        <Redirect to="/" />
-      </Switch>
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/session" component={Session} />
+          <Route path="/user-settings" component={UserSettings} />
+          <Route path="/edit-overview" component={EditOverview} />
+          <Route path="/edit-form/:id?" component={EditForm} />
+          <Redirect to="/" />
+        </Switch>
+      </AppContext.Provider>
     </div>
   )
 }

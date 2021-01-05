@@ -1,39 +1,50 @@
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import AppContext from '../../app/context/AppContext'
 import styled from 'styled-components/macro'
-import AppHeader from '../../app/AppHeader'
+import AppHeader from '../../app/components/AppHeader'
 import {
   AddIconButton,
   BackIconButton,
   EditIconButton,
-} from '../../app/buttons/IconButtons'
+  UserIconButton,
+} from '../../app/components/buttons/IconButtons'
 
-EditOverview.propTypes = {
-  history: PropTypes.object.isRequired,
-  pensum: PropTypes.array.isRequired,
-}
+export default function EditOverview() {
+  const history = useHistory()
+  const { userData, levels } = useContext(AppContext)
 
-export default function EditOverview({ history, pensum }) {
+  !userData.token && history.push('/')
+
   return (
     <>
-      <AppHeader cols="110">
-        <BackIconButton size={'sm'} onClick={() => history.push('/')} />
-        <h1>Moves Overview</h1>
+      <AppHeader cols="111">
+        <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
+        <h1 className="logo">Salsa time!</h1>
+        <UserIconButton
+          size={'md'}
+          onClick={() => history.push('/user-settings')}
+        />
       </AppHeader>
 
       <UpdateStyled>
-        {pensum.map((level) => {
+        {levels.map(({ name, moves }) => {
           return (
-            <ul key={level.id}>
-              <li>{level.levelName.toUpperCase()}</li>
-              {level.moves.map((move) => (
-                <li key={move._id}>
-                  {move.name}
-                  <EditIconButton
-                    size={'xs'}
-                    onClick={() => history.push(`/edit-form/${move._id}`)}
-                  />
-                </li>
-              ))}
+            <ul key={name}>
+              <li>{name.toUpperCase()}</li>
+              {moves.map((move) => {
+                return move.levelName === name ? (
+                  <li key={move._id}>
+                    {move.name}
+                    <EditIconButton
+                      size={'xs'}
+                      onClick={() => history.push(`/edit-form/${move._id}`)}
+                    />
+                  </li>
+                ) : (
+                  ''
+                )
+              })}
             </ul>
           )
         })}
