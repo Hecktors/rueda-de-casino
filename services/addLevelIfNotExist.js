@@ -1,17 +1,16 @@
-const Level = require("../models/level.model");
+const Pensum = require("../models/pensum.model")
+const Level = require("../models/level.model")
 
-function addLevelIfNotExist(levelName) {
-  Level.findOne({ name: levelName })
-    .then((level) => {
-      if (!level) {
-        const newLevel = new Level({ name: levelName });
-        newLevel
-          .save()
-          .then(() => console.log(levelName + " added"))
-          .catch((err) => console.log(err));
-      }
-    })
-    .catch((err) => console.log(err));
+async function addLevelIfNotExist(userID, levelName) {
+  return await Pensum.findOne({userID: userID})
+  .then(pensum => {
+    let hasLevel = pensum.levels.find(level => level.name === levelName)
+    if(!hasLevel) {
+      const newLevel = new Level({name: levelName})
+      pensum.levels.push(newLevel)
+    }
+    pensum.save()
+  })
 }
 
-module.exports = addLevelIfNotExist;
+module.exports = addLevelIfNotExist

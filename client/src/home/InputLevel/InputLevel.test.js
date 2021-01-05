@@ -1,32 +1,30 @@
 import ReactDOM from 'react-dom'
-import FormInputLevel from './FormInputLevel'
-import { render } from '@testing-library/react'
+import InputLevel from './InputLevel'
 const moves = [
   {
-    id: 1,
+    _id: 1,
     name: 'la prima',
     steps: 2,
     filename: 'la_prima.mp3',
   },
   {
-    id: 2,
+    _id: 2,
     name: 'sombrero',
     steps: 2,
     filename: 'sombrero.mp3',
   },
 ]
 
-describe('FormInputLevel', () => {
+describe('InputLevel', () => {
   it('renders Accordion', () => {
     const div = document.createElement('div')
     ReactDOM.render(
-      <FormInputLevel
+      <InputLevel
         name="test accordion"
         levelMoves={moves}
         levelName="level"
-        selectedMoveIds={[]}
-        userInput={[2]}
-        updateUserInput={() => {}}
+        selectedMoveIDs={[]}
+        updateAppState={() => {}}
       />,
       div
     )

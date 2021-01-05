@@ -1,102 +1,148 @@
-const router = require("express").Router();
-const Move = require("../models/move.model");
-const getPensum = require("../services/getPensum");
-const addAudio = require("../services/addAudio");
-const deleteAudio = require("../services/deleteAudio");
-const addLevelIfNotExist = require("../services/addLevelIfNotExist");
-const deleteLevelIfEmpty = require("../services/deleteLevelIfEmpty");
-
-// Get all moves
-router.route("/").get(async (req, res) => {
-  const response = await getPensum();
-  response.err
-    ? res.status(400).json("Error" + response.err)
-    : res.json(response.pensum);
-});
+const router = require("express").Router()
+const User = require('../models/user.model')
+const Move = require("../models/move.model")
+const auth = require("../middleware/auth")
+const checkExistenzOfMoveName = require("../services/checkExistenzOfMoveName")
+const saveAudio = require("../services/saveAudio")
+const deleteAudio = require("../services/deleteAudio")
 
 // Add move
-router.route("/add").post((req, res) => {
-  const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
-  const levelName = req.body.levelName;
-  const bars = req.body.bars;
-  const audioName = name.replace(/\s/g, "_") + ".mp3";
-  const videoUrl = req.body.videoUrl;
-  const videoStart = req.body.videoStart;
-
-  const newMove = new Move({
+router.post("/add", auth, async (req, res) => {
+  try {
+  const userID = req.user
+  const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ")
+  const levelName = req.body.levelName
+  const bars = req.body.bars
+  const audioName = name.replace(/\s/g, "_") + ".mp3"
+  const videoUrl = req.body.videoUrl
+  const videoStart = req.body.videoStart
+  
+  if(!name || !levelName || !bars) {
+    return res.status(400).json({msg: "All required field have to been filled."})
+  }
+  
+  if(name.length >= 30) {
+    return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
+  }
+  
+  if(levelName.length >= 30) {
+    return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
+  }
+  
+  if(bars >= 20) {
+    return res.status(400).json({msg: "The number of bars is to long. Max num: 20."})
+  }
+  
+  if(await checkExistenzOfMoveName(userID, name)){
+    return res.status(400).json({msg: `${name} allready exists.`})
+  }
+  
+  const move = new Move({
     name,
     levelName,
     bars,
     audioName,
     videoUrl,
-    videoStart,
-  });
-
-  newMove
-    .save()
-    .then(async () => {
-      addAudio(name, audioName);
-      addLevelIfNotExist(levelName);
-      const response = await getPensum();
-      response.err
-        ? res.status(400).json("Error" + response.err)
-        : res.json(response.pensum);
+    videoStart
+  })
+  
+  return await move.save()
+  .then(newMove =>  User.findById(userID)
+  .then(user => {
+    user.moveIDs = [...user.moveIDs, newMove._id]
+    user.save()
+    .then(user => {
+      saveAudio(user.id, move)
+      res.json({msg: newMove})
     })
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+    })
+    .catch(err => err)
+  )
+  .catch(err => res.status(400).json({msg: "error: ", err}))
+} catch(err) {
+  res.status(500).json({msg: err.message})
+}
 
-// Get move
-router.route("/:id").get((req, res) => {
-  Move.findById(req.params.id)
-    .then((move) => res.json(move))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+})
+
+// Get all moves
+router.get("/", auth, (req,res) => {
+  User.findById(req.user)
+  .then(user => {
+    Move.find({_id: {$in: user.moveIDs}})
+    .then(moves => res.json({msg: moves}))
+    .catch(err => res.status(400).json({msg: err}))
+  })
+  .catch(err => res.status(400).json({msg: err}))
+})
 
 // Delete move
-router.route("/:id").delete((req, res) => {
-  Move.findByIdAndDelete(req.params.id)
-    .then(async (move) => {
-      deleteAudio(move.audioName);
-      deleteLevelIfEmpty(move.levelName);
-      const response = await getPensum();
-      response.err
-        ? res.status(400).json("Error" + response.err)
-        : res.json(response.pensum);
+router.delete("/:moveID", auth, (req, res)=> {
+  Move.findByIdAndDelete(req.params.moveID)
+  .then(move => {
+    User.findById(req.user)
+    .then(user => {
+      user.moveIDs = user.moveIDs.filter(moveID => moveID !== String(move._id))
+      user.save()
+      .then(() => {
+        deleteAudio(req.user, move.audioName)
+        res.json({msg: move})
+      })
     })
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+    .catch(err => res.status(400).json({msg: err}))
+  })
+  .catch(err => res.status(400).json({msg: err}))
+})
+  
 
 // Update move
-router.route("/update/:id").post((req, res) => {
-  Move.findById(req.params.id)
-    .then((move) => {
-      const prevAudioName = move.audioName;
-      move.name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ");
-      move.levelName = req.body.levelName;
-      move.bars = req.body.bars;
-      move.audioName = req.body.name.replace(/\s/g, "_") + ".mp3";
-      move.videoUrl = req.body.videoUrl;
-      move.videoStart = req.body.videoStart;
+router.post("/update/:id", auth, async (req, res) => {
+  try {
+    const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ")
+    const levelName = req.body.levelName
+    const bars = req.body.bars
+    const audioName = name.replace(/\s/g, "_") + ".mp3"
+    const videoUrl = req.body.videoUrl
+    const videoStart = req.body.videoStart
+    
+    if(!name || !levelName || !bars) {
+      return res.status(400).json({msg: "All required field have to been filled."})
+    }
+    
+    if(name.length >= 30) {
+      return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
+    }
+    
+    if(levelName.length >= 30) {
+      return res.status(400).json({msg: "The move name is to long. Max num of character: 30."})
+    }
+  
+    if(bars >= 20) {
+      return res.status(400).json({msg: "The number of bars is to long. Max num: 20."})
+    }
+    
+    if(await checkExistenzOfMoveName(req.user, name, req.params.id)){
+      return res.status(400).json({msg: "Move name allready exists."})
+    }
+    
+    const updatedMove = await Move.findById(req.params.id)
+    .then(res => res)
+    .catch(err => res.status(400).json({msg: err}))
+    
+    updatedMove.name = name
+    updatedMove.levelName = levelName
+    updatedMove.bars = bars
+    updatedMove.audioName = audioName
+    updatedMove.videoUrl = videoUrl
+    updatedMove.videoStart = videoStart
 
-      move
-        .save()
-        .then(async () => {
-          if (prevAudioName !== move.audioName) {
-            deleteAudio(prevAudioName);
-            addLevelIfNotExist(move.levelName);
-            deleteLevelIfEmpty(move.levelName);
-            addAudio(move.name, move.audioName);
-          }
-          const response = await getPensum();
-          setTimeout(() => {
-            response.err
-              ? res.status(400).json("Error" + response.err)
-              : res.json(response.pensum);
-          }, 500);
-        })
-        .catch((err) => res.status(400).json("Error: " + err));
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+    updatedMove.save()
+    .then(move => res.json({msg: move}))
+    .catch(err => res.status(400).json({msg: err}))
+    
+  } catch(err) {
+    res.status(500).json({msg: err.message})
+  }
+})
 
-module.exports = router;
+module.exports = router

@@ -1,24 +1,31 @@
 import { useState, useEffect } from 'react'
 
-export default function useUserInput(pensum, id, setIsNewLevelSelected) {
+export default function useUserInput(
+  move,
+  setIsNewLevelSelected,
+  initLevelName,
+  hasNoLevels
+) {
   const initState = {
-    _id: null,
+    _id: '',
     name: '',
-    levelName: pensum.length ? pensum[0].levelName : '',
+    levelName: initLevelName,
     bars: '',
     videoUrl: '',
     videoStart: '',
   }
   const [userInput, setUserInput] = useState(initState)
-  const hasNoChanges = JSON.stringify(userInput) === JSON.stringify(initState)
   const isValid = userInput.name && userInput.levelName && userInput.bars
+  const hasNoChanges = move
+    ? JSON.stringify(userInput) === JSON.stringify(move)
+    : JSON.stringify(userInput) === JSON.stringify(initState)
 
   useEffect(() => {
-    const move = pensum
-      .map((level) => level.moves)
-      .flat()
-      .find((move) => move._id === id)
-    move &&
+    setInitState()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function setInitState() {
+    if (move) {
       setUserInput({
         _id: move._id,
         name: move.name,
@@ -27,11 +34,14 @@ export default function useUserInput(pensum, id, setIsNewLevelSelected) {
         videoUrl: move.videoUrl,
         videoStart: move.videoStart,
       })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    } else {
+      setUserInput(initState)
+    }
+  }
 
   function resetUserInput() {
-    setUserInput(initState)
-    setIsNewLevelSelected(false)
+    setInitState()
+    !hasNoLevels && setIsNewLevelSelected(false)
   }
 
   function updateUserInput(event) {
