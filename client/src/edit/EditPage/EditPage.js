@@ -5,9 +5,7 @@ import styled from 'styled-components/macro'
 import AppHeader from '../../app/components/AppHeader'
 import {
   AddIconButton,
-  BackIconButton,
   EditIconButton,
-  UserIconButton,
 } from '../../app/components/buttons/IconButtons'
 import Navigation from '../../app/components/Navigation'
 
@@ -20,12 +18,7 @@ export default function EditOverview() {
   return (
     <>
       <AppHeader cols="010">
-        {/* <BackIconButton size={'sm'} onClick={() => history.push('/home')} /> */}
         <h1 className="logo">Salsa time!</h1>
-        {/* <UserIconButton
-          size={'md'}
-          onClick={() => history.push('/user-settings')}
-        /> */}
       </AppHeader>
 
       <EditPageStyled>
