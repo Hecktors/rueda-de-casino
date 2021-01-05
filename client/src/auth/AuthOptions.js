@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { LoginButton, RegisterButton } from '../app/components/buttons/Buttons'
 import Header from '../app/components/AppHeader'
-import Footer from '../app/components/AppFooter'
+import MainFooter from '../app/components/MainFooter'
 
 export default function AuthOptions() {
   const history = useHistory()
@@ -16,7 +16,7 @@ export default function AuthOptions() {
         <RegisterButton onClick={() => history.push('/register')} outlined />
         <LoginButton onClick={() => history.push('/login')} outlined />
       </AuthStyled>
-      <Footer />
+      <footer><MainFooter /></footer>
     </>
   )
 }
