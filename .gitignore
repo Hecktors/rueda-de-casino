@@ -103,21 +103,29 @@ dist
 # TernJS port file
 .tern-port
 
+# Generated audio files
+public/audio/*
 
+# Hardcoded data
+data
+
+
+##########################
 # Client
+##########################
 
-# dependencies
+# Dependencies
 client/node_modules
 client/.pnp
 client/.pnp.js
 
-# testing
+# Testing
 client/coverage
 
-# production
+# Production
 client/build
 
-# misc
+# Misc
 client/.DS_Store
 client/.env
 client/.env.local
@@ -129,5 +137,5 @@ client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
 
-# styleguidist
+# Styleguidist
 client/styleguide
