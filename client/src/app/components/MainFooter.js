@@ -23,8 +23,8 @@ const FooterStyled = styled.footer`
   grid-template-rows: auto;
 
   .msg-container {
-    position: absolute;
-    top: -20px;
+    /* position: absolute; */
+    /* top: -20px; */
     width: 100%;
     padding: 5px 0;
     text-align: center;

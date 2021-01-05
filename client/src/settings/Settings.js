@@ -4,12 +4,11 @@ import styled from 'styled-components/macro'
 import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
-import MainFooter from '../app/components/MainFooter'
 import {
-  PlayIconButton,
   ResetIconButton,
 } from '../app/components/buttons/IconButtons'
-import InputLevel from './InputLevel'
+import InputPlaySong from './InputPlaySong'
+import InputSongSpeed from './InputSongSpeed'
 import Navigation from '../app/components/Navigation'
 
 export default function Home() {
@@ -32,26 +31,13 @@ export default function Home() {
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
-        {/* <SettingsIconButton
-          onClick={() => history.push('/edit-overview')}
-          size={'md'}
-        /> */}
+
       </AppHeader>
 
       <MainStyled hasMultiLevels={levels.length > 1}>
         <form>
-          <div className="level-container">
-            {levels.map(({ name, moves }) => (
-              <InputLevel
-                key={name}
-                levelName={name}
-                levelMoves={moves}
-                selectedMoveIDs={selectedMoveIDs}
-                updateAppState={updateAppState}
-              />
-            ))}
-          </div>
-          {/* <div className="form-group-container">
+
+          <div className="form-group-container">
             <InputPlaySong
               isSongActive={appState.isSongActive}
               updateAppState={updateAppState}
@@ -63,18 +49,9 @@ export default function Home() {
                 updateAppState={updateAppState}
               />
             )}
-          </div> */}
+          </div>
         </form>
-        <MainFooter
-          msg={hasNotEnoughMoves ? 'Select at least 2 moves to start' : ''}
-        >
-          <PlayIconButton
-            type={'button'}
-            onClick={() => history.push('/session')}
-            size={'lg'}
-            disabled={hasNotEnoughMoves}
-          />
-        </MainFooter>
+
       </MainStyled>
       <footer><Navigation /></footer>
     </>

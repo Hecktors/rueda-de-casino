@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import AppContext from '../../app/context/AppContext'
 import AppHeader from '../../app/components/AppHeader'
-import AppFooter from '../../app/components/AppFooter'
+import MainFooter from '../../app/components/MainFooter'
 import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
@@ -14,6 +14,7 @@ import LevelAccordion from './LevelAccordion'
 import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
 import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
+import Navigation from '../../app/components/Navigation'
 
 export default function EditForm() {
   const history = useHistory()
@@ -193,21 +194,22 @@ export default function EditForm() {
             />
           </div>
         </div>
+        <MainFooter>
+          <ResetButton
+            onClick={resetUserInput}
+            disabled={hasNoChanges}
+            type={'button'}
+            inline
+            outlined
+          />
+          <SaveButton
+            onClick={() => { }}
+            disabled={hasNoChanges || !isValid}
+            inline
+          />
+        </MainFooter>
       </main>
-      <AppFooter>
-        <ResetButton
-          onClick={resetUserInput}
-          disabled={hasNoChanges}
-          type={'button'}
-          inline
-          outlined
-        />
-        <SaveButton
-          onClick={() => {}}
-          disabled={hasNoChanges || !isValid}
-          inline
-        />
-      </AppFooter>
+      <footer><Navigation /></footer>
     </EditFormStyled>
   )
 }

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
-import AppFooter from '../app/components/AppFooter'
+import AppFooter from '../app/components/MainFooter'
 import AppHeader from '../app/components/AppHeader'
 import Overlay from '../app/components/Overlay'
 import BackgroundVideo from './BackgroundVideo'
@@ -10,6 +10,7 @@ import CurrentMove from './CurrentMove'
 import SelectedMoveList from './SelectedMoveList'
 import YoutubeVideo from './YoutubeVideo'
 import {
+  BackIconButton,
   CancelIconButton,
   PauseIconButton,
   PlayIconButton,
@@ -43,46 +44,46 @@ export default function Session() {
       <YoutubeVideo video={YoutubeVideoObj} />
     </Overlay>
   ) : (
-    <>
-      <AppHeader
-        cols={isPlaying ? '000' : '110'}
-        className={!isPlaying ? 'dark' : ''}
-      >
-        {!isPlaying && (
-          <StopIconButton onClick={sessionHandler.stop} size={'md'} />
-        )}
-        {!isPlaying && <h1>Pause</h1>}
-      </AppHeader>
-
-      <main className="dark no-bg-img">
-        <Overlay paused={!isPlaying}>
-          {isPlaying ? (
-            <CSSTransition
-              in={isMoveDisplayed}
-              timeout={2000}
-              classNames="fade"
-              onMountOnExit={true}
-              onEntered={() => setIsMoveDisplayed(false)}
-            >
-              <CurrentMove name={currentMove.name} />
-            </CSSTransition>
-          ) : (
-            <SelectedMoveList
-              moves={selectedMoves}
-              onClick={setYoutubeVideoObj}
-            />
+      <>
+        <AppHeader
+          cols={isPlaying ? '000' : '110'}
+          className={!isPlaying ? 'dark' : ''}
+        >
+          {!isPlaying && (
+            <BackIconButton onClick={sessionHandler.stop} size={'md'} />
           )}
-        </Overlay>
-        <BackgroundVideo isPlaying={isPlaying} />
-      </main>
+          {!isPlaying && <h1>Pause</h1>}
+        </AppHeader>
 
-      <AppFooter className={!isPlaying ? 'dark' : ''}>
-        {isPlaying ? (
-          <PauseIconButton onClick={sessionHandler.pause} size={'lg'} />
-        ) : (
-          <PlayIconButton onClick={sessionHandler.play} size={'lg'} />
-        )}
-      </AppFooter>
-    </>
-  )
+        <main className="dark no-bg-img">
+          <Overlay paused={!isPlaying}>
+            {isPlaying ? (
+              <CSSTransition
+                in={isMoveDisplayed}
+                timeout={2000}
+                classNames="fade"
+                onMountOnExit={true}
+                onEntered={() => setIsMoveDisplayed(false)}
+              >
+                <CurrentMove name={currentMove.name} />
+              </CSSTransition>
+            ) : (
+                <SelectedMoveList
+                  moves={selectedMoves}
+                  onClick={setYoutubeVideoObj}
+                />
+              )}
+          </Overlay>
+          <BackgroundVideo isPlaying={isPlaying} />
+        </main>
+
+        <AppFooter className={!isPlaying ? 'dark' : ''}>
+          {isPlaying ? (
+            <PauseIconButton onClick={sessionHandler.pause} size={'lg'} />
+          ) : (
+              <PlayIconButton onClick={sessionHandler.play} size={'lg'} />
+            )}
+        </AppFooter>
+      </>
+    )
 }

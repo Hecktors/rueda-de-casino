@@ -9,6 +9,7 @@ import {
   EditIconButton,
   UserIconButton,
 } from '../../app/components/buttons/IconButtons'
+import Navigation from '../../app/components/Navigation'
 
 export default function EditOverview() {
   const history = useHistory()
@@ -18,16 +19,16 @@ export default function EditOverview() {
 
   return (
     <>
-      <AppHeader cols="111">
-        <BackIconButton size={'sm'} onClick={() => history.push('/home')} />
+      <AppHeader cols="010">
+        {/* <BackIconButton size={'sm'} onClick={() => history.push('/home')} /> */}
         <h1 className="logo">Salsa time!</h1>
-        <UserIconButton
+        {/* <UserIconButton
           size={'md'}
           onClick={() => history.push('/user-settings')}
-        />
+        /> */}
       </AppHeader>
 
-      <UpdateStyled>
+      <EditPageStyled>
         {levels.map(({ name, moves }) => {
           return (
             <ul key={name}>
@@ -42,8 +43,8 @@ export default function EditOverview() {
                     />
                   </li>
                 ) : (
-                  ''
-                )
+                    ''
+                  )
               })}
             </ul>
           )
@@ -53,12 +54,14 @@ export default function EditOverview() {
           size={'lg'}
           onClick={() => history.push('/edit-form')}
         />
-      </UpdateStyled>
+      </EditPageStyled>
+      <footer><Navigation /></footer>
     </>
   )
 }
 
-const UpdateStyled = styled.main`
+const EditPageStyled = styled.main`
+position: relative;
   width: 100%;
   padding: 10px;
   padding-bottom: 50px;

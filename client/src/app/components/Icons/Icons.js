@@ -6,6 +6,7 @@ import { ReactComponent as CancelIcon } from './assets/cancel.svg'
 import { ReactComponent as DeleteIcon } from './assets/delete_outline.svg'
 import { ReactComponent as EditIcon } from './assets/edit.svg'
 import { ReactComponent as EyeIcon } from './assets/eye.svg'
+import { ReactComponent as HomeIcon } from './assets/playList.svg'
 import { ReactComponent as PauseIcon } from './assets/pause.svg'
 import { ReactComponent as PlayIcon } from './assets/play.svg'
 import { ReactComponent as ResetIcon } from './assets/reset.svg'
@@ -24,6 +25,7 @@ export {
   DeleteIcon,
   EditIcon,
   EyeIcon,
+  HomeIcon,
   PauseIcon,
   PlayIcon,
   ResetIcon,

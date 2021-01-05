@@ -10,6 +10,7 @@ import Register from '../auth/Register'
 import Login from '../auth/Login'
 import Home from '../home'
 import Session from '../session'
+import Settings from '../settings'
 import EditForm from '../edit/EditForm'
 import EditOverview from '../edit/EditOverview'
 import UserSettings from '../auth/UserSettings'
@@ -21,10 +22,11 @@ export default function App() {
   const { appState, setAppState, error, setError } = useAppState()
 
   const location = useLocation()
-  const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
+  // const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
 
   return (
-    <div className={`App${classes}`}>
+    // <div className={`App${classes}`}>
+    <div className="App">
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <div className="desktop-only">
         This application is optimized for mobile devices.
@@ -50,6 +52,7 @@ export default function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/session" component={Session} />
+          <Route path="/settings" component={Settings} />
           <Route path="/user-settings" component={UserSettings} />
           <Route path="/edit-overview" component={EditOverview} />
           <Route path="/edit-form/:id?" component={EditForm} />
