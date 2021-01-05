@@ -1,19 +1,13 @@
-const initState = {
-  selectedMoveIDs: [],
-  speed: 2900,
-  isSongActive: true,
-}
-
 export default function useUserInput(levels, appState, setAppState) {
   const selectedMoves = appState.selectedMoveIDs
     ? levels
-        .map((level) => level.moves)
-        .filter((move) => appState.selectedMoveIDs.includes(move._id))
+      .map((level) => level.moves)
+      .filter((move) => appState.selectedMoveIDs.includes(move._id))
     : []
 
   function updateAppState(event) {
-    const { name, value, checked } = event.target
-    appStateHandler[name](value, checked)
+    const { name, value } = event.target
+    appStateHandler[name](value)
   }
 
   const appStateHandler = {
@@ -23,14 +17,10 @@ export default function useUserInput(levels, appState, setAppState) {
         : [...appState.selectedMoveIDs, value]
       setAppState({ ...appState, selectedMoveIDs: updatedMoveIDs })
     },
-    speed: (value) => setAppState({ ...appState, speed: Number(value) }),
-    songActivity: (_, checked) => {
-      setAppState({ ...appState, isSongActive: checked })
-    },
   }
 
   function resetAppState() {
-    setAppState(initState)
+    setAppState({ ...appState, selectedMoveIDs: [] })
   }
 
   return { selectedMoves, updateAppState, resetAppState }
