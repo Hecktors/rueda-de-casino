@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
+// import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
+import { setLocalStorage } from '../lib/localStorage'
 // import getAudios from '../services/getAudios'
 import getLevels from '../services/getLevels'
 
@@ -13,8 +14,10 @@ export default function useLevels(userData) {
   useEffect(() => {
     async function initfetch() {
       if (token) {
+        // console.log('useLevel useEffect')
         const fetchedLevels = await getLevels(token)
-        setLevels(getLocalStorage('levels') || fetchedLevels)
+        // setLevels(getLocalStorage('levels') || fetchedLevels)
+        setLevels(fetchedLevels)
         // !audios.length && setAudios(await getAudios(fetchedLevels))
       }
       // setLevels([])
