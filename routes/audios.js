@@ -1,13 +1,22 @@
 const router = require("express").Router()
-const auth = require("../middleware/auth")
 const path = require("path")
+const auth = require("../middleware/auth")
+const { saveAudio } = require("../services/handleAudios");
+const { checkExistenzOfAudio } = require("../services/handleFiles");
+const Move = require("../models/move.model");
 
-router.get("/:audioName", auth,(req, res) => {
-  const audioName = req.params.audioName
-    if(!audioName) {
-      return res.status(400).json({msg: "Invalid resquest"})
-    }
-    res.sendFile(path.join(__dirname, `../public/${req.user}/${audioName}`))
-  });
+router.get("/:id", auth, (req, res) => {
+  Move.findById(req.params.id)
+    .then(async (move) => {
+      const target = path.join(__dirname, `../public/audio/${req.user}/${move.audioName}`)
+      let result = await checkExistenzOfAudio(target)
+      !result && await saveAudio(req.user, move)
+      result = await checkExistenzOfAudio(target)
+      res.sendFile(target)
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 
 module.exports = router
