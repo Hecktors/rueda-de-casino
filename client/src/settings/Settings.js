@@ -1,42 +1,28 @@
 import { useContext } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
-import {
-  ResetIconButton,
-} from '../app/components/buttons/IconButtons'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 import Navigation from '../app/components/Navigation'
 
 export default function Home() {
-  const history = useHistory()
-  const { levels, appState, setAppState } = useContext(AppContext)
-  const { updateAppState, resetAppState } = useUserInput(
-    levels,
+  const { appState, setAppState } = useContext(AppContext)
+  const { updateAppState } = useUserInput(
     appState,
     setAppState
   )
-  const { selectedMoveIDs, speed, isSongActive } = appState
-  const hasNotEnoughMoves = selectedMoveIDs.length < 2
+  const { speed, isSongActive } = appState
 
   return (
     <>
-      <AppHeader cols="110">
-        <ResetIconButton
-          onClick={resetAppState}
-          size={'md'}
-          disabled={selectedMoveIDs.length === 0}
-        />
+      <AppHeader cols="010">
         <h1 className="logo">Salsa time!</h1>
-
       </AppHeader>
 
-      <MainStyled hasMultiLevels={levels.length > 1}>
+      <MainStyled>
         <form>
-
           <div className="form-group-container">
             <InputPlaySong
               isSongActive={appState.isSongActive}
@@ -68,8 +54,6 @@ const MainStyled = styled.main`
 
   .level-container {
     display: grid;
-    grid-template-columns: ${(props) =>
-    props.hasMultiLevels ? '1fr 1fr' : '1fr'};
     align-items: start;
     gap: 5px;
   }
