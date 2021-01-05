@@ -5,7 +5,6 @@ export default createGlobalStyle`
         /* General */
         --color-primary: #d04b1f;
         --color-secondary: #2ca3d2;
-        --color-tertiary: #2ca3d240;
         --color-text: #999;
         --color-bg: #0e0e15;
         --color-bg-dark : #000;

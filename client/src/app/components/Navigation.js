@@ -21,9 +21,10 @@ const NavigationStyled = styled.nav`
   align-items: center;
 
   svg {
-    fill: var(--color-tertiary);
+    fill: var(--color-secondary);
+    opacity: 0.3;
   }
   a.active svg {
-    fill: var(--color-secondary);
+    opacity: 1;
   }
 `

@@ -6,6 +6,7 @@ const sizes = {
   sm: '30px',
   md: '40px',
   lg: '60px',
+  xl: '100px',
 }
 
 IconButton.propTypes = {

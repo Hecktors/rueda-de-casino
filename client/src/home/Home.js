@@ -20,7 +20,7 @@ export default function Home() {
     appState,
     setAppState
   )
-  const { selectedMoveIDs, speed, isSongActive } = appState
+  const { selectedMoveIDs } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
 
   return (
@@ -32,10 +32,7 @@ export default function Home() {
           disabled={selectedMoveIDs.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
-        {/* <SettingsIconButton
-          onClick={() => history.push('/edit-overview')}
-          size={'md'}
-        /> */}
+
       </AppHeader>
 
       <MainStyled hasMultiLevels={levels.length > 1}>
@@ -51,19 +48,7 @@ export default function Home() {
               />
             ))}
           </div>
-          {/* <div className="form-group-container">
-            <InputPlaySong
-              isSongActive={appState.isSongActive}
-              updateAppState={updateAppState}
-            />
-            {!isSongActive && (
-              <InputSongSpeed
-                isSongActive={isSongActive}
-                speed={speed}
-                updateAppState={updateAppState}
-              />
-            )}
-          </div> */}
+
         </form>
         <MainFooter
           msg={hasNotEnoughMoves ? 'Select at least 2 moves to start' : ''}
@@ -71,7 +56,7 @@ export default function Home() {
           <PlayIconButton
             type={'button'}
             onClick={() => history.push('/session')}
-            size={'lg'}
+            size={'xl'}
             disabled={hasNotEnoughMoves}
           />
         </MainFooter>
