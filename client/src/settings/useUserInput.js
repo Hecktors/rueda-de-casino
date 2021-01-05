@@ -1,8 +1,3 @@
-const initState = {
-  speed: 2900,
-  isSongActive: true,
-}
-
 export default function useUserInput(appState, setAppState) {
   function updateAppState(event) {
     const { name, value, checked } = event.target
@@ -16,9 +11,5 @@ export default function useUserInput(appState, setAppState) {
     },
   }
 
-  function resetAppState() {
-    setAppState(initState)
-  }
-
-  return { updateAppState, resetAppState }
+  return { updateAppState }
 }
