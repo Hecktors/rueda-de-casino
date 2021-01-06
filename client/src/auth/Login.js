@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import AppContext from '../app/context/AppContext'
 import { loginUser } from '../app/services/userAPIs'
 import { LoginButton } from '../app/components/buttons/Buttons'
@@ -29,6 +29,7 @@ export default function Login() {
       setError('All required field have to been filled.')
       return
     }
+
     const loginResponse = await loginUser({
       email: userInput.email,
       password: userInput.password,
@@ -54,7 +55,7 @@ export default function Login() {
         </Link>
       </Header>
       <LoginStyled onSubmit={handleSubmit}>
-        {/* Email */}
+
         <div className="form-group">
           <label htmlFor="email">Email*</label>
           <input
@@ -65,11 +66,9 @@ export default function Login() {
             name="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
-            // required
           />
         </div>
 
-        {/* Password */}
         <div className="form-group">
           <label htmlFor="password">Password*</label>
           <div className="pos">
@@ -82,12 +81,11 @@ export default function Login() {
               name="password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
-              // required
             />
           </div>
         </div>
 
-        <LoginButton onClick={() => {}} />
+        <LoginButton onClick={() => { }} />
       </LoginStyled>
     </>
   )
@@ -96,8 +94,8 @@ export default function Login() {
 const LoginStyled = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 10px;
   gap: 20px;
+  padding: 10px;
 
   .form-group {
     display: flex;

@@ -31,16 +31,16 @@ export default function InputPlaySong({ isSongActive, updateAppState }) {
 
 const FormInputPlaySongStyled = styled.div`
   width: 100%;
-  position: relative;
   max-width: 400px;
+  position: relative;
+  display: flex;
   margin: 0 auto;
   padding: 20px 20px;
   font-size: 1rem;
-  display: flex;
 
   .info {
-    color: var(--color-text);
     user-select: none;
+    color: var(--color-text);
   }
 
   input {
@@ -55,19 +55,19 @@ const FormInputPlaySongStyled = styled.div`
 
   label::before {
     content: '';
-    display: block;
-    border: 1px solid var(--color-text);
     width: 17px;
     height: 19px;
+    display: block;
     margin-right: 10px;
     padding-left: 3px;
+    border: 1px solid var(--color-text);
   }
 
   input:checked + label::before {
     content: '✔';
-    color: var(--color-primary);
-    font-size: 1.2rem;
     line-height: 1;
+    font-size: 1.2rem;
+    color: var(--color-primary);
   }
 
   .tooltip {
@@ -79,18 +79,18 @@ const FormInputPlaySongStyled = styled.div`
   .tooltip .tooltiptext {
     width: 100%;
     height: 300px;
-    display: flex;
-    place-items: center;
-    visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
+    display: flex;
+    place-items: center;
+    visibility: hidden;
     transform: translateY(-100%);
     border-radius: 6px;
     padding: 15px;
-    text-align: center;
     line-height: 1.6;
+    text-align: center;
     color: #fff;
     background-color: var(--color-bg-message);
   }

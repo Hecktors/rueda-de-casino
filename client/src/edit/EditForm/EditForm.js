@@ -19,10 +19,10 @@ export default function EditForm() {
   const history = useHistory()
   const params = useParams()
   const { userData, levels, refreshLevels, setError } = useContext(AppContext)
-  const moveID = params.id || ''
   const [isNewLevel, setIsNewLevel] = useState(false)
-  const hasNoLevels = !levels.length
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
+  const moveID = params.id || ''
+  const hasNoLevels = !levels.length
   const { token } = userData
   const editedMove = levels
     .map((level) => level.moves)
@@ -34,14 +34,15 @@ export default function EditForm() {
 
   !token && history.push('/')
 
-  const [
+  const {
     userInput,
+    hasNoChanges,
+    isValid,
     updateUserInput,
     resetUserInput,
     openNewLevelInput,
-    hasNoChanges,
-    isValid,
-  ] = useUserInput(editedMove, setIsNewLevel, initLevelName, hasNoLevels)
+  } = useUserInput(editedMove, hasNoLevels, initLevelName, setIsNewLevel)
+
 
   useEffect(() => {
     !initLevelName && setIsNewLevel(true)
@@ -81,6 +82,7 @@ export default function EditForm() {
           deleteItem={editedMove.name}
         />
       )}
+
       <AppHeader cols={moveID ? '111' : '110'}>
         <BackIconButton
           onClick={() => history.push('/edit-overview')}
@@ -99,6 +101,7 @@ export default function EditForm() {
 
       <main>
         <form>
+
           <div className="form-group-container">
             <div className="form-group">
               <LevelAccordion
@@ -225,10 +228,10 @@ const EditFormStyled = styled.section`
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  border-radius: 5px;
   display: grid;
-  flex-direction: column;
   grid-template-rows: 100px auto 100px;
+  flex-direction: column;
+  border-radius: 5px;
 
   main {
     padding: 10px;
@@ -240,9 +243,9 @@ const EditFormStyled = styled.section`
 
   .form-group-container {
     display: flex;
+    gap: 40px;
     max-width: 400px;
     margin: auto;
-    gap: 40px;
 
     &:first-of-type {
       padding-right: 20px;
@@ -250,9 +253,9 @@ const EditFormStyled = styled.section`
   }
 
   .form-group {
+    display: grid;
     max-width: 400px;
     margin: 15px auto;
-    display: grid;
   }
 
   .form-group:first-of-type {

@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import AppContext from '../../app/context/AppContext'
 import styled from 'styled-components/macro'
-import AppHeader from '../../app/components/AppHeader'
+import AppContext from '../../app/context/AppContext'
 import {
   AddIconButton,
   EditIconButton,
 } from '../../app/components/buttons/IconButtons'
+import AppHeader from '../../app/components/AppHeader'
 import Navigation from '../../app/components/Navigation'
 
 export default function EditPage() {
@@ -38,6 +38,7 @@ export default function EditPage() {
             </ul>
           )
         })}
+
         <AddIconButton
           className="add-button"
           size={'lg'}
@@ -58,11 +59,11 @@ position: relative;
   ul {
     width: 73%;
     max-width: 264px;
-    margin: auto;
     display: flex;
-    margin-bottom: 50px;
     flex-direction: column;
     gap: 7px;
+    margin: auto;
+    margin-bottom: 50px;
 
     li {
       display: flex;

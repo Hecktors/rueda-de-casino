@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import useSession from './useSession'
+import styled from 'styled-components'
 import AppContext from '../app/context/AppContext'
+import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
 import {
   BackIconButton,
@@ -89,8 +89,8 @@ export default function Session() {
 
 const FooterStyled = styled.footer`
   position: relative;
-  z-index: 999;
   display: grid;
   place-items: auto;
+  z-index: 999;
 `
 

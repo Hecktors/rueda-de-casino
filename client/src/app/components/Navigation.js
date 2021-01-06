@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import { EditIconButton, HomeIconButton, SettingsIconButton, UserIconButton } from './buttons/IconButtons'
 import { NavLink } from 'react-router-dom'
+import styled from 'styled-components/macro'
+import { EditIconButton, HomeIconButton, SettingsIconButton, UserIconButton } from './buttons/IconButtons'
 
 export default function Navigation() {
   return (
@@ -24,6 +24,7 @@ const NavigationStyled = styled.nav`
     fill: var(--color-secondary);
     opacity: 0.3;
   }
+
   a.active svg {
     opacity: 1;
   }

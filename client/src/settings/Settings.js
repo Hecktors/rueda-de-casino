@@ -3,9 +3,9 @@ import styled from 'styled-components/macro'
 import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
+import Navigation from '../app/components/Navigation'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
-import Navigation from '../app/components/Navigation'
 
 export default function Home() {
   const { appState, setAppState } = useContext(AppContext)
@@ -47,8 +47,8 @@ export default function Home() {
 const MainStyled = styled.main`
   display: flex;
   flex-direction: column;
-  align-items: space-between;
   justify-content: space-between;
+  align-items: space-between;
   padding: 10px;
   padding-top: 40px;
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/macro'
 import { ArrowRightIcon, ArrowDownIcon } from '../../app/components/Icons/Icons'
 
 LevelAccordion.propTypes = {
@@ -85,8 +85,8 @@ const InputLevelStyled = styled.div`
 
     & .level-name {
       width: 100%;
-      color: var(--color-secondary);
       text-align: center;
+      color: var(--color-secondary);
     }
 
     svg {
@@ -97,6 +97,7 @@ const InputLevelStyled = styled.div`
 
   ul {
     width: 100%;
+    height: ${({ ulHeight }) => ulHeight};
     position: absolute;
     display: grid;
     gap: 10px;
@@ -104,7 +105,6 @@ const InputLevelStyled = styled.div`
     overflow: hidden;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    height: ${({ ulHeight }) => ulHeight};
     border: ${({ border }) => border};
     border-top: none;
     background-color: var(--color-bg-accordion);
