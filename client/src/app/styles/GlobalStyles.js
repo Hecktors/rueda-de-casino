@@ -20,6 +20,8 @@ export default createGlobalStyle`
         /* Message */
         --color-message: #666;
         --color-bg-message: #0f1118d9;
+        /* Border */
+        --color-border: #9999993d;
         /* Overlay */
         --color-bg-overlay: rgba(0, 0, 0, 0.7);
         --color-bg-overlay-full: #000;
@@ -68,26 +70,14 @@ export default createGlobalStyle`
         display: grid;
         grid-template-rows: 100px auto 100px;
 
-        &.no-footer {
-        grid-template-rows: 100px auto;
+        &.session {
+        grid-template-rows: 100px auto 240px;
         }
     }
 
     main { 
         flex-grow: 1;
         overflow-y: auto;
-    }
-
-    button {
-        cursor: pointer;
-        outline: none;
-        border: none;
-        background-color: transparent;
-
-        &:active,
-        &:hover {
-        opacity: 0.8;
-        }
     }
 
     ul {
@@ -103,14 +93,27 @@ export default createGlobalStyle`
         color: var(--color-secondary)
     }
 
+    button {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background-color: transparent;
+
+        &:active,
+        &:hover {
+        opacity: 0.8;
+        }
+    }
+
     label {
-        font-size: 1.1rem;
+        font-size: 0.875rem;
+        padding-bottom: 1px; 
     }
 
     input,
     select {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
         font-size: 1rem;
         outline: none;
         border-radius: 3px;
@@ -189,7 +192,7 @@ export default createGlobalStyle`
     @media (orientation: landscape) {
         .App {
             max-height: 414px !important;
-            grid-template-rows: 80px auto 80px;
+            grid-template-rows: 80px auto 80px !important; 
         }
 
         main {
@@ -198,6 +201,11 @@ export default createGlobalStyle`
     }
 
     @media screen and (min-width: 800px) {
+        .App{
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+        }
+
         .desktop-only {
             display: block;
         }

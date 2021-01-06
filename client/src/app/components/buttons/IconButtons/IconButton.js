@@ -6,7 +6,7 @@ const sizes = {
   sm: '30px',
   md: '40px',
   lg: '60px',
-  xl: '100px',
+  xl: '80px',
 }
 
 IconButton.propTypes = {
@@ -15,6 +15,7 @@ IconButton.propTypes = {
   className: PropTypes.string,
   size: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  primary: PropTypes.bool,
   type: PropTypes.string,
 }
 
@@ -24,11 +25,15 @@ export default function IconButton({
   className,
   size,
   disabled,
+  primary,
   onClick,
 }) {
-  const fillColor = disabled
-    ? 'var(--color-disabled)'
+
+  let fillColor = primary
+    ? 'var(--color-primary)'
     : 'var(--color-secondary)'
+
+  if (disabled) fillColor = 'var(--color-disabled)'
 
   return (
     <IconButtonStyled

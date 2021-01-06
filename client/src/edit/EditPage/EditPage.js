@@ -9,7 +9,7 @@ import {
 } from '../../app/components/buttons/IconButtons'
 import Navigation from '../../app/components/Navigation'
 
-export default function EditOverview() {
+export default function EditPage() {
   const history = useHistory()
   const { userData, levels } = useContext(AppContext)
 
@@ -26,19 +26,15 @@ export default function EditOverview() {
           return (
             <ul key={name}>
               <li>{name.toUpperCase()}</li>
-              {moves.map((move) => {
-                return move.levelName === name ? (
-                  <li key={move._id}>
-                    {move.name}
-                    <EditIconButton
-                      size={'xs'}
-                      onClick={() => history.push(`/edit-form/${move._id}`)}
-                    />
-                  </li>
-                ) : (
-                    ''
-                  )
-              })}
+              {moves.filter((move) => move.levelName === name).map(move =>
+                <li key={move._id}>
+                  {move.name}
+                  <EditIconButton
+                    size={'xs'}
+                    onClick={() => history.push(`/edit-form/${move._id}`)}
+                  />
+                </li>
+              )}
             </ul>
           )
         })}
@@ -60,7 +56,7 @@ position: relative;
   padding-bottom: 50px;
 
   ul {
-    width: 80%;
+    width: 73%;
     max-width: 264px;
     margin: auto;
     display: flex;
@@ -80,8 +76,8 @@ position: relative;
   }
 
   .add-button {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
   }
 `

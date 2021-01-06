@@ -2,8 +2,9 @@ import { useState, useEffect, useContext } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import AppContext from '../../app/context/AppContext'
+import useUserInput from './useUserInput'
+import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 import AppHeader from '../../app/components/AppHeader'
-import MainFooter from '../../app/components/MainFooter'
 import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
@@ -11,9 +12,7 @@ import {
   DeleteIconButton,
 } from '../../app//components/buttons/IconButtons/IconButtons'
 import LevelAccordion from './LevelAccordion'
-import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
-import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 import Navigation from '../../app/components/Navigation'
 
 export default function EditForm() {
@@ -97,124 +96,129 @@ export default function EditForm() {
           />
         )}
       </AppHeader>
+
       <main>
-        <div className="form-group-container">
-          <div className="form-group">
-            <LevelAccordion
-              levels={levels}
-              selectedLevelName={userInput.levelName}
-              isNewLevel={isNewLevel}
-              updateUserInput={updateUserInput}
-            />
+        <form>
+          <div className="form-group-container">
+            <div className="form-group">
+              <LevelAccordion
+                levels={levels}
+                selectedLevelName={userInput.levelName}
+                isNewLevel={isNewLevel}
+                updateUserInput={updateUserInput}
+              />
+            </div>
+            <div className="form-group">
+              <AddIconButton
+                onClick={openNewLevelInput}
+                type={'button'}
+                size={'sm'}
+                disabled={isNewLevel}
+              />
+            </div>
           </div>
-          <div className="form-group">
-            <AddIconButton
-              onClick={openNewLevelInput}
+
+          {isNewLevel && (
+            <div className="form-group">
+              <label htmlFor="">Level name</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.levelName}
+                type="text"
+                id="newLevel"
+                name="newLevel"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+          )}
+
+          <div className="form-group-container">
+            <div className="form-group">
+              <label htmlFor="name">Move name*</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.name}
+                type="text"
+                id="name"
+                name="name"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="">Num of bars*</label>
+              <input
+                className="tac"
+                onChange={updateUserInput}
+                value={userInput.bars}
+                type="number"
+                id="bars"
+                name="bars"
+                placeholder="0"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group-container">
+            <div className="form-group">
+              <label htmlFor="">Youtube link</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.videoUrl}
+                type="text"
+                id="videoUrl"
+                name="videoUrl"
+                placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="">Start at sec</label>
+              <input
+                className="tac"
+                onChange={updateUserInput}
+                value={userInput.videoStart}
+                type="text"
+                id="videoStart"
+                name="videoStart"
+                placeholder="00:00"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+          </div>
+
+          <div className="button-container">
+            <ResetButton
+              onClick={resetUserInput}
+              disabled={hasNoChanges}
               type={'button'}
-              size={'sm'}
-              disabled={isNewLevel}
+              inline
+              outlined
             />
-          </div>
-        </div>
-
-        {isNewLevel && (
-          <div className="form-group">
-            <label htmlFor="">Level name</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.levelName}
-              type="text"
-              id="newLevel"
-              name="newLevel"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
-            />
-          </div>
-        )}
-
-        <div className="form-group-container">
-          <div className="form-group">
-            <label htmlFor="name">Move name*</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.name}
-              type="text"
-              id="name"
-              name="name"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
+            <SaveButton
+              onClick={() => { }}
+              disabled={hasNoChanges || !isValid}
+              inline
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="">Num of bars*</label>
-            <input
-              className="tar"
-              onChange={updateUserInput}
-              value={userInput.bars}
-              type="number"
-              id="bars"
-              name="bars"
-              placeholder="0"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="form-group-container">
-          <div className="form-group">
-            <label htmlFor="">Youtube link</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.videoUrl}
-              type="text"
-              id="videoUrl"
-              name="videoUrl"
-              placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="">Start at sec</label>
-            <input
-              className="tar"
-              onChange={updateUserInput}
-              value={userInput.videoStart}
-              type="text"
-              id="videoStart"
-              name="videoStart"
-              placeholder="00:00"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-        </div>
-        <MainFooter>
-          <ResetButton
-            onClick={resetUserInput}
-            disabled={hasNoChanges}
-            type={'button'}
-            inline
-            outlined
-          />
-          <SaveButton
-            onClick={() => { }}
-            disabled={hasNoChanges || !isValid}
-            inline
-          />
-        </MainFooter>
+        </form>
       </main>
-      <footer><Navigation /></footer>
+      <Navigation />
     </EditFormStyled>
   )
 }
 
-const EditFormStyled = styled.form`
+const EditFormStyled = styled.section`
   position: absolute;
   top: 0px;
   right: 0px;
@@ -230,24 +234,24 @@ const EditFormStyled = styled.form`
     padding: 10px;
   }
 
-  label {
-    display: block;
+  form {
+    height: 100%;
   }
 
   .form-group-container {
     display: flex;
     max-width: 400px;
     margin: auto;
-    gap: 20px;
+    gap: 40px;
 
     &:first-of-type {
-      margin-top: 20px;
+      padding-right: 20px;
     }
   }
 
   .form-group {
     max-width: 400px;
-    margin: 20px auto;
+    margin: 15px auto;
     display: grid;
   }
 
@@ -257,5 +261,11 @@ const EditFormStyled = styled.form`
     &.select {
       width: 100%;
     }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
   }
 `

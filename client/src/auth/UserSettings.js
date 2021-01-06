@@ -8,7 +8,6 @@ import {
   DeleteAccountButton,
   LogoutButton,
 } from '../app/components/buttons/Buttons'
-import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
 import Navigation from '../app/components/Navigation'
 
@@ -40,20 +39,14 @@ export default function UserSettings() {
         />
       )}
       <Header cols="010">
-        {/* <BackIconButton
-          size={'sm'}
-          onClick={() => history.push('/edit-overview')}
-        /> */}
         <h1 className="logo">Salsa time!</h1>
       </Header>
       {userData.user && (
         <UserSettingsStyled>
           <p>User: {userData.user.displayName}</p>
-          <LogoutButton onClick={handelLogout} />
+          <LogoutButton onClick={handelLogout} outlined />
           <DeleteAccountButton
-            onClick={() => setIsDeleteModalDisplayed(true)}
-            outlined
-          />
+            onClick={() => setIsDeleteModalDisplayed(true)} />
         </UserSettingsStyled>
       )}
       <footer><Navigation /></footer>

@@ -1,22 +1,21 @@
 import { useState, useContext } from 'react'
+import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import useSession from './useSession'
+import AppContext from '../app/context/AppContext'
 import { CSSTransition } from 'react-transition-group'
-import AppFooter from '../app/components/MainFooter'
-import AppHeader from '../app/components/AppHeader'
-import Overlay from '../app/components/Overlay'
-import BackgroundVideo from './BackgroundVideo'
-import CurrentMove from './CurrentMove'
-import SelectedMoveList from './SelectedMoveList'
-import YoutubeVideo from './YoutubeVideo'
 import {
   BackIconButton,
   CancelIconButton,
   PauseIconButton,
   PlayIconButton,
-  StopIconButton,
 } from '../app/components/buttons/IconButtons'
-import AppContext from '../app/context/AppContext'
+import Overlay from '../app/components/Overlay'
+import BackgroundVideo from './BackgroundVideo'
+import AppHeader from '../app/components/AppHeader'
+import CurrentMove from './CurrentMove'
+import SelectedMoveList from './SelectedMoveList'
+import YoutubeVideo from './YoutubeVideo'
 
 export default function Session() {
   const history = useHistory()
@@ -40,6 +39,7 @@ export default function Session() {
         onClick={() => setYoutubeVideoObj({})}
         className="top-right"
         size={'md'}
+        primary
       />
       <YoutubeVideo video={YoutubeVideoObj} />
     </Overlay>
@@ -47,7 +47,6 @@ export default function Session() {
       <>
         <AppHeader
           cols={isPlaying ? '000' : '110'}
-          className={!isPlaying ? 'dark' : ''}
         >
           {!isPlaying && (
             <BackIconButton onClick={sessionHandler.stop} size={'md'} />
@@ -77,13 +76,21 @@ export default function Session() {
           <BackgroundVideo isPlaying={isPlaying} />
         </main>
 
-        <AppFooter className={!isPlaying ? 'dark' : ''}>
+        <FooterStyled >
           {isPlaying ? (
-            <PauseIconButton onClick={sessionHandler.pause} size={'lg'} />
+            <PauseIconButton onClick={sessionHandler.pause} size={'xl'} primary />
           ) : (
-              <PlayIconButton onClick={sessionHandler.play} size={'lg'} />
+              <PlayIconButton onClick={sessionHandler.play} size={'xl'} primary />
             )}
-        </AppFooter>
+        </FooterStyled>
       </>
     )
 }
+
+const FooterStyled = styled.footer`
+  position: relative;
+  z-index: 999;
+  display: grid;
+  place-items: auto;
+`
+

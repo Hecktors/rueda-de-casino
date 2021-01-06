@@ -42,7 +42,7 @@ const DeleteModalStyled = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    border: 1px solid var(--color-text);
+    border: 1px solid var(--color-border);
     border-radius: 5px;
     text-align: center;
     background-color: var(--color-bg);
