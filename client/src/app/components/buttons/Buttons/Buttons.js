@@ -33,21 +33,15 @@ export const LogoutButton = (props) => (
   </Button>
 )
 
-export const MsgButton = (props) => (
-  <Button color={'primary'} {...props}>
-    Clear
+export const RegisterButton = (props) => (
+  <Button color={'secondary'} {...props}>
+    Register
   </Button>
 )
 
 export const ResetButton = (props) => (
   <Button color={'secondary'} {...props}>
     Reset
-  </Button>
-)
-
-export const RegisterButton = (props) => (
-  <Button color={'secondary'} {...props}>
-    Register
   </Button>
 )
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { EditIconButton, HomeIconButton, SettingsIconButton, UserIconButton } from './buttons/IconButtons'
+import { EditIconButton, HomeIconButton, SettingsIconButton, UserIconButton } from '../buttons/IconButtons'
 
 export default function Navigation() {
   return (

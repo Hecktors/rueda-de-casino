@@ -17,6 +17,8 @@ export default function Register() {
     passwordCheck: '',
   })
 
+  let isValid = userInput.email && userInput.password && userInput.passwordCheck
+
   function handleChange(e) {
     setUserInput({
       ...userInput,
@@ -115,7 +117,7 @@ export default function Register() {
           />
         </div>
 
-        <RegisterButton onClick={() => { }} />
+        <RegisterButton onClick={() => { }} disabled={!isValid} />
 
         <p className="tac">
           Already have an account?{' '}

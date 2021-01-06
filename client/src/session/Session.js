@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import AppContext from '../app/context/AppContext'
 import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
