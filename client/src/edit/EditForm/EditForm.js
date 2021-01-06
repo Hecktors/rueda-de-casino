@@ -2,8 +2,9 @@ import { useState, useEffect, useContext } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import AppContext from '../../app/context/AppContext'
+import useUserInput from './useUserInput'
+import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
 import AppHeader from '../../app/components/AppHeader'
-import AppFooter from '../../app/components/AppFooter'
 import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import {
   AddIconButton,
@@ -11,18 +12,17 @@ import {
   DeleteIconButton,
 } from '../../app//components/buttons/IconButtons/IconButtons'
 import LevelAccordion from './LevelAccordion'
-import useUserInput from './useUserInput'
 import DeleteModal from '../../app/components/DeleteModal'
-import { addMove, deleteMove, updateMove } from '../../app/services/moveAPIs'
+import Navigation from '../../app/components/Navigation/Navigation'
 
 export default function EditForm() {
   const history = useHistory()
   const params = useParams()
   const { userData, levels, refreshLevels, setError } = useContext(AppContext)
-  const moveID = params.id || ''
   const [isNewLevel, setIsNewLevel] = useState(false)
-  const hasNoLevels = !levels.length
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
+  const moveID = params.id || ''
+  const hasNoLevels = !levels.length
   const { token } = userData
   const editedMove = levels
     .map((level) => level.moves)
@@ -34,14 +34,15 @@ export default function EditForm() {
 
   !token && history.push('/')
 
-  const [
+  const {
     userInput,
+    hasNoChanges,
+    isValid,
     updateUserInput,
     resetUserInput,
     openNewLevelInput,
-    hasNoChanges,
-    isValid,
-  ] = useUserInput(editedMove, setIsNewLevel, initLevelName, hasNoLevels)
+  } = useUserInput(editedMove, hasNoLevels, initLevelName, setIsNewLevel)
+
 
   useEffect(() => {
     !initLevelName && setIsNewLevel(true)
@@ -81,10 +82,11 @@ export default function EditForm() {
           deleteItem={editedMove.name}
         />
       )}
+
       <AppHeader cols={moveID ? '111' : '110'}>
         <BackIconButton
           onClick={() => history.push('/edit-overview')}
-          size={'sm'}
+          size={'md'}
           type="button"
         />
         <h1 className="logo">Salsa time!</h1>
@@ -96,157 +98,164 @@ export default function EditForm() {
           />
         )}
       </AppHeader>
+
       <main>
-        <div className="form-group-container">
-          <div className="form-group">
-            <LevelAccordion
-              levels={levels}
-              selectedLevelName={userInput.levelName}
-              isNewLevel={isNewLevel}
-              updateUserInput={updateUserInput}
-            />
+        <form>
+
+          <div className="form-group-container">
+            <div className="form-group">
+              <LevelAccordion
+                levels={levels}
+                selectedLevelName={userInput.levelName}
+                isNewLevel={isNewLevel}
+                updateUserInput={updateUserInput}
+              />
+            </div>
+            <div className="form-group">
+              <AddIconButton
+                onClick={openNewLevelInput}
+                type={'button'}
+                size={'sm'}
+                disabled={isNewLevel}
+              />
+            </div>
           </div>
-          <div className="form-group">
-            <AddIconButton
-              onClick={openNewLevelInput}
+
+          {isNewLevel && (
+            <div className="form-group">
+              <label htmlFor="">Level name</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.levelName}
+                type="text"
+                id="newLevel"
+                name="newLevel"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+          )}
+
+          <div className="form-group-container">
+            <div className="form-group">
+              <label htmlFor="name">Move name*</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.name}
+                type="text"
+                id="name"
+                name="name"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="">Num of bars*</label>
+              <input
+                className="tac"
+                onChange={updateUserInput}
+                value={userInput.bars}
+                type="number"
+                id="bars"
+                name="bars"
+                placeholder="0"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group-container">
+            <div className="form-group">
+              <label htmlFor="">Youtube link</label>
+              <input
+                onChange={updateUserInput}
+                value={userInput.videoUrl}
+                type="text"
+                id="videoUrl"
+                name="videoUrl"
+                placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="">Start at sec</label>
+              <input
+                className="tac"
+                onChange={updateUserInput}
+                value={userInput.videoStart}
+                type="text"
+                id="videoStart"
+                name="videoStart"
+                placeholder="00:00"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+          </div>
+
+          <div className="button-container">
+            <ResetButton
+              onClick={resetUserInput}
+              disabled={hasNoChanges}
               type={'button'}
-              size={'sm'}
-              disabled={isNewLevel}
+              inline
+              outlined
             />
-          </div>
-        </div>
-
-        {isNewLevel && (
-          <div className="form-group">
-            <label htmlFor="">Level name</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.levelName}
-              type="text"
-              id="newLevel"
-              name="newLevel"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
-            />
-          </div>
-        )}
-
-        <div className="form-group-container">
-          <div className="form-group">
-            <label htmlFor="name">Move name*</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.name}
-              type="text"
-              id="name"
-              name="name"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
+            <SaveButton
+              onClick={() => { }}
+              disabled={hasNoChanges || !isValid}
+              inline
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="">Num of bars*</label>
-            <input
-              className="tar"
-              onChange={updateUserInput}
-              value={userInput.bars}
-              type="number"
-              id="bars"
-              name="bars"
-              placeholder="0"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="form-group-container">
-          <div className="form-group">
-            <label htmlFor="">Youtube link</label>
-            <input
-              onChange={updateUserInput}
-              value={userInput.videoUrl}
-              type="text"
-              id="videoUrl"
-              name="videoUrl"
-              placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="">Start at sec</label>
-            <input
-              className="tar"
-              onChange={updateUserInput}
-              value={userInput.videoStart}
-              type="text"
-              id="videoStart"
-              name="videoStart"
-              placeholder="00:00"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-        </div>
+        </form>
       </main>
-      <AppFooter>
-        <ResetButton
-          onClick={resetUserInput}
-          disabled={hasNoChanges}
-          type={'button'}
-          inline
-          outlined
-        />
-        <SaveButton
-          onClick={() => {}}
-          disabled={hasNoChanges || !isValid}
-          inline
-        />
-      </AppFooter>
+      <Navigation />
     </EditFormStyled>
   )
 }
 
-const EditFormStyled = styled.form`
+const EditFormStyled = styled.section`
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  border-radius: 5px;
   display: grid;
-  flex-direction: column;
   grid-template-rows: 100px auto 100px;
+  flex-direction: column;
+  border-radius: 5px;
 
   main {
     padding: 10px;
   }
 
-  label {
-    display: block;
+  form {
+    height: 100%;
   }
 
   .form-group-container {
     display: flex;
+    gap: 40px;
     max-width: 400px;
     margin: auto;
-    gap: 20px;
 
     &:first-of-type {
-      margin-top: 20px;
+      padding-right: 20px;
     }
   }
 
   .form-group {
-    max-width: 400px;
-    margin: 20px auto;
     display: grid;
+    max-width: 400px;
+    margin: 15px auto;
   }
 
   .form-group:first-of-type {
@@ -255,5 +264,11 @@ const EditFormStyled = styled.form`
     &.select {
       width: 100%;
     }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
   }
 `

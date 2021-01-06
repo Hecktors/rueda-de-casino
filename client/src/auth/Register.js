@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import AppContext from '../app/context/AppContext'
 import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
@@ -16,6 +16,8 @@ export default function Register() {
     password: '',
     passwordCheck: '',
   })
+
+  let isValid = userInput.email && userInput.password && userInput.passwordCheck
 
   function handleChange(e) {
     setUserInput({
@@ -115,7 +117,7 @@ export default function Register() {
           />
         </div>
 
-        <RegisterButton onClick={() => {}} />
+        <RegisterButton onClick={() => { }} disabled={!isValid} />
 
         <p className="tac">
           Already have an account?{' '}

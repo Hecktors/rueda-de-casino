@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import AppContext from '../app/context/AppContext'
 import { deleteUser } from '../app/services/userAPIs'
 import DeleteModal from '../app/components/DeleteModal'
@@ -8,8 +8,8 @@ import {
   DeleteAccountButton,
   LogoutButton,
 } from '../app/components/buttons/Buttons'
-import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
+import Navigation from '../app/components/Navigation'
 
 export default function UserSettings() {
   const history = useHistory()
@@ -38,36 +38,32 @@ export default function UserSettings() {
           deleteItem="User Account"
         />
       )}
-      <Header cols="110">
-        <BackIconButton
-          size={'sm'}
-          onClick={() => history.push('/edit-overview')}
-        />
+
+      <Header cols="010">
         <h1 className="logo">Salsa time!</h1>
       </Header>
+
       {userData.user && (
         <UserSettingsStyled>
           <p>User: {userData.user.displayName}</p>
-          <LogoutButton onClick={handelLogout} />
+          <LogoutButton onClick={handelLogout} outlined />
           <DeleteAccountButton
-            onClick={() => setIsDeleteModalDisplayed(true)}
-            outlined
-          />
+            onClick={() => setIsDeleteModalDisplayed(true)} />
         </UserSettingsStyled>
       )}
+
+      <footer><Navigation /></footer>
     </>
   )
 }
 
 const UserSettingsStyled = styled.main`
   flex-grow: 1;
-  display: grid;
-  flex-direction: column;
-  place-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 10px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
 
   p {
     margin-bottom: 10px;
