@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
-import MainFooter from '../app/components/MainFooter'
 import {
   PlayIconButton,
   ResetIconButton,
@@ -50,16 +49,21 @@ export default function Home() {
           </div>
 
         </form>
-        <MainFooter
-          msg={hasNotEnoughMoves ? 'Select at least 2 moves to start' : ''}
-        >
+        <div className="main-footer">
+          <div className="msg">
+            {
+              hasNotEnoughMoves &&
+              <span>Select at least 2 moves to start</span>
+            }
+          </div>
           <PlayIconButton
             type={'button'}
             onClick={() => history.push('/session')}
             size={'xl'}
             disabled={hasNotEnoughMoves}
+            primary
           />
-        </MainFooter>
+        </div>
       </MainStyled>
       <footer><Navigation /></footer>
     </>
@@ -72,7 +76,6 @@ const MainStyled = styled.main`
   align-items: space-between;
   justify-content: space-between;
   padding: 10px;
-  padding-top: 40px;
 
   .level-container {
     display: grid;
@@ -87,5 +90,17 @@ const MainStyled = styled.main`
   .btn-update {
     width: 50%;
     margin: 50px 0;
+  }
+
+  .main-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .msg {
+      height: 1.5rem;
+      color: var(--color-warning);
+      text-align: center;
+    }
   }
 `

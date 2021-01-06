@@ -17,6 +17,7 @@ export default function LevelAccordion({
   updateUserInput,
 }) {
   const [isOpen, setIsOpen] = useState(false)
+  const hasMultiLevel = levels.length > 1
   const ulHeight = isOpen ? 'auto' : 0
   const bdRdButtom = isOpen ? 0 : '3px'
   const header = isNewLevel ? 'New Level' : selectedLevelName.toUpperCase()
@@ -40,7 +41,10 @@ export default function LevelAccordion({
       border={border}
     >
       <h3 onClick={toogleLevelAccordion}>
-        {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
+        {
+          hasMultiLevel &&
+          (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)
+        }
         <span className="level-name">{header}</span>
       </h3>
       <ul>
@@ -81,7 +85,7 @@ const InputLevelStyled = styled.div`
 
     & .level-name {
       width: 100%;
-      color: var(--color-primary);
+      color: var(--color-secondary);
       text-align: center;
     }
 

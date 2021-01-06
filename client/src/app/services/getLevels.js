@@ -10,6 +10,18 @@ export default async function getLevels(token) {
     }
   )
 
+  function compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  }
+
+  levels.sort(compare);
+
   moves.forEach((move) =>
     levels.forEach(
       (level) => level.name === move.levelName && level.moves.push(move)
