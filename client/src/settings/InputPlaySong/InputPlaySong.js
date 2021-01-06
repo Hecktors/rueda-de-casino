@@ -17,14 +17,14 @@ export default function InputPlaySong({ isSongActive, updateAppState }) {
         checked={isSongActive}
       />
       <label htmlFor="mute">Play learning song </label>
-      <div className="tooltip">
+      {/* <div className="tooltip">
         <span className="info">&#9432;</span>
         <span className="tooltiptext">
           You can use the app with your own music. Just disable the onboard
           learning song and adapt the time between the move calls with the
           slider, if they're too fast or too slow for your song.
         </span>
-      </div>
+      </div> */}
     </FormInputPlaySongStyled>
   )
 }

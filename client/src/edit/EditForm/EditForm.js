@@ -13,7 +13,7 @@ import {
 } from '../../app//components/buttons/IconButtons/IconButtons'
 import LevelAccordion from './LevelAccordion'
 import DeleteModal from '../../app/components/DeleteModal'
-import Navigation from '../../app/components/Navigation'
+import Navigation from '../../app/components/Navigation/Navigation'
 
 export default function EditForm() {
   const history = useHistory()
@@ -86,7 +86,7 @@ export default function EditForm() {
       <AppHeader cols={moveID ? '111' : '110'}>
         <BackIconButton
           onClick={() => history.push('/edit-overview')}
-          size={'sm'}
+          size={'md'}
           type="button"
         />
         <h1 className="logo">Salsa time!</h1>

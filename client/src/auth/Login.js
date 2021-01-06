@@ -15,6 +15,9 @@ export default function Login() {
     password: '',
   })
 
+  let isValid = userInput.email && userInput.password
+
+
   function handleChange(e) {
     setUserInput({
       ...userInput,
@@ -85,7 +88,7 @@ export default function Login() {
           </div>
         </div>
 
-        <LoginButton onClick={() => { }} />
+        <LoginButton onClick={() => { }} disabled={!isValid} />
       </LoginStyled>
     </>
   )

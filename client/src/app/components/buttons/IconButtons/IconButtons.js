@@ -11,7 +11,6 @@ import {
   PlayIcon,
   ResetIcon,
   SettingsIcon,
-  StopIcon,
   UserIcon,
 } from '../../Icons'
 
@@ -83,12 +82,6 @@ export const ResetIconButton = (props) => (
 export const SettingsIconButton = (props) => (
   <IconButton {...props}>
     <SettingsIcon />
-  </IconButton>
-)
-
-export const StopIconButton = (props) => (
-  <IconButton {...props}>
-    <StopIcon />
   </IconButton>
 )
 
