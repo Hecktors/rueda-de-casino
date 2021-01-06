@@ -22,10 +22,10 @@ export default function App() {
   const audios = useAudios(userData, levels)
 
   const location = useLocation()
-  const classes = location.pathname === '/session' ? 'session' : ''
+  const classes = location.pathname === '/session' ? ' session' : ''
 
   return (
-    <div className={`App ${classes}`}>
+    <div className={`App${classes}`}>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <div className="desktop-only">
         This application is optimized for mobile devices.

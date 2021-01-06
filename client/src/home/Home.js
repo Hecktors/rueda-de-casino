@@ -1,14 +1,14 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
-import AppHeader from '../app/components/AppHeader'
+import useUserInput from './useUserInput'
 import {
   PlayIconButton,
   ResetIconButton,
 } from '../app/components/buttons/IconButtons'
 import InputLevel from './InputLevel'
+import AppHeader from '../app/components/AppHeader'
 import Navigation from '../app/components/Navigation'
 
 export default function Home() {
@@ -84,9 +84,11 @@ const MainStyled = styled.main`
     align-items: start;
     gap: 5px;
   }
+
   .form-group-container {
     height: 130px;
   }
+  
   .btn-update {
     width: 50%;
     margin: 50px 0;

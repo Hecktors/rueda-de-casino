@@ -22,6 +22,7 @@ export function getUser(token) {
     .catch((err) => console.log(err))
 }
 
+// Register user
 export async function registerUser(user) {
   return await axios
     .post(`${base}/users/register`, {
@@ -34,6 +35,7 @@ export async function registerUser(user) {
     .catch((err) => err.response)
 }
 
+// Login user
 export async function loginUser({ email, password }) {
   return await axios
     .post(`${base}/users/login`, {
@@ -44,6 +46,7 @@ export async function loginUser({ email, password }) {
     .catch((err) => err.response)
 }
 
+// Delete user
 export async function deleteUser(token) {
   return await axios
     .delete(`${base}/users`, {

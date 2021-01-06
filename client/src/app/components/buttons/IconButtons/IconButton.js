@@ -11,18 +11,18 @@ const sizes = {
 
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
-  onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
+  type: PropTypes.string,
   size: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
-  type: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default function IconButton({
   children,
-  type,
   className,
+  type,
   size,
   disabled,
   primary,

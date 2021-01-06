@@ -1,3 +1,11 @@
+import PropTypes from 'prop-types'
+useUserInput.propTypes = {
+  levels: PropTypes.array.isRequired,
+  appState: PropTypes.object.isRequired,
+  setAppState: PropTypes.func.isRequired
+}
+
+
 export default function useUserInput(levels, appState, setAppState) {
   const selectedMoves = appState.selectedMoveIDs
     ? levels

@@ -3,8 +3,8 @@ import styled from 'styled-components/macro'
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  type: PropTypes.string,
   className: PropTypes.string,
+  type: PropTypes.string,
   color: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
@@ -21,8 +21,8 @@ const colors = {
 
 export default function Button({
   children,
-  type,
   className,
+  type,
   color,
   disabled,
   outlined,

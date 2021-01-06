@@ -28,10 +28,10 @@ export default function SelectedMoveList({ moves, onClick }) {
 const SelectedMoveListStyled = styled.ul`
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 120px 0;
   display: grid;
   gap: 10px;
+  margin: 0 auto;
+  padding: 120px 0;
 
   @media (orientation: landscape) {
     padding: 100px 0;
@@ -39,9 +39,10 @@ const SelectedMoveListStyled = styled.ul`
 
   li {
     padding-left: 24px;
+    
     button {
-      font-size: 1.5rem;
       display: flex;
+      font-size: 1.5rem;
       color: var(--color-text);
 
       svg {

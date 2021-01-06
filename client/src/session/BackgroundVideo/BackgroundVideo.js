@@ -28,9 +28,11 @@ const BackgroundVideoStyled = styled.section`
     z-index: 0;
     filter: blur(3px);
   }
+
   @media (orientation: landscape) {
     overflow: hidden;
   }
+  
   @media screen and (min-width: 800px) {
     .bg-video {
       position: relative;
