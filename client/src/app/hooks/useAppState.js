@@ -35,7 +35,6 @@ export default function useAppState(moves) {
 
   useEffect(() => {
     if (error) {
-      console.log('ERRor')
       setTimeout(() => {
         setError('')
       }, 5000)

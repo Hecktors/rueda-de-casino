@@ -17,10 +17,12 @@ const NameWrapper = styled.div`
   &.fade-enter {
     transform: scale(0);
   }
+
   &.fade-enter-active {
     transform: scale(1);
     transition: transform 500ms;
   }
+
   &.fade-enter-done {
     transform: scale(1);
   }
@@ -28,10 +30,12 @@ const NameWrapper = styled.div`
   &.fade-exit {
     opacity: 1;
   }
+
   &.fade-exit-active {
     opacity: 0;
     transition: opacity 3000ms;
   }
+  
   &.fade-exit-done {
     opacity: 0;
   }

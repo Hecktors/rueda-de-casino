@@ -2,14 +2,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 Header.propTypes = {
-  cols: PropTypes.string.isRequired,
   className: PropTypes.string,
+  cols: PropTypes.string.isRequired,
 }
 
-export default function Header({ cols, className, children }) {
-  if (!children.isArray) {
-    children = [children]
-  }
+export default function Header({ children, className, cols }) {
+  if (!children.isArray) children = [children]
   const hasColLeft = /111|110|100/.test(cols)
   const hasColCenter = /111|110|010/.test(cols)
   const hasColRight = /111|101|001/.test(cols)

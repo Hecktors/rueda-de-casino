@@ -65,27 +65,27 @@ const InputLevelStyled = styled.div`
 
   h3 {
     cursor: pointer;
-    font-size: 1rem;
-    padding: 7px;
     display: flex;
     justify-content: space-between;
+    padding: 7px;
+    font-size: 1rem;
 
     & .level-name {
       width: 100%;
-      color: ${({ color }) => color};
+      text-transform: uppercase;
       text-align: center;
+      color: ${({ color }) => color};
     }
 
     svg {
       transform: scale(1.5);
-      fill: ${({ color }) => color};
     }
   }
 
   ul {
     display: grid;
     gap: 3px;
-    padding: 0 9px;
+    padding: 0 6px;
     overflow: hidden;
     height: ${({ ulHeight }) => ulHeight};
 

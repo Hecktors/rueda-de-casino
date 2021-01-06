@@ -1,8 +1,7 @@
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import { LoginButton, RegisterButton } from '../app/components/buttons/Buttons'
 import Header from '../app/components/AppHeader'
-import Footer from '../app/components/AppFooter'
 
 export default function AuthOptions() {
   const history = useHistory()
@@ -16,17 +15,14 @@ export default function AuthOptions() {
         <RegisterButton onClick={() => history.push('/register')} outlined />
         <LoginButton onClick={() => history.push('/login')} outlined />
       </AuthStyled>
-      <Footer />
     </>
   )
 }
 
 const AuthStyled = styled.main`
   flex-grow: 1;
-  display: grid;
+  display: flex;
   flex-direction: column;
-  place-items: center;
   justify-content: center;
   padding: 10px;
-  display: flex;
 `

@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+
+useUserInput.propTypes = {
+  move: PropTypes.array.isRequired,
+  hasNoLevels: PropTypes.bool.isRequired,
+  initLevelName: PropTypes.string.isRequired,
+  setIsNewLevelSelected: PropTypes.func.isRequired
+}
 
 export default function useUserInput(
   move,
-  setIsNewLevelSelected,
+  hasNoLevels,
   initLevelName,
-  hasNoLevels
+  setIsNewLevelSelected
+
 ) {
   const initState = {
     _id: '',
@@ -25,18 +34,14 @@ export default function useUserInput(
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function setInitState() {
-    if (move) {
-      setUserInput({
-        _id: move._id,
-        name: move.name,
-        levelName: move.levelName,
-        bars: move.bars,
-        videoUrl: move.videoUrl,
-        videoStart: move.videoStart,
-      })
-    } else {
-      setUserInput(initState)
-    }
+    setUserInput(move ? {
+      _id: move._id,
+      name: move.name,
+      levelName: move.levelName,
+      bars: move.bars,
+      videoUrl: move.videoUrl,
+      videoStart: move.videoStart,
+    } : initState)
   }
 
   function resetUserInput() {
@@ -56,12 +61,12 @@ export default function useUserInput(
     setUserInput({ ...userInput, levelName: '' })
   }
 
-  return [
+  return {
     userInput,
+    hasNoChanges,
+    isValid,
     updateUserInput,
     resetUserInput,
     openNewLevelInput,
-    hasNoChanges,
-    isValid,
-  ]
+  }
 }

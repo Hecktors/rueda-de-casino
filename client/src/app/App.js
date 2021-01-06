@@ -10,18 +10,19 @@ import Register from '../auth/Register'
 import Login from '../auth/Login'
 import Home from '../home'
 import Session from '../session'
+import Settings from '../settings'
 import EditForm from '../edit/EditForm'
-import EditOverview from '../edit/EditOverview'
+import EditPage from '../edit/EditPage'
 import UserSettings from '../auth/UserSettings'
 
 export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
-  const audios = useAudios(userData, levels)
   const { appState, setAppState, error, setError } = useAppState()
+  const audios = useAudios(userData, levels)
 
   const location = useLocation()
-  const classes = location.pathname === '/edit-overview' ? ' no-footer' : ''
+  const classes = location.pathname === '/session' ? ' session' : ''
 
   return (
     <div className={`App${classes}`}>
@@ -50,8 +51,9 @@ export default function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/session" component={Session} />
+          <Route path="/settings" component={Settings} />
           <Route path="/user-settings" component={UserSettings} />
-          <Route path="/edit-overview" component={EditOverview} />
+          <Route path="/edit-overview" component={EditPage} />
           <Route path="/edit-form/:id?" component={EditForm} />
           <Redirect to="/" />
         </Switch>

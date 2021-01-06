@@ -1,12 +1,27 @@
 ```jsx
-import Button, { SaveButton, CancelButton } from './Buttons.js'
-;<div>
-  <SaveButton color={'primary'}>Save</SaveButton>{' '}
-  <SaveButton color={'primary'} disabled>
-    Save
-  </SaveButton>{' '}
-  <CancelButton outlined color={'secondary'}>
-    Cancel
-  </CancelButton>
+import {
+  CancelButton,
+  DeleteButton,
+  DeleteAccountButton,
+  LoginButton,
+  LogoutButton,
+  RegisterButton,
+  ResetButton,
+  SaveButton,
+} from './Buttons.js'
+;<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+  <CancelButton /> <DeleteButton />
+  <DeleteAccountButton />
+  <LoginButton outlined />
+  <LoginButton />
+  <LoginButton disabled />
+  <LogoutButton outlined />
+  <RegisterButton outlined />
+  <RegisterButton />
+  <RegisterButton disabled />
+  <ResetButton outlined />
+  <ResetButton outlined disabled />
+  <SaveButton disabled />
+  <SaveButton />
 </div>
 ```

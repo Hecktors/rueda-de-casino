@@ -6,28 +6,34 @@ const sizes = {
   sm: '30px',
   md: '40px',
   lg: '60px',
+  xl: '80px',
 }
 
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
-  onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
+  type: PropTypes.string,
   size: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  type: PropTypes.string,
+  primary: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default function IconButton({
   children,
-  type,
   className,
+  type,
   size,
   disabled,
+  primary,
   onClick,
 }) {
-  const fillColor = disabled
-    ? 'var(--color-disabled)'
+
+  let fillColor = primary
+    ? 'var(--color-primary)'
     : 'var(--color-secondary)'
+
+  if (disabled) fillColor = 'var(--color-disabled)'
 
   return (
     <IconButtonStyled

@@ -6,11 +6,11 @@ import {
   DeleteIcon,
   EditIcon,
   EyeIcon,
+  HomeIcon,
   PauseIcon,
   PlayIcon,
   ResetIcon,
   SettingsIcon,
-  StopIcon,
   UserIcon,
 } from '../../Icons'
 
@@ -54,6 +54,13 @@ export const EyeIconButton = (props) => (
   </IconButton>
 )
 
+export const HomeIconButton = (props) => (
+  <IconButton {...props}>
+    <HomeIcon />
+  </IconButton>
+)
+
+
 export const PauseIconButton = (props) => (
   <IconButton {...props}>
     <PauseIcon />
@@ -75,12 +82,6 @@ export const ResetIconButton = (props) => (
 export const SettingsIconButton = (props) => (
   <IconButton {...props}>
     <SettingsIcon />
-  </IconButton>
-)
-
-export const StopIconButton = (props) => (
-  <IconButton {...props}>
-    <StopIcon />
   </IconButton>
 )
 
