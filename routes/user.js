@@ -4,6 +4,7 @@ const auth = require("../middleware/auth")
 const User = require("../models/user.model")
 const Move = require("../models/move.model")
 const emailCheck = require("../lib/emailCheck")
+const checkPassword = require("../lib/checkPassword")
 const { deleteUserAudioFolder } = require("../services/handleFiles")
 
 const router = require("express").Router()
@@ -22,6 +23,10 @@ router.post("/register", async (req, res) => {
 
 		if (password !== passwordCheck) {
 			return res.status(400).json({ msg: "The entered passwords are not equal." })
+		}
+
+		if (!checkPassword(password)) {
+			return res.status(400).json({ msg: "Passord needs a uppercase letter, a lowercase letter, a number and min. 8 characters" })
 		}
 
 		const existingUser = await User.findOne({ email: email })
