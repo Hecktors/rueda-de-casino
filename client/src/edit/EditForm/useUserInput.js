@@ -1,12 +1,4 @@
 import { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-
-useUserInput.propTypes = {
-  move: PropTypes.array.isRequired,
-  hasNoLevels: PropTypes.bool.isRequired,
-  initLevelName: PropTypes.string.isRequired,
-  setIsNewLevelSelected: PropTypes.func.isRequired
-}
 
 export default function useUserInput(
   move,
