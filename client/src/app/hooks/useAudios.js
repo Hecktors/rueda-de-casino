@@ -13,16 +13,15 @@ export default function useAudios(userData, levels) {
   }, [levels]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function updateAudios() {
-    const fetchedAudios = []
-    await moves.forEach(async (move) => {
+    const fetchedAudios = await Promise.all(moves.map(async (move) => {
       let audio = await getAudio(token, move._id)
       const audioUrl = new Audio(audio)
-      fetchedAudios.push({
+      return {
         moveID: move._id,
         audioElement: audioUrl,
-      })
-      setAudios(fetchedAudios)
-    })
+      }
+    }))
+    setAudios(fetchedAudios)
   }
 
   return audios
