@@ -6,6 +6,7 @@ import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
+import checkRegisterInputInvalidity from '../app/lib/checkRegisterInputInvalidity'
 
 export default function Register() {
   const history = useHistory()
@@ -17,20 +18,21 @@ export default function Register() {
     passwordCheck: '',
   })
 
-  let isValid = userInput.email && userInput.password && userInput.passwordCheck
+  const isRequiredFilled = userInput.email && userInput.password && userInput.passwordCheck
 
   function handleChange(e) {
     setUserInput({
       ...userInput,
       [e.target.name]: e.target.value,
     })
+
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
-
-    if (!userInput.email || !userInput.password || !userInput.passwordCheck) {
-      setError('All required field have to been filled.')
+    const valErr = checkRegisterInputInvalidity(userInput)
+    if (valErr) {
+      setError(valErr)
       return
     }
 
@@ -117,7 +119,7 @@ export default function Register() {
           />
         </div>
 
-        <RegisterButton onClick={() => { }} disabled={!isValid} />
+        <RegisterButton onClick={() => { }} disabled={!isRequiredFilled} />
 
         <p className="tac">
           Already have an account?{' '}
