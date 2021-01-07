@@ -5,7 +5,7 @@ const { deleteFolderIfEmpty } = require("./handleFiles")
 
 async function saveAudio(userID, move) {
   const dir = path.join(__dirname, `../public/audio/${userID}`)
-  !fs.existsSync(dir) && fs.mkdirSync(dir)
+  !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true })
   const gtts = new gTTS(move.name, "es-us");
   gtts.save(dir + "/" + move.audioName, function (err) {
     if (err) { throw new Error(err) }
