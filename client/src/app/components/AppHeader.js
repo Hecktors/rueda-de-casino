@@ -8,9 +8,9 @@ Header.propTypes = {
 
 export default function Header({ children, className, cols }) {
   if (!children.isArray) children = [children]
-  const hasColLeft = /111|110|100/.test(cols)
-  const hasColCenter = /111|110|010/.test(cols)
-  const hasColRight = /111|101|001/.test(cols)
+  const hasColLeft = /111|110|100|101/.test(cols)
+  const hasColCenter = /111|110|010|011/.test(cols)
+  const hasColRight = /111|101|011|001/.test(cols)
 
   const indexCenter = hasColLeft ? 1 : 0
   const indexLeft =

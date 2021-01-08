@@ -24,13 +24,13 @@ export default function Home() {
 
   return (
     <>
-      <AppHeader cols="110">
+      <AppHeader cols="011">
+        <h1 className="logo">Salsa time!</h1>
         <ResetIconButton
           onClick={resetAppState}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
         />
-        <h1 className="logo">Salsa time!</h1>
 
       </AppHeader>
 
