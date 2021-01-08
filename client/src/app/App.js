@@ -11,8 +11,7 @@ import Login from '../auth/Login'
 import Home from '../home'
 import Session from '../session'
 import Settings from '../settings'
-import EditForm from '../edit/EditForm'
-import EditPage from '../edit/EditPage'
+import Edit from '../edit'
 import UserSettings from '../auth/UserSettings'
 
 export default function App() {
@@ -53,8 +52,7 @@ export default function App() {
           <Route path="/session" component={Session} />
           <Route path="/settings" component={Settings} />
           <Route path="/user-settings" component={UserSettings} />
-          <Route path="/edit-overview" component={EditPage} />
-          <Route path="/edit-form/:id?" component={EditForm} />
+          <Route path="/edit" component={Edit} />
           <Redirect to="/" />
         </Switch>
       </AppContext.Provider>

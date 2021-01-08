@@ -107,13 +107,13 @@ export default createGlobalStyle`
 
     label {
         font-size: 0.875rem;
-        padding-bottom: 1px; 
+        padding-bottom: 5px; 
     }
 
     input,
     select {
         width: 100%;
-        padding: 8px;
+        padding: 7px 10px;
         font-size: 1rem;
         outline: none;
         border-radius: 3px;

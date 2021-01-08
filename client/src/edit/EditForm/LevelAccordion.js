@@ -74,7 +74,7 @@ const InputLevelStyled = styled.div`
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px 10px;
     border: ${({ border }) => border};
     border-radius: 3px;
     border-bottom-left-radius: ${({ bdRdButtom }) => bdRdButtom};
@@ -93,8 +93,8 @@ const InputLevelStyled = styled.div`
       transform: scale(1.5);
       fill: var(--color-text);
     }
-  }
-
+  } 
+  
   ul {
     width: 100%;
     height: ${({ ulHeight }) => ulHeight};

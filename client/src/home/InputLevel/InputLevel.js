@@ -68,7 +68,7 @@ const InputLevelStyled = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 7px;
-    font-size: 1rem;
+    font-size: 0.875rem;
 
     & .level-name {
       width: 100%;
