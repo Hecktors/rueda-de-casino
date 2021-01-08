@@ -8,7 +8,7 @@ export default function Navigation() {
     <NavigationStyled>
       <NavLink to="/" exact><HomeIconButton onClick={() => { }} size={'md'} /></NavLink>
       <NavLink to="/settings"><SettingsIconButton onClick={() => { }} size={'md'} /></NavLink>
-      <NavLink to="/edit-overview"><EditIconButton onClick={() => { }} size={'md'} /></NavLink>
+      <NavLink to="/edit"><EditIconButton onClick={() => { }} size={'md'} /></NavLink>
       <NavLink to="/user-settings"><UserIconButton onClick={() => { }} size={'md'} /></NavLink>
     </NavigationStyled>
   )
