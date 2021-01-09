@@ -38,7 +38,7 @@ export default function Home() {
             )}
           </div>
           <InputMoveRepetition
-            isMoveRepetitionOn={appState.isMoveRepetitionOn}
+            isMoveRepetitionOn={appState.isAvoidingMoveRepition}
             updateAppState={updateAppState}
           />
         </form>
