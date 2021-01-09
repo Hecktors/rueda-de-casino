@@ -31,13 +31,14 @@ const FormInputSongSpeedStyled = styled.div`
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px 20px 52px;
 
   input {
     width: 100%;
     display: block;
     direction: rtl;
     background-color: var(--color-bg);
+    padding: 15px 0;
   }
 
   .range-legend {

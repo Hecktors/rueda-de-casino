@@ -4,6 +4,7 @@ import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
 import Navigation from '../app/components/Navigation'
+import InputMoveRepetition from './InputMoveRepetition'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 
@@ -36,6 +37,10 @@ export default function Home() {
               />
             )}
           </div>
+          <InputMoveRepetition
+            isMoveRepetitionOn={appState.isMoveRepetitionOn}
+            updateAppState={updateAppState}
+          />
         </form>
 
       </MainStyled>
@@ -58,7 +63,7 @@ const MainStyled = styled.main`
     gap: 5px;
   }
   .form-group-container {
-    height: 130px;
+    /* height: 130px; */
   }
   .btn-update {
     width: 50%;

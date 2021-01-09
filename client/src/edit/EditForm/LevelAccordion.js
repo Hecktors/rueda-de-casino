@@ -119,7 +119,7 @@ const InputLevelStyled = styled.div`
       }
 
       &:last-of-type {
-        padding-bottom: 30px;
+        padding-bottom: 15px;
       }
 
       label {

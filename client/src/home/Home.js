@@ -72,7 +72,7 @@ export default function Home() {
 const MainStyled = styled.main`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
 
   .level-container {
     display: grid;
