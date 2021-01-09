@@ -9,6 +9,9 @@ export default function useUserInput(appState, setAppState) {
     songActivity: (_, checked) => {
       setAppState({ ...appState, isSongActive: checked })
     },
+    avoidRepetition: (_, checked) => {
+      setAppState({ ...appState, isAvoidingMoveRepition: checked })
+    },
   }
 
   return { updateAppState }

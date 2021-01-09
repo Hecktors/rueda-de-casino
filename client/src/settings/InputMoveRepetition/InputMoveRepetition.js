@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 InputMoveRepetition.propTypes = {
-  isMoveRepetitionOn: PropTypes.bool.isRequired,
+  isAvoidingMoveRepition: PropTypes.bool.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
-export default function InputMoveRepetition({ isMoveRepetitionOn, updateAppState }) {
+export default function InputMoveRepetition({ isAvoidingMoveRepition, updateAppState }) {
   return (
     <InputMoveRepetitionStyled>
       <input
@@ -14,7 +14,7 @@ export default function InputMoveRepetition({ isMoveRepetitionOn, updateAppState
         onChange={updateAppState}
         type="checkbox"
         name="avoidRepetition"
-        checked={isMoveRepetitionOn}
+        checked={isAvoidingMoveRepition}
       />
       <label htmlFor="avoidRepetition">Avoid consecutive move call repepition</label>
     </InputMoveRepetitionStyled>
