@@ -24,14 +24,13 @@ export default function Home() {
 
   return (
     <>
-      <AppHeader cols="011">
-        <h1 className="logo">Salsa time!</h1>
+      <AppHeader cols="110">
         <ResetIconButton
           onClick={resetAppState}
           size={'md'}
           disabled={selectedMoveIDs.length === 0}
         />
-
+        <h1 className="logo">Salsa time!</h1>
       </AppHeader>
 
       <MainStyled hasMultiLevels={levels.length > 1}>
@@ -73,9 +72,7 @@ export default function Home() {
 const MainStyled = styled.main`
   display: flex;
   flex-direction: column;
-  align-items: space-between;
-  justify-content: space-between;
-  padding: 10px;
+  padding: 5px;
 
   .level-container {
     display: grid;
@@ -88,13 +85,10 @@ const MainStyled = styled.main`
   .form-group-container {
     height: 130px;
   }
-  
-  .btn-update {
-    width: 50%;
-    margin: 50px 0;
-  }
 
   .main-footer {
+    padding: 20px 0;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;

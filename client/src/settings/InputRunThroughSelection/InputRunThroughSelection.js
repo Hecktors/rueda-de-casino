@@ -1,27 +1,27 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-InputPlaySong.propTypes = {
-  isSongActive: PropTypes.bool.isRequired,
+InputRunThroughSelection.propTypes = {
+  isRunThroughSelection: PropTypes.bool.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
-export default function InputPlaySong({ isSongActive, updateAppState }) {
+export default function InputRunThroughSelection({ isRunThroughSelection, updateAppState }) {
   return (
-    <InputPlaySongStyled>
+    <InputRunThroughSelectionStyled>
       <input
-        id="songActivity"
+        id="runThroughSelection"
         onChange={updateAppState}
         type="checkbox"
-        name="songActivity"
-        checked={isSongActive}
+        name="runThroughSelection"
+        checked={isRunThroughSelection}
       />
-      <label htmlFor="songActivity">Play learning song </label>
-    </InputPlaySongStyled>
+      <label htmlFor="runThroughSelection">Avoid multi consecutive move repepition</label>
+    </InputRunThroughSelectionStyled>
   )
 }
 
-const InputPlaySongStyled = styled.div`
+const InputRunThroughSelectionStyled = styled.div`
   width: 100%;
   max-width: 400px;
   position: relative;
