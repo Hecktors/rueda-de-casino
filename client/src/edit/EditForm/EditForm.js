@@ -47,6 +47,7 @@ export default function EditForm({ move, setSelectedMoveID, addMove, updateMove 
     <EditFormStyled onSubmit={handleSubmit}>
       <div className="form-group-container">
         <div className="form-group">
+          <label>Level</label>
           <LevelAccordion
             levels={levels}
             selectedLevelName={userInput.levelName}
@@ -55,6 +56,7 @@ export default function EditForm({ move, setSelectedMoveID, addMove, updateMove 
           />
         </div>
         <div className="form-group">
+          &nbsp;
           <AddIconButton
             onClick={openNewLevelInput}
             type={'button'}
@@ -166,12 +168,12 @@ const EditFormStyled = styled.form`
 
   .form-group-container {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     max-width: 400px;
     margin: auto;
 
     &:first-of-type {
-      padding-right: 20px;
+      padding-right: 10px;
     }
   }
 

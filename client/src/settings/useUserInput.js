@@ -9,6 +9,9 @@ export default function useUserInput(appState, setAppState) {
     songActivity: (_, checked) => {
       setAppState({ ...appState, isSongActive: checked })
     },
+    runThroughSelection: (_, checked) => {
+      setAppState({ ...appState, isRunThroughSelection: checked })
+    },
   }
 
   return { updateAppState }

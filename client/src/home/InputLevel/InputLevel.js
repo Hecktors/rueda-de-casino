@@ -84,8 +84,7 @@ const InputLevelStyled = styled.div`
 
   ul {
     display: grid;
-    gap: 3px;
-    padding: 0 6px;
+    padding: 0 5px;
     overflow: hidden;
     height: ${({ ulHeight }) => ulHeight};
 
@@ -97,14 +96,15 @@ const InputLevelStyled = styled.div`
       }
 
       &:first-of-type {
-        padding-top: 1px;
+        padding-top: 5px;
       }
 
       &:last-of-type {
-        padding-bottom: 10px;
+        padding-bottom: 15px;
       }
 
       label {
+        padding: 0;
         width: 100%;
         display: inline-block;
         font-size: 0.875rem;

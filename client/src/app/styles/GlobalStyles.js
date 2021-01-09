@@ -50,10 +50,6 @@ export default createGlobalStyle`
         font-size: 112.5%;
         color:  var(--color-text);
         background-color: var(--color-bg);
-        background-image: url('./assets/img/dancing.svg');
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
     }
 
     #root {
@@ -62,13 +58,17 @@ export default createGlobalStyle`
     }
 
     .App {
+        background-image: url('./assets/img/dancing.svg');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
         position: relative;
         height: 100%;
         width: 100%;
         max-width: 736px;
         margin: auto;
         display: grid;
-        grid-template-rows: 100px auto 100px;
+        grid-template-rows: 80px auto 80px;
 
         &.session {
         grid-template-rows: 100px auto 240px;
@@ -107,7 +107,7 @@ export default createGlobalStyle`
 
     label {
         font-size: 0.875rem;
-        padding-bottom: 5px; 
+        padding-bottom: 3px; 
     }
 
     input,

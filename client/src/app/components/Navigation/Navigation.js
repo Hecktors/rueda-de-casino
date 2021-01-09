@@ -19,6 +19,7 @@ const NavigationStyled = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: var(--color-bg);
 
   svg {
     fill: var(--color-secondary);
