@@ -18,6 +18,7 @@ module.exports = {
     'src/app/components/Navigation/[A-Z]*.js',
     'src/home/InputLevel/[A-Z]*.js',
     'src/settings/InputPlaySong/[A-Z]*.js',
+    'src/settings/InputRunThroughSelection/[A-Z]*.js',
     'src/settings/InputSongSpeed/[A-Z]*.js',
     'src/session/CurrentMove/[A-Z]*.js',
     'src/session/SelectedMoveList/[A-Z]*.js',
