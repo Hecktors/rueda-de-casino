@@ -89,6 +89,13 @@ export default function Login() {
         </div>
 
         <LoginButton onClick={() => { }} disabled={!isValid} />
+
+        <p className="tac">
+          Not have an account?{' '}
+          <span className="link" onClick={() => history.push('/register')}>
+            Register
+          </span>
+        </p>
       </LoginStyled>
     </>
   )

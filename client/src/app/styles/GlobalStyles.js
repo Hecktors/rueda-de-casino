@@ -107,7 +107,7 @@ export default createGlobalStyle`
 
     label {
         font-size: 0.875rem;
-        padding-bottom: 5px; 
+        padding-bottom: 3px; 
     }
 
     input,
