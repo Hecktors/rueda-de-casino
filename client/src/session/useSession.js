@@ -7,7 +7,7 @@ const moveVolume = 0.8
 const callsStart = 5000
 
 export default function useSession(history, levels, audios, appState) {
-  const { selectedMoveIDs, isSongActive, speed } = appState
+  const { selectedMoveIDs, isSongActive, speed, isRunThroughSelection } = appState
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
@@ -17,8 +17,9 @@ export default function useSession(history, levels, audios, appState) {
     .flat()
     .filter((move) => selectedMoveIDs.includes(move._id))
 
-  const musicAudioRef = useRef(null)
   const timeoutRef = useRef(null)
+  const moveCallSequence = useRef(selectedMoves)
+  const musicAudioRef = useRef(null)
 
   useEffect(() => {
     if (isSongActive) {
@@ -53,7 +54,7 @@ export default function useSession(history, levels, audios, appState) {
 
   function startTimeout(ms) {
     timeoutRef.current = setTimeout(() => {
-      const newCurrentMove = getRandomArrayElement(selectedMoves)
+      const newCurrentMove = getNextMove()
       setCurrentMove(newCurrentMove)
       setIsMoveDisplayed(true)
       playAudio(newCurrentMove._id)
@@ -72,6 +73,17 @@ export default function useSession(history, levels, audios, appState) {
       .audioElement
     moveAudio.volume = moveVolume
     moveAudio.play()
+  }
+
+  function getNextMove() {
+    const move = getRandomArrayElement(moveCallSequence.current)
+    isRunThroughSelection && removeIdFromMoveCallSequence(move._id)
+    return move
+  }
+
+  function removeIdFromMoveCallSequence(id) {
+    moveCallSequence.current = moveCallSequence.current.filter(move => move._id !== id)
+    if (!moveCallSequence.current.length) moveCallSequence.current = selectedMoves
   }
 
   return [

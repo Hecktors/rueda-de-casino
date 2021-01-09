@@ -1,27 +1,27 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-InputMoveRepetition.propTypes = {
-  isAvoidingMoveRepition: PropTypes.bool.isRequired,
+InputRunThroughSelection.propTypes = {
+  isRunThroughSelection: PropTypes.bool.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
-export default function InputMoveRepetition({ isAvoidingMoveRepition, updateAppState }) {
+export default function InputRunThroughSelection({ isRunThroughSelection, updateAppState }) {
   return (
-    <InputMoveRepetitionStyled>
+    <InputRunThroughSelectionStyled>
       <input
-        id="avoidRepetition"
+        id="runThroughSelection"
         onChange={updateAppState}
         type="checkbox"
-        name="avoidRepetition"
-        checked={isAvoidingMoveRepition}
+        name="runThroughSelection"
+        checked={isRunThroughSelection}
       />
-      <label htmlFor="avoidRepetition">Avoid consecutive move call repepition</label>
-    </InputMoveRepetitionStyled>
+      <label htmlFor="runThroughSelection">Avoid multi consecutive move repepition</label>
+    </InputRunThroughSelectionStyled>
   )
 }
 
-const InputMoveRepetitionStyled = styled.div`
+const InputRunThroughSelectionStyled = styled.div`
   width: 100%;
   max-width: 400px;
   position: relative;
