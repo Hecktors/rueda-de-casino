@@ -45,7 +45,7 @@ export default function UserSettings() {
 
       {userData.user && (
         <UserSettingsStyled>
-          <p>User: {userData.user.displayName}</p>
+          <p>{userData.user.displayName}</p>
           <LogoutButton onClick={handelLogout} outlined />
           <DeleteAccountButton
             onClick={() => setIsDeleteModalDisplayed(true)} />
