@@ -4,7 +4,7 @@ import useUserInput from './useUserInput'
 import AppContext from '../app/context/AppContext'
 import AppHeader from '../app/components/AppHeader'
 import Navigation from '../app/components/Navigation'
-import InputMoveRepetition from './InputMoveRepetition'
+import InputRunThroughSelection from './InputRunThroughSelection'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 
@@ -14,7 +14,8 @@ export default function Home() {
     appState,
     setAppState
   )
-  const { speed, isSongActive } = appState
+
+  const { speed, isSongActive, isRunThroughSelection } = appState
 
   return (
     <>
@@ -26,7 +27,7 @@ export default function Home() {
         <form>
           <div className="form-group-container">
             <InputPlaySong
-              isSongActive={appState.isSongActive}
+              isSongActive={isSongActive}
               updateAppState={updateAppState}
             />
             {!isSongActive && (
@@ -37,8 +38,8 @@ export default function Home() {
               />
             )}
           </div>
-          <InputMoveRepetition
-            isMoveRepetitionOn={appState.isAvoidingMoveRepition}
+          <InputRunThroughSelection
+            isRunThroughSelection={isRunThroughSelection}
             updateAppState={updateAppState}
           />
         </form>
