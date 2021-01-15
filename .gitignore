@@ -109,6 +109,8 @@ public/audio/*
 # Hardcoded data
 data
 
+# Misc
+.DS_Store
 
 ##########################
 # Client
