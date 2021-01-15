@@ -13,6 +13,10 @@ With up to 200 dance figures, a lot of training is required to master the dance 
 ### What does the app?
 The application simulates this announcer. To drill the reaction and the dance figures you make a selection of moves. In the session it calls up a random one and after a break, whose length depends on the size of this figure, the next.
 
+---
+
+# ![](./assets/img/readme_mock.jpg)
+
 ### Features
 - Create, update, delete moves
 - Audio files for each move name are created by google-text-to-speech plugin
@@ -20,11 +24,6 @@ The application simulates this announcer. To drill the reaction and the dance fi
 - Youtube videos for moves are callable if available
 - In session mode selected moves are called randomly both visually and acoustically
 
----
-
-</br>
-
-# ![](./assets/img/readme_mock.jpg)
 
 ### <code>Demo</code>
 
