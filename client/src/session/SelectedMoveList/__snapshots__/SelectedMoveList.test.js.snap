@@ -3,7 +3,7 @@
 exports[`SelectedMoveList renders SelectedMoveList 1`] = `
 <div>
   <ul
-    class="SelectedMoveList__SelectedMoveListStyled-sc-1qgftrm-0 ljNbcO"
+    class="SelectedMoveList__SelectedMoveListStyled-sc-1qgftrm-0 jppKBK"
   >
     <li>
       <button
