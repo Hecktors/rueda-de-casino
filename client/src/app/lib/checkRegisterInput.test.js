@@ -1,4 +1,3 @@
-import { isExportDeclaration } from 'typescript'
 import checkRegisterInput from './checkRegisterInput'
 
 const inputMock = {
@@ -11,15 +10,15 @@ describe('Register input validation', () => {
     expect(checkRegisterInput({...inputMock, email: ''}).result).toBeFalsy()
   })
 
-  it('should be falsy if password is empty', () => {
+  it('is be falsy if password is empty', () => {
     expect(checkRegisterInput({...inputMock, password: ''}).result).toBeFalsy()
   })
 
-  it('should be falsy if passwordCheck is empty', () => {
+  it('is be falsy if passwordCheck is empty', () => {
     expect(checkRegisterInput({...inputMock, passwordCheck: ''}).result).toBeFalsy()
   })
 
-  it('should be falsy if password in not equal passwordCheck', () => {
+  it('is be falsy if password in not equal passwordCheck', () => {
     expect(checkRegisterInput({...inputMock, passwordCheck: 'abCD1235'}).result).toBeFalsy()
   })
 })
