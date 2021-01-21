@@ -1,4 +1,3 @@
-import { isTypeReferenceNode } from 'typescript'
 import checkPassword from './checkPassword'
 
 describe('Password check function', () => {
