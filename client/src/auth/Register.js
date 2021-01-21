@@ -6,7 +6,7 @@ import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
-import checkRegisterInput from '../app/lib/checkRegisterInput.test'
+import checkRegisterInput from '../app/lib/checkRegisterInput'
 
 export default function Register() {
   const history = useHistory()

@@ -1,7 +1,7 @@
 import checkEmail from "./checkEmail"
 import checkPassword from "./checkPassword"
 
-export default function checkRegister({ email, password, passwordCheck }) {
+export default function checkRegisterInput({ email, password, passwordCheck }) {
   if (!email && !password && !passwordCheck) {
     return{ result: false, msg: "All required field have to been filled."}
   }
