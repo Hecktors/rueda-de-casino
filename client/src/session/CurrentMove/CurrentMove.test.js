@@ -1,9 +1,10 @@
 import CurrentMove from './CurrentMove'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 describe('Current move', () => {
   it('renders current move', () => {
-    const { container, getByText } = render(<CurrentMove name="move" />)
-    expect(getByText('move')).toBeInTheDocument()
+    render(<CurrentMove name="move" />)
+    const moveName = screen.getByText('move')
+    expect(moveName).toBeInTheDocument()
   })
 })

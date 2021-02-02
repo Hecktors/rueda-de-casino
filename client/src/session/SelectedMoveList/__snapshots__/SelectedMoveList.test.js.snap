@@ -6,9 +6,7 @@ exports[`SelectedMoveList renders SelectedMoveList 1`] = `
     class="SelectedMoveList__SelectedMoveListStyled-sc-1qgftrm-0 jppKBK"
   >
     <li>
-      <button
-        data-testid="listitem-button"
-      >
+      <button>
         <span>
           <svg>
             youtube-grey.svg
@@ -18,9 +16,7 @@ exports[`SelectedMoveList renders SelectedMoveList 1`] = `
       </button>
     </li>
     <li>
-      <button
-        data-testid="listitem-button"
-      >
+      <button>
         <span>
           <svg>
             youtube-grey.svg

@@ -1,6 +1,6 @@
 import {deleteUser, loginUser, registerUser, validateToken} from './userAPIs'
 
-describe('Register user', () => {
+describe.skip('Register user', () => {
   const userMock = {
     displayName: 'testName',
     email: 'test@email.com',

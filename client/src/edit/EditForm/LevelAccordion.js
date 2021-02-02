@@ -41,25 +41,21 @@ export default function LevelAccordion({
       border={border}
     >
       <h3 onClick={toogleLevelAccordion}>
-        {
-          hasMultiLevel &&
-          (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)
-        }
+        {hasMultiLevel && (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)}
         <span className="level-name">{header}</span>
       </h3>
       <ul>
         {levels.map(({ name: levelName }) => (
           <li key={levelName}>
-            <label>
-              <input
-                name="levelName"
-                value={levelName}
-                onChange={handleChange}
-                type="checkbox"
-                checked={levelName === selectedLevelName ? 'isChecked' : ''}
-              />
-              {levelName}
-            </label>
+            <input
+              name="levelName"
+              id={levelName}
+              value={levelName}
+              onChange={handleChange}
+              type="checkbox"
+              checked={levelName === selectedLevelName ? 'isChecked' : ''}
+            />
+            <label htmlFor={levelName}>{levelName}</label>
           </li>
         ))}
       </ul>
@@ -93,8 +89,8 @@ const InputLevelStyled = styled.div`
       transform: scale(1.5);
       fill: var(--color-text);
     }
-  } 
-  
+  }
+
   ul {
     width: 100%;
     height: ${({ ulHeight }) => ulHeight};
