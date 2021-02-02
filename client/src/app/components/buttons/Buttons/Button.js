@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string.isRequired,
   className: PropTypes.string,
   type: PropTypes.string,
   color: PropTypes.string.isRequired,
@@ -21,6 +22,7 @@ const colors = {
 
 export default function Button({
   children,
+  ariaLabel,
   className,
   type,
   color,
@@ -43,7 +45,7 @@ export default function Button({
   return (
     <ButtonStyled
       type={type}
-      data-testid="button"
+      aria-label={ariaLabel}
       className={className}
       disabled={disabled}
       width={width}

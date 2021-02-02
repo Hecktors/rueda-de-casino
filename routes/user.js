@@ -78,18 +78,16 @@ router.post("/login", async (req, res) => {
 
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
 
-		res.status(200).json({ token, user: { id: user._id, displayName: user.displayName } })
+		res.json({ token, user: { id: user._id, displayName: user.displayName } })
 	} catch (err) {
 		res.status(500).json({ msg: err.message })
 	}
 })
 
 router.delete("/", auth, async (req, res) => {
-	console.log(req.body)
 	try {
 		User.findByIdAndDelete(req.user)
 			.then(deletedUser => {
-				console.log(deletedUser)
 				Move.remove({
 					'_id': { $in: deletedUser.moveIDs }
 				}, function (err, docs) {

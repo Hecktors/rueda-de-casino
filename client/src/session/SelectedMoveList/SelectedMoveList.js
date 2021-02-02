@@ -13,7 +13,6 @@ export default function SelectedMoveList({ moves, onClick }) {
       {moves.map(({ name, _id, videoUrl, videoStart }) => (
         <li key={_id}>
           <button
-            data-testid="listitem-button"
             onClick={() => onClick({ url: videoUrl, start: videoStart })}
           >
             <span>{videoUrl ? <YoutubeIcon /> : <YoutubeGreyIcon />}</span>

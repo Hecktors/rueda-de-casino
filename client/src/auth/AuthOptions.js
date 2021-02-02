@@ -13,7 +13,7 @@ export default function AuthOptions() {
       </Header>
       <AuthStyled>
         <RegisterButton onClick={() => history.push('/register')} outlined />
-        <LoginButton onClick={() => history.push('/login')} outlined />
+        <LoginButton aria-label="Login" onClick={() => history.push('/login')} outlined />
       </AuthStyled>
     </>
   )
