@@ -12,10 +12,14 @@ export default function SelectedMoveList({ moves, onClick }) {
     <SelectedMoveListStyled>
       {moves.map(({ name, _id, videoUrl, videoStart }) => (
         <li key={_id}>
-          <button
-            onClick={() => onClick({ url: videoUrl, start: videoStart })}
-          >
-            <span>{videoUrl ? <YoutubeIcon /> : <YoutubeGreyIcon />}</span>
+          <button onClick={() => onClick({ url: videoUrl, start: videoStart })}>
+            <span>
+              {videoUrl ? (
+                <YoutubeIcon title="youtube icon" />
+              ) : (
+                <YoutubeGreyIcon title="gray youtube icon" />
+              )}
+            </span>
             {name}
           </button>
         </li>
@@ -38,7 +42,7 @@ const SelectedMoveListStyled = styled.ul`
 
   li {
     padding-left: 24px;
-    
+
     button {
       display: flex;
       font-size: 1.5rem;
