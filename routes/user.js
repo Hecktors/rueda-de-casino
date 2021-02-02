@@ -88,7 +88,6 @@ router.delete("/", auth, async (req, res) => {
 	try {
 		User.findByIdAndDelete(req.user)
 			.then(deletedUser => {
-				console.log(deletedUser)
 				Move.remove({
 					'_id': { $in: deletedUser.moveIDs }
 				}, function (err, docs) {

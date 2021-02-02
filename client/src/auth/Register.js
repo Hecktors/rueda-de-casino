@@ -6,7 +6,7 @@ import { loginUser, registerUser } from '../app/services/userAPIs'
 import { RegisterButton } from '../app/components/buttons/Buttons'
 import { BackIconButton } from '../app/components/buttons/IconButtons'
 import Header from '../app/components/AppHeader'
-import checkRegisterInputInvalidity from '../app/lib/checkRegisterInputInvalidity'
+import checkRegisterInput from '../app/lib/checkRegisterInput'
 
 export default function Register() {
   const history = useHistory()
@@ -30,9 +30,9 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const valErr = checkRegisterInputInvalidity(userInput)
-    if (valErr) {
-      setError(valErr)
+    const validation = checkRegisterInput(userInput)
+    if (!validation.result) {
+      setError(validation.msg)
       return
     }
 
