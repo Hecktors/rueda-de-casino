@@ -16,7 +16,7 @@ export default function InputPlaySong({ isSongActive, updateAppState }) {
         name="songActivity"
         checked={isSongActive}
       />
-      <label htmlFor="songActivity">Play learning song </label>
+      <label htmlFor="songActivity">Play learning song</label>
     </InputPlaySongStyled>
   )
 }
@@ -35,7 +35,7 @@ const InputPlaySongStyled = styled.div`
     color: var(--color-text);
   }
 
-  input {
+   {
     display: none;
   }
 
