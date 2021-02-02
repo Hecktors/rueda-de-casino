@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+// <reference types="cypress" />
 
 const testId = (id) => `[data-testid="${id}"]`
 

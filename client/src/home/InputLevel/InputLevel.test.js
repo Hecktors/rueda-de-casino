@@ -1,6 +1,6 @@
-import ReactDOM from 'react-dom'
+import { render, screen } from '@testing-library/react'
 import InputLevel from './InputLevel'
-const moves = [
+const movesMock = [
   {
     _id: 1,
     name: 'la prima',
@@ -16,18 +16,20 @@ const moves = [
 ]
 
 describe('InputLevel', () => {
-  it('renders Accordion', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(
+  test('renders Accordion', () => {
+    render(
       <InputLevel
         name="test accordion"
-        levelMoves={moves}
+        levelMoves={movesMock}
         levelName="level"
         selectedMoveIDs={[]}
         updateAppState={() => {}}
-      />,
-      div
+      />
     )
-    expect(div.firstChild).toMatchSnapshot()
+
+    const list = screen.getByRole('list')
+    expect(list).toBeInTheDocument()
+    const heading = screen.getByRole('heading', { name: /level/i })
+    expect(heading).toBeInTheDocument()
   })
 })

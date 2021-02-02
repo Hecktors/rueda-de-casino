@@ -37,7 +37,6 @@ export default function IconButton({
 
   return (
     <IconButtonStyled
-      data-testid="button"
       type={type}
       className={className}
       size={sizes[size]}
