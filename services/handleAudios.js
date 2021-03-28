@@ -6,11 +6,13 @@ const { deleteFolderIfEmpty } = require("./handleFiles")
 async function saveAudio(userID, move) {
   const dir = path.join(__dirname, `../public/audio/${userID}`)
   !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true })
-  const gtts = new gTTS(move.name, "es-us");
+  const gtts = new gTTS(move.name, "es-us")
   gtts.save(dir + "/" + move.audioName, function (err) {
-    if (err) { throw new Error(err) }
-    console.log('Audio generated successfully.');
-  });
+    if (err) {
+      throw new Error(err)
+    }
+    console.log("Audio generated successfully.")
+  })
 }
 
 function deleteAudio(userID, audioName) {
@@ -31,5 +33,5 @@ function updateAudio(userID, prevAudioName, move) {
 module.exports = {
   saveAudio,
   deleteAudio,
-  updateAudio
-};
+  updateAudio,
+}
