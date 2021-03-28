@@ -191,7 +191,6 @@ export default createGlobalStyle`
 
     @media (orientation: landscape) {
         .App {
-            max-height: 414px !important;
             grid-template-rows: 80px auto 80px !important; 
         }
 
