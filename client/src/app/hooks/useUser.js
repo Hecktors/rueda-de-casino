@@ -11,6 +11,9 @@ export default function useUser() {
   useEffect(() => {
     async function initfetch() {
       const token = JSON.parse(localStorage.getItem('auth-token'))
+      if (!token) {
+        return
+      }
       const tokenRes = await validateToken(token)
       if (tokenRes) {
         const userResponse = await getUser(token)

@@ -8,12 +8,9 @@ import InputRunThroughSelection from './InputRunThroughSelection'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 
-export default function Home() {
+export default function Settings() {
   const { appState, setAppState } = useContext(AppContext)
-  const { updateAppState } = useUserInput(
-    appState,
-    setAppState
-  )
+  const { updateAppState } = useUserInput(appState, setAppState)
 
   const { speed, isSongActive, isRunThroughSelection } = appState
 
@@ -43,9 +40,10 @@ export default function Home() {
             updateAppState={updateAppState}
           />
         </form>
-
       </MainStyled>
-      <footer><Navigation /></footer>
+      <footer>
+        <Navigation />
+      </footer>
     </>
   )
 }
