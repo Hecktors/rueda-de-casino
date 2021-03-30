@@ -6,7 +6,7 @@
 
 ### Introduction
 <br/>
-At the Rueda De Casino, the moves of Cuban Salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
+In **rueda de casino**, the moves of cuban salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
 The whole thing is not a choreography, it happens out of the spontaneity of the announcer.
 With up to 200 dance figures, a lot of training is required to master the dance figures and to have the appropriate move ready when it's called up. </br> </br>
 
@@ -17,7 +17,7 @@ The application simulates this announcer. To drill the reaction and the dance fi
 
 # ![](./assets/img/readme_mock.jpg)
 
-### Features
+## Features
 - Create, update, delete moves
 - Audio files for each move name are created by google-text-to-speech plugin
 - Make a selection of moves to train
@@ -25,7 +25,7 @@ The application simulates this announcer. To drill the reaction and the dance fi
 - In session mode selected moves are called randomly both visually and acoustically
 
 
-### <code>Demo</code>
+## <code>Demo</code>
 
 A hosted version can be found here:
 [salsa-time.herokuapp.com](https://salsa-time.herokuapp.com/)
