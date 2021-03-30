@@ -71,7 +71,7 @@ export default createGlobalStyle`
         grid-template-rows: 80px auto 80px;
 
         &.session {
-        grid-template-rows: 100px auto 240px;
+        grid-template-rows: 100px auto 160px;
         }
     }
 
@@ -153,7 +153,11 @@ export default createGlobalStyle`
     }
 
     .dark {
-        background-color: var(--color-bg-dark);
+        // background-color: var(--color-bg-dark);
+    }
+
+    .dark-transparent {
+        background-color: var(--color-bg-dark-transparent);
     }
 
     .tac {
@@ -203,6 +207,10 @@ export default createGlobalStyle`
         .App{
             border: 1px solid var(--color-border);
             border-radius: 5px;
+            
+            &.session {
+                grid-template-rows: 80px auto 160px !important; 
+            }
         }
 
         .desktop-only {

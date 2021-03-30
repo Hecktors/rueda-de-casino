@@ -44,53 +44,57 @@ export default function Session() {
       <YoutubeVideo video={YoutubeVideoObj} />
     </Overlay>
   ) : (
-      <>
-        <AppHeader
-          cols={isPlaying ? '000' : '110'}
-        >
-          {!isPlaying && (
-            <BackIconButton onClick={sessionHandler.stop} size={'md'} />
-          )}
-          {!isPlaying && <h1>Pause</h1>}
-        </AppHeader>
+    <>
+      <AppHeader
+        cols={isPlaying ? '000' : '110'}
+        className={`${!isPlaying ? 'dark-transparent' : ''}`}
+      >
+        {!isPlaying && (
+          <BackIconButton onClick={sessionHandler.stop} size={'md'} />
+        )}
+        {!isPlaying && <h1>Pause</h1>}
+      </AppHeader>
 
-        <main className="dark no-bg-img">
-          <Overlay paused={!isPlaying}>
-            {isPlaying ? (
-              <CSSTransition
-                in={isMoveDisplayed}
-                timeout={2000}
-                classNames="fade"
-                onMountOnExit={true}
-                onEntered={() => setIsMoveDisplayed(false)}
-              >
-                <CurrentMove name={currentMove.name} />
-              </CSSTransition>
-            ) : (
-                <SelectedMoveList
-                  moves={selectedMoves}
-                  onClick={setYoutubeVideoObj}
-                />
-              )}
-          </Overlay>
-          <BackgroundVideo isPlaying={isPlaying} />
-        </main>
-
-        <FooterStyled >
+      <MainStyled className="dark no-bg-img">
+        <Overlay paused={!isPlaying}>
           {isPlaying ? (
-            <PauseIconButton onClick={sessionHandler.pause} size={'xl'} primary />
+            <CSSTransition
+              in={isMoveDisplayed}
+              timeout={2000}
+              classNames="fade"
+              onMountOnExit={true}
+              onEntered={() => setIsMoveDisplayed(false)}
+            >
+              <CurrentMove name={currentMove.name} />
+            </CSSTransition>
           ) : (
-              <PlayIconButton onClick={sessionHandler.play} size={'xl'} primary />
-            )}
-        </FooterStyled>
-      </>
-    )
+            <SelectedMoveList
+              moves={selectedMoves}
+              onClick={setYoutubeVideoObj}
+            />
+          )}
+        </Overlay>
+        <BackgroundVideo isPlaying={isPlaying} />
+      </MainStyled>
+
+      <FooterStyled className={`${!isPlaying ? 'dark-transparent' : ''}`}>
+        {isPlaying ? (
+          <PauseIconButton onClick={sessionHandler.pause} size={'xl'} primary />
+        ) : (
+          <PlayIconButton onClick={sessionHandler.play} size={'xl'} primary />
+        )}
+      </FooterStyled>
+    </>
+  )
 }
+
+const MainStyled = styled.main`
+  overflow-x: hidden;
+`
 
 const FooterStyled = styled.footer`
   position: relative;
   display: grid;
-  place-items: auto;
+  place-items: center;
   z-index: 999;
 `
-
