@@ -7,7 +7,7 @@ export default function useAudios(userData, levels) {
   const moves = levels ? levels.map((level) => level.moves).flat() : []
 
   useEffect(() => {
-    if (levels.length) {
+    if (levels.length && token) {
       updateAudios()
     }
   }, [levels]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -16,7 +16,6 @@ export default function useAudios(userData, levels) {
     const fetchedAudios = await Promise.all(
       moves.map(async (move) => {
         let audio = await getAudio(token, move._id)
-        console.log('audio', audio)
         const audioUrl = new Audio(audio)
         return {
           moveID: move._id,
