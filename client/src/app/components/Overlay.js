@@ -35,7 +35,7 @@ const OverlayStyled = styled.div`
   bottom: 0;
   left: 0;
   background-color: ${({ bgColor }) => bgColor};
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: ${({ zIndex }) => zIndex};
   display: grid;
   place-items: center;
