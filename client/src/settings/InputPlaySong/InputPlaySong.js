@@ -35,7 +35,7 @@ const InputPlaySongStyled = styled.div`
     color: var(--color-text);
   }
 
-   {
+  input {
     display: none;
   }
 

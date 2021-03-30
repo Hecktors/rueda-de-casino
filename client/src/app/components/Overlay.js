@@ -9,9 +9,7 @@ Overlay.propTypes = {
 export default function Overlay({ children, fullCovered, paused }) {
   const zIndex = fullCovered ? 9999 : 99
   const paddingBottom = fullCovered ? '0' : '25vh'
-  const bgColor = paused
-    ? 'var(--color-bg-overlay-paused)'
-    : fullCovered
+  const bgColor = fullCovered
     ? 'var(--color-bg-overlay-full)'
     : 'var(--color-bg-overlay)'
 
@@ -35,7 +33,7 @@ const OverlayStyled = styled.div`
   bottom: 0;
   left: 0;
   background-color: ${({ bgColor }) => bgColor};
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: ${({ zIndex }) => zIndex};
   display: grid;
   place-items: center;
