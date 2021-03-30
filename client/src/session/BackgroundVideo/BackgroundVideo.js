@@ -20,6 +20,8 @@ export default function BackgroundVideo({ isPlaying }) {
 }
 
 const BackgroundVideoStyled = styled.section`
+  overflow: hidden;
+
   .bg-video {
     position: fixed;
     top: 50%;
@@ -32,9 +34,13 @@ const BackgroundVideoStyled = styled.section`
   @media (orientation: landscape) {
     overflow: hidden;
   }
-  
+
   @media screen and (min-width: 800px) {
+    padding-top: 45%;
+    overflow: hidden;
+
     .bg-video {
+      padding-top: 3%;
       position: relative;
     }
   }
