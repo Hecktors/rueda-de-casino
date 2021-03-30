@@ -54,5 +54,5 @@ A hosted version can be found here:
 - Copy the given connection string
 - Create a <code>.env</code> file on project root level and asign the connection string to a <code>ATLAS_URI</code> key
 - Start server and client: <code>npm run dev</code>
-- To run Styleguidist use <code>npm run styleguide</code>
-- To run Jest unit tests use <code>npm test</code>
+- To run Styleguidist: <code>npm run styleguide</code>
+- To run Jest unit tests: <code>npm test</code>
