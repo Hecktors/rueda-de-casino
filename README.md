@@ -1,11 +1,9 @@
-#
 # Salsa time! - Learn rueda de casino
- ![](./assets/img/salsa_dancing_banner.jpg)
+![](./assets/img/salsa_dancing_banner.jpg)
 
-## <code>Description</code>
+## Description
 
 ### Introduction
-<br/>
 In rueda de casino the moves of cuban salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
 The whole thing is not a choreography, it happens out of the spontaneity of the announcer.
 With up to 200 dance figures, a lot of training is required to master the dance figures and to have the appropriate move ready when it's called up. </br> </br>
@@ -15,7 +13,9 @@ The application simulates this announcer. To drill the reaction and the dance fi
 
 ---
 
-# ![](./assets/img/readme_mock.jpg)
+ ![](./assets/img/readme_mock.jpg)
+ 
+<br>
 
 ## Features
 - Create, update, delete moves
@@ -24,14 +24,15 @@ The application simulates this announcer. To drill the reaction and the dance fi
 - YouTube videos for moves are callable if available
 - In session mode selected moves are called randomly both visually and acoustically
 
+<br>
 
-## <code>Demo</code>
-
+## Demo <img align="right" width="240" height="436" src="https://user-images.githubusercontent.com/24996874/112938088-34c5d880-9129-11eb-8630-26b6886f27a6.gif">
 A hosted version can be found here:
 [salsa-time.herokuapp.com](https://salsa-time.herokuapp.com/)
 
-## <code>Tech Stack</code>
+<br>
 
+## Tech Stack
 - React
 - React Router
 - React Hooks
@@ -42,23 +43,16 @@ A hosted version can be found here:
 - Styleguidist
 - Jest
 
+<br>
+
 ## <code>Project setup</code>
-
-
 - Clone the repository
-- Enter the created folder:
-<code>cd &lt;repository name&gt;</code>
-- Install all npm dependencies server side:
-<code>npm install</code>
-- Install all npm dependencies client side:
-<code>cd client && npm install && cd..</code>
-
+- Enter the created folder: <code>cd &lt;repository name&gt;</code>
+- Install all npm dependencies server side: <code>npm install</code>
+- Install all npm dependencies client side:<code>cd client && npm install && cd..</code>
 - Create on [www.mongodb.com](https://www.mongodb.com/) a database called 'salsaApp'
 - Copy the given connection string
 - Create a <code>.env</code> file on project root level and asign the connection string to a <code>ATLAS_URI</code> key
-
-- Start server and client:
-<code>npm run dev</code>
-
+- Start server and client: <code>npm run dev</code>
 - To run Styleguidist use <code>npm run styleguide</code>
 - To run Jest unit tests use <code>npm test</code>
