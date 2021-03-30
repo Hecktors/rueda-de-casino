@@ -6,7 +6,7 @@
 
 ### Introduction
 <br/>
-In **rueda de casino**, the moves of cuban salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
+In rueda de casino the moves of cuban salsa are danced in a group. The dance couples form a circle, the announcer spontaneously calls out a command and the couples perform these figures synchronously and/or exchange partners. </br> </br>
 The whole thing is not a choreography, it happens out of the spontaneity of the announcer.
 With up to 200 dance figures, a lot of training is required to master the dance figures and to have the appropriate move ready when it's called up. </br> </br>
 
