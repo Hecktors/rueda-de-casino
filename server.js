@@ -18,9 +18,7 @@ mongoose.connect(uri, {
 })
 
 const connection = mongoose.connection
-connection.once("open", () =>
-console.log("MongoDB connection established successfully")
-)
+connection.once("open", () => console.log("MongoDB connection established successfully"))
 
 const userRouter = require("./routes/user")
 const movesRouter = require("./routes/moves")
@@ -30,13 +28,9 @@ app.use("/users", userRouter)
 app.use("/moves", movesRouter)
 app.use("/audios", audiosRouter)
 
-app.get("/", (req, res) =>
-res.sendFile(path.join(__dirname, "client/build", "index.html"))
-)
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "client/build", "index.html")))
 
-app.get("*", (req, res) =>
-res.sendFile(path.join(__dirname, "client/build", "index.html"))
-)
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "client/build", "index.html")))
 
 const PORT = process.env.PORT || 3001
 

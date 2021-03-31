@@ -13,19 +13,19 @@ export default function Register() {
   const { setUserData, setError } = useContext(AppContext)
   const [userInput, setUserInput] = useState({
     name: '',
-    email: '',
-    password: '',
-    passwordCheck: '',
+    email: 'test@gmail.com',
+    password: 'Test1234',
+    passwordCheck: 'Test1234',
   })
 
-  const isRequiredFilled = userInput.email && userInput.password && userInput.passwordCheck
+  const isRequiredFilled =
+    userInput.email && userInput.password && userInput.passwordCheck
 
   function handleChange(e) {
     setUserInput({
       ...userInput,
       [e.target.name]: e.target.value,
     })
-
   }
 
   async function handleSubmit(e) {
@@ -119,7 +119,7 @@ export default function Register() {
           />
         </div>
 
-        <RegisterButton onClick={() => { }} disabled={!isRequiredFilled} />
+        <RegisterButton onClick={() => {}} disabled={!isRequiredFilled} />
 
         <p className="tac">
           Already have an account?{' '}
