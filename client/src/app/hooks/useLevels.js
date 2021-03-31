@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
+import { setLocalStorage } from '../lib/localStorage'
 import getLevels from '../services/getLevels'
 
 const STORAGE_KEY = 'levels'
@@ -10,12 +10,9 @@ export default function useLevels(userData) {
 
   useEffect(() => {
     async function initfetch() {
-      const storedLevels = await getLocalStorage('levels')
-      if (token && !storedLevels) {
+      if (token) {
         const fetchedLevels = await getLevels(token)
         setLevels(fetchedLevels)
-      } else {
-        setLevels(storedLevels)
       }
     }
     initfetch()
