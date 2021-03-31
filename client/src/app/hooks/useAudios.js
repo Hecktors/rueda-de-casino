@@ -16,7 +16,6 @@ export default function useAudios(userData, levels) {
     const fetchedAudios = await Promise.all(
       moves.map(async (move) => {
         let audio = await getAudio(token, move._id)
-        console.log('audio', audio)
         const audioUrl = new Audio(audio)
         return {
           moveID: move._id,

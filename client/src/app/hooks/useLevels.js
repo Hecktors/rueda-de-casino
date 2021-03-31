@@ -18,20 +18,14 @@ export default function useLevels(userData) {
     initfetch()
   }, [userData]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    async function fetchData() {
-      if (token) {
-        const fetchedLevels = await getLevels(token)
-        levels.length
-          ? setLocalStorage(STORAGE_KEY, fetchedLevels)
-          : localStorage.removeItem(STORAGE_KEY)
-      }
-    }
-    fetchData()
-  }, [levels]) // eslint-disable-line react-hooks/exhaustive-deps
-
   async function refreshLevels() {
-    setLevels(await getLevels(token))
+    if (token) {
+      const fetchedLevels = await getLevels(token)
+      levels.length
+        ? setLocalStorage(STORAGE_KEY, fetchedLevels)
+        : localStorage.removeItem(STORAGE_KEY)
+      setLevels(fetchedLevels)
+    }
   }
 
   return { levels, refreshLevels }
