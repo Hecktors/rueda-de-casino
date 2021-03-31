@@ -11,7 +11,6 @@ router.get("/:id", auth, (req, res) => {
       const target = path.join(__dirname, `../public/audio/${req.user}/${move.audioName}`)
       let result = await checkExistenzOfAudio(target)
       !result && (await saveAudio(req.user, move))
-      result = await checkExistenzOfAudio(target)
       res.sendFile(target)
     })
     .catch((err) => res.status(400).json("Error: " + err))

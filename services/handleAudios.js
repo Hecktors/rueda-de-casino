@@ -13,6 +13,7 @@ async function saveAudio(userID, move) {
     }
     console.log("Audio generated successfully.")
   })
+  return true
 }
 
 function deleteAudio(userID, audioName) {
