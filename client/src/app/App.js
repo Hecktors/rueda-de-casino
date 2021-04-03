@@ -26,9 +26,6 @@ export default function App() {
   return (
     <div className={`App${classes}`}>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
-      <div className="desktop-only">
-        This application is optimized for mobile devices.
-      </div>
       <AppContext.Provider
         value={{
           userData,
@@ -45,8 +42,8 @@ export default function App() {
           {!userData.user ? (
             <Route exact path="/" component={AuthOptions} />
           ) : (
-              <Route exact path="/" component={Home} />
-            )}
+            <Route exact path="/" component={Home} />
+          )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/session" component={Session} />

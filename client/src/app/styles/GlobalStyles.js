@@ -66,6 +66,7 @@ export default createGlobalStyle`
         height: 100%;
         width: 100%;
         max-width: 736px;
+        max-height: 800px;
         margin: auto;
         display: grid;
         grid-template-rows: 80px auto 80px;
@@ -184,7 +185,9 @@ export default createGlobalStyle`
         left: 10px;
     }
 
-    .desktop-only {
+    .desktop-only {<div className="desktop-only">
+    This application is optimized for mobile devices.
+  </div>
         display: none;
         position: absolute;
         width:100%;
@@ -207,14 +210,20 @@ export default createGlobalStyle`
         .App{
             border: 1px solid var(--color-border);
             border-radius: 5px;
+            // grid-template-rows: 80px auto 160px !important; 
             
             &.session {
-                grid-template-rows: 80px auto 160px !important; 
             }
         }
 
         .desktop-only {
             display: block;
+        }
+    }
+
+    @media (orientation: landscape) and (min-height: 500px) {
+        .App {
+           max-width:560px;
         }
     }
 `
