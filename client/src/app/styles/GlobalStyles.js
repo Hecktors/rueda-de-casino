@@ -217,6 +217,10 @@ export default createGlobalStyle`
     @media (orientation: landscape) and (min-height: 500px) {
         .App {
            max-width:560px;
+
+           &.session {
+            grid-template-rows: 100px auto 160px !important;
+            }
         }
     }
 `
