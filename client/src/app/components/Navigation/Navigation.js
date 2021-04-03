@@ -1,15 +1,28 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { EditIconButton, HomeIconButton, SettingsIconButton, UserIconButton } from '../buttons/IconButtons'
+import {
+  EditIconButton,
+  HomeIconButton,
+  SettingsIconButton,
+  UserIconButton,
+} from '../buttons/IconButtons'
 
 export default function Navigation() {
   return (
     <NavigationStyled>
-      <NavLink to="/" exact><HomeIconButton onClick={() => { }} size={'md'} /></NavLink>
-      <NavLink to="/settings"><SettingsIconButton onClick={() => { }} size={'md'} /></NavLink>
-      <NavLink to="/edit"><EditIconButton onClick={() => { }} size={'md'} /></NavLink>
-      <NavLink to="/user-settings"><UserIconButton onClick={() => { }} size={'md'} /></NavLink>
+      <NavLink to="/" exact>
+        <HomeIconButton onClick={() => {}} size={'md'} />
+      </NavLink>
+      <NavLink to="/settings">
+        <SettingsIconButton onClick={() => {}} size={'md'} />
+      </NavLink>
+      <NavLink to="/edit">
+        <EditIconButton onClick={() => {}} size={'md'} />
+      </NavLink>
+      <NavLink to="/user-settings">
+        <UserIconButton onClick={() => {}} size={'md'} />
+      </NavLink>
     </NavigationStyled>
   )
 }
@@ -19,7 +32,6 @@ const NavigationStyled = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--color-bg);
 
   svg {
     fill: var(--color-secondary);
