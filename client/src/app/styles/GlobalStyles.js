@@ -59,8 +59,8 @@ export default createGlobalStyle`
 
     .App {
         background-image: url('./assets/img/dancing.svg');
-        background-position: center;
-        background-size: contain;
+        background-position: center 63%;
+        background-size: 75%;
         background-repeat: no-repeat;
         position: relative;
         height: 100%;
@@ -153,10 +153,6 @@ export default createGlobalStyle`
     transition: background-color 5000s ease-in-out 0s;
     }
 
-    .dark {
-        // background-color: var(--color-bg-dark);
-    }
-
     .dark-transparent {
         background-color: var(--color-bg-dark-transparent);
     }
@@ -185,9 +181,7 @@ export default createGlobalStyle`
         left: 10px;
     }
 
-    .desktop-only {<div className="desktop-only">
-    This application is optimized for mobile devices.
-  </div>
+    .desktop-only {
         display: none;
         position: absolute;
         width:100%;
@@ -210,7 +204,6 @@ export default createGlobalStyle`
         .App{
             border: 1px solid var(--color-border);
             border-radius: 5px;
-            // grid-template-rows: 80px auto 160px !important; 
             
             &.session {
             }
