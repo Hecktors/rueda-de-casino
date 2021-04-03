@@ -68,8 +68,8 @@ module.exports = [
     levelName: "Basic 2",
     bars: 3,
     audioName: "prima_con_la_hermana.mp3",
-    videoUrl: "",
-    videoStart: "https://www.youtube.com/watch?v=6K81nkFtZSM",
+    videoUrl: "https://www.youtube.com/watch?v=6K81nkFtZSM",
+    videoStart: "",
   },
   {
     name: "sombrero con una mano",
