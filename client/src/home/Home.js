@@ -68,9 +68,14 @@ export default function Home() {
 }
 
 const MainStyled = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 5px;
+
+  form {
+    z-index: 1;
+  }
 
   .level-container {
     display: grid;
@@ -85,14 +90,17 @@ const MainStyled = styled.main`
   }
 
   .main-footer {
-    padding: 20px 0;
-    flex-grow: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 3rem;
 
     .msg {
-      height: 1.5rem;
+      height: 2.5rem;
       color: var(--color-warning);
       text-align: center;
     }
