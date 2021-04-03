@@ -13,9 +13,9 @@ export default function Register() {
   const { setUserData, setError } = useContext(AppContext)
   const [userInput, setUserInput] = useState({
     name: '',
-    email: 'test@gmail.com',
-    password: 'Test1234',
-    passwordCheck: 'Test1234',
+    email: '',
+    password: '',
+    passwordCheck: '',
   })
 
   const isRequiredFilled =
