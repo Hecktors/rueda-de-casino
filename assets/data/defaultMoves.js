@@ -3,7 +3,7 @@ module.exports = [
     name: "vamos para arriba",
     levelName: "Basic 1",
     bars: 2,
-    audioName: "dile_que_no.mp3",
+    audioName: "vamos para arriba.mp3",
     videoUrl: "https://www.youtube.com/watch?v=zNcDgvG-T4A",
     videoStart: "",
   },
