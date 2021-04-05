@@ -48,53 +48,62 @@ export default function Edit() {
         />
       )}
 
-      <AppHeader cols={!selectedMoveID ? "011" : "111"}>
-        {selectedMoveID &&
+      <AppHeader cols={!selectedMoveID ? '011' : '111'}>
+        {selectedMoveID && (
           <BackIconButton
             onClick={() => setSelectedMoveID(false)}
             size={'md'}
             type="button"
           />
-        }
+        )}
         <h1 className="logo">Salsa time!</h1>
-        {!selectedMoveID
-          ?
+        {!selectedMoveID ? (
           <AddIconButton
             className="add-button"
             size={'md'}
             onClick={() => setSelectedMoveID({})}
           />
-          : <DeleteIconButton
+        ) : (
+          <DeleteIconButton
             onClick={() => setIsDeleteModalDisplayed(true)}
             type="button"
             size={'md'}
           />
-        }
+        )}
       </AppHeader>
 
       <EditStyled>
-        {!selectedMoveID ?
+        {!selectedMoveID ? (
           levels.map(({ name, moves }) => {
             return (
               <ul key={name}>
                 <li>{name.toUpperCase()}</li>
-                {moves.filter((move) => move.levelName === name).map(move =>
-                  <li key={move._id}>
-                    {move.name}
-                    <EditIconButton
-                      size={'xs'}
-                      onClick={() => setSelectedMoveID(move._id)}
-                    />
-                  </li>
-                )}
+                {moves
+                  .filter((move) => move.levelName === name)
+                  .map((move) => (
+                    <li key={move._id}>
+                      {move.name}
+                      <EditIconButton
+                        size={'xs'}
+                        onClick={() => setSelectedMoveID(move._id)}
+                      />
+                    </li>
+                  ))}
               </ul>
             )
           })
-          : <EditForm move={selectedMove} setSelectedMoveID={setSelectedMoveID} addMove={addMove} updateMove={updateMove} />
-        }
-
+        ) : (
+          <EditForm
+            move={selectedMove}
+            setSelectedMoveID={setSelectedMoveID}
+            addMove={addMove}
+            updateMove={updateMove}
+          />
+        )}
       </EditStyled>
-      <footer><Navigation /></footer>
+      <footer>
+        <Navigation />
+      </footer>
     </>
   )
 }

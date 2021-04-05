@@ -21,7 +21,6 @@ export default function Home() {
   )
   const { selectedMoveIDs } = appState
   const hasNotEnoughMoves = selectedMoveIDs.length < 2
-  alert(hasNotEnoughMoves)
 
   return (
     <>

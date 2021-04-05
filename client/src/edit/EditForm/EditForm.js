@@ -6,7 +6,12 @@ import { ResetButton, SaveButton } from '../../app/components/buttons/Buttons'
 import { AddIconButton } from '../../app//components/buttons/IconButtons'
 import LevelAccordion from './LevelAccordion'
 
-export default function EditForm({ move, setSelectedMoveID, addMove, updateMove }) {
+export default function EditForm({
+  move,
+  setSelectedMoveID,
+  addMove,
+  updateMove,
+}) {
   const { userData, levels, refreshLevels, setError } = useContext(AppContext)
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
@@ -23,7 +28,6 @@ export default function EditForm({ move, setSelectedMoveID, addMove, updateMove 
     resetUserInput,
     openNewLevelInput,
   } = useUserInput(move, hasNoLevels, initLevelName, setIsNewLevel)
-
 
   useEffect(() => {
     !initLevelName && setIsNewLevel(true)
@@ -153,18 +157,17 @@ export default function EditForm({ move, setSelectedMoveID, addMove, updateMove 
           outlined
         />
         <SaveButton
-          onClick={() => { }}
+          onClick={() => {}}
           disabled={hasNoChanges || !isValid}
           inline
         />
       </div>
-
     </EditFormStyled>
   )
 }
 
 const EditFormStyled = styled.form`
-    height: 100%;
+  height: 100%;
 
   .form-group-container {
     display: flex;

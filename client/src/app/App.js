@@ -17,9 +17,10 @@ import UserSettings from '../auth/UserSettings'
 export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
-  const { appState, setAppState, error, setError } = useAppState()
-  const audios = useAudios(userData, levels)
+  const { appState, setAppState, error, setError } = useAppState(levels)
 
+  const audios = useAudios(userData, levels)
+  const isLogedin = !!userData.user
   const location = useLocation()
   const classes = location.pathname === '/session' ? ' session' : ''
 
@@ -39,17 +40,17 @@ export default function App() {
         }}
       >
         <Switch>
-          {!userData.user ? (
+          {!isLogedin ? (
             <Route exact path="/" component={AuthOptions} />
           ) : (
             <Route exact path="/" component={Home} />
           )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/session" component={Session} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/user-settings" component={UserSettings} />
-          <Route path="/edit" component={Edit} />
+          isLogedin && <Route path="/session" component={Session} />
+          isLogedin && <Route path="/settings" component={Settings} />
+          isLogedin && <Route path="/user-settings" component={UserSettings} />
+          isLogedin && <Route path="/edit" component={Edit} />
           <Redirect to="/" />
         </Switch>
       </AppContext.Provider>
