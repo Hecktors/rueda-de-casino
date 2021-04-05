@@ -48,8 +48,11 @@ export default createGlobalStyle`
     body {
         font-family: 'Open Sans', sans-serif;
         font-size: 112.5%;
-        color:  var(--color-text);
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-body);
+        background: #396afc;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #2948ff, #396afc);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #2948ff, #396afc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
     }
 
     #root {
@@ -62,6 +65,7 @@ export default createGlobalStyle`
         background-position: center 63%;
         background-size: 75%;
         background-repeat: no-repeat;
+        background-color: var(--color-bg);
         position: relative;
         height: 100%;
         width: 100%;
