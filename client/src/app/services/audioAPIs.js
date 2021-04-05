@@ -9,5 +9,8 @@ export function getAudio(token, moveID) {
       headers: { 'x-auth-token': token },
       responseType: 'blob',
     })
-    .then((response) => URL.createObjectURL(response.data))
+    .then((response) => {
+      console.log(URL, response.data)
+      return URL.createObjectURL(response.data)
+    })
 }
