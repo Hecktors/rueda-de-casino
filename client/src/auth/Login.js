@@ -17,7 +17,6 @@ export default function Login() {
 
   let isValid = userInput.email && userInput.password
 
-  console.log('### Login')
   function handleChange(e) {
     setUserInput({
       ...userInput,
