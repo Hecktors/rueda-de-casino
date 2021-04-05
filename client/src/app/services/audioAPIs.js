@@ -10,7 +10,6 @@ export function getAudio(token, moveID) {
       responseType: 'blob',
     })
     .then((response) => {
-      console.log(URL, response.data)
-      return URL.createObjectURL(response.data)
+      return window.URL.createObjectURL(response.data)
     })
 }

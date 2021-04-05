@@ -8,12 +8,11 @@ export default function useAudios(userData, levels) {
 
   useEffect(() => {
     if (levels.length) {
-      updateAudios()
+      setTimeout(updateAudios, 200)
     }
   }, [levels]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function updateAudios() {
-    console.log('updateAudios', moves)
     const fetchedAudios = await Promise.all(
       moves.map(async (move) => {
         let audio = await getAudio(token, move._id)
@@ -24,7 +23,7 @@ export default function useAudios(userData, levels) {
         }
       })
     )
-    console.log('fetchedAudios', fetchedAudios)
+    console.log(fetchedAudios)
     setAudios(fetchedAudios)
   }
 
