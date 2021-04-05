@@ -20,7 +20,7 @@ export default function Navigation() {
       <NavLink to="/edit">
         <EditIconButton onClick={() => {}} size={'md'} />
       </NavLink>
-      <NavLink to="/user-settings">
+      <NavLink to="/account">
         <UserIconButton onClick={() => {}} size={'md'} />
       </NavLink>
     </NavigationStyled>

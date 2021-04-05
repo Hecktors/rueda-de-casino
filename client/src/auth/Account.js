@@ -11,7 +11,7 @@ import {
 import Header from '../app/components/AppHeader'
 import Navigation from '../app/components/Navigation'
 
-export default function UserSettings() {
+export default function Account() {
   const history = useHistory()
   const { userData, setUserData } = useContext(AppContext)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
@@ -44,13 +44,13 @@ export default function UserSettings() {
       </Header>
 
       {userData.user && (
-        <UserSettingsStyled>
+        <AccountStyled>
           <p>{userData.user.displayName}</p>
           <LogoutButton onClick={handleLogout} outlined />
           <DeleteAccountButton
             onClick={() => setIsDeleteModalDisplayed(true)}
           />
-        </UserSettingsStyled>
+        </AccountStyled>
       )}
 
       <footer>
@@ -60,7 +60,7 @@ export default function UserSettings() {
   )
 }
 
-const UserSettingsStyled = styled.main`
+const AccountStyled = styled.main`
   flex-grow: 1;
   display: flex;
   flex-direction: column;

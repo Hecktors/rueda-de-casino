@@ -12,16 +12,16 @@ import Home from '../home'
 import Session from '../session'
 import Settings from '../settings'
 import Edit from '../edit'
-import UserSettings from '../auth/UserSettings'
+import Account from '../auth/Account'
 
 export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
   const { appState, setAppState, error, setError } = useAppState(levels)
-
   const audios = useAudios(userData, levels)
-  const isLogedin = !!userData.user
+
   const location = useLocation()
+  const isLogedin = !!userData.user
   const classes = location.pathname === '/session' ? ' session' : ''
 
   return (
@@ -49,7 +49,7 @@ export default function App() {
           <Route path="/login" component={Login} />
           isLogedin && <Route path="/session" component={Session} />
           isLogedin && <Route path="/settings" component={Settings} />
-          isLogedin && <Route path="/user-settings" component={UserSettings} />
+          isLogedin && <Route path="/account" component={Account} />
           isLogedin && <Route path="/edit" component={Edit} />
           <Redirect to="/" />
         </Switch>
