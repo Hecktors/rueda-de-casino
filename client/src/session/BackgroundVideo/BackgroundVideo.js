@@ -35,7 +35,7 @@ const BackgroundVideoStyled = styled.section`
     overflow: hidden;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 730px) {
     padding-top: 45%;
     overflow: hidden;
 
