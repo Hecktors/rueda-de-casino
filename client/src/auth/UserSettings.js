@@ -16,8 +16,8 @@ export default function UserSettings() {
   const { userData, setUserData } = useContext(AppContext)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
 
-  function handelLogout() {
-    setUserData({ token: '', user: null })
+  function handleLogout() {
+    setUserData({ token: null, user: null })
     history.push('/')
   }
 
@@ -25,7 +25,7 @@ export default function UserSettings() {
     setIsDeleteModalDisplayed(false)
     const deleteResponse = await deleteUser(userData.token)
     if (deleteResponse.status === 200) {
-      handelLogout()
+      handleLogout()
     }
   }
 
@@ -46,13 +46,16 @@ export default function UserSettings() {
       {userData.user && (
         <UserSettingsStyled>
           <p>{userData.user.displayName}</p>
-          <LogoutButton onClick={handelLogout} outlined />
+          <LogoutButton onClick={handleLogout} outlined />
           <DeleteAccountButton
-            onClick={() => setIsDeleteModalDisplayed(true)} />
+            onClick={() => setIsDeleteModalDisplayed(true)}
+          />
         </UserSettingsStyled>
       )}
 
-      <footer><Navigation /></footer>
+      <footer>
+        <Navigation />
+      </footer>
     </>
   )
 }

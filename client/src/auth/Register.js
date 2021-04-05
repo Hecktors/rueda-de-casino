@@ -50,7 +50,7 @@ export default function Register() {
       history.push('/')
     }
   }
-
+  console.log('### Register')
   return (
     <>
       <Header cols="110">
