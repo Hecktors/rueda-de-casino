@@ -2,14 +2,12 @@ import axios from 'axios'
 
 const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
 
-export function getAudio(token, moveID) {
+export async function getAudio(token, moveID) {
   const url = `${base}/audios/${moveID}`
-  return axios
+  return await axios
     .get(url, {
       headers: { 'x-auth-token': token },
       responseType: 'blob',
     })
-    .then((response) => {
-      return window.URL.createObjectURL(response.data)
-    })
+    .then(async (response) => window.URL.createObjectURL(response.data))
 }
