@@ -93,8 +93,13 @@ export default createGlobalStyle`
     }
 
     a, .link {
+        cursor: pointer;
         text-decoration: unset;
         color: var(--color-secondary)
+    }
+
+    a, .link:hover {
+        opacity: 0.8;
     }
 
     button {
