@@ -38,6 +38,7 @@ const OverlayStyled = styled.div`
   display: grid;
   place-items: center;
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
+  overflow: hidden;
 
   .top-right {
     position: absolute;
