@@ -1,0 +1,3 @@
+1. If token in storage get fill userData if not
+
+--- case not login in --

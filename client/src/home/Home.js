@@ -46,14 +46,10 @@ export default function Home() {
               />
             ))}
           </div>
-
         </form>
         <div className="main-footer">
           <div className="msg">
-            {
-              hasNotEnoughMoves &&
-              <span>Select at least 2 moves to start</span>
-            }
+            {hasNotEnoughMoves && <span>Select at least 2 moves to start</span>}
           </div>
           <PlayIconButton
             type={'button'}
@@ -64,20 +60,27 @@ export default function Home() {
           />
         </div>
       </MainStyled>
-      <footer><Navigation /></footer>
+      <footer>
+        <Navigation />
+      </footer>
     </>
   )
 }
 
 const MainStyled = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 5px;
 
+  form {
+    z-index: 1;
+  }
+
   .level-container {
     display: grid;
     grid-template-columns: ${(props) =>
-    props.hasMultiLevels ? '1fr 1fr' : '1fr'};
+      props.hasMultiLevels ? '1fr 1fr' : '1fr'};
     align-items: start;
     gap: 5px;
   }
@@ -87,14 +90,17 @@ const MainStyled = styled.main`
   }
 
   .main-footer {
-    padding: 20px 0;
-    flex-grow: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 3rem;
 
     .msg {
-      height: 1.5rem;
+      height: 2.5rem;
       color: var(--color-warning);
       text-align: center;
     }

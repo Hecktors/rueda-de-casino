@@ -9,13 +9,7 @@ export default function useLevels(userData) {
   const { token } = userData
 
   useEffect(() => {
-    async function initfetch() {
-      if (token) {
-        const fetchedLevels = await getLevels(token)
-        setLevels(fetchedLevels)
-      }
-    }
-    initfetch()
+    refreshLevels()
   }, [userData]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function refreshLevels() {

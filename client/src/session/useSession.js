@@ -1,13 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import getRandomArrayElement from '../app/lib/getRandomArrayElement'
-import musicUrl from './assets/Uno_dos_tres.mp3'
+const musicUrl = './assets/audio/Uno_dos_tres.mp3'
 
 const songVolume = 0.2
 const moveVolume = 0.8
 const callsStart = 5000
 
 export default function useSession(history, levels, audios, appState) {
-  const { selectedMoveIDs, isSongActive, speed, isRunThroughSelection } = appState
+  const {
+    selectedMoveIDs,
+    isSongActive,
+    speed,
+    isRunThroughSelection,
+  } = appState
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
@@ -82,8 +87,11 @@ export default function useSession(history, levels, audios, appState) {
   }
 
   function removeIdFromMoveCallSequence(id) {
-    moveCallSequence.current = moveCallSequence.current.filter(move => move._id !== id)
-    if (!moveCallSequence.current.length) moveCallSequence.current = selectedMoves
+    moveCallSequence.current = moveCallSequence.current.filter(
+      (move) => move._id !== id
+    )
+    if (!moveCallSequence.current.length)
+      moveCallSequence.current = selectedMoves
   }
 
   return [

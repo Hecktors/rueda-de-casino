@@ -13,11 +13,9 @@ export default function Login() {
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',
-    
   })
 
   let isValid = userInput.email && userInput.password
-
 
   function handleChange(e) {
     setUserInput({
@@ -59,7 +57,6 @@ export default function Login() {
         </Link>
       </Header>
       <LoginStyled onSubmit={handleSubmit}>
-
         <div className="form-group">
           <label htmlFor="email">Email*</label>
           <input
@@ -89,7 +86,7 @@ export default function Login() {
           </div>
         </div>
 
-        <LoginButton onClick={() => { }} disabled={!isValid} />
+        <LoginButton onClick={() => {}} disabled={!isValid} />
 
         <p className="tac">
           Not have an account?{' '}

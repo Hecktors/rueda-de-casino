@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import AuthOptions from '../AuthOptions'
+import AuthOptions from './AuthOptions'
 
 describe('AuthOptions', () => {
   test('renders header', () => {

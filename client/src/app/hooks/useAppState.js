@@ -10,21 +10,21 @@ const initState = {
   isSongActive: true,
 }
 
-export default function useAppState(moves) {
+export default function useAppState(levels) {
   const [appState, setAppState] = useState(initState)
   const [error, setError] = useState('')
 
-  const selectedMoves =
-    moves &&
-    moves
-      .map((level) => level.moves)
-      .flat()
-      .filter((move) => appState.selectedMoveIDs.includes(move._id))
+  const selectedMoves = levels
+    ? levels
+        .map((level) => level.moves)
+        .flat()
+        .filter((move) => appState.selectedMoveIDs.includes(move._id))
+    : []
 
   useEffect(() => {
     async function initfetch() {
-      const storedData = await getLocalStorage(STORAGE_KEY)
-      setAppState(storedData || initState)
+      const storedAppState = await getLocalStorage(STORAGE_KEY)
+      setAppState(storedAppState || initState)
     }
     initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
