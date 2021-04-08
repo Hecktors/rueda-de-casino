@@ -89,7 +89,7 @@ export default function Session() {
 }
 
 const MainStyled = styled.main`
-  overflow-x: hidden;
+  overflow: hidden;
 `
 
 const FooterStyled = styled.footer`

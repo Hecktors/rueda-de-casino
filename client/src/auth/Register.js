@@ -50,7 +50,6 @@ export default function Register() {
       history.push('/')
     }
   }
-
   return (
     <>
       <Header cols="110">

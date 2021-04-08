@@ -49,7 +49,9 @@ export default createGlobalStyle`
         font-family: 'Open Sans', sans-serif;
         font-size: 112.5%;
         color:  var(--color-text);
-        background-color: var(--color-bg);
+        background: #396afc;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #2948ff, #396afc);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #2948ff, #396afc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 
     #root {
@@ -59,13 +61,15 @@ export default createGlobalStyle`
 
     .App {
         background-image: url('./assets/img/dancing.svg');
-        background-position: center;
-        background-size: contain;
+        background-position: center 63%;
+        background-size: 75%;
         background-repeat: no-repeat;
+        background-color: var(--color-bg);
         position: relative;
         height: 100%;
         width: 100%;
         max-width: 736px;
+        max-height: 800px;
         margin: auto;
         display: grid;
         grid-template-rows: 80px auto 80px;
@@ -89,8 +93,13 @@ export default createGlobalStyle`
     }
 
     a, .link {
+        cursor: pointer;
         text-decoration: unset;
         color: var(--color-secondary)
+    }
+
+    a, .link:hover {
+        opacity: 0.8;
     }
 
     button {
@@ -152,10 +161,6 @@ export default createGlobalStyle`
     transition: background-color 5000s ease-in-out 0s;
     }
 
-    .dark {
-        // background-color: var(--color-bg-dark);
-    }
-
     .dark-transparent {
         background-color: var(--color-bg-dark-transparent);
     }
@@ -209,12 +214,21 @@ export default createGlobalStyle`
             border-radius: 5px;
             
             &.session {
-                grid-template-rows: 80px auto 160px !important; 
             }
         }
 
         .desktop-only {
             display: block;
+        }
+    }
+
+    @media (orientation: landscape) and (min-height: 500px) {
+        .App {
+           max-width:560px;
+
+           &.session {
+            grid-template-rows: 100px auto 160px !important;
+            }
         }
     }
 `

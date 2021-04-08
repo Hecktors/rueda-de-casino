@@ -12,23 +12,21 @@ import Home from '../home'
 import Session from '../session'
 import Settings from '../settings'
 import Edit from '../edit'
-import UserSettings from '../auth/UserSettings'
+import Account from '../auth/Account'
 
 export default function App() {
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
-  const { appState, setAppState, error, setError } = useAppState()
+  const { appState, setAppState, error, setError } = useAppState(levels)
   const audios = useAudios(userData, levels)
 
   const location = useLocation()
+  const isLogedin = !!userData.user
   const classes = location.pathname === '/session' ? ' session' : ''
 
   return (
     <div className={`App${classes}`}>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
-      <div className="desktop-only">
-        This application is optimized for mobile devices.
-      </div>
       <AppContext.Provider
         value={{
           userData,
@@ -42,17 +40,17 @@ export default function App() {
         }}
       >
         <Switch>
-          {!userData.user ? (
+          {!isLogedin ? (
             <Route exact path="/" component={AuthOptions} />
           ) : (
-              <Route exact path="/" component={Home} />
-            )}
+            <Route exact path="/" component={Home} />
+          )}
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/session" component={Session} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/user-settings" component={UserSettings} />
-          <Route path="/edit" component={Edit} />
+          isLogedin && <Route path="/session" component={Session} />
+          isLogedin && <Route path="/settings" component={Settings} />
+          isLogedin && <Route path="/account" component={Account} />
+          isLogedin && <Route path="/edit" component={Edit} />
           <Redirect to="/" />
         </Switch>
       </AppContext.Provider>
