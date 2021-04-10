@@ -24,7 +24,7 @@ export const AddIconButton = (props) => (
 )
 
 export const BackIconButton = (props) => (
-  <IconButton ariaLabel="Back link" {...props}>
+  <IconButton ariaLabel="Back" {...props}>
     <BackIcon />
   </IconButton>
 )
