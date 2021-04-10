@@ -16,7 +16,7 @@ export const DeleteButton = (props) => (
 )
 
 export const DeleteAccountButton = (props) => (
-  <Button color={'primary'}ariaLabel="Delete Account" {...props}>
+  <Button color={'primary'} ariaLabel="Delete Account" {...props}>
     Delete Account
   </Button>
 )
@@ -34,7 +34,7 @@ export const LogoutButton = (props) => (
 )
 
 export const RegisterButton = (props) => (
-  <Button color={'secondary'} ariaLabel="Register"  {...props}>
+  <Button color={'secondary'} ariaLabel="Register" {...props}>
     Register
   </Button>
 )

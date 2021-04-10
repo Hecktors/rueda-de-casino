@@ -5,7 +5,6 @@ import {
   CancelIcon,
   DeleteIcon,
   EditIcon,
-  EyeIcon,
   HomeIcon,
   PauseIcon,
   PlayIcon,
@@ -19,74 +18,67 @@ import {
  */
 
 export const AddIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Add" {...props}>
     <AddIcon />
   </IconButton>
 )
 
 export const BackIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Back link" {...props}>
     <BackIcon />
   </IconButton>
 )
 
 export const CancelIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Cancel" {...props}>
     <CancelIcon />
   </IconButton>
 )
 
 export const DeleteIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Delete" {...props}>
     <DeleteIcon />
   </IconButton>
 )
 
 export const EditIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Edit" {...props}>
     <EditIcon />
   </IconButton>
 )
 
-export const EyeIconButton = (props) => (
-  <IconButton {...props}>
-    <EyeIcon />
-  </IconButton>
-)
-
 export const HomeIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Home" {...props}>
     <HomeIcon />
   </IconButton>
 )
 
-
 export const PauseIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Pause" {...props}>
     <PauseIcon />
   </IconButton>
 )
 
 export const PlayIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Play" {...props}>
     <PlayIcon />
   </IconButton>
 )
 
 export const ResetIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Reset" {...props}>
     <ResetIcon />
   </IconButton>
 )
 
 export const SettingsIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="Settings" {...props}>
     <SettingsIcon />
   </IconButton>
 )
 
 export const UserIconButton = (props) => (
-  <IconButton {...props}>
+  <IconButton ariaLabel="User Account" {...props}>
     <UserIcon />
   </IconButton>
 )
