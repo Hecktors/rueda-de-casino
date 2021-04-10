@@ -16,7 +16,7 @@ export default function Header({ children, className, cols }) {
   const indexLeft =
     hasColLeft && hasColCenter ? 2 : !hasColLeft && !hasColCenter ? 0 : 1
 
-  const Placeholder = () => <div role="placeholder" />
+  const Placeholder = () => <div data-testid="placeholder" />
 
   const colLeft = hasColLeft ? children[0] : <Placeholder />
   let colCenter = hasColCenter ? children[indexCenter] : <Placeholder />
