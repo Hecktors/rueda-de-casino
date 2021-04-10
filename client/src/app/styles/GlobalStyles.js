@@ -47,7 +47,7 @@ export default createGlobalStyle`
 
     body {
         font-family: 'Open Sans', sans-serif;
-        font-display: auto;
+        font-display: optional;
         font-size: 112.5%;
         color:  var(--color-text);
         background: #396afc;  /* fallback for old browsers */
