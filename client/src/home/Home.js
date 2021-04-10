@@ -96,7 +96,7 @@ const MainStyled = styled.main`
     bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     padding-bottom: 3rem;
 
     .msg {
