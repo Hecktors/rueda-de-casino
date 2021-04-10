@@ -6,7 +6,10 @@ InputRunThroughSelection.propTypes = {
   updateAppState: PropTypes.func.isRequired,
 }
 
-export default function InputRunThroughSelection({ isRunThroughSelection, updateAppState }) {
+export default function InputRunThroughSelection({
+  isRunThroughSelection,
+  updateAppState,
+}) {
   return (
     <InputRunThroughSelectionStyled>
       <input
@@ -16,7 +19,9 @@ export default function InputRunThroughSelection({ isRunThroughSelection, update
         name="runThroughSelection"
         checked={isRunThroughSelection}
       />
-      <label htmlFor="runThroughSelection">Avoid multi consecutive move repepition</label>
+      <label htmlFor="runThroughSelection">
+        Avoid multi consecutive move repetitions
+      </label>
     </InputRunThroughSelectionStyled>
   )
 }
