@@ -65,6 +65,7 @@ export default function Login() {
             type="email"
             id="email"
             name="email"
+            autoComplete="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
           />
@@ -80,6 +81,7 @@ export default function Login() {
               type="password"
               id="password"
               name="password"
+              autoComplete="current-password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
             />

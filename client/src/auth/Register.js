@@ -70,6 +70,7 @@ export default function Register() {
             type="text"
             id="name"
             name="name"
+            autoComplete="name"
             autoFocus
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
@@ -84,6 +85,7 @@ export default function Register() {
             type="email"
             id="email"
             name="email"
+            autoComplete="email"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
           />
@@ -99,6 +101,7 @@ export default function Register() {
               type="password"
               id="password"
               name="password"
+              autoComplete="new-password"
               onFocus={(e) => e.target.select()}
               onContextMenu={(e) => e.preventDefault()}
             />
@@ -113,6 +116,7 @@ export default function Register() {
             type="password"
             id="passwordCheck"
             name="passwordCheck"
+            autoComplete="new-password"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
           />
