@@ -52,6 +52,7 @@ const HeaderStyled = styled.header`
       letter-spacing: 0px;
       font-size: 2.3rem;
       font-family: 'Molle', cursive;
+      font-display: optional;
       color: var(--color-primary);
     }
   }

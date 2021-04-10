@@ -33,11 +33,10 @@ export default function IconButton({
   let fillColor = primary ? 'var(--color-primary)' : 'var(--color-secondary)'
 
   if (disabled) fillColor = 'var(--color-disabled)'
-
   return (
     <IconButtonStyled
       type={type}
-      ariaLabel={ariaLabel}
+      aria-label={ariaLabel}
       className={className}
       size={sizes[size]}
       disabled={disabled}
