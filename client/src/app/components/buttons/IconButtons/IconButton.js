@@ -11,8 +11,9 @@ const sizes = {
 
 IconButton.propTypes = {
   children: PropTypes.element.isRequired,
-  className: PropTypes.string,
   type: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  className: PropTypes.string,
   size: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
@@ -21,23 +22,21 @@ IconButton.propTypes = {
 
 export default function IconButton({
   children,
-  className,
   type,
+  ariaLabel,
+  className,
   size,
   disabled,
   primary,
   onClick,
 }) {
-
-  let fillColor = primary
-    ? 'var(--color-primary)'
-    : 'var(--color-secondary)'
+  let fillColor = primary ? 'var(--color-primary)' : 'var(--color-secondary)'
 
   if (disabled) fillColor = 'var(--color-disabled)'
-
   return (
     <IconButtonStyled
       type={type}
+      aria-label={ariaLabel}
       className={className}
       size={sizes[size]}
       disabled={disabled}

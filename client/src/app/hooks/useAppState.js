@@ -35,11 +35,13 @@ export default function useAppState(levels) {
   }, [appState])
 
   useEffect(() => {
+    let timeoutId
     if (error) {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setError('')
       }, 5000)
     }
+    return clearTimeout(timeoutId)
   }, [error])
 
   return { selectedMoves, appState, setAppState, error, setError }

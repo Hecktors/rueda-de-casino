@@ -5,14 +5,17 @@ import useAppState from './hooks/useAppState'
 import useLevels from './hooks/useLevels'
 import useAudios from './hooks/useAudios'
 import ErrorMsg from './components/ErrorMsg'
-import AuthOptions from '../auth/AuthOptions'
-import Register from '../auth/Register'
-import Login from '../auth/Login'
-import Home from '../home'
-import Session from '../session'
-import Settings from '../settings'
-import Edit from '../edit'
-import Account from '../auth/Account'
+import React from 'react'
+
+import LoadingSpinner from './components/LoadingSpinner'
+const AuthOptions = React.lazy(() => import('../auth/AuthOptions'))
+const Register = React.lazy(() => import('../auth/Register'))
+const Login = React.lazy(() => import('../auth/Login'))
+const Home = React.lazy(() => import('../home'))
+const Session = React.lazy(() => import('../session'))
+const Settings = React.lazy(() => import('../settings'))
+const Edit = React.lazy(() => import('../edit'))
+const Account = React.lazy(() => import('../auth/Account'))
 
 export default function App() {
   const { userData, setUserData } = useUser()
@@ -39,20 +42,26 @@ export default function App() {
           setError,
         }}
       >
-        <Switch>
-          {!isLogedin ? (
-            <Route exact path="/" component={AuthOptions} />
-          ) : (
-            <Route exact path="/" component={Home} />
-          )}
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          isLogedin && <Route path="/session" component={Session} />
-          isLogedin && <Route path="/settings" component={Settings} />
-          isLogedin && <Route path="/account" component={Account} />
-          isLogedin && <Route path="/edit" component={Edit} />
-          <Redirect to="/" />
-        </Switch>
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Switch>
+            {!isLogedin ? (
+              <>
+                <Route exact path="/" component={AuthOptions} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+              </>
+            ) : (
+              <>
+                <Route exact path="/" component={Home} />
+                <Route path="/session" component={Session} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/account" component={Account} />
+                <Route path="/edit" component={Edit} />
+              </>
+            )}
+            <Redirect to="/" />
+          </Switch>
+        </React.Suspense>
       </AppContext.Provider>
     </div>
   )
