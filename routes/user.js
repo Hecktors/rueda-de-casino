@@ -1,4 +1,3 @@
-const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const auth = require("../middleware/auth")
 const User = require("../models/user.model")
@@ -6,37 +5,28 @@ const Move = require("../models/move.model")
 const { deleteUserAudioFolder } = require("../services/handleFiles")
 const createDefaultMoves = require("../services/createDefaultMoves")
 const sendEmail = require("../services/sendEmail")
-const { checkRegisterData } = require("../services/validateUserData")
+const { checkRegisterData, checkLoginData } = require("../services/validateUserData")
+const { createPasswordHash, comparePasswords } = require("../lib/createPasswordHash")
 
 const router = require("express").Router()
 
 router.post("/register", async (req, res) => {
   try {
-    let { email, password, passwordCheck, displayName } = req.body
+    const { email, password, passwordCheck, displayName } = req.body
 
     const checkResult = checkRegisterData(email, password, passwordCheck)
     if (checkResult.error) {
       return res.status(400).json({ msg: checkResult.msg })
     }
-    const existingUser = await User.findOne({ email: email })
-
-    if (existingUser) {
-      return res.status(400).json({ msg: "User already exists." })
-    }
-
-    if (!displayName) {
-      displayName = email
-    }
-
-    const salt = await bcrypt.genSalt()
-    const passwordHash = await bcrypt.hash(password, salt)
 
     const newUser = new User({
       email,
-      password: passwordHash,
-      displayName,
+      password: await createPasswordHash(password),
+      displayName: displayName ? displayName : email,
       moveIDs: [],
     })
+
+    res.json({ msg: newUser })
 
     newUser
       .save()
@@ -55,24 +45,22 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body
 
-    if (!email || !password) {
-      return res.status(400).json({ msg: "All required field have to been filled." })
+    const checkLogin = checkLoginData(email, password)
+    if (checkLogin.error) {
+      return res.status(400).json({ msg: checkLogin.msg })
     }
 
     const user = await User.findOne({ email: email })
-
     if (!user) {
       return res.status(400).json({ msg: "Account with this email doesn't exists" })
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
-
+    const isMatch = await comparePasswords(password, user.password)
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" })
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
-
     res.json({ token, user: { id: user._id, displayName: user.displayName } })
   } catch (err) {
     res.status(500).json({ msg: err.message })
@@ -89,12 +77,12 @@ router.delete("/", auth, async (req, res) => {
           },
         },
         function (err, result) {
-          if (err) {
-            console.log(err)
-          } else {
-            console.log("Deleted successful! ", deletedUser.moveIDs)
+          if (!err) {
+            console.log("Account has been deleted successful! ", deletedUser.moveIDs)
             deleteUserAudioFolder(req.user)
             res.json({ msg: `User acount of ${deletedUser.email} has been deleted.` })
+          } else {
+            res.status(500).json({ error: err.message })
           }
         }
       )
@@ -146,7 +134,6 @@ router.put("/forgot-password", (req, res) => {
         return res.status(400).json({ msg: "Account with this email doesn't exists" })
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
-      console.log(token)
       const base = process.env.CLIENT_URL || "https://localhost:3000"
       const url = `${base}/authentication/activate/${token}`
       const emailData = {
@@ -181,18 +168,13 @@ router.put("/reset-password", async (req, res) => {
   }
 
   jwt.verify(resetLink, process.env.JWT_SECRET, async (err, decodedData) => {
-    // console.log("decodedData", decodedData)
     if (err) {
       return res.status(400).json({ msg: "Link includes wrong code or is expired." })
     }
 
-    const salt = await bcrypt.genSalt()
-    const passwordHash = await bcrypt.hash(password, salt)
-
-    // console.log("#resetLink", resetLink)
     User.findOne({ resetLink })
-      .then((user) => {
-        user.password = passwordHash
+      .then(async (user) => {
+        user.password = await createPasswordHash(password)
         user.resetLink = ""
         user
           .save()
