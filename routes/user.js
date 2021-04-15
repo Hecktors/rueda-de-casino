@@ -137,8 +137,8 @@ router.put("/forgot-password", (req, res) => {
       const base = process.env.CLIENT_URL || "https://localhost:3000"
       const url = `${base}/authentication/activate/${token}`
       const emailData = {
-        from: "Salsatime Admin <no-reply@hecktors.de>",
-        to: "to-beck@gmx.de",
+        from: `Salsatime Admin <${process.env.EMAIL_USER}>`,
+        to: email,
         subject: "Your password reset link from salsatime",
         html: `<p>Please click <a href="${url}">here</a> to reset your password of your Salsatime account</p>`,
       }
