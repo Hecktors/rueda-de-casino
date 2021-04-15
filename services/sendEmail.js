@@ -3,12 +3,12 @@ const nodemailer = require("nodemailer")
 async function sendEmail(data) {
   try {
     let transporter = nodemailer.createTransport({
-      host: "smtp.strato.de",
+      host: "",
       port: 587,
       secure: false,
       auth: {
-        user: "no-reply@hecktors.de",
-        pass: "Vh34trmE#2439",
+        user: "",
+        pass: "",
       },
     })
     await transporter.sendMail(data)
