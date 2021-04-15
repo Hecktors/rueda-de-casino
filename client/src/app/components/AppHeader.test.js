@@ -6,7 +6,7 @@ describe('AppHeader', () => {
     render(<AppHeader children={[<h1 key="1" role="title" />]} cols="010" />)
 
     const title = screen.getByRole('title')
-    const placeholders = screen.getAllByRole('placeholder')
+    const placeholders = screen.getAllByTestId('placeholder')
     expect(title).toBeInTheDocument()
     expect(placeholders).toHaveLength(2)
   })
@@ -21,7 +21,7 @@ describe('AppHeader', () => {
 
     const button = screen.getByRole('button')
     const title = screen.getByRole('title')
-    const placeholders = screen.getAllByRole('placeholder')
+    const placeholders = screen.getAllByTestId('placeholder')
     expect(button).toBeInTheDocument()
     expect(title).toBeInTheDocument()
     expect(placeholders).toHaveLength(1)
@@ -37,7 +37,7 @@ describe('AppHeader', () => {
 
     const button = screen.getByRole('button')
     const title = screen.getByRole('title')
-    const placeholders = screen.getAllByRole('placeholder')
+    const placeholders = screen.getAllByTestId('placeholder')
     expect(button).toBeInTheDocument()
     expect(title).toBeInTheDocument()
     expect(placeholders).toHaveLength(1)
@@ -66,7 +66,7 @@ describe('AppHeader', () => {
   test('header has 3 placeholder div', () => {
     render(<AppHeader children={[]} cols="000" />)
 
-    const placeholders = screen.queryAllByRole('placeholder')
+    const placeholders = screen.getAllByTestId('placeholder')
     expect(placeholders).toHaveLength(3)
   })
 })
