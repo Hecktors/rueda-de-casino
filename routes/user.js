@@ -3,12 +3,10 @@ const jwt = require("jsonwebtoken")
 const auth = require("../middleware/auth")
 const User = require("../models/user.model")
 const Move = require("../models/move.model")
-const emailCheck = require("../lib/emailCheck")
-const checkPassword = require("../lib/checkPassword")
 const { deleteUserAudioFolder } = require("../services/handleFiles")
 const createDefaultMoves = require("../services/createDefaultMoves")
 const sendEmail = require("../services/sendEmail")
-const { json } = require("express")
+const { checkRegisterData } = require("../services/validateUserData")
 
 const router = require("express").Router()
 
@@ -16,24 +14,10 @@ router.post("/register", async (req, res) => {
   try {
     let { email, password, passwordCheck, displayName } = req.body
 
-    if (!email || !password || !passwordCheck) {
-      return res.status(400).json({ msg: "All required field have to been filled." })
+    const checkResult = checkRegisterData(email, password, passwordCheck)
+    if (checkResult.error) {
+      return res.status(400).json({ msg: checkResult.msg })
     }
-
-    if (!emailCheck(email)) {
-      return res.status(400).json({ msg: "The entered email is not valid." })
-    }
-
-    if (password !== passwordCheck) {
-      return res.status(400).json({ msg: "The entered passwords are not equal." })
-    }
-
-    if (!checkPassword(password)) {
-      return res.status(400).json({
-        msg: "Passord needs a uppercase letter, a lowercase letter, a number and min. 8 characters",
-      })
-    }
-
     const existingUser = await User.findOne({ email: email })
 
     if (existingUser) {
@@ -54,9 +38,12 @@ router.post("/register", async (req, res) => {
       moveIDs: [],
     })
 
-    await newUser
+    newUser
       .save()
-      .then(async (user) => await createDefaultMoves(user._id))
+      .then(async (user) => {
+        await createDefaultMoves(user._id)
+        return user._id
+      })
       .then((userID) => res.json({ msg: userID }))
       .catch((err) => res.status(404).json({ msg: err.message }))
   } catch (err) {
@@ -150,31 +137,70 @@ router.get("/", auth, async (req, res) => {
 
 router.put("/forgot-password", (req, res) => {
   const { email } = req.body
+  if (!email) {
+    return res.status(400).json({ msg: "The email field has to been filled." })
+  }
   User.findOne({ email })
     .then((user) => {
+      if (!user) {
+        return res.status(400).json({ msg: "Account with this email doesn't exists" })
+      }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
+      console.log(token)
       const base = process.env.CLIENT_URL || "https://localhost:3000"
       const url = `${base}/authentication/activate/${token}`
       const emailData = {
         from: "Salsatime Admin <no-reply@hecktors.de>",
         to: "to-beck@gmx.de",
         subject: "Your password reset link from salsatime",
-        html: `<p>Please click <a href="${url}">here</a> to reset your password </p>`,
+        html: `<p>Please click <a href="${url}">here</a> to reset your password of your Salsatime account</p>`,
       }
 
       user.updateOne({ resetLink: token }, async (err) => {
         if (!err) {
-          res.json({ msg: token })
           const sendEmailResponse = await sendEmail(emailData)
           sendEmailResponse
             ? res.json({ msg: `Reset link has been sent to ${user.email}` })
             : res.status(500).json({ errorMsg: "Email sending failed, please try again" })
         } else {
-          return res.status(400).json({ error: "Reset password link error" })
+          rres.status(400).json({ error: "Reset password link error" })
         }
       })
     })
     .catch((err) => res.status(500).json({ errorMsg: err }))
+})
+
+router.put("/reset-password", async (req, res) => {
+  const { resetLink, password, passwordCheck } = req.body
+  if (!resetLink || !password || !passwordCheck) {
+    return res.status(400).json({ msg: "All required field have to been filled." })
+  }
+
+  if (password !== passwordCheck) {
+    return res.status(400).json({ msg: "The entered passwords are not equal." })
+  }
+
+  jwt.verify(resetLink, process.env.JWT_SECRET, async (err, decodedData) => {
+    // console.log("decodedData", decodedData)
+    if (err) {
+      return res.status(400).json({ msg: "Link includes wrong code or is expired." })
+    }
+
+    const salt = await bcrypt.genSalt()
+    const passwordHash = await bcrypt.hash(password, salt)
+
+    // console.log("#resetLink", resetLink)
+    User.findOne({ resetLink })
+      .then((user) => {
+        user.password = passwordHash
+        user.resetLink = ""
+        user
+          .save()
+          .then((user) => res.json({ msg: "Your passwort has been changed successfully." }))
+          .catch((err) => res.status(400).json({ msg: err.message }))
+      })
+      .catch((err) => res.status(400).json({ msg: "Link includes wrong code or is expired." }))
+  })
 })
 
 module.exports = router
