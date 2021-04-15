@@ -108,6 +108,7 @@ public/audio/*
 
 # Misc
 .DS_Store
+note.txt
 
 ##########################
 # Client

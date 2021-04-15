@@ -7,6 +7,8 @@ const emailCheck = require("../lib/emailCheck")
 const checkPassword = require("../lib/checkPassword")
 const { deleteUserAudioFolder } = require("../services/handleFiles")
 const createDefaultMoves = require("../services/createDefaultMoves")
+const sendEmail = require("../services/sendEmail")
+const { json } = require("express")
 
 const router = require("express").Router()
 
@@ -144,6 +146,35 @@ router.get("/", auth, async (req, res) => {
     id: user._id,
     displayName: user.displayName,
   })
+})
+
+router.put("/forgot-password", (req, res) => {
+  const { email } = req.body
+  User.findOne({ email })
+    .then((user) => {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
+      const base = process.env.CLIENT_URL || "https://localhost:3000"
+      const url = `${base}/authentication/activate/${token}`
+      const emailData = {
+        from: "Salsatime Admin <no-reply@hecktors.de>",
+        to: "to-beck@gmx.de",
+        subject: "Your password reset link from salsatime",
+        html: `<p>Please click <a href="${url}">here</a> to reset your password </p>`,
+      }
+
+      user.updateOne({ resetLink: token }, async (err) => {
+        if (!err) {
+          res.json({ msg: token })
+          const sendEmailResponse = await sendEmail(emailData)
+          sendEmailResponse
+            ? res.json({ msg: `Reset link has been sent to ${user.email}` })
+            : res.status(500).json({ errorMsg: "Email sending failed, please try again" })
+        } else {
+          return res.status(400).json({ error: "Reset password link error" })
+        }
+      })
+    })
+    .catch((err) => res.status(500).json({ errorMsg: err }))
 })
 
 module.exports = router
