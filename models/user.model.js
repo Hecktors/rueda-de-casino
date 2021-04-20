@@ -18,7 +18,7 @@ const userSchema = new Schema({
   displayName: {
     type: String,
   },
-  moveIDs: [
+  moveIds: [
     {
       type: String,
     },

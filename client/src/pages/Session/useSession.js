@@ -8,7 +8,7 @@ const callsStart = 5000
 
 export default function useSession(history, levels, audios, appState) {
   const {
-    selectedMoveIDs,
+    selectedMoveIds,
     isSongActive,
     speed,
     isRunThroughSelection,
@@ -20,7 +20,7 @@ export default function useSession(history, levels, audios, appState) {
   const selectedMoves = levels
     .map((level) => level.moves)
     .flat()
-    .filter((move) => selectedMoveIDs.includes(move._id))
+    .filter((move) => selectedMoveIds.includes(move._id))
 
   const timeoutRef = useRef(null)
   const moveCallSequence = useRef(selectedMoves)
@@ -37,7 +37,7 @@ export default function useSession(history, levels, audios, appState) {
 
   const sessionHandler = {
     play: () => {
-      if (selectedMoveIDs.length) {
+      if (selectedMoveIds.length) {
         isSongActive && musicAudioRef.current.play()
         startTimeout(callsStart)
         setIsPlaying(true)
@@ -73,8 +73,8 @@ export default function useSession(history, levels, audios, appState) {
     timeoutRef.current = null
   }
 
-  function playAudio(moveID) {
-    const moveAudio = audios.find((audio) => audio.moveID === moveID)
+  function playAudio(moveId) {
+    const moveAudio = audios.find((audio) => audio.moveId === moveId)
       .audioElement
     moveAudio.volume = moveVolume
     moveAudio.play()

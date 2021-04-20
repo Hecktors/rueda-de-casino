@@ -10,9 +10,9 @@ export function getMoves(token) {
 }
 
 // Get move
-export function getMove(token, moveID) {
+export function getMove(token, moveId) {
   return axios
-    .get(`${base}/moves/${moveID}`, { headers: { 'x-auth-token': token } })
+    .get(`${base}/moves/${moveId}`, { headers: { 'x-auth-token': token } })
     .then((response) => response)
     .catch((err) => console.log(err.response))
 }
@@ -26,9 +26,9 @@ export function addMove(token, data) {
 }
 
 // Update move
-export function updateMove(token, moveID, data) {
+export function updateMove(token, moveId, data) {
   return axios
-    .post(`${base}/moves/update/${moveID}`, data, {
+    .post(`${base}/moves/update/${moveId}`, data, {
       headers: { 'x-auth-token': token },
     })
     .then((response) => response)
@@ -36,9 +36,9 @@ export function updateMove(token, moveID, data) {
 }
 
 // Delete move
-export function deleteMove(token, moveID) {
+export function deleteMove(token, moveId) {
   return axios
-    .delete(`${base}/moves/${moveID}`, {
+    .delete(`${base}/moves/${moveId}`, {
       headers: { 'x-auth-token': token },
     })
     .then((response) => response)

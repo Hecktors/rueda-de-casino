@@ -36,7 +36,7 @@
         videoStart: '1',
       },
     ]}
-    selectedMoveIDs={[]}
+    selectedMoveIds={[]}
     updateAppState={() => {}}
   />
 </div>

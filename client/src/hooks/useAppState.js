@@ -4,7 +4,7 @@ import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 const STORAGE_KEY = 'appState'
 
 const initState = {
-  selectedMoveIDs: [],
+  selectedMoveIds: [],
   speed: 2900,
   isRunThroughSelection: true,
   isSongActive: true,
@@ -18,7 +18,7 @@ export default function useAppState(levels) {
     ? levels
         .map((level) => level.moves)
         .flat()
-        .filter((move) => appState.selectedMoveIDs.includes(move._id))
+        .filter((move) => appState.selectedMoveIds.includes(move._id))
     : []
 
   useEffect(() => {

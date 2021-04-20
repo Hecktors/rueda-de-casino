@@ -5,12 +5,12 @@ const { saveAudio } = require("./handleAudios")
 const defaultMoves = require("../assets/data/defaultMoves")
 
 async function createDefaultMoves(userID) {
-  const newMoveIDs = await Promise.all(
+  const newMoveIds = await Promise.all(
     defaultMoves.map(async (move) => {
       return createNewMoves(move, userID)
     })
   )
-  const id = await updateUser(userID, newMoveIDs)
+  const id = await updateUser(userID, newMoveIds)
 }
 
 function createNewMoves(move, userID) {
@@ -32,10 +32,10 @@ function createNewMoves(move, userID) {
     .catch((err) => console.log(err))
 }
 
-function updateUser(userID, newMoveIDs) {
+function updateUser(userID, newMoveIds) {
   return User.findById(userID)
     .then(async (user) => {
-      user.moveIDs = newMoveIDs
+      user.moveIds = newMoveIds
       user.save().catch((err) => console.log(err))
       return user._id
     })

@@ -16,8 +16,8 @@ export default function Home() {
     appState,
     setAppState
   )
-  const { selectedMoveIDs } = appState
-  const hasNotEnoughMoves = selectedMoveIDs.length < 2
+  const { selectedMoveIds } = appState
+  const hasNotEnoughMoves = selectedMoveIds.length < 2
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function Home() {
         <ResetIconButton
           onClick={resetAppState}
           size={'md'}
-          disabled={selectedMoveIDs.length === 0}
+          disabled={selectedMoveIds.length === 0}
         />
         <h1 className="logo">Salsa time!</h1>
       </Header>
@@ -38,7 +38,7 @@ export default function Home() {
                 key={name}
                 levelName={name}
                 levelMoves={moves}
-                selectedMoveIDs={selectedMoveIDs}
+                selectedMoveIds={selectedMoveIds}
                 updateAppState={updateAppState}
               />
             ))}

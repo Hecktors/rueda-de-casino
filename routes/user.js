@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
       email,
       password: await createPasswordHash(password),
       displayName: displayName ? displayName : email,
-      moveIDs: [],
+      moveIds: [],
     })
 
     res.json({ msg: newUser })
@@ -73,12 +73,12 @@ router.delete("/", auth, async (req, res) => {
       Move.deleteMany(
         {
           _id: {
-            $in: deletedUser.moveIDs,
+            $in: deletedUser.moveIds,
           },
         },
         function (err, result) {
           if (!err) {
-            console.log("Account has been deleted successful! ", deletedUser.moveIDs)
+            console.log("Account has been deleted successful! ", deletedUser.moveIds)
             deleteUserAudioFolder(req.user)
             res.json({ msg: `User acount of ${deletedUser.email} has been deleted.` })
           } else {

@@ -22,7 +22,7 @@ describe('InputLevel', () => {
         name="test accordion"
         levelMoves={movesMock}
         levelName="level"
-        selectedMoveIDs={[]}
+        selectedMoveIds={[]}
         updateAppState={() => {}}
       />
     )

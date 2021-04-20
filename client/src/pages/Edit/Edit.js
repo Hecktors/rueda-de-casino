@@ -17,24 +17,24 @@ import DeleteModal from '../../components/DeleteModal'
 export default function Edit() {
   const { userData, levels, refreshLevels, setError } = useContext(AppContext)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
-  const [selectedMoveID, setSelectedMoveID] = useState(null)
+  const [selectedMoveId, setSelectedMoveId] = useState(null)
   const history = useHistory()
 
   const selectedMove = levels
     .map((level) => level.moves)
     .flat()
-    .find((move) => move._id === selectedMoveID)
+    .find((move) => move._id === selectedMoveId)
 
   !userData.token && history.push('/')
 
   async function handleDelete(id) {
-    const response = await deleteMove(userData.token, selectedMoveID)
+    const response = await deleteMove(userData.token, selectedMoveId)
     setIsDeleteModalDisplayed(false)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {
       refreshLevels()
-      setSelectedMoveID(false)
+      setSelectedMoveId(false)
     }
   }
 
@@ -43,25 +43,25 @@ export default function Edit() {
       {isDeleteModalDisplayed && (
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
-          handleDelete={() => handleDelete(selectedMoveID)}
+          handleDelete={() => handleDelete(selectedMoveId)}
           deleteItem={selectedMove.name}
         />
       )}
 
-      <Header cols={!selectedMoveID ? '011' : '111'}>
-        {selectedMoveID && (
+      <Header cols={!selectedMoveId ? '011' : '111'}>
+        {selectedMoveId && (
           <BackIconButton
-            onClick={() => setSelectedMoveID(false)}
+            onClick={() => setSelectedMoveId(false)}
             size={'md'}
             type="button"
           />
         )}
         <h1 className="logo">Salsa time!</h1>
-        {!selectedMoveID ? (
+        {!selectedMoveId ? (
           <AddIconButton
             className="add-button"
             size={'md'}
-            onClick={() => setSelectedMoveID({})}
+            onClick={() => setSelectedMoveId({})}
           />
         ) : (
           <DeleteIconButton
@@ -73,7 +73,7 @@ export default function Edit() {
       </Header>
 
       <EditStyled>
-        {!selectedMoveID ? (
+        {!selectedMoveId ? (
           levels.map(({ name, moves }) => {
             return (
               <ul key={name}>
@@ -85,7 +85,7 @@ export default function Edit() {
                       {move.name}
                       <EditIconButton
                         size={'xs'}
-                        onClick={() => setSelectedMoveID(move._id)}
+                        onClick={() => setSelectedMoveId(move._id)}
                       />
                     </li>
                   ))}
@@ -95,7 +95,7 @@ export default function Edit() {
         ) : (
           <EditForm
             move={selectedMove}
-            setSelectedMoveID={setSelectedMoveID}
+            setSelectedMoveId={setSelectedMoveId}
             addMove={addMove}
             updateMove={updateMove}
           />

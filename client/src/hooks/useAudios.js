@@ -16,7 +16,7 @@ export default function useAudios(userData, levels) {
         let audio = await getAudio(token, move._id)
         const audioUrl = new Audio(audio)
         return {
-          moveID: move._id,
+          moveId: move._id,
           audioElement: audioUrl,
         }
       })

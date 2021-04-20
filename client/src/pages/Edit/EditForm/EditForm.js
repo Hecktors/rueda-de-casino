@@ -8,7 +8,7 @@ import LevelAccordion from './LevelAccordion'
 
 export default function EditForm({
   move,
-  setSelectedMoveID,
+  setSelectedMoveId,
   addMove,
   updateMove,
 }) {
@@ -43,7 +43,7 @@ export default function EditForm({
       setError(response.data.msg)
     } else {
       refreshLevels()
-      setSelectedMoveID(null)
+      setSelectedMoveId(null)
     }
   }
 

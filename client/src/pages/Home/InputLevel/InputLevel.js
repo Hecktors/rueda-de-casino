@@ -6,26 +6,26 @@ import { ArrowRightIcon, ArrowDownIcon } from '../../../components/Icons/Icons'
 InputLevel.propTypes = {
   levelName: PropTypes.string.isRequired,
   levelMoves: PropTypes.array.isRequired,
-  selectedMoveIDs: PropTypes.array.isRequired,
+  selectedMoveIds: PropTypes.array.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
 export default function InputLevel({
   levelName,
   levelMoves,
-  selectedMoveIDs,
+  selectedMoveIds,
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
   const hasInputMove = levelMoves.some((move) =>
-    selectedMoveIDs.includes(move._id)
+    selectedMoveIds.includes(move._id)
   )
   const color = hasInputMove ? 'var(--color-primary)' : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
 
   useEffect(() => {
-    !selectedMoveIDs.length && setIsOpen(false)
-  }, [selectedMoveIDs])
+    !selectedMoveIds.length && setIsOpen(false)
+  }, [selectedMoveIds])
 
   function toogleInputLevel() {
     setIsOpen(!isOpen)
@@ -41,14 +41,14 @@ export default function InputLevel({
         {levelMoves.map((move) => (
           <li key={move._id}>
             <label
-              className={selectedMoveIDs.includes(move._id) ? 'isChecked' : ''}
+              className={selectedMoveIds.includes(move._id) ? 'isChecked' : ''}
             >
               <input
                 name="move"
                 value={move._id}
                 onChange={updateAppState}
                 type="checkbox"
-                checked={selectedMoveIDs.includes(move.id)}
+                checked={selectedMoveIds.includes(move.id)}
               />
               {move.name}
             </label>
