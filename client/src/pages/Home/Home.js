@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import useUserInput from './useUserInput'
 import { PlayIconButton, ResetIconButton } from '../../components/IconButtons'
 import InputLevel from './InputLevel'
@@ -10,7 +10,7 @@ import Navigation from '../../components/Navigation'
 
 export default function Home() {
   const history = useHistory()
-  const { levels, appState, setAppState } = useContext(AppContext)
+  const { levels, appState, setAppState } = useContext(Context)
   const { updateAppState, resetAppState } = useUserInput(
     levels,
     appState,

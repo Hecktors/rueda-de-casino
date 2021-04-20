@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../context/AppContext'
+import { Context } from '../context/Context'
 import checkEmail from '../lib/checkEmail'
 import { sendResetCode } from '../services/userAPIs'
 import { GetCodeButton } from '../components/buttons/Buttons'
@@ -10,7 +10,7 @@ import Header from '../components/Header'
 
 export default function PasswordReset() {
   const history = useHistory()
-  const { error, setError } = useContext(AppContext)
+  const { error, setError } = useContext(Context)
   const [userInput, setUserInput] = useState({
     email: '',
   })

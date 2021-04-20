@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { getAudio } from '../services/audioAPIs'
 
 export default function useAudios(userData, levels) {
-  const token = userData.token
   const [audios, setAudios] = useState([])
+  const token = userData.token
   const moves = levels ? levels.map((level) => level.moves).flat() : []
 
   useEffect(() => {
@@ -24,5 +24,5 @@ export default function useAudios(userData, levels) {
     setAudios(fetchedAudios)
   }
 
-  return audios
+  return { audios }
 }

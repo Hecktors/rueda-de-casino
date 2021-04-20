@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import styled from 'styled-components/macro'
 import useUserInput from './useUserInput'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import Header from '../../components/Header'
 import Navigation from '../../components/Navigation'
 import InputRunThroughSelection from './InputRunThroughSelection'
@@ -9,7 +9,7 @@ import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
 
 export default function Settings() {
-  const { appState, setAppState } = useContext(AppContext)
+  const { appState, setAppState } = useContext(Context)
   const { updateAppState } = useUserInput(appState, setAppState)
 
   const { speed, isSongActive, isRunThroughSelection } = appState

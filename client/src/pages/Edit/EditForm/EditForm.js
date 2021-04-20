@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components/macro'
-import AppContext from '../../../context/AppContext'
+import { Context } from '../../../context/Context'
 import useUserInput from './useUserInput'
 import { ResetButton, SaveButton } from '../../../components/Buttons'
 import { AddIconButton } from '../../../components/IconButtons'
@@ -12,7 +12,7 @@ export default function EditForm({
   addMove,
   updateMove,
 }) {
-  const { userData, levels, refreshLevels, setError } = useContext(AppContext)
+  const { userData, levels, refreshLevels, setError } = useContext(Context)
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
   const { token } = userData

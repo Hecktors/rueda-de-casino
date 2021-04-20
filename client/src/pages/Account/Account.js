@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import { deleteUser } from '../../services/userAPIs'
 import DeleteModal from '../../components/DeleteModal'
 import { DeleteAccountButton, LogoutButton } from '../../components/Buttons'
@@ -9,19 +8,18 @@ import Header from '../../components/Header'
 import Navigation from '../../components/Navigation'
 
 export default function Account() {
-  const history = useHistory()
-  const { userData, setUserData } = useContext(AppContext)
+  const { userData, setUserData } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
 
   function handleLogout() {
     setUserData({ token: null, user: null })
-    history.push('/')
   }
 
   async function handleDelete() {
     setIsDeleteModalDisplayed(false)
     const deleteResponse = await deleteUser(userData.token)
     if (deleteResponse.status === 200) {
+      localStorage.clear()
       handleLogout()
     }
   }

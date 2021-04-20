@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import { loginUser } from '../../services/userAPIs'
 import { LoginButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
@@ -9,7 +9,7 @@ import Header from '../../components/Header'
 
 export default function Login() {
   const history = useHistory()
-  const { setUserData, setError } = useContext(AppContext)
+  const { setUserData, setError } = useContext(Context)
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',

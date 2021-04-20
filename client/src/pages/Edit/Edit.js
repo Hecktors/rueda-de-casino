@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import { addMove, deleteMove, updateMove } from '../../services/moveAPIs'
 import {
   AddIconButton,
@@ -15,7 +15,7 @@ import Navigation from '../../components/Navigation'
 import DeleteModal from '../../components/DeleteModal'
 
 export default function Edit() {
-  const { userData, levels, refreshLevels, setError } = useContext(AppContext)
+  const { userData, levels, refreshLevels, setError } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   const [selectedMoveId, setSelectedMoveId] = useState(null)
   const history = useHistory()

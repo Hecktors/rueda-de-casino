@@ -10,9 +10,8 @@ const initState = {
   isSongActive: true,
 }
 
-export default function useAppState(levels) {
+export default function useAppState(levels, userData) {
   const [appState, setAppState] = useState(initState)
-  const [error, setError] = useState('')
 
   const selectedMoves = levels
     ? levels
@@ -34,15 +33,5 @@ export default function useAppState(levels) {
       setLocalStorage(STORAGE_KEY, appState)
   }, [appState])
 
-  useEffect(() => {
-    let timeoutId
-    if (error) {
-      timeoutId = setTimeout(() => {
-        setError('')
-      }, 5000)
-    }
-    return () => clearTimeout(timeoutId)
-  }, [error])
-
-  return { selectedMoves, appState, setAppState, error, setError }
+  return { selectedMoves, appState, setAppState }
 }

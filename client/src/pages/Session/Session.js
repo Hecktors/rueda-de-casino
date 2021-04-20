@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import AppContext from '../../context/AppContext'
+import { Context } from '../../context/Context'
 import useSession from './useSession'
 import { CSSTransition } from 'react-transition-group'
 import {
@@ -19,7 +19,7 @@ import YoutubeVideo from './YoutubeVideo'
 
 export default function Session() {
   const history = useHistory()
-  const { levels, audios, appState } = useContext(AppContext)
+  const { levels, audios, appState } = useContext(Context)
 
   const [
     selectedMoves,
