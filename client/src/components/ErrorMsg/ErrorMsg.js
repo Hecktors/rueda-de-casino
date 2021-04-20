@@ -31,9 +31,11 @@ const ErrorMsgStyled = styled.div`
   color: var(--color-bg);
 
   @media screen and (min-width: 800px) {
+    position: fixed;
     max-width: 716px;
-    top: -40px;
-    border-radius: 10px;
+    /* top: -40px; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     padding: 10px 20px;
     margin: 0 auto;
   }

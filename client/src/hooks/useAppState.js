@@ -41,7 +41,7 @@ export default function useAppState(levels) {
         setError('')
       }, 5000)
     }
-    return clearTimeout(timeoutId)
+    return () => clearTimeout(timeoutId)
   }, [error])
 
   return { selectedMoves, appState, setAppState, error, setError }
