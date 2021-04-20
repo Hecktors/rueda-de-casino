@@ -7,9 +7,9 @@ import useError from '../hooks/useError'
 const Context = createContext()
 
 function ContextProvider({ children }) {
-  const { appState, setAppState } = useAppState(levels, userData)
   const { userData, setUserData } = useUser()
   const { levels, refreshLevels } = useLevels(userData)
+  const { appState, setAppState } = useAppState(levels)
   const { audios } = useAudios(userData, levels)
   const { error, setError } = useError()
 

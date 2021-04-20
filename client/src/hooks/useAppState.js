@@ -10,7 +10,7 @@ const initState = {
   isSongActive: true,
 }
 
-export default function useAppState(levels, userData) {
+export default function useAppState(levels) {
   const [appState, setAppState] = useState(initState)
 
   const selectedMoves = levels

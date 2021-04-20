@@ -11,6 +11,8 @@ export default createGlobalStyle`
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
         --color-warning: #f53030;
+        /* Body */
+        --color-bg-body: linear-gradient(to top, #ff00cc, #333399);
         /* Header */
         --color-title: #929292;
         /* Accordion */
@@ -50,9 +52,7 @@ export default createGlobalStyle`
         font-display: optional;
         font-size: 112.5%;
         color:  var(--color-text);
-        background: #396afc;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #2948ff, #396afc);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #2948ff, #396afc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: var(--color-bg-body);
     }
 
     #root {
