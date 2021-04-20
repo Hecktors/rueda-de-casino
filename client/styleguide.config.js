@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   ignore: [
-    'src/app/App.js',
+    'src/App.js',
     '**/**/components/GlobalStyle.js',
     '**/**/components/Overlay.js',
     '**/**/BackgroundVideo.js',
@@ -13,9 +13,9 @@ module.exports = {
   exampleMode: 'expand',
   usageMode: 'expand',
   components: [
-    'src/app/components/buttons/[A-Z]*/[A-Z]*s.js',
-    'src/app/components/ErrorMsg/[A-Z]*.js',
-    'src/app/components/Navigation/[A-Z]*.js',
+    'src/components/buttons/[A-Z]*/[A-Z]*s.js',
+    'src/components/ErrorMsg/[A-Z]*.js',
+    'src/components/Navigation/[A-Z]*.js',
     'src/home/InputLevel/[A-Z]*.js',
     'src/settings/InputPlaySong/[A-Z]*.js',
     'src/settings/InputRunThroughSelection/[A-Z]*.js',
@@ -24,6 +24,6 @@ module.exports = {
     'src/session/SelectedMoveList/[A-Z]*.js',
   ],
   styleguideComponents: {
-    Wrapper: path.join(__dirname, 'src/app/styles/StyleWrapper'),
+    Wrapper: path.join(__dirname, 'src/styles/StyleWrapper'),
   },
 }
