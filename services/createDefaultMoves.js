@@ -4,16 +4,16 @@ const { saveAudio } = require("./handleAudios")
 
 const defaultMoves = require("../assets/data/defaultMoves")
 
-async function createDefaultMoves(userID) {
+async function createDefaultMoves(userId) {
   const newMoveIds = await Promise.all(
     defaultMoves.map(async (move) => {
-      return createNewMoves(move, userID)
+      return createNewMoves(move, userId)
     })
   )
-  const id = await updateUser(userID, newMoveIds)
+  const id = await updateUser(userId, newMoveIds)
 }
 
-function createNewMoves(move, userID) {
+function createNewMoves(move, userId) {
   const newMove = new Move({
     name: move.name,
     levelName: move.levelName,
@@ -26,14 +26,14 @@ function createNewMoves(move, userID) {
   return newMove
     .save()
     .then((savedMove) => {
-      saveAudio(userID, savedMove)
+      saveAudio(userId, savedMove)
       return savedMove._id
     })
     .catch((err) => console.log(err))
 }
 
-function updateUser(userID, newMoveIds) {
-  return User.findById(userID)
+function updateUser(userId, newMoveIds) {
+  return User.findById(userId)
     .then(async (user) => {
       user.moveIds = newMoveIds
       user.save().catch((err) => console.log(err))

@@ -7,6 +7,7 @@ import ErrorMsg from './components/ErrorMsg'
 const Login = React.lazy(() => import('./pages/Login'))
 const Register = React.lazy(() => import('./pages/Register'))
 const PasswordReset = React.lazy(() => import('./pages/PasswordReset'))
+const PasswordRenew = React.lazy(() => import('./pages/PasswordRenew'))
 const Home = React.lazy(() => import('./pages/Home'))
 const Session = React.lazy(() => import('./pages/Session'))
 const Settings = React.lazy(() => import('./pages/Settings'))
@@ -22,6 +23,7 @@ export default function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/password-reset" component={PasswordReset} />
+      <Route path="/new-password/:resetToken" component={PasswordRenew} />
       <Redirect to="/login" />
     </Switch>
   ) : (
@@ -35,7 +37,6 @@ export default function App() {
     </Switch>
   )
 
-  console.log(isLogedIn)
   return (
     <div className={`App${classes}`}>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}

@@ -23,7 +23,7 @@ const userSchema = new Schema({
       type: String,
     },
   ],
-  resetLink: {
+  resetToken: {
     data: String,
     default: "",
   },

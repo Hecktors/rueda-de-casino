@@ -5,7 +5,7 @@ import {
   fetchUser,
   fetchUserLogin,
   fetchUserRegister,
-  fetchTokenValidation,
+  fetchTokenVerification,
   fetchUserAccountDelete,
 } from '../services/userAPIs'
 
@@ -18,7 +18,7 @@ export default function useAuth(error, setError) {
       if (!storedToken) {
         return
       }
-      const tokenRes = await fetchTokenValidation(storedToken)
+      const tokenRes = await fetchTokenVerification(storedToken)
       if (tokenRes) {
         const userResponse = await fetchUser(storedToken)
         setAuthData({
@@ -39,13 +39,13 @@ export default function useAuth(error, setError) {
   }, [authData.token])
 
   // Login User
-  async function loginUser(userInput) {
-    if (!userInput.email || !userInput.password) {
+  async function loginUser(loginData) {
+    if (!loginData.email || !loginData.password) {
       setError('All required field have to been filled.')
       return
     }
 
-    const loginResponse = await fetchUserLogin(userInput)
+    const loginResponse = await fetchUserLogin(loginData)
 
     if (loginResponse.status !== 200) {
       setError(loginResponse.data.msg)
@@ -73,6 +73,7 @@ export default function useAuth(error, setError) {
 
   // Logout User
   function logoutUser() {
+    localStorage.removeItem('auth-token')
     setAuthData({})
   }
 

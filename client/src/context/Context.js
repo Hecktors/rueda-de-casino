@@ -20,7 +20,6 @@ function ContextProvider({ children }) {
   const { appState, setAppState } = useAppState(levels)
 
   const isLogedIn = !!authData.user
-  console.log(authData)
   return (
     <Context.Provider
       value={{

@@ -3,9 +3,9 @@ import axios from 'axios'
 const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
 
 // Get token
-export function fetchTokenValidation(token) {
+export function fetchTokenVerification(token) {
   return axios
-    .post(`${base}/users/validateToken`, null, {
+    .post(`${base}/users/token-verification`, null, {
       headers: { 'x-auth-token': token },
     })
     .then((res) => res.data)
@@ -57,11 +57,22 @@ export async function fetchUserAccountDelete(token) {
 }
 
 // Send Password Reset Code
-export async function fetchCodeReset(email) {
-  console.log(email)
+export async function fetchPasswordReset(email) {
   return await axios
-    .put(`${base}/users/forgot-password`, {
-      email: email,
+    .put(`${base}/users/password-reset`, {
+      email,
+    })
+    .then((res) => res)
+    .catch((err) => err.response)
+}
+
+// Change Password
+export async function fetchPasswordRenew(resetToken, password, passwordCheck) {
+  return await axios
+    .put(`${base}/users/password-renew`, {
+      resetToken,
+      password,
+      passwordCheck,
     })
     .then((res) => res)
     .catch((err) => err.response)

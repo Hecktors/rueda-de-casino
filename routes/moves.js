@@ -8,7 +8,7 @@ const { deleteAudio, updateAudio, saveAudio } = require("../services/handleAudio
 // Add move
 router.post("/add", auth, async (req, res) => {
   try {
-    const userID = req.user
+    const userId = req.user
     const name = req.body.name.toLowerCase().trim().replace(/\s+/g, " ")
     const levelName = req.body.levelName
     const bars = req.body.bars
@@ -32,7 +32,7 @@ router.post("/add", auth, async (req, res) => {
       return res.status(400).json({ msg: "The number of bars is to long. Max num: 20." })
     }
 
-    if (await checkExistenzOfMoveName(userID, name)) {
+    if (await checkExistenzOfMoveName(userId, name)) {
       return res.status(400).json({ msg: `${name} allready exists.` })
     }
 
@@ -48,7 +48,7 @@ router.post("/add", auth, async (req, res) => {
     return await move
       .save()
       .then((newMove) =>
-        User.findById(userID)
+        User.findById(userId)
           .then((user) => {
             user.moveIds = [...user.moveIds, newMove._id]
             user.save().then((user) => {

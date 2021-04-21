@@ -1,53 +1,19 @@
-import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Context } from '../../context/Context'
-import checkEmail from '../../lib/checkEmail'
-import { fetchCodeReset } from '../../services/userAPIs'
 import { SendEmailButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 import Header from '../../components/Header'
+import usePasswordReset from './usePasswordReset'
 
 export default function PasswordReset() {
   const history = useHistory()
-  const { error, setError } = useContext(Context)
-  const [userInput, setUserInput] = useState({
-    email: '',
-  })
-  const [emailIsSent, setEmailIsSent] = useState(false)
-
-  const isEmailValid = checkEmail(userInput.email)
-
-  function handleChange(e) {
-    setUserInput({
-      ...userInput,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-
-    if (!userInput.email) {
-      setError('All required field have to been filled.')
-      return
-    }
-
-    if (!isEmailValid) {
-      setError('The entered email is not valid')
-      return
-    }
-
-    const response = await fetchCodeReset(userInput.email)
-    if (response.status !== 200) {
-      setError(response.data.msg)
-    } else {
-      error && setError('')
-      setEmailIsSent(true)
-      console.log('push to setNewPasswordForm')
-      // history.push('/')
-    }
-  }
+  const {
+    userInput,
+    isRequiredFilled,
+    emailIsSent,
+    handleChange,
+    handleSubmit,
+  } = usePasswordReset()
 
   return (
     <>
@@ -78,7 +44,7 @@ export default function PasswordReset() {
               />
             </div>
 
-            <SendEmailButton onClick={() => {}} />
+            <SendEmailButton onClick={() => {}} disabled={!isRequiredFilled} />
           </>
         )}
       </PasswordResetStyled>

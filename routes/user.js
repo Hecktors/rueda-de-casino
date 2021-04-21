@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
         await createDefaultMoves(user._id)
         return user._id
       })
-      .then((userID) => res.json({ msg: userID }))
+      .then((userId) => res.json({ msg: userId }))
       .catch((err) => res.status(404).json({ msg: err.message }))
   } catch (err) {
     res.status(500).json({ msg: err.message })
@@ -98,7 +98,7 @@ router.delete("/", auth, async (req, res) => {
   }
 })
 
-router.post("/validateToken", async (req, res) => {
+router.post("/token-verification", async (req, res) => {
   try {
     const token = req.header("x-auth-token")
     if (!token) {
@@ -129,7 +129,7 @@ router.get("/", auth, async (req, res) => {
   })
 })
 
-router.put("/forgot-password", (req, res) => {
+router.put("/password-reset", (req, res) => {
   const { email } = req.body
   if (!email) {
     return res.status(400).json({ msg: "The email field has to been filled." })
@@ -141,7 +141,7 @@ router.put("/forgot-password", (req, res) => {
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
       const base = process.env.CLIENT_URL || "https://localhost:3000"
-      const url = `${base}/authentication/activate/${token}`
+      const url = `${base}/new-password/${token}`
       const emailData = {
         from: `Salsatime Admin <${process.env.EMAIL_USER}>`,
         to: email,
@@ -149,7 +149,7 @@ router.put("/forgot-password", (req, res) => {
         html: `<p>Please click <a href="${url}">here</a> to reset your password of your Salsatime account</p>`,
       }
 
-      user.updateOne({ resetLink: token }, async (err) => {
+      user.updateOne({ resetToken: token }, async (err) => {
         if (!err) {
           const sendEmailResponse = await sendEmail(emailData)
           sendEmailResponse
@@ -163,31 +163,30 @@ router.put("/forgot-password", (req, res) => {
     .catch((err) => res.status(500).json({ errorMsg: err }))
 })
 
-router.put("/reset-password", async (req, res) => {
-  const { resetLink, password, passwordCheck } = req.body
-  if (!resetLink || !password || !passwordCheck) {
+router.put("/password-renew", async (req, res) => {
+  const { resetToken, password, passwordCheck } = req.body
+  if (!resetToken || !password || !passwordCheck) {
     return res.status(400).json({ msg: "All required field have to been filled." })
   }
 
   if (password !== passwordCheck) {
     return res.status(400).json({ msg: "The entered passwords are not equal." })
   }
-
-  jwt.verify(resetLink, process.env.JWT_SECRET, async (err, decodedData) => {
+  jwt.verify(resetToken, process.env.JWT_SECRET, async (err, decodedData) => {
     if (err) {
       return res.status(400).json({ msg: "Link includes wrong code or is expired." })
     }
 
-    User.findOne({ resetLink })
+    User.findOne({ resetToken })
       .then(async (user) => {
         user.password = await createPasswordHash(password)
-        user.resetLink = ""
+        user.resetToken = ""
         user
           .save()
-          .then((user) => res.json({ msg: "Your passwort has been changed successfully." }))
+          .then((user) => res.json({ email: user.email }))
           .catch((err) => res.status(400).json({ msg: err.message }))
       })
-      .catch((err) => res.status(400).json({ msg: "Link includes wrong code or is expired." }))
+      .catch((err) => res.status(400).json({ msg: "Link includes wrong code or is expired..." }))
   })
 })
 
