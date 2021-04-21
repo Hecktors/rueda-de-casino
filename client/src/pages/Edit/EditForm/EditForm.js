@@ -12,10 +12,10 @@ export default function EditForm({
   addMove,
   updateMove,
 }) {
-  const { userData, levels, refreshLevels, setError } = useContext(Context)
+  const { authData, levels, refreshLevels, setError } = useContext(Context)
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
-  const { token } = userData
+  const { token } = authData
 
   let initLevelName = levels.length > 0 ? levels[levels.length - 1].name : ''
   if (move) initLevelName = move.levelName

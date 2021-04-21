@@ -1,30 +1,39 @@
 import { createContext } from 'react'
 import useAppState from '../hooks/useAppState'
-import useUser from '../hooks/useUser'
+import useAuth from '../hooks/useAuth'
 import useLevels from '../hooks/useLevels'
 import useAudios from '../hooks/useAudios'
 import useError from '../hooks/useError'
 const Context = createContext()
 
 function ContextProvider({ children }) {
-  const { userData, setUserData } = useUser()
-  const { levels, refreshLevels } = useLevels(userData)
-  const { appState, setAppState } = useAppState(levels)
-  const { audios } = useAudios(userData, levels)
   const { error, setError } = useError()
+  const {
+    authData,
+    registerUser,
+    loginUser,
+    logoutUser,
+    deleteUserAccount,
+  } = useAuth(error, setError)
+  const { levels, refreshLevels } = useLevels(authData)
+  const { audios } = useAudios(authData, levels)
+  const { appState, setAppState } = useAppState(levels)
 
-  const isLogedIn = !!userData.user
-
+  const isLogedIn = !!authData.user
+  console.log(authData)
   return (
     <Context.Provider
       value={{
+        authData,
         isLogedIn,
-        userData,
         levels,
         appState,
         audios,
         error,
-        setUserData,
+        logoutUser,
+        registerUser,
+        loginUser,
+        deleteUserAccount,
         refreshLevels,
         setAppState,
         setError,

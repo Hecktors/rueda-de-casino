@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { getAudio } from '../services/audioAPIs'
 
-export default function useAudios(userData, levels) {
+export default function useAudios(authData, levels) {
   const [audios, setAudios] = useState([])
-  const token = userData.token
+  const token = authData.token
   const moves = levels ? levels.map((level) => level.moves).flat() : []
 
   useEffect(() => {

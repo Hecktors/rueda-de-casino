@@ -17,16 +17,14 @@ export default function App() {
   const { isLogedIn, error, setError } = useContext(Context)
   const classes = !!useRouteMatch('/session')?.isExact ? ' session' : ''
 
-  const logedOutRoutes = (
+  const routes = !isLogedIn ? (
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/password-reset" component={PasswordReset} />
       <Redirect to="/login" />
     </Switch>
-  )
-
-  const logedInRoutes = (
+  ) : (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/session" component={Session} />
@@ -37,13 +35,11 @@ export default function App() {
     </Switch>
   )
 
+  console.log(isLogedIn)
   return (
     <div className={`App${classes}`}>
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
-
-      <React.Suspense fallback={<LoadingSpinner />}>
-        {isLogedIn ? logedInRoutes : logedOutRoutes}
-      </React.Suspense>
+      <React.Suspense fallback={<LoadingSpinner />}>{routes}</React.Suspense>
     </div>
   )
 }

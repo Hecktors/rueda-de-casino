@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { Context } from '../../context/Context'
 import { addMove, deleteMove, updateMove } from '../../services/moveAPIs'
@@ -15,20 +14,17 @@ import Navigation from '../../components/Navigation'
 import DeleteModal from '../../components/DeleteModal'
 
 export default function Edit() {
-  const { userData, levels, refreshLevels, setError } = useContext(Context)
+  const { authData, levels, refreshLevels, setError } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   const [selectedMoveId, setSelectedMoveId] = useState(null)
-  // const history = useHistory()
 
   const selectedMove = levels
     .map((level) => level.moves)
     .flat()
     .find((move) => move._id === selectedMoveId)
 
-  // !userData.token && history.push('/')
-
   async function handleDelete(id) {
-    const response = await deleteMove(userData.token, selectedMoveId)
+    const response = await deleteMove(authData.token, selectedMoveId)
     setIsDeleteModalDisplayed(false)
     if (response.status !== 200) {
       setError(response.data.msg)

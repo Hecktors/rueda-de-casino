@@ -1,56 +1,19 @@
-import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Context } from '../../context/Context'
-import { loginUser, registerUser } from '../../services/userAPIs'
+import useRegister from './useRegister'
 import { RegisterButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 import Header from '../../components/Header'
-import checkRegisterInput from '../../lib/checkRegisterInput'
 
 export default function Register() {
   const history = useHistory()
-  const { setUserData, setError } = useContext(Context)
-  const [userInput, setUserInput] = useState({
-    name: '',
-    email: 'to-beck@gmx.de',
-    password: 'Test1234',
-    passwordCheck: 'Test1234',
-  })
+  const {
+    userInput,
+    isRequiredFilled,
+    handleChange,
+    handleSubmit,
+  } = useRegister()
 
-  const isRequiredFilled =
-    userInput.email && userInput.password && userInput.passwordCheck
-
-  function handleChange(e) {
-    setUserInput({
-      ...userInput,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-    const validation = checkRegisterInput(userInput)
-    if (!validation.result) {
-      setError(validation.msg)
-      return
-    }
-
-    const registerResponse = await registerUser(userInput)
-
-    if (registerResponse.status !== 200) {
-      setError(registerResponse.data.msg)
-    } else {
-      const loginResponse = await loginUser({
-        email: userInput.email,
-        password: userInput.password,
-      })
-
-      setUserData(loginResponse.data)
-      console.log(loginResponse.data)
-      history.push('/')
-    }
-  }
   return (
     <>
       <Header

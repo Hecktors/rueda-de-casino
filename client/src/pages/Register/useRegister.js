@@ -1,14 +1,18 @@
 import { useState, useContext } from 'react'
 import { Context } from '../../context/Context'
 
-export default function useLogin() {
-  const { loginUser } = useContext(Context)
+export default function useRegister() {
+  const { registerUser } = useContext(Context)
+
   const [userInput, setUserInput] = useState({
-    email: '',
-    password: '',
+    name: '',
+    email: 'to-beck@gmx.de',
+    password: 'Test1234',
+    passwordCheck: 'Test1234',
   })
 
-  let isRequiredFilled = userInput.email && userInput.password
+  const isRequiredFilled =
+    userInput.email && userInput.password && userInput.passwordCheck
 
   function handleChange(e) {
     setUserInput({
@@ -19,7 +23,7 @@ export default function useLogin() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    loginUser(userInput)
+    await registerUser(userInput)
   }
 
   return { userInput, isRequiredFilled, handleChange, handleSubmit }

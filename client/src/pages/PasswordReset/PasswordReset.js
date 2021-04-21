@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { Context } from '../../context/Context'
 import checkEmail from '../../lib/checkEmail'
-import { sendResetCode } from '../../services/userAPIs'
+import { fetchCodeReset } from '../../services/userAPIs'
 import { SendEmailButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 import Header from '../../components/Header'
@@ -38,7 +38,7 @@ export default function PasswordReset() {
       return
     }
 
-    const response = await sendResetCode(userInput.email)
+    const response = await fetchCodeReset(userInput.email)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {

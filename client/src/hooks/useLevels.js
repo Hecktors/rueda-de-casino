@@ -4,13 +4,13 @@ import getLevels from '../services/getLevels'
 
 const STORAGE_KEY = 'levels'
 
-export default function useLevels(userData) {
+export default function useLevels(authData) {
   const [levels, setLevels] = useState([])
-  const { token } = userData
+  const { token } = authData
 
   useEffect(() => {
     refreshLevels()
-  }, [userData]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [authData]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function refreshLevels() {
     if (token) {

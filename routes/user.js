@@ -19,6 +19,12 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ msg: checkResult.msg })
     }
 
+    const user = await User.findOne({ email })
+
+    if (user) {
+      return res.status(400).json({ msg: "Account with this email already exists" })
+    }
+
     const newUser = new User({
       email,
       password: await createPasswordHash(password),
@@ -26,7 +32,7 @@ router.post("/register", async (req, res) => {
       moveIds: [],
     })
 
-    res.json({ msg: newUser })
+    // return res.json({ msg: newUser })
 
     newUser
       .save()

@@ -5,8 +5,8 @@ import Header from '../../components/Header'
 import useLogin from './useLogin'
 
 export default function Login() {
-  const { userInput, isValid, handleChange, handleSubmit } = useLogin()
   const history = useHistory()
+  const { userInput, isRequiredFilled, handleChange, handleSubmit } = useLogin()
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Login() {
           </div>
         </div>
 
-        <LoginButton onClick={() => {}} disabled={!isValid} />
+        <LoginButton onClick={() => {}} disabled={!isRequiredFilled} />
 
         <p className="tac">
           Not have an account?{' '}
