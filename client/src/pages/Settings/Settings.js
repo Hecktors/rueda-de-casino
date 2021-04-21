@@ -16,9 +16,7 @@ export default function Settings() {
 
   return (
     <>
-      <Header cols="010">
-        <h1 className="logo">Salsa time!</h1>
-      </Header>
+      <Header />
 
       <MainStyled>
         <form>

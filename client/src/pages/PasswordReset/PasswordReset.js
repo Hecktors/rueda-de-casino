@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Context } from '../context/Context'
-import checkEmail from '../lib/checkEmail'
-import { sendResetCode } from '../services/userAPIs'
-import { GetCodeButton } from '../components/buttons/Buttons'
-import { BackIconButton } from '../components/buttons/IconButtons'
-import Header from '../components/Header'
+import { Context } from '../../context/Context'
+import checkEmail from '../../lib/checkEmail'
+import { sendResetCode } from '../../services/userAPIs'
+import { SendEmailButton } from '../../components/Buttons'
+import { BackIconButton } from '../../components/IconButtons'
+import Header from '../../components/Header'
 
 export default function PasswordReset() {
   const history = useHistory()
@@ -14,6 +14,7 @@ export default function PasswordReset() {
   const [userInput, setUserInput] = useState({
     email: '',
   })
+  const [emailIsSent, setEmailIsSent] = useState(false)
 
   const isEmailValid = checkEmail(userInput.email)
 
@@ -38,11 +39,11 @@ export default function PasswordReset() {
     }
 
     const response = await sendResetCode(userInput.email)
-    console.log(response)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {
       error && setError('')
+      setEmailIsSent(true)
       console.log('push to setNewPasswordForm')
       // history.push('/')
     }
@@ -50,52 +51,59 @@ export default function PasswordReset() {
 
   return (
     <>
-      <Header cols="110">
-        <BackIconButton size={'sm'} onClick={() => history.push('/')} />
-        <Link to="/">
-          <h1 onClick={() => history.push('/')} className="logo">
-            Salsa time!
-          </h1>
-        </Link>
-      </Header>
-      <PasswordResetStyled onSubmit={handleSubmit}>
-        <div className="form-group">
-          <h2>Password reset</h2>
-          <p>Submit your email to get a reset code</p>
-          <label htmlFor="email">Email*</label>
-          <input
-            onChange={handleChange}
-            value={userInput.email}
-            type="text"
-            id="email"
-            name="email"
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </div>
+      <Header
+        left={
+          <BackIconButton size={'sm'} onClick={() => history.push('/login')} />
+        }
+      />
 
-        <GetCodeButton onClick={() => {}} />
+      <PasswordResetStyled onSubmit={handleSubmit}>
+        <h2>Password reset</h2>
+
+        {emailIsSent ? (
+          <p>Click on the reset password link in the email you've received.</p>
+        ) : (
+          <>
+            <p>Submit your email to get a reset code</p>
+            <div className="form-group">
+              <label htmlFor="email">Email*</label>
+              <input
+                onChange={handleChange}
+                value={userInput.email}
+                type="text"
+                id="email"
+                name="email"
+                onFocus={(e) => e.target.select()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+
+            <SendEmailButton onClick={() => {}} />
+          </>
+        )}
       </PasswordResetStyled>
     </>
   )
 }
 
 const PasswordResetStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-
-  h2 {
-    text-align: center;
-  }
-
-  p {
-    margin: 23px 0;
-  }
-
-  .form-group {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      margin: 23px 0;
+      text-align: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `

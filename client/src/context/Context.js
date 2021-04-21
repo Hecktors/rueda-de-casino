@@ -13,12 +13,12 @@ function ContextProvider({ children }) {
   const { audios } = useAudios(userData, levels)
   const { error, setError } = useError()
 
-  const isLogedin = !!userData.user
+  const isLogedIn = !!userData.user
 
   return (
     <Context.Provider
       value={{
-        isLogedin,
+        isLogedIn,
         userData,
         levels,
         appState,

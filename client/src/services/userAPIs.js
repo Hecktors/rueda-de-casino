@@ -55,3 +55,14 @@ export async function deleteUser(token) {
     .then((res) => res)
     .catch((err) => err.response)
 }
+
+// Send Password Reset Code
+export async function sendResetCode(email) {
+  console.log(email)
+  return await axios
+    .put(`${base}/users/forgot-password`, {
+      email: email,
+    })
+    .then((res) => res)
+    .catch((err) => err.response)
+}

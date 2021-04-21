@@ -1,17 +1,59 @@
-import { useHistory } from 'react-router-dom'
+import { useState, useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import { Context } from '../../context/Context'
+import { loginUser } from '../../services/userAPIs'
 import { LoginButton } from '../../components/Buttons'
 import Header from '../../components/Header'
-import useLogin from './useLogin'
 
 export default function Login() {
-  const { userInput, isValid, handleChange, handleSubmit } = useLogin()
   const history = useHistory()
+  const { setUserData, setError } = useContext(Context)
+  const [userInput, setUserInput] = useState({
+    email: '',
+    password: '',
+  })
+
+  let isValid = userInput.email && userInput.password
+
+  function handleChange(e) {
+    setUserInput({
+      ...userInput,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (!userInput.email || !userInput.password) {
+      setError('All required field have to been filled.')
+      return
+    }
+
+    const loginResponse = await loginUser({
+      email: userInput.email,
+      password: userInput.password,
+    })
+
+    if (loginResponse.status !== 200) {
+      setError(loginResponse.data.msg)
+    } else {
+      setError('')
+      setUserData(loginResponse.data)
+      history.push('/')
+    }
+  }
 
   return (
     <>
-      <Header />
-
+      <Header cols="010">
+        <Link to="/">
+          <h1 onClick={() => history.push('/')} className="logo">
+            Salsa time!
+          </h1>
+        </Link>
+      </Header>
       <LoginStyled onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">Email*</label>

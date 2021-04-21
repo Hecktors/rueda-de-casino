@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { Context } from '../../context/Context'
 import { loginUser, registerUser } from '../../services/userAPIs'
@@ -13,9 +13,9 @@ export default function Register() {
   const { setUserData, setError } = useContext(Context)
   const [userInput, setUserInput] = useState({
     name: '',
-    email: '',
-    password: '',
-    passwordCheck: '',
+    email: 'to-beck@gmx.de',
+    password: 'Test1234',
+    passwordCheck: 'Test1234',
   })
 
   const isRequiredFilled =
@@ -47,19 +47,15 @@ export default function Register() {
       })
 
       setUserData(loginResponse.data)
+      console.log(loginResponse.data)
       history.push('/')
     }
   }
   return (
     <>
-      <Header cols="110">
-        <BackIconButton size={'sm'} onClick={() => history.push('/')} />
-        <Link to="/">
-          <h1 onClick={() => history.push('/')} className="logo">
-            Salsa time!
-          </h1>
-        </Link>
-      </Header>
+      <Header
+        left={<BackIconButton size={'sm'} onClick={() => history.push('/')} />}
+      />
 
       <RegisterStyled onSubmit={handleSubmit}>
         <div className="form-group">

@@ -18,14 +18,14 @@ export default function Edit() {
   const { userData, levels, refreshLevels, setError } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   const [selectedMoveId, setSelectedMoveId] = useState(null)
-  const history = useHistory()
+  // const history = useHistory()
 
   const selectedMove = levels
     .map((level) => level.moves)
     .flat()
     .find((move) => move._id === selectedMoveId)
 
-  !userData.token && history.push('/')
+  // !userData.token && history.push('/')
 
   async function handleDelete(id) {
     const response = await deleteMove(userData.token, selectedMoveId)
@@ -38,6 +38,35 @@ export default function Edit() {
     }
   }
 
+  const header = selectedMoveId ? (
+    <Header
+      left={
+        <BackIconButton
+          onClick={() => setSelectedMoveId(false)}
+          size={'md'}
+          type="button"
+        />
+      }
+      right={
+        <DeleteIconButton
+          onClick={() => setIsDeleteModalDisplayed(true)}
+          type="button"
+          size={'md'}
+        />
+      }
+    />
+  ) : (
+    <Header
+      right={
+        <AddIconButton
+          className="add-button"
+          size={'md'}
+          onClick={() => setSelectedMoveId({})}
+        />
+      }
+    />
+  )
+
   return (
     <>
       {isDeleteModalDisplayed && (
@@ -48,29 +77,7 @@ export default function Edit() {
         />
       )}
 
-      <Header cols={!selectedMoveId ? '011' : '111'}>
-        {selectedMoveId && (
-          <BackIconButton
-            onClick={() => setSelectedMoveId(false)}
-            size={'md'}
-            type="button"
-          />
-        )}
-        <h1 className="logo">Salsa time!</h1>
-        {!selectedMoveId ? (
-          <AddIconButton
-            className="add-button"
-            size={'md'}
-            onClick={() => setSelectedMoveId({})}
-          />
-        ) : (
-          <DeleteIconButton
-            onClick={() => setIsDeleteModalDisplayed(true)}
-            type="button"
-            size={'md'}
-          />
-        )}
-      </Header>
+      {header}
 
       <EditStyled>
         {!selectedMoveId ? (

@@ -21,14 +21,15 @@ export default function Home() {
 
   return (
     <>
-      <Header cols="110">
-        <ResetIconButton
-          onClick={resetAppState}
-          size={'md'}
-          disabled={selectedMoveIds.length === 0}
-        />
-        <h1 className="logo">Salsa time!</h1>
-      </Header>
+      <Header
+        left={
+          <ResetIconButton
+            onClick={resetAppState}
+            size={'md'}
+            disabled={selectedMoveIds.length === 0}
+          />
+        }
+      />
 
       <MainStyled hasMultiLevels={levels.length > 1}>
         <form>

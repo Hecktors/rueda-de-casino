@@ -21,6 +21,12 @@ export const DeleteAccountButton = (props) => (
   </Button>
 )
 
+export const SendEmailButton = (props) => (
+  <Button color={'primary'} ariaLabel="Submit Email Adress" {...props}>
+    Send
+  </Button>
+)
+
 export const LoginButton = (props) => (
   <Button color={'secondary'} ariaLabel="Login" {...props}>
     Log in

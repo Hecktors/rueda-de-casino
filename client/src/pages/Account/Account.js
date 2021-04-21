@@ -34,9 +34,7 @@ export default function Account() {
         />
       )}
 
-      <Header cols="010">
-        <h1 className="logo">Salsa time!</h1>
-      </Header>
+      <Header />
 
       {userData.user && (
         <AccountStyled>

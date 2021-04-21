@@ -27,7 +27,6 @@ export default function useUser() {
   }, [])
 
   useEffect(() => {
-    console.log(userData.token)
     const storedToken = getLocalStorage('auth-token')
     if (storedToken !== userData.token) {
       setLocalStorage('auth-token', userData.token)

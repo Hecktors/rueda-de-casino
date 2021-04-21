@@ -3,30 +3,21 @@ import styled from 'styled-components/macro'
 
 Header.propTypes = {
   className: PropTypes.string,
-  cols: PropTypes.string.isRequired,
+  left: PropTypes.node,
+  center: PropTypes.node,
+  right: PropTypes.node,
 }
 
-export default function Header({ children, className, cols }) {
-  if (!children.isArray) children = [children]
-  const hasColLeft = /111|110|100|101/.test(cols)
-  const hasColCenter = /111|110|010|011/.test(cols)
-  const hasColRight = /111|101|011|001/.test(cols)
-
-  const indexCenter = hasColLeft ? 1 : 0
-  const indexLeft =
-    hasColLeft && hasColCenter ? 2 : !hasColLeft && !hasColCenter ? 0 : 1
-
-  const Placeholder = () => <div data-testid="placeholder" />
-
-  const colLeft = hasColLeft ? children[0] : <Placeholder />
-  let colCenter = hasColCenter ? children[indexCenter] : <Placeholder />
-  let colRight = hasColRight ? children[indexLeft] : <Placeholder />
+export default function Header({ className, left, center, right }) {
+  left = left || <div data-testid="placeholder" />
+  center = center || <h1 className="logo">Salsa time!</h1>
+  right = right || <div data-testid="placeholder" />
 
   return (
     <HeaderStyled className={className}>
-      {colLeft}
-      {colCenter}
-      {colRight}
+      {left}
+      {center}
+      {right}
     </HeaderStyled>
   )
 }

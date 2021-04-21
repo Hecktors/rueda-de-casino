@@ -31,9 +31,11 @@ export default function Session() {
   ] = useSession(history, levels, audios, appState)
 
   !selectedMoves.length && history.push('/')
-  const [YoutubeVideoObj, setYoutubeVideoObj] = useState({})
 
-  return YoutubeVideoObj.url ? (
+  const [YoutubeVideoObj, setYoutubeVideoObj] = useState({})
+  const isYoutubeVideoShown = !!YoutubeVideoObj.url
+
+  const youTubeVideoOverlay = (
     <Overlay fullCovered={!!YoutubeVideoObj.url}>
       <CancelIconButton
         onClick={() => setYoutubeVideoObj({})}
@@ -43,18 +45,25 @@ export default function Session() {
       />
       <YoutubeVideo video={YoutubeVideoObj} />
     </Overlay>
-  ) : (
-    <>
-      <Header
-        cols={isPlaying ? '000' : '110'}
-        className={`${!isPlaying ? 'dark-transparent' : ''}`}
-      >
-        {!isPlaying && (
-          <BackIconButton onClick={sessionHandler.stop} size={'md'} />
-        )}
-        {!isPlaying && <h1>Pause</h1>}
-      </Header>
+  )
 
+  const header = isPlaying ? (
+    <Header center={' '} />
+  ) : (
+    <Header
+      className="dark-transparent"
+      left={<BackIconButton onClick={sessionHandler.stop} size={'md'} />}
+      center={<h1>Pause</h1>}
+    />
+  )
+
+  if (isYoutubeVideoShown) {
+    return youTubeVideoOverlay
+  }
+
+  return (
+    <>
+      {header}
       <MainStyled className="dark no-bg-img">
         <Overlay paused={!isPlaying}>
           {isPlaying ? (
