@@ -40,10 +40,10 @@ export default function LevelAccordion({
       bdRdButtom={bdRdButtom}
       border={border}
     >
-      <h3 onClick={toogleLevelAccordion}>
+      <h2 onClick={toogleLevelAccordion}>
         {hasMultiLevel && (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)}
         <span className="level-name">{header}</span>
-      </h3>
+      </h2>
       <ul>
         {levels.map(({ name: levelName }) => (
           <li key={levelName}>
@@ -66,7 +66,7 @@ export default function LevelAccordion({
 const InputLevelStyled = styled.div`
   position: relative;
 
-  h3 {
+  h2 {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -130,7 +130,7 @@ const InputLevelStyled = styled.div`
     }
 
     .isChecked {
-      color: var(--color-primary);
+      color: var(--color-primary-lighter);
     }
   }
 `
