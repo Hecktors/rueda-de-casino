@@ -24,11 +24,11 @@ function deleteFolderIfEmpty(dir) {
   })
 }
 
-function deleteUserAudioFolder(userID) {
-  const dir = path.join(__dirname, `../public/audio/${userID}`)
+function deleteUserAudioFolder(userId) {
+  const dir = path.join(__dirname, `../public/audio/${userId}`)
   fs.rmdirSync(dir, { recursive: true }, (err) => {
     if (err) throw err
-    console.log(`Audio folder of user ${userID} was deleted`)
+    console.log(`Audio folder of user ${userId} was deleted`)
   })
 }
 

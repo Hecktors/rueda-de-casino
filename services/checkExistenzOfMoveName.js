@@ -1,11 +1,11 @@
 const Move = require("../models/move.model")
 const User = require("../models/user.model")
 
-async function checkExistenzOfMoveName(userID, moveName, moveID) {
-  const foundUser = await User.findById(userID)
-  return await Move.findOne({ name: moveName, _id: { $in: foundUser.moveIDs } })
+async function checkExistenzOfMoveName(userId, moveName, moveId) {
+  const foundUser = await User.findById(userId)
+  return await Move.findOne({ name: moveName, _id: { $in: foundUser.moveIds } })
     .then((move) => {
-      if (move && moveID && String(move._id) === moveID) {
+      if (move && moveId && String(move._id) === moveId) {
         return false
       }
       return !!move
