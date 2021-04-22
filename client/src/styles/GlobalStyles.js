@@ -12,7 +12,7 @@ export default createGlobalStyle`
         --color-disabled: #333;
         --color-warning: #f53030;
         /* Body */
-        --color-bg-body: linear-gradient(to top, #ff00cc, #333399);
+        --color-bg-body: linear-gradient(to top, #0575e6, #021b79); 
         /* Header */
         --color-title: #929292;
         /* Accordion */
