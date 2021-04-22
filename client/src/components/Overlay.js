@@ -44,7 +44,7 @@ const OverlayStyled = styled.div`
     position: absolute;
     z-index: 9999;
     top: 10px;
-    right: 5px;
+    right: 10px;
   }
 
   @media screen and (min-width: 800px) {

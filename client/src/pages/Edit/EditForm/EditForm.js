@@ -102,7 +102,7 @@ export default function EditForm({
         </div>
 
         <div className="form-group">
-          <label htmlFor="">Num of bars*</label>
+          <label htmlFor="">Num of bar pairs*</label>
           <input
             className="tac"
             onChange={updateUserInput}

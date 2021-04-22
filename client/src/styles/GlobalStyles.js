@@ -4,6 +4,7 @@ export default createGlobalStyle`
     :root {
         /* General */
         --color-primary: #d04b1f;
+        --color-primary-lighter: #df5426;
         --color-secondary: #2ca3d2;
         --color-text: #999;
         --color-bg: #0e0e15;
@@ -168,26 +169,6 @@ export default createGlobalStyle`
 
     .tac {
         text-align: center;
-    }
-
-    .tar {
-        text-align: right;
-    }
-
-    .pos {
-        position: relative;
-    }
-
-    .top-right {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .top-left {
-        position: absolute;
-        top: 10px;
-        left: 10px;
     }
 
     .desktop-only {

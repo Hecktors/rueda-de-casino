@@ -132,7 +132,7 @@ const EditStyled = styled.main`
     }
 
     li:first-child {
-      color: var(--color-primary);
+      color: var(--color-primary-lighter);
     }
   }
 `

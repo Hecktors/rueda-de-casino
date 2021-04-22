@@ -20,7 +20,9 @@ export default function InputLevel({
   const hasInputMove = levelMoves.some((move) =>
     selectedMoveIds.includes(move._id)
   )
-  const color = hasInputMove ? 'var(--color-primary)' : 'var(--color-text)'
+  const color = hasInputMove
+    ? 'var(--color-primary-lighter)'
+    : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
 
   useEffect(() => {
@@ -33,10 +35,10 @@ export default function InputLevel({
 
   return (
     <InputLevelStyled isOpen={isOpen} color={color} ulHeight={ulHeight}>
-      <h3 onClick={toogleInputLevel}>
+      <h2 onClick={toogleInputLevel}>
         {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
         <span className="level-name">{levelName}</span>
-      </h3>
+      </h2>
       <ul>
         {levelMoves.map((move) => (
           <li key={move._id}>
@@ -63,7 +65,7 @@ const InputLevelStyled = styled.div`
   background-color: var(--color-bg-accordion);
   border-radius: 5px;
 
-  h3 {
+  h2 {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -116,7 +118,7 @@ const InputLevelStyled = styled.div`
     }
 
     .isChecked {
-      color: var(--color-primary);
+      color: var(--color-primary-lighter);
     }
   }
 `
