@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import checkRegisterInput from '../lib/checkRegisterInput'
+import getInputErrors from '../lib/checkInputs'
 import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 import {
   fetchUser,
@@ -7,6 +7,8 @@ import {
   fetchUserRegister,
   fetchTokenVerification,
   fetchUserAccountDelete,
+  fetchPasswordReset,
+  fetchPasswordRenew,
 } from '../services/userAPIs'
 
 export default function useAuth(error, setError) {
@@ -38,46 +40,46 @@ export default function useAuth(error, setError) {
     }
   }, [authData.token])
 
-  // Login User
-  async function loginUser(loginData) {
-    if (!loginData.email || !loginData.password) {
-      setError('All required field have to been filled.')
+  // Login user
+  async function loginUser(userInput) {
+    const inputErr = getInputErrors(userInput)
+    if (inputErr) {
+      setError(inputErr)
       return
     }
 
-    const loginResponse = await fetchUserLogin(loginData)
-
-    if (loginResponse.status !== 200) {
-      setError(loginResponse.data.msg)
+    const response = await fetchUserLogin(userInput)
+    if (response.status !== 200) {
+      setError(response.data.msg)
     } else {
       error && setError('')
-      setAuthData(loginResponse.data)
+      setAuthData(response.data)
     }
   }
 
-  // Register User
+  // Register user
   async function registerUser(userInput) {
-    const validation = checkRegisterInput(userInput)
-
-    if (!validation.result) {
-      setError(validation.msg)
+    const inputErr = getInputErrors(userInput)
+    if (inputErr) {
+      setError(inputErr)
       return
     }
-    const registerResponse = await fetchUserRegister(userInput)
-    if (registerResponse.status !== 200) {
-      setError(registerResponse.data.msg)
+
+    const response = await fetchUserRegister(userInput)
+    if (response.status !== 200) {
+      setError(response.data.msg)
     } else {
       loginUser(userInput)
     }
   }
 
-  // Logout User
+  // Logout user
   function logoutUser() {
     localStorage.removeItem('auth-token')
     setAuthData({})
   }
 
-  // Delete User
+  // Delete user
   async function deleteUserAccount() {
     const deleteResponse = await fetchUserAccountDelete(authData.token)
     if (deleteResponse.status === 200) {
@@ -86,5 +88,47 @@ export default function useAuth(error, setError) {
     }
   }
 
-  return { authData, registerUser, loginUser, logoutUser, deleteUserAccount }
+  // Request password reset link
+  async function getResetLink(userInput) {
+    const inputErr = getInputErrors(userInput)
+    if (inputErr) {
+      setError(inputErr)
+      return
+    }
+
+    const response = await fetchPasswordReset(userInput.email)
+    if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      return true
+    }
+  }
+
+  // Save new password
+  async function saveNewPassword(resetToken, userInput) {
+    const inputErr = getInputErrors(userInput)
+    if (inputErr) {
+      setError(inputErr)
+      return
+    }
+
+    const response = await fetchPasswordRenew(
+      resetToken,
+      userInput.password,
+      userInput.passwordCheck
+    )
+    if (response.status === 200) {
+      loginUser({ email: response.data.email, password: userInput.password })
+    }
+  }
+
+  return {
+    authData,
+    registerUser,
+    loginUser,
+    logoutUser,
+    deleteUserAccount,
+    getResetLink,
+    saveNewPassword,
+  }
 }

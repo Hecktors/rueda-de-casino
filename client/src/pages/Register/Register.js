@@ -34,7 +34,7 @@ export default function Register() {
         />
 
         <AuthFormInput
-          type="email"
+          type="text"
           id="email"
           name="email"
           label="Email*"

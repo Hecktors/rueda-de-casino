@@ -1,9 +1,8 @@
 import { useState, useContext } from 'react'
 import { Context } from '../../context/Context'
-import { fetchPasswordRenew } from '../../services/userAPIs'
 
 export default function usePasswordRenew(resetToken) {
-  const { loginUser } = useContext(Context)
+  const { saveNewPassword } = useContext(Context)
 
   const [userInput, setUserInput] = useState({
     password: '',
@@ -21,14 +20,7 @@ export default function usePasswordRenew(resetToken) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await fetchPasswordRenew(
-      resetToken,
-      userInput.password,
-      userInput.passwordCheck
-    )
-    if (response.status === 200) {
-      loginUser({ email: response.data.email, password: userInput.password })
-    }
+    saveNewPassword(resetToken, userInput)
   }
 
   return { userInput, isRequiredFilled, handleChange, handleSubmit }

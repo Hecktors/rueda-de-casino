@@ -14,6 +14,8 @@ function ContextProvider({ children }) {
     loginUser,
     logoutUser,
     deleteUserAccount,
+    getResetLink,
+    saveNewPassword,
   } = useAuth(error, setError)
   const { levels, refreshLevels } = useLevels(authData)
   const { audios } = useAudios(authData, levels)
@@ -33,6 +35,8 @@ function ContextProvider({ children }) {
         registerUser,
         loginUser,
         deleteUserAccount,
+        getResetLink,
+        saveNewPassword,
         refreshLevels,
         setAppState,
         setError,

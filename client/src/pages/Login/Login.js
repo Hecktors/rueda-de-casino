@@ -15,7 +15,7 @@ export default function Login() {
 
       <AuthForm onSubmit={handleSubmit}>
         <AuthFormInput
-          type="email"
+          type="text"
           id="email"
           name="email"
           label="Email*"
