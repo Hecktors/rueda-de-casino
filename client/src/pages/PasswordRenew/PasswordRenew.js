@@ -29,6 +29,13 @@ export default function PasswordRenew() {
         }
       />
       <AuthForm onSubmit={handleSubmit}>
+        {/* Hidden input to prevent chrome warning */}
+        <input
+          type="text"
+          name="username"
+          autoComplete="username"
+          style={{ display: 'none' }}
+        />
         <p>Enter your new password.</p>
         <AuthFormInput
           type="password"
