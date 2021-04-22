@@ -10,17 +10,12 @@ export default function Account() {
   const { authData, logoutUser, deleteUserAccount } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
 
-  async function handleDelete() {
-    deleteUserAccount()
-    setIsDeleteModalDisplayed(false)
-  }
-
   return (
     <>
       {isDeleteModalDisplayed && (
         <DeleteModal
           cancel={() => setIsDeleteModalDisplayed(false)}
-          handleDelete={handleDelete}
+          handleDelete={deleteUserAccount}
           deleteItem="User Account"
         />
       )}
@@ -36,6 +31,7 @@ export default function Account() {
         </p>
         <DeepRedButton
           text="Delete Account"
+          type="button"
           outlined
           onClick={() => setIsDeleteModalDisplayed(true)}
         />
