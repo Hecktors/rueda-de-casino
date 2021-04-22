@@ -1,9 +1,10 @@
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
-import { SendEmailButton } from '../../components/Buttons'
-import { BackIconButton } from '../../components/IconButtons'
-import Header from '../../components/Header'
 import usePasswordReset from './usePasswordReset'
+import Header from '../../components/Header'
+import AuthForm from '../../components/AuthForm'
+import AuthFormInput from '../../components/AuthFormInput'
+import { BlueButton } from '../../components/Buttons'
+import { BackIconButton } from '../../components/IconButtons'
 
 export default function PasswordReset() {
   const history = useHistory()
@@ -23,53 +24,28 @@ export default function PasswordReset() {
         }
       />
 
-      <PasswordResetStyled onSubmit={handleSubmit}>
-        <h2>Password reset</h2>
-
+      <AuthForm onSubmit={handleSubmit}>
         {emailIsSent ? (
           <p>Click on the reset password link in the email you've received.</p>
         ) : (
           <>
-            <p>Submit your email to get a reset code</p>
-            <div className="form-group">
-              <label htmlFor="email">Email*</label>
-              <input
-                onChange={handleChange}
-                value={userInput.email}
-                type="text"
-                id="email"
-                name="email"
-                onFocus={(e) => e.target.select()}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
+            <p>Enter your email address to get a password reset link.</p>
+            <AuthFormInput
+              type="email"
+              id="email"
+              name="email"
+              label="Email*"
+              value={userInput.email}
+              autoComplete="email"
+              onChange={handleChange}
+              onContextMenu={(e) => e.preventDefault()}
+              onFocus={(e) => e.target.select()}
+            />
 
-            <SendEmailButton onClick={() => {}} disabled={!isRequiredFilled} />
+            <BlueButton text="Get Reset Link" disabled={!isRequiredFilled} />
           </>
         )}
-      </PasswordResetStyled>
+      </AuthForm>
     </>
   )
 }
-
-const PasswordResetStyled = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-
-    h2 {
-      text-align: center;
-    }
-
-    p {
-      margin: 23px 0;
-      text-align: center;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-`

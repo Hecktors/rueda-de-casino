@@ -12,18 +12,18 @@ const Home = React.lazy(() => import('./pages/Home'))
 const Session = React.lazy(() => import('./pages/Session'))
 const Settings = React.lazy(() => import('./pages/Settings'))
 const Edit = React.lazy(() => import('./pages/Edit'))
-const Account = React.lazy(() => import('./pages/Account/Account'))
+const Account = React.lazy(() => import('./pages/Account'))
 
 export default function App() {
-  const { isLogedIn, error, setError } = useContext(Context)
+  const { isLoggedIn, error, setError } = useContext(Context)
   const classes = !!useRouteMatch('/session')?.isExact ? ' session' : ''
 
-  const routes = !isLogedIn ? (
+  const routes = !isLoggedIn ? (
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/password-reset" component={PasswordReset} />
-      <Route path="/new-password/:resetToken" component={PasswordRenew} />
+      <Route path="/password-renew/:resetToken" component={PasswordRenew} />
       <Redirect to="/login" />
     </Switch>
   ) : (

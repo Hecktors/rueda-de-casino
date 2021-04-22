@@ -1,9 +1,10 @@
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
 import useRegister from './useRegister'
-import { RegisterButton } from '../../components/Buttons'
-import { BackIconButton } from '../../components/IconButtons'
 import Header from '../../components/Header'
+import AuthForm from '../../components/AuthForm'
+import AuthFormInput from '../../components/AuthFormInput'
+import { BlueButton } from '../../components/Buttons'
+import { BackIconButton } from '../../components/IconButtons'
 
 export default function Register() {
   const history = useHistory()
@@ -19,69 +20,58 @@ export default function Register() {
       <Header
         left={<BackIconButton size={'sm'} onClick={() => history.push('/')} />}
       />
+      <AuthForm onSubmit={handleSubmit}>
+        <AuthFormInput
+          type="text"
+          id="name"
+          name="name"
+          label="Name"
+          value={userInput.name}
+          autoComplete="name"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-      <RegisterStyled onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            onChange={handleChange}
-            value={userInput.name}
-            type="text"
-            id="name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </div>
+        <AuthFormInput
+          type="email"
+          id="email"
+          name="email"
+          label="Email*"
+          value={userInput.email}
+          autoComplete="email"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-        <div className="form-group">
-          <label htmlFor="email">Email*</label>
-          <input
-            onChange={handleChange}
-            value={userInput.email}
-            type="email"
-            id="email"
-            name="email"
-            autoComplete="email"
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </div>
+        <AuthFormInput
+          type="password"
+          id="password"
+          name="password"
+          label="Password*"
+          className="password"
+          value={userInput.password}
+          autoComplete="current-password"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-        <div className="form-group">
-          <label htmlFor="password">Password*</label>
-          <div className="pos">
-            <input
-              className="password"
-              onChange={handleChange}
-              value={userInput.password}
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="new-password"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-        </div>
+        <AuthFormInput
+          type="password"
+          id="passwordCheck"
+          name="passwordCheck"
+          label="Confirm Password*"
+          className="passwordCheck"
+          value={userInput.passwordCheck}
+          autoComplete="current-passwordCheck"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-        <div className="form-group">
-          <label htmlFor="passwordCheck">Confirm Password*</label>
-          <input
-            onChange={handleChange}
-            value={userInput.passwordCheck}
-            type="password"
-            id="passwordCheck"
-            name="passwordCheck"
-            autoComplete="new-password"
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </div>
-
-        <RegisterButton onClick={() => {}} disabled={!isRequiredFilled} />
+        <BlueButton text="Register" disabled={!isRequiredFilled} />
 
         <p className="tac">
           Already have an account?{' '}
@@ -89,19 +79,7 @@ export default function Register() {
             Log in
           </span>
         </p>
-      </RegisterStyled>
+      </AuthForm>
     </>
   )
 }
-
-const RegisterStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  gap: 20px;
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-`

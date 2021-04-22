@@ -10,12 +10,13 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
   inline: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 }
 
 const colors = {
   primary: 'var(--color-primary)',
   secondary: 'var(--color-secondary)',
+  warning: 'var(--color-warning)',
   bg: 'var(--color-bg)',
   disabled: 'var(--color-disabled)',
 }
@@ -31,7 +32,7 @@ export default function Button({
   inline,
   onClick,
 }) {
-  const width = inline ? '30%' : '60%'
+  const width = inline ? '30%' : '200px'
   let textColor = outlined ? colors[color] : colors['bg']
   let bgColor = outlined ? colors['bg'] : colors[color]
   let bdColor = outlined ? textColor : bgColor

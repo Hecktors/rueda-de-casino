@@ -1,8 +1,9 @@
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
-import { LoginButton } from '../../components/Buttons'
-import Header from '../../components/Header'
 import useLogin from './useLogin'
+import Header from '../../components/Header'
+import AuthForm from '../../components/AuthForm'
+import AuthFormInput from '../../components/AuthFormInput'
+import { BlueButton } from '../../components/Buttons'
 
 export default function Login() {
   const history = useHistory()
@@ -12,47 +13,41 @@ export default function Login() {
     <>
       <Header />
 
-      <LoginStyled onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email*</label>
-          <input
-            onChange={handleChange}
-            value={userInput.email}
-            type="email"
-            id="email"
-            name="email"
-            autoComplete="email"
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </div>
+      <AuthForm onSubmit={handleSubmit}>
+        <AuthFormInput
+          type="email"
+          id="email"
+          name="email"
+          label="Email*"
+          value={userInput.email}
+          autoComplete="email"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-        <div className="form-group">
-          <label htmlFor="password">Password*</label>
-          <div className="pos">
-            <input
-              className="password"
-              onChange={handleChange}
-              value={userInput.password}
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="current-password"
-              onFocus={(e) => e.target.select()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
-          </div>
-        </div>
+        <AuthFormInput
+          type="password"
+          id="password"
+          name="password"
+          label="Password*"
+          className="password"
+          value={userInput.password}
+          autoComplete="current-password"
+          onChange={handleChange}
+          onContextMenu={(e) => e.preventDefault()}
+          onFocus={(e) => e.target.select()}
+        />
 
-        <LoginButton onClick={() => {}} disabled={!isRequiredFilled} />
+        <BlueButton text="Login" disabled={!isRequiredFilled} />
 
-        <p className="tac">
+        <p>
           Not have an account?{' '}
           <span className="link" onClick={() => history.push('/register')}>
             Register
           </span>
         </p>
-        <p className="tac">
+        <p>
           <span
             className="link"
             onClick={() => history.push('/password-reset')}
@@ -60,19 +55,7 @@ export default function Login() {
             Forgot password?
           </span>
         </p>
-      </LoginStyled>
+      </AuthForm>
     </>
   )
 }
-
-const LoginStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-`

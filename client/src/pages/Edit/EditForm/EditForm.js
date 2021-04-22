@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { Context } from '../../../context/Context'
 import useUserInput from './useUserInput'
-import { ResetButton, SaveButton } from '../../../components/Buttons'
+import { BlueButton, RedButton } from '../../../components/Buttons'
 import { AddIconButton } from '../../../components/IconButtons'
 import LevelAccordion from './LevelAccordion'
 
@@ -149,14 +149,16 @@ export default function EditForm({
       </div>
 
       <div className="button-container">
-        <ResetButton
+        <BlueButton
+          text="Reset"
           onClick={resetUserInput}
           disabled={hasNoChanges}
           type={'button'}
           inline
           outlined
         />
-        <SaveButton
+        <RedButton
+          text="Save"
           onClick={() => {}}
           disabled={hasNoChanges || !isValid}
           inline

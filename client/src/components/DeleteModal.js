@@ -1,7 +1,7 @@
 import React from 'react'
 import Proptypes from 'prop-types'
 import styled from 'styled-components/macro'
-import { CancelButton, DeleteButton } from './Buttons'
+import { BlueButton, RedButton } from './Buttons'
 
 DeleteModal.propTypes = {
   deleteItem: Proptypes.string.isRequired,
@@ -16,8 +16,8 @@ export default function DeleteModal({ deleteItem, cancel, handleDelete }) {
         <h2>Delete {deleteItem}</h2>
         <p>Are you sure? This process cannot be undone.</p>
         <div>
-          <CancelButton onClick={cancel} type="button" />
-          <DeleteButton onClick={handleDelete} type="button" />{' '}
+          <BlueButton text="Cancel" onClick={cancel} type="button" />
+          <RedButton text="Delete" onClick={handleDelete} type="button" />{' '}
         </div>
       </div>
     </DeleteModalStyled>

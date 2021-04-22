@@ -6,9 +6,9 @@ export default function useRegister() {
 
   const [userInput, setUserInput] = useState({
     name: '',
-    email: 'to-beck@gmx.de',
-    password: 'Test1234',
-    passwordCheck: 'Test1234',
+    email: '',
+    password: '',
+    passwordCheck: '',
   })
 
   const isRequiredFilled =

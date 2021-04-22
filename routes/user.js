@@ -141,7 +141,7 @@ router.put("/password-reset", (req, res) => {
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
       const base = process.env.CLIENT_URL || "https://localhost:3000"
-      const url = `${base}/new-password/${token}`
+      const url = `${base}/password-new/${token}`
       const emailData = {
         from: `Salsatime Admin <${process.env.EMAIL_USER}>`,
         to: email,

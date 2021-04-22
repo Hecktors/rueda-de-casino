@@ -19,12 +19,12 @@ function ContextProvider({ children }) {
   const { audios } = useAudios(authData, levels)
   const { appState, setAppState } = useAppState(levels)
 
-  const isLogedIn = !!authData.user
+  const isLoggedIn = !!authData.user
   return (
     <Context.Provider
       value={{
         authData,
-        isLogedIn,
+        isLoggedIn,
         levels,
         appState,
         audios,
