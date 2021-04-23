@@ -145,7 +145,7 @@
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="##0e0e15" />
+    <meta name="theme-color" content="#0e0e15" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -166,6 +166,8 @@
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js')
+      } else {
+        console.log('No service worker available')
       }
     </script>
     <div id="root"></div>
