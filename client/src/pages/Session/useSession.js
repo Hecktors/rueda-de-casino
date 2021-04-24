@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
+import { Context } from '../../context/Context'
 import getRandomArrayElement from '../../lib/getRandomArrayElement'
-const musicUrl = './assets/audio/Uno_dos_tres.mp3'
+const unoDosTresSong = new Audio('./assets/audio/Uno_dos_tres.mp3')
 
 const songVolume = 0.2
 const moveVolume = 0.8
 const callsStart = 5000
 
-export default function useSession(history, levels, audios, appState) {
+export default function useSession(history) {
+  const { levels, audios, appState } = useContext(Context)
   const { selectedMoveIds, isSongActive, speed, noRepetition } = appState
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
@@ -23,7 +25,7 @@ export default function useSession(history, levels, audios, appState) {
 
   useEffect(() => {
     if (isSongActive) {
-      musicAudioRef.current = new Audio(musicUrl)
+      musicAudioRef.current = unoDosTresSong
       musicAudioRef.current.volume = songVolume
     }
     sessionHandler.play()

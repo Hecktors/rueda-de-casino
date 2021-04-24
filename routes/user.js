@@ -101,21 +101,25 @@ router.delete("/", auth, async (req, res) => {
 router.post("/token-verification", async (req, res) => {
   try {
     const token = req.header("x-auth-token")
+
     if (!token) {
       return res.json(false)
     }
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET)
-    if (!verified) {
-      return res.json(false)
-    }
+    const verified = await jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+      if (err) {
+        console.log(err.message)
+        return res.status(400).json({ error: err.message })
+      }
+      return decoded
+    })
 
     const user = await User.findById(verified.id)
     if (!user) {
-      return res.json(false)
+      return res.json({ error: "No user found" })
     }
 
-    res.json(true)
+    res.json({ error: null })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
