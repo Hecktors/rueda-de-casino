@@ -18,7 +18,6 @@ import YoutubeVideo from './YoutubeVideo'
 
 export default function Session() {
   const history = useHistory()
-  const { history } = useContext(Context)
 
   const [
     selectedMoves,
@@ -27,7 +26,7 @@ export default function Session() {
     currentMove,
     isMoveDisplayed,
     setIsMoveDisplayed,
-  ] = useSession(history, levels, audios, appState)
+  ] = useSession(history)
 
   !selectedMoves.length && history.push('/')
 
