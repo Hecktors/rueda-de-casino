@@ -6,7 +6,7 @@ const STORAGE_KEY = 'appState'
 const initState = {
   selectedMoveIds: [],
   speed: 2900,
-  isRunThroughSelection: true,
+  noRepetition: true,
   isSongActive: true,
 }
 

@@ -10,7 +10,7 @@ export default function useUserInput(appState, setAppState) {
       setAppState({ ...appState, isSongActive: checked })
     },
     runThroughSelection: (_, checked) => {
-      setAppState({ ...appState, isRunThroughSelection: checked })
+      setAppState({ ...appState, noRepetition: checked })
     },
   }
 

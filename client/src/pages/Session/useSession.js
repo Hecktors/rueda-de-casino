@@ -7,12 +7,7 @@ const moveVolume = 0.8
 const callsStart = 5000
 
 export default function useSession(history, levels, audios, appState) {
-  const {
-    selectedMoveIds,
-    isSongActive,
-    speed,
-    isRunThroughSelection,
-  } = appState
+  const { selectedMoveIds, isSongActive, speed, noRepetition } = appState
   const [currentMove, setCurrentMove] = useState({})
   const [isPlaying, setIsPlaying] = useState(true)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
@@ -82,7 +77,7 @@ export default function useSession(history, levels, audios, appState) {
 
   function getNextMove() {
     const move = getRandomArrayElement(moveCallSequence.current)
-    isRunThroughSelection && removeIdFromMoveCallSequence(move._id)
+    noRepetition && removeIdFromMoveCallSequence(move._id)
     return move
   }
 

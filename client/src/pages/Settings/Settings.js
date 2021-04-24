@@ -12,7 +12,7 @@ export default function Settings() {
   const { appState, setAppState } = useContext(Context)
   const { updateAppState } = useUserInput(appState, setAppState)
 
-  const { speed, isSongActive, isRunThroughSelection } = appState
+  const { speed, isSongActive, noRepetition } = appState
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Settings() {
             )}
           </div>
           <InputRunThroughSelection
-            isRunThroughSelection={isRunThroughSelection}
+            noRepetition={noRepetition}
             updateAppState={updateAppState}
           />
         </form>

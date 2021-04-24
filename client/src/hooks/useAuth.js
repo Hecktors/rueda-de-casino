@@ -16,29 +16,35 @@ export default function useAuth(error, setError) {
 
   useEffect(() => {
     async function initfetch() {
-      const storedToken = JSON.parse(localStorage.getItem('auth-token'))
-      if (!storedToken) {
+      const storedAuthData = getLocalStorage('auth')
+      if (!storedAuthData?.token) {
         return
       }
-      const tokenRes = await fetchTokenVerification(storedToken)
-      if (tokenRes) {
-        const userResponse = await fetchUser(storedToken)
+
+      const tokenRes = await fetchTokenVerification(storedAuthData.token)
+      if (!tokenRes) {
         setAuthData({
-          token: storedToken,
-          user: userResponse,
+          token: storedAuthData.token,
+          user: storedAuthData.user,
         })
+        return
       }
+      if (tokenRes?.err) {
+        setError(tokenRes.err)
+        return
+      }
+      const userResponse = await fetchUser(storedAuthData.token)
+      setAuthData({
+        token: storedAuthData.token,
+        user: userResponse,
+      })
     }
     initfetch()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (authData.token) {
-      const storedToken = getLocalStorage('auth-token')
-      storedToken !== authData.token &&
-        setLocalStorage('auth-token', authData.token)
-    }
-  }, [authData.token])
+    setLocalStorage('auth', authData)
+  }, [authData])
 
   // Login user
   async function loginUser(userInput) {
@@ -49,7 +55,9 @@ export default function useAuth(error, setError) {
     }
 
     const response = await fetchUserLogin(userInput)
-    if (response.status !== 200) {
+    if (!response) {
+      setError('No internet connection')
+    } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
       error && setError('')
@@ -66,7 +74,9 @@ export default function useAuth(error, setError) {
     }
 
     const response = await fetchUserRegister(userInput)
-    if (response.status !== 200) {
+    if (!response) {
+      setError('No internet connection')
+    } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
       loginUser(userInput)
@@ -97,7 +107,9 @@ export default function useAuth(error, setError) {
     }
 
     const response = await fetchPasswordReset(userInput.email)
-    if (response.status !== 200) {
+    if (!response) {
+      setError('No internet connection')
+    } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
       return true

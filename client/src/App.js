@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom'
 import { Context } from './context/Context'
 import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMsg from './components/ErrorMsg'
-import logo from './components/Icons/assets/dancing.svg'
+import logo from './assets/svg/dancing.svg'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
