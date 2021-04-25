@@ -9,23 +9,22 @@ const Context = createContext()
 function ContextProvider({ children }) {
   const { error, setError } = useError()
   const {
-    authData,
+    authToken,
     registerUser,
     loginUser,
     logoutUser,
     deleteUserAccount,
     getResetLink,
     saveNewPassword,
-  } = useAuth(error, setError)
-  const { levels, refreshLevels } = useLevels(authData)
-  const { audios } = useAudios(authData, levels)
+  } = useAuth(setError)
+  const { levels, refreshLevels } = useLevels()
+  const { audios } = useAudios(authToken, levels)
   const { appState, setAppState } = useAppState(levels)
 
-  const isLoggedIn = !!authData.user
+  const isLoggedIn = !!authToken
   return (
     <Context.Provider
       value={{
-        authData,
         isLoggedIn,
         levels,
         appState,

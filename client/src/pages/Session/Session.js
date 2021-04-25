@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Context } from '../../context/Context'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import useSession from './useSession'
@@ -18,6 +19,8 @@ import YoutubeVideo from './YoutubeVideo'
 
 export default function Session() {
   const history = useHistory()
+  const { setError } = useContext(Context)
+  const isOnline = window.navigator.onLine
 
   const [
     selectedMoves,
@@ -56,7 +59,12 @@ export default function Session() {
   )
 
   if (isYoutubeVideoShown) {
-    return youTubeVideoOverlay
+    if (isOnline) {
+      return youTubeVideoOverlay
+    } else {
+      setError('Internet connection not available')
+      setYoutubeVideoObj(false)
+    }
   }
 
   return (

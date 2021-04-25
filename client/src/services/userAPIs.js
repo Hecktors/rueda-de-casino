@@ -8,7 +8,7 @@ export function fetchTokenVerification(token) {
     .post(`${base}/users/token-verification`, null, {
       headers: { 'x-auth-token': token },
     })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((err) => console.log(err))
 }
 
@@ -18,7 +18,7 @@ export function fetchUser(token) {
     .get(`${base}/users/`, {
       headers: { 'x-auth-token': token },
     })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((err) => console.log(err))
 }
 

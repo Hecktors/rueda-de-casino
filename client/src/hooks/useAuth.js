@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import getInputErrors from '../lib/checkInputs'
-import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 import {
-  fetchUser,
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from '../lib/localStorage'
+import {
   fetchUserLogin,
   fetchUserRegister,
   fetchTokenVerification,
@@ -11,116 +14,99 @@ import {
   fetchPasswordRenew,
 } from '../services/userAPIs'
 
-export default function useAuth(error, setError) {
-  const [authData, setAuthData] = useState({})
+export default function useAuth(setError) {
+  const [authToken, setAuthToken] = useState(null)
 
   useEffect(() => {
     async function initfetch() {
-      const storedAuthData = getLocalStorage('auth')
-      if (!storedAuthData?.token) {
-        return
-      }
+      const storedToken = getLocalStorage('authToken')
 
-      const tokenRes = await fetchTokenVerification(storedAuthData.token)
-      if (!tokenRes) {
-        setAuthData({
-          token: storedAuthData.token,
-          user: storedAuthData.user,
-        })
-        return
+      if (storedToken) {
+        const tokenRes = await fetchTokenVerification(storedToken)
+        !tokenRes?.err
+          ? setAuthToken(storedToken)
+          : setLocalStorage('authToken', null)
       }
-      if (tokenRes?.err) {
-        setError(tokenRes.err)
-        return
-      }
-      const userResponse = await fetchUser(storedAuthData.token)
-      setAuthData({
-        token: storedAuthData.token,
-        user: userResponse,
-      })
     }
     initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    setLocalStorage('auth', authData)
-  }, [authData])
-
   // Login user
   async function loginUser(userInput) {
-    const inputErr = getInputErrors(userInput)
-    if (inputErr) {
-      setError(inputErr)
+    const inputError = getInputErrors(userInput)
+
+    if (inputError) {
+      setError(inputError)
       return
     }
 
     const response = await fetchUserLogin(userInput)
+
     if (!response) {
       setError('No internet connection')
     } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
-      error && setError('')
-      setAuthData(response.data)
+      // Login successful
+      setLocalStorage('authToken', response.data.token)
+      setLocalStorage('userName', response.data.user)
+      setAuthToken(response.data.token)
     }
   }
 
   // Register user
   async function registerUser(userInput) {
-    const inputErr = getInputErrors(userInput)
-    if (inputErr) {
-      setError(inputErr)
+    const inputError = getInputErrors(userInput)
+
+    if (inputError) {
+      setError(inputError)
       return
     }
 
     const response = await fetchUserRegister(userInput)
+
     if (!response) {
       setError('No internet connection')
     } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
-      loginUser(userInput)
+      // Register successful - login new user
+      loginUser({ email: response.data.email, password: userInput.password })
     }
   }
 
   // Logout user
   function logoutUser() {
-    localStorage.removeItem('auth-token')
-    setAuthData({})
-  }
-
-  // Delete user
-  async function deleteUserAccount() {
-    const deleteResponse = await fetchUserAccountDelete(authData.token)
-    if (deleteResponse.status === 200) {
-      localStorage.clear()
-      logoutUser()
-    }
+    clearLocalStorage()
+    setAuthToken(null)
   }
 
   // Request password reset link
   async function getResetLink(userInput) {
-    const inputErr = getInputErrors(userInput)
-    if (inputErr) {
-      setError(inputErr)
+    const inputError = getInputErrors(userInput)
+
+    if (inputError) {
+      setError(inputError)
       return
     }
-
     const response = await fetchPasswordReset(userInput.email)
+
     if (!response) {
       setError('No internet connection')
     } else if (response.status !== 200) {
       setError(response.data.msg)
     } else {
+      // Request successful - reset link is sent
       return true
     }
   }
 
   // Save new password
   async function saveNewPassword(resetToken, userInput) {
-    const inputErr = getInputErrors(userInput)
-    if (inputErr) {
-      setError(inputErr)
+    const inputError = getInputErrors(userInput)
+
+    if (inputError) {
+      setError(inputError)
       return
     }
 
@@ -129,13 +115,33 @@ export default function useAuth(error, setError) {
       userInput.password,
       userInput.passwordCheck
     )
-    if (response.status === 200) {
+
+    if (!response) {
+      setError('No internet connection')
+    } else if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      // Update password successfully
       loginUser({ email: response.data.email, password: userInput.password })
     }
   }
 
+  // Delete user
+  async function deleteUserAccount() {
+    const response = await fetchUserAccountDelete(authToken)
+
+    if (!response) {
+      setError('No internet connection')
+    } else if (response.status !== 200) {
+      setError(response.data.msg)
+    } else {
+      // Delete user account successfully
+      logoutUser()
+    }
+  }
+
   return {
-    authData,
+    authToken,
     registerUser,
     loginUser,
     logoutUser,
