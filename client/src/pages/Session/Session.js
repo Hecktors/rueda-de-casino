@@ -62,7 +62,7 @@ export default function Session() {
     if (isOnline) {
       return youTubeVideoOverlay
     } else {
-      setError('Internet connection not available')
+      setError('No internet connection')
       setYoutubeVideoObj(false)
     }
   }
