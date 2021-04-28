@@ -1,3 +1,4 @@
+import sslRedirect from "heroku-ssl-redirect"
 const express = require("express")
 const path = require("path")
 const mongoose = require("mongoose")
@@ -5,6 +6,7 @@ const cors = require("cors")
 const app = express()
 require("dotenv").config({})
 
+app.use(sslRedirect())
 app.use(cors())
 app.use(express.json())
 app.use(express.static("public"))
