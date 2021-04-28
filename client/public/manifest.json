@@ -18,6 +18,11 @@
       "sizes": "144x144"
     },
     {
+      "src": "./assets/icons/app-icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
       "src": "./assets/icons/app-icon-256x256.png",
       "type": "image/png",
       "sizes": "256x256"
@@ -26,6 +31,12 @@
       "src": "./assets/icons/app-icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "./assets/icons/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
