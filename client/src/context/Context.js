@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { useState, createContext } from 'react'
 import useAppState from '../hooks/useAppState'
 import useAuth from '../hooks/useAuth'
 import useLevels from '../hooks/useLevels'
@@ -20,6 +20,16 @@ function ContextProvider({ children }) {
   const { levels, refreshLevels } = useLevels()
   const { audios } = useAudios(authToken, levels)
   const { appState, setAppState } = useAppState(levels)
+  const [deferredPrompt, setDeferredPrompt] = useState()
+
+  window.addEventListener('beforeinstallprompt', function (event) {
+    console.log(
+      '##########################################################################beforeinstallprompt fired'
+    )
+    event.preventDefault()
+    setDeferredPrompt(event)
+    return false
+  })
 
   const isLoggedIn = !!authToken
   return (
@@ -29,6 +39,7 @@ function ContextProvider({ children }) {
         levels,
         appState,
         audios,
+        deferredPrompt,
         error,
         logoutUser,
         registerUser,
@@ -38,6 +49,7 @@ function ContextProvider({ children }) {
         saveNewPassword,
         refreshLevels,
         setAppState,
+        setDeferredPrompt,
         setError,
       }}
     >

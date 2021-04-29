@@ -9,7 +9,7 @@ const AuthFormStyled = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 20px 40px;
+  /* margin: 0 20px; */
   gap: 20px;
   padding: 10px;
 

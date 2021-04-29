@@ -73,6 +73,7 @@ export default createGlobalStyle`
         margin: auto;
         display: grid;
         grid-template-rows: 80px auto 80px;
+        overflow-y: scroll;
 
         &.session {
         grid-template-rows: 100px auto 160px;
