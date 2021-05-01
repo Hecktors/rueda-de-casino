@@ -13,7 +13,7 @@ export default function InstallButton({ onClick }) {
       onClick={onClick}
       ariaLabel={'Install App'}
     >
-      <img src={logo} height="32px" />
+      <img src={logo} alt="Install App" height="32px" />
       Install App On Your Device
     </InstallButtonStyled>
   )

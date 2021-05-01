@@ -5,46 +5,66 @@ const unoDosTresSong = new Audio('./assets/audio/Uno_dos_tres.mp3')
 
 const songVolume = 0.2
 const moveVolume = 0.8
-const callsStart = 5000
+const callsStart = 10000
 
 export default function useSession(history) {
   const { levels, audios, appState } = useContext(Context)
   const { selectedMoveIds, isSongActive, speed, noRepetition } = appState
+
   const [currentMove, setCurrentMove] = useState({})
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isRunning, setIsRunning] = useState(null)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
+
+  const moveCallTimeoutRef = useRef(null)
+  const moveCallSequence = useRef(null)
+  const observerTimeoutRef = useRef(null)
+  const musicAudioRef = useRef(null)
 
   const selectedMoves = levels
     .map((level) => level.moves)
     .flat()
     .filter((move) => selectedMoveIds.includes(move._id))
 
-  const timeoutRef = useRef(null)
-  const moveCallSequence = useRef(selectedMoves)
-  const musicAudioRef = useRef(null)
-
   useEffect(() => {
+    moveCallSequence.current = selectedMoves
+    setIsRunning(true)
+
     if (isSongActive) {
       musicAudioRef.current = unoDosTresSong
       musicAudioRef.current.volume = songVolume
+      musicObserver()
     }
-    sessionHandler.play()
-    return () => clearTimeout(timeoutRef.current)
+    return () => {
+      clearTimeout(moveCallTimeoutRef.current)
+      clearTimeout(observerTimeoutRef.current)
+    }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isRunning) {
+      sessionHandler.play()
+    } else {
+      sessionHandler.pause()
+    }
+  }, [isRunning]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function musicObserver() {
+    observerTimeoutRef.current = setTimeout(() => {
+      musicAudioRef.current.paused ? setIsRunning(false) : setIsRunning(true)
+      musicObserver()
+    }, [300])
+  }
 
   const sessionHandler = {
     play: () => {
       if (selectedMoveIds.length) {
         isSongActive && musicAudioRef.current.play()
         startTimeout(callsStart)
-        setIsPlaying(true)
       }
     },
     pause: () => {
-      isSongActive && musicAudioRef.current.pause()
       stopMoveAudioProcess()
       setCurrentMove({})
-      setIsPlaying(false)
     },
     stop: () => {
       if (isSongActive) {
@@ -54,20 +74,29 @@ export default function useSession(history) {
     },
   }
 
+  function toogleSessionRun() {
+    if (isSongActive) {
+      musicAudioRef.current.paused
+        ? musicAudioRef.current.play()
+        : musicAudioRef.current.pause()
+    } else {
+      setIsRunning(!isRunning)
+    }
+  }
+
   function startTimeout(ms) {
-    timeoutRef.current = setTimeout(() => {
+    moveCallTimeoutRef.current = setTimeout(() => {
       const newCurrentMove = getNextMove()
       setCurrentMove(newCurrentMove)
       setIsMoveDisplayed(true)
       playAudio(newCurrentMove._id)
-      timeoutRef.current = null
       startTimeout(newCurrentMove.bars * speed + speed)
     }, ms)
   }
 
   function stopMoveAudioProcess() {
-    clearTimeout(timeoutRef.current)
-    timeoutRef.current = null
+    clearTimeout(moveCallTimeoutRef.current)
+    moveCallTimeoutRef.current = null
   }
 
   function playAudio(moveId) {
@@ -91,12 +120,13 @@ export default function useSession(history) {
       moveCallSequence.current = selectedMoves
   }
 
-  return [
+  return {
     selectedMoves,
     sessionHandler,
-    isPlaying,
+    isRunning,
     currentMove,
     isMoveDisplayed,
     setIsMoveDisplayed,
-  ]
+    toogleSessionRun,
+  }
 }

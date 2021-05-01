@@ -22,14 +22,15 @@ export default function Session() {
   const { setError } = useContext(Context)
   const isOnline = window.navigator.onLine
 
-  const [
+  const {
     selectedMoves,
     sessionHandler,
-    isPlaying,
+    isRunning,
     currentMove,
     isMoveDisplayed,
     setIsMoveDisplayed,
-  ] = useSession(history)
+    toogleSessionRun,
+  } = useSession(history)
 
   !selectedMoves.length && history.push('/')
 
@@ -48,7 +49,7 @@ export default function Session() {
     </Overlay>
   )
 
-  const header = isPlaying ? (
+  const header = isRunning ? (
     <Header center={' '} />
   ) : (
     <Header
@@ -71,8 +72,8 @@ export default function Session() {
     <>
       {header}
       <MainStyled className="dark no-bg-img">
-        <Overlay paused={!isPlaying}>
-          {isPlaying ? (
+        <Overlay paused={!isRunning}>
+          {isRunning ? (
             <CSSTransition
               in={isMoveDisplayed}
               timeout={2000}
@@ -89,14 +90,14 @@ export default function Session() {
             />
           )}
         </Overlay>
-        <BackgroundVideo isPlaying={isPlaying} />
+        <BackgroundVideo isRunning={isRunning} />
       </MainStyled>
 
-      <FooterStyled className={`${!isPlaying ? 'dark-transparent' : ''}`}>
-        {isPlaying ? (
-          <PauseIconButton onClick={sessionHandler.pause} size={'xl'} primary />
+      <FooterStyled className={`${!isRunning ? 'dark-transparent' : ''}`}>
+        {isRunning ? (
+          <PauseIconButton onClick={toogleSessionRun} size={'xl'} primary />
         ) : (
-          <PlayIconButton onClick={sessionHandler.play} size={'xl'} primary />
+          <PlayIconButton onClick={toogleSessionRun} size={'xl'} primary />
         )}
       </FooterStyled>
     </>
