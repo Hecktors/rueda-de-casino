@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getAudio } from '../services/audioAPIs'
+import { fetchAudio } from '../services/audioAPIs'
 
 export default function useAudios(token, levels) {
   const [audios, setAudios] = useState([])
@@ -12,7 +12,7 @@ export default function useAudios(token, levels) {
   async function updateAudios() {
     const fetchedAudios = await Promise.all(
       moves.map(async (move) => {
-        let audio = await getAudio(token, move._id)
+        let audio = await fetchAudio(token, move._id)
         const audioUrl = new Audio(audio)
         return {
           moveId: move._id,

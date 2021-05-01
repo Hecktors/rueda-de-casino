@@ -23,9 +23,6 @@ function ContextProvider({ children }) {
   const [deferredPrompt, setDeferredPrompt] = useState()
 
   window.addEventListener('beforeinstallprompt', function (event) {
-    console.log(
-      '##########################################################################beforeinstallprompt fired'
-    )
     event.preventDefault()
     setDeferredPrompt(event)
     return false

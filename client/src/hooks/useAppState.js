@@ -19,16 +19,13 @@ export default function useAppState(levels) {
     : []
 
   useEffect(() => {
-    async function initfetch() {
-      const storedAppState = await getLocalStorage('appState')
-      if (
-        storedAppState &&
-        JSON.stringify(storedAppState) !== JSON.stringify(appState)
-      ) {
-        setAppState(storedAppState)
-      }
+    const storedAppState = getLocalStorage('appState')
+    if (
+      storedAppState &&
+      JSON.stringify(storedAppState) !== JSON.stringify(appState)
+    ) {
+      setAppState(storedAppState)
     }
-    initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
