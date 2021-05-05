@@ -146,7 +146,7 @@ router.put("/password-reset", (req, res) => {
         return res.status(400).json({ msg: "Account with this email doesn't exists" })
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
-      const base = process.env.CLIENT_URL || "https://localhost:3000"
+      const base = process.env.REACT_APP_BASE || "https://localhost:3000"
       const url = `${base}/password-renew/${token}`
       const emailData = {
         from: `Salsatime Admin <${process.env.EMAIL_USER}>`,

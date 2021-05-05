@@ -26,7 +26,9 @@ export default function PasswordReset() {
 
       <AuthForm onSubmit={handleSubmit}>
         {emailIsSent ? (
-          <p>Click on the reset password link in the email you've received.</p>
+          <p>
+            We've sent you an email. Please open it and follow the instruction.
+          </p>
         ) : (
           <>
             <p>Enter your email address to get a password reset link.</p>

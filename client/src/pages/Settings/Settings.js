@@ -5,7 +5,7 @@ import Navigation from '../../components/Navigation'
 import InputRunThroughSelection from './InputRunThroughSelection'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
-import InstallButton from './InstallButton'
+import InstallPanel from './InstallPanel'
 
 export default function Settings() {
   const { appState, deferredPrompt, updateAppState, installApp } = useSettings()
@@ -34,7 +34,7 @@ export default function Settings() {
             noRepetition={noRepetition}
             updateAppState={updateAppState}
           />
-          {deferredPrompt && <InstallButton onClick={installApp} />}
+          {deferredPrompt && <InstallPanel onClick={installApp} />}
         </form>
       </MainStyled>
       <footer>

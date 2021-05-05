@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
+const BASE = process.env.REACT_APP_BASE
 
 // Get token
 export function fetchTokenVerification(token) {
   return axios
-    .post(`${base}/users/token-verification`, null, {
+    .post(`${BASE}/users/token-verification`, null, {
       headers: { 'x-auth-token': token },
     })
     .then((res) => res)
@@ -15,7 +15,7 @@ export function fetchTokenVerification(token) {
 // Get user
 export function fetchUser(token) {
   return axios
-    .get(`${base}/users/`, {
+    .get(`${BASE}/users/`, {
       headers: { 'x-auth-token': token },
     })
     .then((res) => res)
@@ -25,7 +25,7 @@ export function fetchUser(token) {
 // Register user
 export async function fetchUserRegister(user) {
   return await axios
-    .post(`${base}/users/register`, {
+    .post(`${BASE}/users/register`, {
       displayName: user.displayName,
       email: user.email,
       password: user.password,
@@ -38,7 +38,7 @@ export async function fetchUserRegister(user) {
 // Login user
 export async function fetchUserLogin({ email, password }) {
   return await axios
-    .post(`${base}/users/login`, {
+    .post(`${BASE}/users/login`, {
       email,
       password,
     })
@@ -49,7 +49,7 @@ export async function fetchUserLogin({ email, password }) {
 // Delete user
 export async function fetchUserAccountDelete(token) {
   return await axios
-    .delete(`${base}/users`, {
+    .delete(`${BASE}/users`, {
       headers: { 'x-auth-token': token },
     })
     .then((res) => res)
@@ -59,7 +59,7 @@ export async function fetchUserAccountDelete(token) {
 // Send Password Reset Code
 export async function fetchPasswordReset(email) {
   return await axios
-    .put(`${base}/users/password-reset`, {
+    .put(`${BASE}/users/password-reset`, {
       email,
     })
     .then((res) => res)
@@ -69,7 +69,7 @@ export async function fetchPasswordReset(email) {
 // Change Password
 export async function fetchPasswordRenew(resetToken, password, passwordCheck) {
   return await axios
-    .put(`${base}/users/password-renew`, {
+    .put(`${BASE}/users/password-renew`, {
       resetToken,
       password,
       passwordCheck,
