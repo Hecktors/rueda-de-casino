@@ -11,9 +11,7 @@ import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate } from 'workbox-strategies'
-import { CacheableResponsePlugin } from 'workbox-cacheable-response'
-import { CacheFirst } from 'workbox-strategies'
+import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
 
 clientsClaim()
 
@@ -74,35 +72,22 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-precacheAndRoute([{ url: '/logo/favicon-196.png', revision: null }])
-precacheAndRoute([{ url: '/assets/video/rueda.mp4', revision: null }])
-// precacheAndRoute([{ url: '/assets/audio/Uno_dos_tres.mp3', revision: null }])
+// Precache icons
+precacheAndRoute([
+  { url: '/favicon.ico', revision: null },
+  { url: '/assets/icons/apple-icon-180x180.png', revision: null },
+])
 
 // Cache Google Fonts with a stale-while-revalidate strategy, with
 // a maximum number of entries.
 registerRoute(
-  ({ url }) =>
-    url.origin === 'https://fonts.googleapis.com' ||
-    url.origin === 'https://fonts.gstatic.com',
+  new RegExp('.*(?:googleapis|gstatic).com.*$'),
   new StaleWhileRevalidate({
     cacheName: 'google-fonts',
-    plugins: [new ExpirationPlugin({ maxEntries: 20 })],
-  })
-)
-
-// Cache page navigations (html) with a Network First strategy
-registerRoute(
-  // Check to see if the request is a navigation to a new page
-  ({ request }) => request.mode === 'navigate',
-  // Use a Network First caching strategy
-  new CacheFirst({
-    // Put all cached files in a cache named 'pages'
-    cacheName: 'pages',
     plugins: [
-      // Ensure that only requests that result in a 200 status are cached
-      new CacheableResponsePlugin({
-        statuses: [200],
-      }),
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
     ],
   })
 )
@@ -112,11 +97,6 @@ registerRoute(
   ({ url }) => url.pathname === '/moves',
   new CacheFirst({
     cacheName: 'moves',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
   })
 )
 
@@ -125,10 +105,21 @@ registerRoute(
   ({ url }) => url.pathname.startsWith('/audios/'),
   new CacheFirst({
     cacheName: 'audios',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
+  })
+)
+
+// Cache background video
+registerRoute(
+  ({ url }) => url.pathname === '/assets/video/rueda.mp4',
+  new CacheFirst({
+    cacheName: 'video',
+  })
+)
+
+// Cache default song
+registerRoute(
+  ({ url }) => url.pathname === '/assets/audio/Uno_dos_tres.mp3',
+  new CacheFirst({
+    cacheName: 'song',
   })
 )

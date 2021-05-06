@@ -48,6 +48,17 @@ export default function useAuth(setError) {
       setError(response.data.msg)
     } else {
       // Login successful
+      if ('caches' in window) {
+        console.log('Write cache')
+        caches.open('video').then((cache) => {
+          cache.add(`${process.env.REACT_APP_BASE}/assets/video/rueda.mp4`)
+        })
+        caches.open('song').then((cache) => {
+          cache.add(
+            `${process.env.REACT_APP_BASE}/assets/audio/Uno_dos_tres.mp3`
+          )
+        })
+      }
       setLocalStorage('authToken', response.data.token)
       setLocalStorage('userName', response.data.user)
       setAuthToken(response.data.token)

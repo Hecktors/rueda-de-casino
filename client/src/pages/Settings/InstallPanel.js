@@ -52,7 +52,7 @@ const InstallPanelStyled = styled.div`
   button {
     width: auto;
     height: auto;
-    margin: 10px 0 0 0;
+    margin: 10px auto 0;
     padding: 8px 16px;
   }
 `
