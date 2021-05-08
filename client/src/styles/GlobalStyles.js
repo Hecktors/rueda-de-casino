@@ -4,10 +4,9 @@ export default createGlobalStyle`
     :root {
         /* General */
         --color-primary: #d04b1f;
-        --color-primary-lighter: #df5426;
         --color-secondary: #2ca3d2;
         --color-text: #999;
-        --color-text-active: #ff2391;
+        --color-text-active: #df5426;
         --color-bg: rgb(7, 7, 17);
         --color-bg-dark : #000;
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
