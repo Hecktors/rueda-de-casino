@@ -21,6 +21,7 @@ export default function Session() {
   const history = useHistory()
   const { setError } = useContext(Context)
   const isOnline = window.navigator.onLine
+  const isMobile = window.innerWidth <= 768
 
   const {
     selectedMoves,
@@ -53,7 +54,7 @@ export default function Session() {
     <Header center={' '} />
   ) : (
     <Header
-      className="dark-transparent"
+      className={`${isMobile ? 'dark-transparent' : ''}`}
       left={<BackIconButton onClick={sessionHandler.stop} size={'md'} />}
       center={<h1>Pause</h1>}
     />
@@ -71,7 +72,7 @@ export default function Session() {
   return (
     <>
       {header}
-      <MainStyled className="dark no-bg-img">
+      <MainStyled>
         <Overlay paused={!isRunning}>
           {isRunning ? (
             <CSSTransition
@@ -93,7 +94,9 @@ export default function Session() {
         <BackgroundVideo isRunning={isRunning} />
       </MainStyled>
 
-      <FooterStyled className={`${!isRunning ? 'dark-transparent' : ''}`}>
+      <FooterStyled
+        className={`${!isRunning && isMobile ? 'dark-transparent' : ''}`}
+      >
         {isRunning ? (
           <PauseIconButton onClick={toogleSessionRun} size={'xl'} primary />
         ) : (
@@ -106,6 +109,10 @@ export default function Session() {
 
 const MainStyled = styled.main`
   overflow: hidden;
+
+  .bg-video {
+    overflow: hidden;
+  }
 `
 
 const FooterStyled = styled.footer`
