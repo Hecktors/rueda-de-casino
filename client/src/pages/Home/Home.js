@@ -21,7 +21,7 @@ export default function Home() {
   const hasNotEnoughMoves = selectedMoveIds.length < 2
 
   let levelColsNum = 1
-  if (window.innerWidth >= 375) {
+  if (window.innerWidth >= 360) {
     levelColsNum = 2
   }
   if (window.innerWidth >= 768) {
@@ -68,9 +68,7 @@ export default function Home() {
       />
 
       <MainStyled>
-        <form>
-          <div className="level-container">{levelCols}</div>
-        </form>
+        <div className="level-container">{levelCols}</div>
         <div className="main-footer">
           <div className="msg">
             {hasNotEnoughMoves && <span>Select at least 2 moves to start</span>}
@@ -100,13 +98,13 @@ const MainStyled = styled.main`
   overflow-y: hidden;
 
   form {
-    overflow-y: auto;
   }
 
   .level-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 6px;
+    overflow-y: auto;
 
     @media ${device.mobileM} {
       grid-template-columns: 1fr 1fr;
@@ -114,6 +112,7 @@ const MainStyled = styled.main`
 
     @media ${device.tablet} {
       grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
     }
 
     @media ${device.laptop} {
@@ -124,7 +123,11 @@ const MainStyled = styled.main`
   .level-col {
     align-self: start;
     display: grid;
-    gap: 10px;
+    gap: 6px;
+
+    @media ${device.tablet} {
+      gap: 12px;
+    }
   }
 
   .form-group-container {

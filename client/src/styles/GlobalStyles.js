@@ -7,7 +7,8 @@ export default createGlobalStyle`
         --color-primary-lighter: #df5426;
         --color-secondary: #2ca3d2;
         --color-text: #999;
-        --color-bg: #0e0e15;
+        --color-text-active: #ff2391;
+        --color-bg: rgb(7, 7, 17);
         --color-bg-dark : #000;
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
@@ -21,8 +22,7 @@ export default createGlobalStyle`
         --color-title: #929292;
 
         /* Accordion */
-        --color-bg-accordion: rgba(14, 14, 21, 0.7);
-        --color-accordion-item: #999;
+        --color-bg-accordion: rgba(7, 7, 17, 0.8);
 
         /* Message */
         --color-message: #666;

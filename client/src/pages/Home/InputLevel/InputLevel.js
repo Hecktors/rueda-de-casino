@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
+import { device } from '../../../styles/device'
 import { ArrowRightIcon, ArrowDownIcon } from '../../../components/Icons/Icons'
 
 InputLevel.propTypes = {
@@ -23,7 +24,7 @@ export default function InputLevel({
   )
   const color =
     hasInputMove && !isDesktop
-      ? 'var(--color-primary-lighter)'
+      ? 'var(--color-text-active)'
       : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
   const headerSize = isDesktop ? '1.2rem' : '0.875rem'
@@ -84,11 +85,12 @@ const InputLevelStyled = styled.div`
       width: 100%;
       text-transform: uppercase;
       text-align: center;
-      color: ${({ color }) => color};
+      color: var(--color-text);
     }
 
     svg {
       transform: scale(1.5);
+      fill: ${({ color }) => color};
     }
   }
 
@@ -120,15 +122,17 @@ const InputLevelStyled = styled.div`
         display: inline-block;
         font-size: 0.875rem;
 
-        &:hover {
-          cursor: pointer;
-          opacity: 0.5;
+        @media ${device.laptop} {
+          &:hover {
+            cursor: pointer;
+            opacity: 0.5;
+          }
         }
       }
     }
 
     .isChecked {
-      color: var(--color-primary-lighter);
+      color: var(--color-text-active);
     }
   }
 `
