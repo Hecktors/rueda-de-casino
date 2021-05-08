@@ -15,7 +15,6 @@ export default createGlobalStyle`
         --color-warning: #f53030;
 
         /* Body */
-        --color-bg-body: linear-gradient(to top, #0575e6, #021b79); 
         --color-bg-body: var(--color-bg); 
 
         /* Header */
@@ -23,6 +22,7 @@ export default createGlobalStyle`
 
         /* Accordion */
         --color-bg-accordion: rgba(7, 7, 17, 0.8);
+        --color-bg-accordion: rgba(2, 190, 255, 0.05);
 
         /* Message */
         --color-message: #666;

@@ -23,7 +23,9 @@ export default function InputLevel({
     selectedMoveIds.includes(move._id)
   )
   const color =
-    hasInputMove && !isDesktop ? 'var(--color-text-active)' : 'transparent'
+    hasInputMove && !isDesktop && !isOpen
+      ? 'var(--color-text-active)'
+      : 'transparent'
   const ulHeight = isOpen ? 'auto' : 0
   const headerSize = isDesktop ? '1.2rem' : '0.875rem'
 
@@ -94,12 +96,13 @@ const InputLevelStyled = styled.div`
 
   ul {
     display: grid;
-    padding: 0 5px;
+    padding: 0 4px;
     overflow: hidden;
     height: ${({ ulHeight }) => ulHeight};
 
     li {
       line-height: 1.3;
+      margin-bottom: 2px;
 
       input {
         display: none;
@@ -115,8 +118,9 @@ const InputLevelStyled = styled.div`
 
       label {
         height: 100%;
-        padding: 0;
         width: 100%;
+        padding: 0;
+        padding-left: 2px;
         display: inline-block;
         font-size: 0.875rem;
 
