@@ -77,7 +77,7 @@ const InputLevelStyled = styled.div`
     border-bottom-right-radius: ${({ bdRdButtom }) => bdRdButtom};
     border-bottom: none;
     font-size: 1rem;
-    background-color: var(--color-bg-accordion);
+    background-color: var(--color-bg-input);
 
     & .level-name {
       width: 100%;
@@ -103,7 +103,7 @@ const InputLevelStyled = styled.div`
     border-bottom-right-radius: 3px;
     border: ${({ border }) => border};
     border-top: none;
-    background-color: var(--color-bg-accordion);
+    background-color: var(--color-bg-input);
 
     li {
       input {
