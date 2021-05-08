@@ -41,7 +41,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "theme_color": "#0e0e15",
   "background_color": "#0e0e15",
   "desciption": "The rueada de casino app - learn whenever you want"
