@@ -141,7 +141,7 @@ const MainStyled = styled.main`
     padding-bottom: 3rem;
 
     .msg {
-      height: 2.5rem;
+      min-height: 16px;
       color: var(--color-warning);
       text-align: center;
     }
