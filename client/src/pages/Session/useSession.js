@@ -12,7 +12,7 @@ export default function useSession(history) {
   const { selectedMoveIds, isSongActive, speed, noRepetition } = appState
 
   const [currentMove, setCurrentMove] = useState({})
-  const [isRunning, setIsRunning] = useState(null)
+  const [isRunning, setIsRunning] = useState(false)
   const [isMoveDisplayed, setIsMoveDisplayed] = useState(false)
 
   const moveCallTimeoutRef = useRef(null)

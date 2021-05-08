@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
+import { setLocalStorage } from '../lib/localStorage'
 import getLevels from '../services/getLevels'
 
-export default function useLevels() {
+export default function useLevels(authToken) {
   const [levels, setLevels] = useState([])
-  const authToken = getLocalStorage('authToken')
 
   useEffect(() => {
     refreshLevels()

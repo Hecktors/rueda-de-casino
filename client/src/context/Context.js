@@ -17,7 +17,7 @@ function ContextProvider({ children }) {
     getResetLink,
     saveNewPassword,
   } = useAuth(setError)
-  const { levels, refreshLevels } = useLevels()
+  const { levels, refreshLevels } = useLevels(authToken)
   const { audios } = useAudios(authToken, levels)
   const { appState, setAppState } = useAppState(levels)
   const [deferredPrompt, setDeferredPrompt] = useState()
@@ -32,6 +32,7 @@ function ContextProvider({ children }) {
   return (
     <Context.Provider
       value={{
+        authToken,
         isLoggedIn,
         levels,
         appState,

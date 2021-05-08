@@ -12,7 +12,7 @@ export default function EditForm({
   addMove,
   updateMove,
 }) {
-  const { authData, levels, refreshLevels, setError } = useContext(Context)
+  const { authToken, levels, refreshLevels, setError } = useContext(Context)
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
 
@@ -36,8 +36,8 @@ export default function EditForm({
     e.preventDefault()
     const isNewMove = !userInput._id
     const response = isNewMove
-      ? await addMove(authData, userInput)
-      : await updateMove(authData, move._id, userInput)
+      ? await addMove(authToken, userInput)
+      : await updateMove(authToken, move._id, userInput)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {
