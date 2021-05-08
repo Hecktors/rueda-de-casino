@@ -96,13 +96,13 @@ const InputLevelStyled = styled.div`
 
   ul {
     display: grid;
-    padding: 0 4px;
+    padding: 0;
+    padding-left: 4px;
     overflow: hidden;
     height: ${({ ulHeight }) => ulHeight};
 
     li {
       line-height: 1.3;
-      margin-bottom: 2px;
 
       input {
         display: none;
