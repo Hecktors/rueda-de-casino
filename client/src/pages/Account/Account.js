@@ -5,9 +5,11 @@ import { DeepRedButton, RedButton } from '../../components/Buttons'
 import Header from '../../components/Header'
 import Navigation from '../../components/Navigation'
 import AuthForm from '../../components/AuthForm'
+import { getLocalStorage } from '../../lib/localStorage'
 
 export default function Account() {
-  const { authData, logoutUser, deleteUserAccount } = useContext(Context)
+  const userName = getLocalStorage('userName')
+  const { logoutUser, deleteUserAccount } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
 
   return (
@@ -22,8 +24,8 @@ export default function Account() {
 
       <Header />
       <AuthForm>
-        <p>Current User: {authData.user.displayName}</p>
-        <RedButton text="Log out" onClick={logoutUser} outlined />
+        <p>Current User: {userName}</p>
+        <RedButton text="Log out" type="button" onClick={logoutUser} outlined />
         <p>
           If you want to delete your user account, you can do it by clicking the
           button below. Please note: All your stored data will be removed

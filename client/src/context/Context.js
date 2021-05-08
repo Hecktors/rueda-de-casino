@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { useState, createContext } from 'react'
 import useAppState from '../hooks/useAppState'
 import useAuth from '../hooks/useAuth'
 import useLevels from '../hooks/useLevels'
@@ -9,27 +9,35 @@ const Context = createContext()
 function ContextProvider({ children }) {
   const { error, setError } = useError()
   const {
-    authData,
+    authToken,
     registerUser,
     loginUser,
     logoutUser,
     deleteUserAccount,
     getResetLink,
     saveNewPassword,
-  } = useAuth(error, setError)
-  const { levels, refreshLevels } = useLevels(authData)
-  const { audios } = useAudios(authData, levels)
+  } = useAuth(setError)
+  const { levels, refreshLevels } = useLevels(authToken)
+  const { audios } = useAudios(authToken, levels)
   const { appState, setAppState } = useAppState(levels)
+  const [deferredPrompt, setDeferredPrompt] = useState()
 
-  const isLoggedIn = !!authData.user
+  window.addEventListener('beforeinstallprompt', function (event) {
+    event.preventDefault()
+    setDeferredPrompt(event)
+    return false
+  })
+
+  const isLoggedIn = !!authToken
   return (
     <Context.Provider
       value={{
-        authData,
+        authToken,
         isLoggedIn,
         levels,
         appState,
         audios,
+        deferredPrompt,
         error,
         logoutUser,
         registerUser,
@@ -39,6 +47,7 @@ function ContextProvider({ children }) {
         saveNewPassword,
         refreshLevels,
         setAppState,
+        setDeferredPrompt,
         setError,
       }}
     >

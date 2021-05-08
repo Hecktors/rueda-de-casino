@@ -1,10 +1,10 @@
 import axios from 'axios'
-const base = process.env.REACT_APP_BASE || 'http://localhost:3001'
+const BASE = process.env.REACT_APP_BASE
 
 // Get all moves
 export function getMoves(token) {
   return axios
-    .get(`${base}/moves`, { headers: { 'x-auth-token': token } })
+    .get(`${BASE}/moves`, { headers: { 'x-auth-token': token } })
     .then((response) => response.data)
     .catch((err) => console.log(err))
 }
@@ -12,7 +12,7 @@ export function getMoves(token) {
 // Get move
 export function getMove(token, moveId) {
   return axios
-    .get(`${base}/moves/${moveId}`, { headers: { 'x-auth-token': token } })
+    .get(`${BASE}/moves/${moveId}`, { headers: { 'x-auth-token': token } })
     .then((response) => response)
     .catch((err) => console.log(err.response))
 }
@@ -20,7 +20,7 @@ export function getMove(token, moveId) {
 // Add move
 export function addMove(token, data) {
   return axios
-    .post(`${base}/moves/add`, data, { headers: { 'x-auth-token': token } })
+    .post(`${BASE}/moves/add`, data, { headers: { 'x-auth-token': token } })
     .then((response) => response)
     .catch((err) => err.response)
 }
@@ -28,7 +28,7 @@ export function addMove(token, data) {
 // Update move
 export function updateMove(token, moveId, data) {
   return axios
-    .post(`${base}/moves/update/${moveId}`, data, {
+    .post(`${BASE}/moves/update/${moveId}`, data, {
       headers: { 'x-auth-token': token },
     })
     .then((response) => response)
@@ -38,7 +38,7 @@ export function updateMove(token, moveId, data) {
 // Delete move
 export function deleteMove(token, moveId) {
   return axios
-    .delete(`${base}/moves/${moveId}`, {
+    .delete(`${BASE}/moves/${moveId}`, {
       headers: { 'x-auth-token': token },
     })
     .then((response) => response)

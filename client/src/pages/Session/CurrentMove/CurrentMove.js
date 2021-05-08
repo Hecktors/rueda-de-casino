@@ -37,7 +37,7 @@ const NameWrapper = styled.div`
     opacity: 0;
     transition: opacity 3000ms;
   }
-  
+
   &.fade-exit-done {
     opacity: 0;
   }

@@ -3,16 +3,16 @@ import styled from 'styled-components/macro'
 import ReactPlayer from 'react-player'
 
 BackgroundVideo.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
+  isRunning: PropTypes.bool.isRequired,
 }
 
-export default function BackgroundVideo({ isPlaying }) {
+export default function BackgroundVideo({ isRunning }) {
   return (
     <BackgroundVideoStyled>
       <ReactPlayer
         url="./assets/video/rueda.mp4"
         className="bg-video"
-        playing={isPlaying}
+        playing={isRunning}
         loop={true}
       />
     </BackgroundVideoStyled>

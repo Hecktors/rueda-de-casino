@@ -12,10 +12,9 @@ export default function EditForm({
   addMove,
   updateMove,
 }) {
-  const { authData, levels, refreshLevels, setError } = useContext(Context)
+  const { authToken, levels, refreshLevels, setError } = useContext(Context)
   const [isNewLevel, setIsNewLevel] = useState(false)
   const hasNoLevels = !levels.length
-  const { token } = authData
 
   let initLevelName = levels.length > 0 ? levels[levels.length - 1].name : ''
   if (move) initLevelName = move.levelName
@@ -37,8 +36,8 @@ export default function EditForm({
     e.preventDefault()
     const isNewMove = !userInput._id
     const response = isNewMove
-      ? await addMove(token, userInput)
-      : await updateMove(token, move._id, userInput)
+      ? await addMove(authToken, userInput)
+      : await updateMove(authToken, move._id, userInput)
     if (response.status !== 200) {
       setError(response.data.msg)
     } else {
@@ -199,6 +198,6 @@ const EditFormStyled = styled.form`
   .button-container {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 60px;
+    margin-top: 20px;
   }
 `

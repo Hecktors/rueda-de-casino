@@ -14,7 +14,7 @@ import Navigation from '../../components/Navigation'
 import DeleteModal from '../../components/DeleteModal'
 
 export default function Edit() {
-  const { authData, levels, refreshLevels, setError } = useContext(Context)
+  const { authToken, levels, refreshLevels, setError } = useContext(Context)
   const [isDeleteModalDisplayed, setIsDeleteModalDisplayed] = useState(false)
   const [selectedMoveId, setSelectedMoveId] = useState(null)
 
@@ -24,7 +24,7 @@ export default function Edit() {
     .find((move) => move._id === selectedMoveId)
 
   async function handleDelete(id) {
-    const response = await deleteMove(authData.token, selectedMoveId)
+    const response = await deleteMove(authToken, selectedMoveId)
     setIsDeleteModalDisplayed(false)
     if (response.status !== 200) {
       setError(response.data.msg)

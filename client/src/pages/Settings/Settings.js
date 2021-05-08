@@ -1,18 +1,15 @@
-import { useContext } from 'react'
 import styled from 'styled-components/macro'
-import useUserInput from './useUserInput'
-import { Context } from '../../context/Context'
+import useSettings from './useSettings'
 import Header from '../../components/Header'
 import Navigation from '../../components/Navigation'
 import InputRunThroughSelection from './InputRunThroughSelection'
 import InputPlaySong from './InputPlaySong'
 import InputSongSpeed from './InputSongSpeed'
+import InstallPanel from './InstallPanel'
 
 export default function Settings() {
-  const { appState, setAppState } = useContext(Context)
-  const { updateAppState } = useUserInput(appState, setAppState)
-
-  const { speed, isSongActive, isRunThroughSelection } = appState
+  const { appState, deferredPrompt, updateAppState, installApp } = useSettings()
+  const { speed, isSongActive, noRepetition } = appState
 
   return (
     <>
@@ -34,9 +31,10 @@ export default function Settings() {
             )}
           </div>
           <InputRunThroughSelection
-            isRunThroughSelection={isRunThroughSelection}
+            noRepetition={noRepetition}
             updateAppState={updateAppState}
           />
+          {deferredPrompt && <InstallPanel onClick={installApp} />}
         </form>
       </MainStyled>
       <footer>
@@ -47,6 +45,7 @@ export default function Settings() {
 }
 
 const MainStyled = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,9 +58,7 @@ const MainStyled = styled.main`
     align-items: start;
     gap: 5px;
   }
-  .form-group-container {
-    /* height: 130px; */
-  }
+
   .btn-update {
     width: 50%;
     margin: 50px 0;

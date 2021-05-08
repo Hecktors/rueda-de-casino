@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 InputRunThroughSelection.propTypes = {
-  isRunThroughSelection: PropTypes.bool.isRequired,
+  noRepetition: PropTypes.bool.isRequired,
   updateAppState: PropTypes.func.isRequired,
 }
 
 export default function InputRunThroughSelection({
-  isRunThroughSelection,
+  noRepetition,
   updateAppState,
 }) {
   return (
@@ -17,7 +17,7 @@ export default function InputRunThroughSelection({
         onChange={updateAppState}
         type="checkbox"
         name="runThroughSelection"
-        checked={isRunThroughSelection}
+        checked={noRepetition}
       />
       <label htmlFor="runThroughSelection">
         Avoid multi consecutive move repetitions

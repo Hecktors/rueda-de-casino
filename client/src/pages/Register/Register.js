@@ -73,7 +73,7 @@ export default function Register() {
 
         <BlueButton text="Register" disabled={!isRequiredFilled} />
 
-        <p className="tac">
+        <p>
           Already have an account?{' '}
           <span className="link" onClick={() => history.push('/login')}>
             Log in

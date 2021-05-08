@@ -10,6 +10,7 @@ const { createPasswordHash, comparePasswords } = require("../lib/createPasswordH
 
 const router = require("express").Router()
 
+// Register user
 router.post("/register", async (req, res) => {
   try {
     const { email, password, passwordCheck, displayName } = req.body
@@ -32,21 +33,20 @@ router.post("/register", async (req, res) => {
       moveIds: [],
     })
 
-    // return res.json({ msg: newUser })
-
     newUser
       .save()
       .then(async (user) => {
         await createDefaultMoves(user._id)
         return user._id
       })
-      .then((userId) => res.json({ msg: userId }))
+      .then((user) => res.json({ email }))
       .catch((err) => res.status(404).json({ msg: err.message }))
   } catch (err) {
     res.status(500).json({ msg: err.message })
   }
 })
 
+// Login user
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body
@@ -67,12 +67,13 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
-    res.json({ token, user: { id: user._id, displayName: user.displayName } })
+    res.json({ token, user: user.displayName })
   } catch (err) {
     res.status(500).json({ msg: err.message })
   }
 })
 
+// Delete user account
 router.delete("/", auth, async (req, res) => {
   try {
     User.findByIdAndDelete(req.user).then((deletedUser) => {
@@ -98,37 +99,42 @@ router.delete("/", auth, async (req, res) => {
   }
 })
 
+// Verify auth token
 router.post("/token-verification", async (req, res) => {
   try {
     const token = req.header("x-auth-token")
+
     if (!token) {
       return res.json(false)
     }
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET)
-    if (!verified) {
-      return res.json(false)
-    }
+    const verified = await jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+      if (err) {
+        console.log(err.message)
+        return res.status(400).json({ error: err.message })
+      }
+      return decoded
+    })
 
     const user = await User.findById(verified.id)
     if (!user) {
-      return res.json(false)
+      return res.json({ error: "No user found" })
     }
 
-    res.json(true)
+    res.json({ error: null })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
 })
 
+// Get user
 router.get("/", auth, async (req, res) => {
-  const user = await User.findById(req.user)
-  res.json({
-    id: user._id,
-    displayName: user.displayName,
-  })
+  User.findById(req.user)
+    .then((user) => res.json({ displayName: user.displayName }))
+    .catch((err) => res.status(500).json({ error: err.message }))
 })
 
+// Send password reset link
 router.put("/password-reset", (req, res) => {
   const { email } = req.body
   if (!email) {
@@ -140,7 +146,7 @@ router.put("/password-reset", (req, res) => {
         return res.status(400).json({ msg: "Account with this email doesn't exists" })
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" })
-      const base = process.env.CLIENT_URL || "https://localhost:3000"
+      const base = process.env.REACT_APP_BASE || "https://localhost:3000"
       const url = `${base}/password-renew/${token}`
       const emailData = {
         from: `Salsatime Admin <${process.env.EMAIL_USER}>`,
@@ -163,6 +169,7 @@ router.put("/password-reset", (req, res) => {
     .catch((err) => res.status(500).json({ errorMsg: err }))
 })
 
+// Update user password
 router.put("/password-renew", async (req, res) => {
   const { resetToken, password, passwordCheck } = req.body
   if (!resetToken || !password || !passwordCheck) {

@@ -50,7 +50,6 @@ export default createGlobalStyle`
 
     body {
         font-family: 'Open Sans', sans-serif;
-        font-display: optional;
         font-size: 112.5%;
         color:  var(--color-text);
         background: var(--color-bg-body);
@@ -62,9 +61,8 @@ export default createGlobalStyle`
     }
 
     .App {
-        background-image: url('./assets/img/dancing.svg');
-        background-position: center 63%;
-        background-size: 75%;
+        background-position: center 75%;
+        background-size: contain;
         background-repeat: no-repeat;
         background-color: var(--color-bg);
         position: relative;
@@ -75,6 +73,7 @@ export default createGlobalStyle`
         margin: auto;
         display: grid;
         grid-template-rows: 80px auto 80px;
+        overflow-y: auto;
 
         &.session {
         grid-template-rows: 100px auto 160px;

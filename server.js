@@ -1,14 +1,17 @@
+const sslRedirect = require("heroku-ssl-redirect").default
 const express = require("express")
 const path = require("path")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const app = express()
+
 require("dotenv").config({})
 
 app.use(cors())
 app.use(express.json())
 app.use(express.static("public"))
 app.use(express.static(path.join(__dirname, "client/build")))
+app.use(sslRedirect())
 
 const uri = process.env.ATLAS_URI
 mongoose.connect(uri, {

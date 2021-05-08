@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
 import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 
-const STORAGE_KEY = 'appState'
-
-const initState = {
+const DEFAULT_STATE = {
   selectedMoveIds: [],
   speed: 2900,
-  isRunThroughSelection: true,
+  noRepetition: true,
   isSongActive: true,
 }
 
 export default function useAppState(levels) {
-  const [appState, setAppState] = useState(initState)
+  const [appState, setAppState] = useState(DEFAULT_STATE)
 
   const selectedMoves = levels
     ? levels
@@ -21,16 +19,18 @@ export default function useAppState(levels) {
     : []
 
   useEffect(() => {
-    async function initfetch() {
-      const storedAppState = await getLocalStorage(STORAGE_KEY)
-      setAppState(storedAppState || initState)
+    const storedAppState = getLocalStorage('appState')
+    if (
+      storedAppState &&
+      JSON.stringify(storedAppState) !== JSON.stringify(appState)
+    ) {
+      setAppState(storedAppState)
     }
-    initfetch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     JSON.stringify(appState) !== JSON.stringify(getLocalStorage('appState')) &&
-      setLocalStorage(STORAGE_KEY, appState)
+      setLocalStorage('appState', appState)
   }, [appState])
 
   return { selectedMoves, appState, setAppState }

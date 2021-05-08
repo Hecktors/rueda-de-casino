@@ -3,11 +3,13 @@ import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom'
 import { Context } from './context/Context'
 import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMsg from './components/ErrorMsg'
+import logo from './assets/svg/dancing.svg'
 
-const Login = React.lazy(() => import('./pages/Login'))
-const Register = React.lazy(() => import('./pages/Register'))
-const PasswordReset = React.lazy(() => import('./pages/PasswordReset'))
-const PasswordRenew = React.lazy(() => import('./pages/PasswordRenew'))
+import Login from './pages/Login'
+import Register from './pages/Register'
+import PasswordReset from './pages/PasswordReset'
+import PasswordRenew from './pages/PasswordRenew'
+
 const Home = React.lazy(() => import('./pages/Home'))
 const Session = React.lazy(() => import('./pages/Session'))
 const Settings = React.lazy(() => import('./pages/Settings'))
@@ -38,7 +40,10 @@ export default function App() {
   )
 
   return (
-    <div className={`App${classes}`}>
+    <div
+      className={`App${classes}`}
+      style={{ backgroundImage: `url(${logo})` }}
+    >
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <React.Suspense fallback={<LoadingSpinner />}>{routes}</React.Suspense>
     </div>
