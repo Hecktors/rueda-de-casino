@@ -23,9 +23,7 @@ export default function InputLevel({
     selectedMoveIds.includes(move._id)
   )
   const color =
-    hasInputMove && !isDesktop
-      ? 'var(--color-text-active)'
-      : 'var(--color-text)'
+    hasInputMove && !isDesktop ? 'var(--color-text-active)' : 'transparent'
   const ulHeight = isOpen ? 'auto' : 0
   const headerSize = isDesktop ? '1.2rem' : '0.875rem'
 
@@ -47,6 +45,7 @@ export default function InputLevel({
       <h2 onClick={toogleInputLevel}>
         {!isDesktop && (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)}{' '}
         <span className="level-name">{levelName}</span>
+        <span className="checkmark">✔</span>
       </h2>
       <ul>
         {levelMoves.map((move) => (
@@ -81,16 +80,15 @@ const InputLevelStyled = styled.div`
     padding: 7px;
     font-size: ${({ headerSize }) => headerSize};
 
-    & .level-name {
+    .level-name {
       width: 100%;
       text-transform: uppercase;
       text-align: center;
       color: var(--color-text);
     }
 
-    svg {
-      transform: scale(1.5);
-      fill: ${({ color }) => color};
+    .checkmark {
+      color: ${({ color }) => color};
     }
   }
 
