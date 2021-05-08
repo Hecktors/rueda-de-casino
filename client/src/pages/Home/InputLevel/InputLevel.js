@@ -17,26 +17,34 @@ export default function InputLevel({
   updateAppState,
 }) {
   const [isOpen, setIsOpen] = useState()
+  const isDesktop = window.innerWidth >= 1024
   const hasInputMove = levelMoves.some((move) =>
     selectedMoveIds.includes(move._id)
   )
-  const color = hasInputMove
-    ? 'var(--color-primary-lighter)'
-    : 'var(--color-text)'
+  const color =
+    hasInputMove && !isDesktop
+      ? 'var(--color-primary-lighter)'
+      : 'var(--color-text)'
   const ulHeight = isOpen ? 'auto' : 0
+  const headerSize = isDesktop ? '1.2rem' : '0.875rem'
 
   useEffect(() => {
-    !selectedMoveIds.length && setIsOpen(false)
-  }, [selectedMoveIds])
+    isDesktop ? setIsOpen(true) : !selectedMoveIds.length && setIsOpen(false)
+  }, [selectedMoveIds]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function toogleInputLevel() {
-    setIsOpen(!isOpen)
+    !isDesktop && setIsOpen(!isOpen)
   }
 
   return (
-    <InputLevelStyled isOpen={isOpen} color={color} ulHeight={ulHeight}>
+    <InputLevelStyled
+      isOpen={isOpen}
+      color={color}
+      ulHeight={ulHeight}
+      headerSize={headerSize}
+    >
       <h2 onClick={toogleInputLevel}>
-        {isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />}{' '}
+        {!isDesktop && (isOpen ? <ArrowDownIcon /> : <ArrowRightIcon />)}{' '}
         <span className="level-name">{levelName}</span>
       </h2>
       <ul>
@@ -70,7 +78,7 @@ const InputLevelStyled = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 7px;
-    font-size: 0.875rem;
+    font-size: ${({ headerSize }) => headerSize};
 
     & .level-name {
       width: 100%;
@@ -106,6 +114,7 @@ const InputLevelStyled = styled.div`
       }
 
       label {
+        height: 100%;
         padding: 0;
         width: 100%;
         display: inline-block;
@@ -113,6 +122,7 @@ const InputLevelStyled = styled.div`
 
         &:hover {
           cursor: pointer;
+          opacity: 0.5;
         }
       }
     }

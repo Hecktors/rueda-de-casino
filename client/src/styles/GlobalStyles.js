@@ -12,28 +12,37 @@ export default createGlobalStyle`
         --color-bg-dark-transparent: rgba(0, 0, 0, 0.8);
         --color-disabled: #333;
         --color-warning: #f53030;
+
         /* Body */
         --color-bg-body: linear-gradient(to top, #0575e6, #021b79); 
+        --color-bg-body: var(--color-bg); 
+
         /* Header */
         --color-title: #929292;
+
         /* Accordion */
-        --color-bg-accordion: #181826;        
-        --color-bg-accordion-title: #0b1644;
+        --color-bg-accordion: rgba(14, 14, 21, 0.7);
         --color-accordion-item: #999;
+
         /* Message */
         --color-message: #666;
         --color-bg-message: #0f1118d9;
+
         /* Border */
         --color-border: #9999993d;
+
         /* Overlay */
         --color-bg-overlay: rgba(0, 0, 0, 0.7);
         --color-bg-overlay-full: #000;
+
         /* Selected Moves List */
         --color-selected-movelist: #2ca3d2;
         --color-bg-overlay-paused: rgba(0, 0, 0, 0.85);
+
         /* Edit Form */
         --color-select: #ccc;
         --color-bg-select: #0e0e15;
+
         /* Input */
         --color-input: #ccc;
         --color-bg-input: #282b3f;
@@ -60,29 +69,13 @@ export default createGlobalStyle`
         align-items: center;
     }
 
-    .App {
-        background-position: center 75%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-color: var(--color-bg);
-        position: relative;
-        height: 100%;
-        width: 100%;
-        max-width: 736px;
-        max-height: 800px;
-        margin: auto;
-        display: grid;
-        grid-template-rows: 80px auto 80px;
-        overflow-y: auto;
-
-        &.session {
-        grid-template-rows: 100px auto 160px;
-        }
-    }
-
     main { 
         flex-grow: 1;
         overflow-y: auto;
+
+        @media (orientation: landscape) {
+                padding-top: 0 !important;
+        }
     }
 
     ul {
@@ -168,48 +161,5 @@ export default createGlobalStyle`
 
     .tac {
         text-align: center;
-    }
-
-    .desktop-only {
-        display: none;
-        position: absolute;
-        width:100%;
-        text-align: center;
-        top: -10vh;
-        left: 0;
-    }
-
-    @media (orientation: landscape) {
-        .App {
-            grid-template-rows: 80px auto 80px !important; 
-        }
-
-        main {
-            padding-top: 0 !important;
-        }
-    }
-
-    @media screen and (min-width: 800px) {
-        .App{
-            border: 1px solid var(--color-border);
-            border-radius: 5px;
-            
-            &.session {
-            }
-        }
-
-        .desktop-only {
-            display: block;
-        }
-    }
-
-    @media (orientation: landscape) and (min-height: 500px) {
-        .App {
-           max-width:560px;
-
-           &.session {
-            grid-template-rows: 100px auto 160px !important;
-            }
-        }
     }
 `

@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import { device } from '../../styles/device'
 import { Context } from '../../context/Context'
 import useUserInput from './useUserInput'
 import { PlayIconButton, ResetIconButton } from '../../components/IconButtons'
@@ -19,6 +20,41 @@ export default function Home() {
   const { selectedMoveIds } = appState
   const hasNotEnoughMoves = selectedMoveIds.length < 2
 
+  let levelColsNum = 1
+  if (window.innerWidth >= 375) {
+    levelColsNum = 2
+  }
+  if (window.innerWidth >= 768) {
+    levelColsNum = 3
+  }
+  if (window.innerWidth >= 1024) {
+    levelColsNum = 4
+  }
+
+  const levelCols = Array(levelColsNum)
+    .fill([])
+    .map((_, colIdx) => {
+      return (
+        <div key={colIdx} className="level-col">
+          {levels
+            .map(({ name, moves }) => (
+              <InputLevel
+                key={name}
+                levelName={name}
+                levelMoves={moves}
+                selectedMoveIds={selectedMoveIds}
+                updateAppState={updateAppState}
+              />
+            ))
+            .filter((_, levelIdx) => {
+              return levels.length > levelColsNum
+                ? levelIdx % levelColsNum === colIdx
+                : levelIdx === colIdx
+            })}
+        </div>
+      )
+    })
+
   return (
     <>
       <Header
@@ -31,19 +67,9 @@ export default function Home() {
         }
       />
 
-      <MainStyled hasMultiLevels={levels.length > 1}>
+      <MainStyled>
         <form>
-          <div className="level-container">
-            {levels.map(({ name, moves }) => (
-              <InputLevel
-                key={name}
-                levelName={name}
-                levelMoves={moves}
-                selectedMoveIds={selectedMoveIds}
-                updateAppState={updateAppState}
-              />
-            ))}
-          </div>
+          <div className="level-container">{levelCols}</div>
         </form>
         <div className="main-footer">
           <div className="msg">
@@ -67,20 +93,38 @@ export default function Home() {
 
 const MainStyled = styled.main`
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 100px;
   flex-direction: column;
   padding: 5px;
+  overflow-y: hidden;
 
   form {
-    z-index: 1;
+    overflow-y: auto;
   }
 
   .level-container {
     display: grid;
-    grid-template-columns: ${(props) =>
-      props.hasMultiLevels ? '1fr 1fr' : '1fr'};
-    align-items: start;
-    gap: 5px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+
+    @media ${device.mobileM} {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media ${device.tablet} {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media ${device.laptop} {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  .level-col {
+    align-self: start;
+    display: grid;
+    gap: 10px;
   }
 
   .form-group-container {
@@ -88,10 +132,6 @@ const MainStyled = styled.main`
   }
 
   .main-footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

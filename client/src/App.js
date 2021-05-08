@@ -1,4 +1,6 @@
 import React, { useContext } from 'react'
+import styled from 'styled-components/macro'
+import { device } from './styles/device'
 import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom'
 import { Context } from './context/Context'
 import LoadingSpinner from './components/LoadingSpinner'
@@ -40,12 +42,40 @@ export default function App() {
   )
 
   return (
-    <div
+    <AppStyled
       className={`App${classes}`}
       style={{ backgroundImage: `url(${logo})` }}
     >
       {error && <ErrorMsg msg={error} clearError={() => setError('')} />}
       <React.Suspense fallback={<LoadingSpinner />}>{routes}</React.Suspense>
-    </div>
+    </AppStyled>
   )
 }
+
+const AppStyled = styled.div`
+  background-position: center 75%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--color-bg);
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 900px;
+  max-height: 800px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 80px auto 80px;
+  overflow-y: auto;
+
+  @media ${device.tablet} {
+    padding: 40px;
+  }
+
+  @media (orientation: landscape) {
+    grid-template-rows: 80px auto 80px !important;
+  }
+
+  &.session {
+    grid-template-rows: 100px auto 160px;
+  }
+`
