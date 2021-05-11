@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom'
 import useRegister from './useRegister'
 import Header from '../../components/Header'
 import AuthForm from '../../components/AuthForm'
-import AuthFormInput from '../../components/AuthFormInput'
+import Input from '../../components/Input'
 import { BlueButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 
@@ -21,54 +21,38 @@ export default function Register() {
         left={<BackIconButton size={'sm'} onClick={() => history.push('/')} />}
       />
       <AuthForm onSubmit={handleSubmit}>
-        <AuthFormInput
+        <Input
           type="text"
-          id="name"
           name="name"
-          label="Name"
+          placeholder="Name"
           value={userInput.name}
-          autoComplete="name"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
         />
 
-        <AuthFormInput
-          type="text"
-          id="email"
+        <Input
+          type="email"
           name="email"
-          label="Email*"
+          placeholder="Email*"
           value={userInput.email}
-          autoComplete="email"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
         />
 
-        <AuthFormInput
+        <Input
           type="password"
-          id="password"
           name="password"
-          label="Password*"
-          className="password"
+          placeholder="Password*"
           value={userInput.password}
-          autoComplete="current-password"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="current-password"
         />
 
-        <AuthFormInput
-          type="password"
-          id="passwordCheck"
+        <Input
+          type="passwordCheck"
           name="passwordCheck"
-          label="Confirm Password*"
-          className="passwordCheck"
+          placeholder="ConfirmPassword*"
           value={userInput.passwordCheck}
-          autoComplete="current-passwordCheck"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="current-password"
         />
 
         <BlueButton text="Register" disabled={!isRequiredFilled} />

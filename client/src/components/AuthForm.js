@@ -5,11 +5,12 @@ export default function AuthForm({ children, onSubmit }) {
 }
 
 const AuthFormStyled = styled.form`
+  width: 300px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin: 0 20px; */
   gap: 20px;
   padding: 10px;
 

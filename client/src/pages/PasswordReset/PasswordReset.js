@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom'
 import usePasswordReset from './usePasswordReset'
 import Header from '../../components/Header'
 import AuthForm from '../../components/AuthForm'
-import AuthFormInput from '../../components/AuthFormInput'
+import Input from '../../components/Input'
 import { BlueButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 
@@ -32,11 +32,10 @@ export default function PasswordReset() {
         ) : (
           <>
             <p>Enter your email address to get a password reset link.</p>
-            <AuthFormInput
+            <Input
               type="email"
-              id="email"
               name="email"
-              label="Email*"
+              placeholder="Email*"
               value={userInput.email}
               autoComplete="email"
               onChange={handleChange}

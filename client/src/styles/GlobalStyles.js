@@ -44,7 +44,7 @@ export default createGlobalStyle`
 
         /* Input */
         --color-input: #ccc;
-        --color-bg-input: #282b3f;
+        --color-bg-input: #080814;
     }
     * {
         box-sizing: border-box;
@@ -107,51 +107,15 @@ export default createGlobalStyle`
         }
     }
 
-    label {
-        font-size: 0.875rem;
-        padding-bottom: 3px; 
-    }
+    input {
+        color:  var(--color-text);
 
-    input,
-    select {
-        width: 100%;
-        padding: 7px 10px;
-        font-size: 1rem;
-        outline: none;
-        border-radius: 3px;
-        border: none;
-        color: var(--color-input);
-        background-color: var(--color-bg-input);
     }
+    input:-webkit-autofill { 
+        box-shadow: 0 0 0 30px #070711 inset !important;
+        -webkit-box-shadow: 0 0 0 30px #070711 inset !important;
+        -webkit-text-fill-color: var(--color-text) !important;
 
-    input:focus {
-        box-shadow: inset 0px 0px 4px var(--color-secondary);
-    }
-
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-
-    /* Change Autocomplete styles in Chrome*/
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus,
-    select:-webkit-autofill,
-    select:-webkit-autofill:hover,
-    select:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--color-input);;
-    transition: background-color 5000s ease-in-out 0s;
     }
 
     .dark-transparent {

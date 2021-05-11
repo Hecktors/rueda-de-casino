@@ -115,6 +115,7 @@ const EditStyled = styled.main`
   position: relative;
   width: 100%;
   padding: 0 10px;
+  margin-top: 40px;
 
   & > ul {
     width: 73%;

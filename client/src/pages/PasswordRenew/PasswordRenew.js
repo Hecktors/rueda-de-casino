@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import usePasswordRenew from './usePasswordRenew'
 import Header from '../../components/Header'
 import AuthForm from '../../components/AuthForm'
-import AuthFormInput from '../../components/AuthFormInput'
+import Input from '../../components/Input'
 import { BlueButton } from '../../components/Buttons'
 import { BackIconButton } from '../../components/IconButtons'
 
@@ -37,30 +37,22 @@ export default function PasswordRenew() {
           style={{ display: 'none' }}
         />
         <p>Enter your new password.</p>
-        <AuthFormInput
+        <Input
           type="password"
-          id="password"
           name="password"
-          label="Password*"
-          className="password"
+          placeholder="Password*"
           value={userInput.password}
-          autoComplete="new-password"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="current-password"
         />
 
-        <AuthFormInput
-          type="password"
-          id="passwordCheck"
+        <Input
+          type="passwordCheck"
           name="passwordCheck"
-          label="Confirm Password*"
-          className="passwordCheck"
+          placeholder="ConfirmPassword*"
           value={userInput.passwordCheck}
-          autoComplete="new-passwordCheck"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="current-password"
         />
 
         <BlueButton text="save password" disabled={!isRequiredFilled} />

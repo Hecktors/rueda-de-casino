@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom'
 import useLogin from './useLogin'
 import Header from '../../components/Header'
 import AuthForm from '../../components/AuthForm'
-import AuthFormInput from '../../components/AuthFormInput'
+import Input from '../../components/Input'
 import { BlueButton } from '../../components/Buttons'
 
 export default function Login() {
@@ -14,29 +14,22 @@ export default function Login() {
       <Header />
 
       <AuthForm onSubmit={handleSubmit}>
-        <AuthFormInput
-          type="text"
-          id="email"
+        <Input
+          type="email"
           name="email"
-          label="Email*"
+          placeholder="Email*"
           value={userInput.email}
-          autoComplete="email"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="email"
         />
 
-        <AuthFormInput
+        <Input
           type="password"
-          id="password"
           name="password"
-          label="Password*"
-          className="password"
+          placeholder="Password*"
           value={userInput.password}
-          autoComplete="current-password"
           onChange={handleChange}
-          onContextMenu={(e) => e.preventDefault()}
-          onFocus={(e) => e.target.select()}
+          autoComplete="current-password"
         />
 
         <BlueButton text="Login" disabled={!isRequiredFilled} />

@@ -5,6 +5,7 @@ import useUserInput from './useUserInput'
 import { BlueButton, RedButton } from '../../../components/Buttons'
 import { AddIconButton } from '../../../components/IconButtons'
 import LevelAccordion from './LevelAccordion'
+import Input from '../../../components/Input'
 
 export default function EditForm({
   move,
@@ -49,8 +50,8 @@ export default function EditForm({
   return (
     <EditFormStyled onSubmit={handleSubmit}>
       <div className="form-group-container">
-        <div className="form-group">
-          <label>Level</label>
+        <div className="form-group levels">
+          {/* <label>Level</label> */}
           <LevelAccordion
             levels={levels}
             selectedLevelName={userInput.levelName}
@@ -70,30 +71,33 @@ export default function EditForm({
       </div>
 
       {isNewLevel && (
-        <div className="form-group">
-          <label htmlFor="">Level name</label>
-          <input
-            onChange={updateUserInput}
-            value={userInput.levelName}
-            type="text"
-            id="newLevel"
-            name="newLevel"
-            onFocus={(e) => e.target.select()}
-            onContextMenu={(e) => e.preventDefault()}
-            required
-          />
+        <div className="form-group-container">
+          <div className="form-group">
+            {/* <label htmlFor="">Level name</label> */}
+            <Input
+              onChange={updateUserInput}
+              value={userInput.levelName}
+              type="text"
+              placeholder="Level Name"
+              id="newLevel"
+              name="newLevel"
+              onFocus={(e) => e.target.select()}
+              onContextMenu={(e) => e.preventDefault()}
+              required
+            />
+          </div>
         </div>
       )}
 
       <div className="form-group-container">
         <div className="form-group">
-          <label htmlFor="name">Move name*</label>
-          <input
+          {/* <label htmlFor="name">Move name*</label> */}
+          <Input
             onChange={updateUserInput}
             value={userInput.name}
             type="text"
-            id="name"
             name="name"
+            placeholder="Move Name*"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
             required
@@ -101,15 +105,14 @@ export default function EditForm({
         </div>
 
         <div className="form-group">
-          <label htmlFor="">Num of bar pairs*</label>
-          <input
+          {/* <label htmlFor="">Rounds*</label> */}
+          <Input
             className="tac"
             onChange={updateUserInput}
             value={userInput.bars}
             type="number"
-            id="bars"
+            placeholder="Rounds"
             name="bars"
-            placeholder="0"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
             required
@@ -119,12 +122,11 @@ export default function EditForm({
 
       <div className="form-group-container">
         <div className="form-group">
-          <label htmlFor="">Youtube link</label>
-          <input
+          {/* <label htmlFor="">Youtube link</label> */}
+          <Input
             onChange={updateUserInput}
             value={userInput.videoUrl}
             type="text"
-            id="videoUrl"
             name="videoUrl"
             placeholder="https://www.youtube.com/watch?v=b4jaXaC1P04"
             onFocus={(e) => e.target.select()}
@@ -132,15 +134,14 @@ export default function EditForm({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="">Start at sec</label>
-          <input
+          {/* <label htmlFor="">Start at</label> */}
+          <Input
             className="tac"
             onChange={updateUserInput}
             value={userInput.videoStart}
             type="text"
-            id="videoStart"
             name="videoStart"
-            placeholder="00:00"
+            placeholder="Start At"
             onFocus={(e) => e.target.select()}
             onContextMenu={(e) => e.preventDefault()}
           />
@@ -171,28 +172,30 @@ const EditFormStyled = styled.form`
   height: 100%;
 
   .form-group-container {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    gap: 30px;
     max-width: 400px;
     margin: auto;
-
-    &:first-of-type {
-      padding-right: 10px;
-    }
+    grid-template-columns: 3fr 1fr;
   }
 
   .form-group {
-    display: grid;
     max-width: 400px;
     margin: 20px auto;
+
+    &.levels {
+      width: 100%;
+    }
   }
 
   .form-group:first-of-type {
-    width: 100%;
-
     &.select {
       width: 100%;
     }
+  }
+
+  label {
+    margin-bottom: 5px;
   }
 
   .button-container {
